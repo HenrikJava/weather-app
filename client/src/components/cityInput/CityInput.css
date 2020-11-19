@@ -1,0 +1,19 @@
+.cityInputWrapper {
+    width: 50%;
+    height: 5vh;
+    margin: 2vh auto;
+    text-align: center;
+}
+label {
+    font-size: 4vh;
+}
+input {
+    margin-left: 0.5vw;
+    font-size: 4vh;
+
+
+}
+button {
+    height: 89%;
+    font-size: 4vh;
+}
