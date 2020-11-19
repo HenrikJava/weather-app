@@ -1,0 +1,21 @@
+.navigationBarWrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background-color: lightblue;
+}.homeImage {
+    grid-column: 1/1;
+    width: 13vw;
+    cursor: pointer;
+}
+.myProfile {
+    grid-column: 6/6;
+    align-self: center;
+    cursor: pointer;
+}
+.appName {
+    margin: auto;
+    grid-column: 2/6;
+    text-align: center;
+    font-size: 7vh;
+
+}
