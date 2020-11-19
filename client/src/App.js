@@ -1,7 +1,20 @@
+import React from 'react'
+import {Routing} from './routes/Routing'
+import {NavigationBar} from './components/navigationBar/NavigationBar'
+import './shared/global/css/Global.css'
+import {UserProvider} from './shared/global/provider/UserProvider'
+import {DataProvider} from './shared/global/provider/DataProvider'
+import {CityProvider} from './shared/global/provider/CityProvider'
 
 function App() {
   return (
-    <div></div>
+    <UserProvider>
+      <DataProvider><CityProvider><Routing>
+    <NavigationBar/>
+  </Routing></CityProvider></DataProvider>
+  
+  </UserProvider>
+   
   );
 }
 
