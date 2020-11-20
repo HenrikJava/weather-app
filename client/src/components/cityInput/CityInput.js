@@ -17,8 +17,8 @@ export  const CityInput = () => {
       .catch((error) => console.log(error));
   };
     return(
-<div className="cityInputWrapper"><form onSubmit={(e) => {e.preventDefault(); fetchDataFromExternalApi()}}><input className="input" type="text" onChange={(event) => setCity(event.target.value)} placeholder="Sök stad här"/>
-      <input type="submit" value="Sök"></input></form>
+<div className="cityInputWrapper"><form onSubmit={(e) => {e.preventDefault(); fetchDataFromExternalApi()}}><input className="input" type="text" onChange={(event) => setCity(event.target.value)} placeholder="Search city..."/>
+      <input type="submit" value="Search"></input></form>
       </div>
     )
 }

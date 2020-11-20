@@ -12,7 +12,7 @@ export const NavigationBar = () => {
     return(
         <div className="navigationBarWrapper">
         <img onClick={() => history.push(RoutingPath.homeView)} src={homeImage} alt="home" className="homeImage"/>
-        <h1 className="appName">Väderprognosen</h1>
+        <h1 className="appName">Weatherprovider</h1>
         <span  className="myProfile">{authenticatedUser? <Profile/> : <p onClick={() => history.push(RoutingPath.signinView)}>Sign in</p> }</span>
         </div>
     )
