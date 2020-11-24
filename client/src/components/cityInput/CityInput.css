@@ -1,19 +1,11 @@
-.cityInputWrapper {
-    width: 50%;
+.city-input-wrapper {
     height: 5vh;
     margin: 2vh auto;
-    text-align: center;
 }
-label {
-    font-size: 4vh;
-}
+
 input {
     margin-left: 0.5vw;
-    font-size: 4vh;
+    font-size: 3vh;
 
 
-}
-button {
-    height: 89%;
-    font-size: 4vh;
 }

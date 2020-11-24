@@ -1,3 +1,9 @@
-.image-and-temp {
-    display:flex;
+
+.current-weather-wrapper {
+    flex: 50%;
+    background-color: lightskyblue;
+    text-align: center;
+}
+.weather-icon {
+    width: 15vh;
 }
