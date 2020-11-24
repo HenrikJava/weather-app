@@ -1,0 +1,9 @@
+.daily-weather {
+    border: 1px solid black;
+    border-radius: 5%;
+    background-color: white;
+    width: 14vw;
+    height: 14vw;
+    margin: auto;
+    text-align: center;
+}
