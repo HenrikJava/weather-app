@@ -11,8 +11,9 @@ function App() {
     <UserProvider>
       <DataProvider>
         <CityProvider>
-          <NavigationBar />
-          <Routing />
+          <Routing>
+            <NavigationBar />
+          </Routing>
         </CityProvider>
       </DataProvider>
     </UserProvider>

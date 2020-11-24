@@ -1,12 +1,9 @@
 import React from "react";
-import { CityInput } from "../components/cityInput/CityInput";
-import { WeatherCard } from "../components/weathercard/WeatherCard";
-
+import { WeatherCards } from "../components/weathercards/WeatherCards";
 export const HomeView = () => {
   return (
-    <div>
-      <CityInput></CityInput>
-      <WeatherCard></WeatherCard>
+    <div className="home-view">
+      <WeatherCards ></WeatherCards>
     </div>
   );
 };

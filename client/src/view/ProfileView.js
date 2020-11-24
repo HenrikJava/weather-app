@@ -2,6 +2,10 @@ import React from 'react'
 
 export const ProfileView = () => {
     return(
-        <div>Min profil</div>
+       
+        <div className="profile-view">
+            Profil
+        </div>
+        
     )
 }
