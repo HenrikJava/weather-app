@@ -1,5 +1,19 @@
-body {
+body, html , #root {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+.home-view, .profile-view {
+    width: 100%;
+    height: 82%;
+}
+.profile-view {
+    background-color: lightskyblue;
+}
+.image-and-temp {
+    display:flex;
+    justify-content: center;
+    margin-top: 3vh
 }
