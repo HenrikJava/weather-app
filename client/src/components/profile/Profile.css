@@ -1,24 +1,19 @@
-img {
+.profile-img {
     width: 7vw;
     border-radius: 100%;
     grid-column: 1/4;
 }
 .username {
     align-self: center;
-    grid-column: 6/7;
+    display: flex;
+    grid-column: 6/8;
 }
 .profile-wrapper {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
 }
-.profile-dropdown {
-    align-self: center;
-    grid-column: 8/10;
-    display: none;
-}
-.profile-dropdown a {
-    display: block;
-}
-.profile-wrapper:hover .profile-dropdown {
-    display: block;
+.profile-subBar {
+    display: flex;
+    grid-column: 1/8;
+    justify-content: space-around
 }

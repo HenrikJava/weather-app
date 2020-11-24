@@ -1,31 +1,43 @@
-import React, {useContext} from 'react'
-import {UserContext} from '../../shared/global/provider/UserProvider'
-import './Profile.css'
-import {useHistory} from 'react-router-dom'
-import RoutingPath from '../../routes/RoutingPath'
+import React, { useContext } from "react";
+import { UserContext } from "../../shared/global/provider/UserProvider";
+import "./Profile.css";
+import { useHistory } from "react-router-dom";
+import RoutingPath from "../../routes/RoutingPath";
+import { Typography } from "@material-ui/core";
 
-export const Profile =() => {
-    const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext)
-    const history = useHistory()
+export const Profile = () => {
+  const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext);
+  const history = useHistory();
 
-    const logout = () =>{
-        setAuthenticatedUser()
-        localStorage.removeItem('username')
-        history.push(RoutingPath.homeView)
-    }
-    return(
-<div>
-    <div className="profile-wrapper"><img src="https://www.thispersondoesnotexist.com/image" alt="picture"/>
-    <span className="username">{authenticatedUser}</span>
-    <div className='profile-dropdown'>
-        <a onClick={() => history.push(RoutingPath.profileView)}>
-            Profile
-        </a>
-        <a>Settings</a>
-        <a onClick={() => logout()}>Log out</a>
-    </div></div>
+  const logout = () => {
+    setAuthenticatedUser();
+    localStorage.removeItem("username");
+    history.push(RoutingPath.homeView);
+  };
+  return (
     
-    
-</div>
-    )
-}
+      <div className="profile-wrapper">
+        <img
+          src="https://www.thispersondoesnotexist.com/image"
+          alt="picture"
+          className="profile-img"
+        />
+        <span className="username">
+          <Typography variant="h5">{authenticatedUser}</Typography>
+        </span>
+        <div className="profile-subBar">
+          <a onClick={() => history.push(RoutingPath.profileView)}>
+            <Typography variant="h5">Profile</Typography>
+          </a>
+          <a onClick={() => history.push(RoutingPath.settingsView)}>
+            <Typography variant="h5">Settings</Typography>
+          </a>
+
+          <a onClick={() => logout()}>
+            <Typography variant="h5">Log out</Typography>
+          </a>
+        </div>
+      </div>
+   
+  );
+};

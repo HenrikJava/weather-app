@@ -1,21 +1,28 @@
 .navigationBarWrapper {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    background-color: lightblue;
-}.homeImage {
+    grid-template-columns: repeat(12, 1fr);
+    background-image: url('../../shared/images/clouds2.jpg');
+    background-size: cover;
+    height: 18%;
+  
+
+}/* .homeImage {
     grid-column: 1/1;
     width: 13vw;
     cursor: pointer;
-}
+} */
 .myProfile {
-    grid-column: 6/6;
+    grid-column: 10/13;
     align-self: center;
     cursor: pointer;
+   
 }
 .appName {
     margin: auto;
-    grid-column: 2/6;
+    grid-column: 5/8;
     text-align: center;
     font-size: 7vh;
+    cursor: pointer;
+
 
 }
