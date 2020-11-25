@@ -1,0 +1,43 @@
+.profile-form {
+  width: 50%;
+  margin: auto;
+  height: 50%;
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.user, .user > input {
+  grid-column: 1/5;
+  grid-row: 2/3;
+  font-size: 2.8vh
+}
+.pass, .pass > input {
+  grid-column: 9/13;
+  grid-row: 2/3;
+  font-size: 2.8vh
+}
+.mail, .mail > input {
+  grid-column: 1/5;
+  grid-row: 3/4;
+  font-size: 2.8vh
+}
+.city, .city > input {
+  grid-column: 9/13;
+  grid-row: 3/4;
+  font-size: 2.8vh
+}
+.profile-button {
+  grid-column: 6/9;
+  grid-row: 4/5;
+  margin-top: auto;
+  height: 4vh;
+  border-radius: 5%;
+  
+}
+.profile-img {
+  grid-row: 1/2;
+  width: 12vw;
+  border-radius: 100%;
+  grid-column: 6/8;
+}

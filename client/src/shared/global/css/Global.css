@@ -5,15 +5,22 @@ body, html , #root {
     width: 100%;
     height: 100%;
 }
-.home-view, .profile-view {
+.home-view, .profile-view, .empty-view {
     width: 100%;
     height: 82%;
 }
-.profile-view {
+.profile-view, .empty-view {
     background-color: lightskyblue;
 }
 .image-and-temp {
     display:flex;
     justify-content: center;
     margin-top: 3vh
+}
+.link-bewteen-dialogs {
+    text-align: center;
+    cursor: pointer;
+}
+.link-bewteen-dialogs:hover {
+    color: #3f51b5;
 }
