@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../shared/global/provider/UserProvider";
-import "./Profile.css";
+import "./ProfileBar.css";
 import { useHistory } from "react-router-dom";
 import RoutingPath from "../../routes/RoutingPath";
 import { Typography } from "@material-ui/core";
 
-export const Profile = () => {
+export const ProfileBar = () => {
   const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext);
   const history = useHistory();
 
@@ -20,7 +20,7 @@ export const Profile = () => {
         <img
           src="https://www.thispersondoesnotexist.com/image"
           alt="picture"
-          className="profile-img"
+          className="navbar-img"
         />
         <span className="username">
           <Typography variant="h5">{authenticatedUser}</Typography>

@@ -9,7 +9,7 @@ export const ForeCastWeather = () => {
     return(
         <div className="fore-cast-wrapper">
         {weatherAtMiddleOfDay.map(day =>  
-            <DailyWeather day={day}></DailyWeather>
+            <DailyWeather day={day}  key={day.dt}></DailyWeather>
         )}
         </div> 
 

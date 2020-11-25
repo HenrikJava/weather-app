@@ -7,7 +7,6 @@ import './CurrentWeather.css'
 
 export const CurrentWeather = () => {
   const [data] = useContext(DataContext);
-console.log(data);
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }

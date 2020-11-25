@@ -23,7 +23,7 @@ export const CityInput = () => {
         }}
       >
         <input
-          className="input"
+          className="city-input"
           type="text"
           onChange={(event) => setCity(event.target.value)}
           placeholder="Search city..."

@@ -1,7 +1,7 @@
 .navigationBarWrapper {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    background-image: url('../../shared/images/clouds2.jpg');
+    background-color: lightskyblue;
     background-size: cover;
     height: 18%;
   
@@ -25,4 +25,7 @@
     cursor: pointer;
 
 
+}
+.sign-in {
+    text-align: center;
 }
