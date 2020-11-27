@@ -28,7 +28,7 @@ export const CityInput = () => {
           onChange={(event) => setCity(event.target.value)}
           placeholder="Search city..."
         />
-        <input type="submit" value="Search"></input>
+        <input type="submit" value="Go" className="city-button"></input>
       </form>
     </div>
   );

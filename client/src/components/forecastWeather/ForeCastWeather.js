@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import {DataContext} from '../../shared/global/provider/DataProvider'
-import {DailyWeather} from './DailyWeather'
+import {DailyWeatherOverview} from './DailyWeatherOverview'
 import './ForeCastWeather.css'
 export const ForeCastWeather = () => {
     const [data, setData] = useContext(DataContext)
@@ -9,7 +9,7 @@ export const ForeCastWeather = () => {
     return(
         <div className="fore-cast-wrapper">
         {weatherAtMiddleOfDay.map(day =>  
-            <DailyWeather day={day}  key={day.dt}></DailyWeather>
+            <DailyWeatherOverview day={day}  key={day.dt}></DailyWeatherOverview>
         )}
         </div> 
 

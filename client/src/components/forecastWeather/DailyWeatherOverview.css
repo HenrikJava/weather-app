@@ -6,4 +6,8 @@
     height: 14vw;
     margin: auto;
     text-align: center;
+    cursor: pointer;
+}
+.daily-weather:hover {
+    background-color: gainsboro;
 }

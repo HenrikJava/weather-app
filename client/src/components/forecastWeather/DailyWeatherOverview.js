@@ -1,15 +1,18 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Typography } from "@material-ui/core";
-import "./DailyWeather.css";
-export const DailyWeather = (props) => {
-  const getDay = (date) => {
+import "./DailyWeatherOverview.css";
+import { ShowDetailsContext } from "../../shared/global/provider/ShowDetailsProvider";
+export const DailyWeatherOverview = (props) => {
+  const [showDetails, setShowDetails,showDetailsDate, setShowDetailsDate] = useContext(ShowDetailsContext)
+
+  const getDay = () => {
     return new Date(props.day.dt * 1000).toLocaleString("en-us", {
       weekday: "short",
     });
   };
 
   return (
-    <div className="daily-weather">
+    <div className="daily-weather" onClick={() => setShowDetailsDate(getDay(), setShowDetails(true))}>
       <h1 className="weekday">{getDay()}</h1>
       <div className="image-and-temp">
         <img

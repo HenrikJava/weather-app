@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { DataContext } from "../../shared/global/provider/DataProvider";
 import { Typography } from "@material-ui/core";
-import { CityInfo } from "../../components/cityInfo/CityInfo";
-import { CityInput } from "../../components/cityInput/CityInput";
+
 import './CurrentWeather.css'
 
 export const CurrentWeather = () => {
@@ -12,8 +11,7 @@ export const CurrentWeather = () => {
   }
   return (
     <div className="current-weather-wrapper">
-      <CityInput></CityInput>
-      <CityInfo></CityInfo>
+      <Typography variant='h5' className='current-header'>Current weather</Typography>
       <Typography variant="h3">
         {capitalizeFirstLetter(data.list[0].weather[0].description)}
       </Typography>

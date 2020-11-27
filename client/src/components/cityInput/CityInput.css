@@ -3,7 +3,7 @@
     margin: 2vh auto;
 }
 
-.city-input {
+.city-input, .city-button {
     margin-left: 0.5vw;
     font-size: 3vh;
 
