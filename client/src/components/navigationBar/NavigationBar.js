@@ -5,6 +5,8 @@ import {UserContext} from '../../shared/global/provider/UserProvider'
 import {ProfileBar} from '../profile/ProfileBar'
 import RoutingPath from '../../routes/RoutingPath'
 import { Typography } from '@material-ui/core'
+import { ShowDetailsContext } from "../../shared/global/provider/ShowDetailsProvider";
+
 import {SignInDialogContext} from '../../shared/global/provider/SignInDialogProvider'
 import { SignInDialog } from '../signInDialog/SignInDialog'
 import {RegisterDialogContext} from '../../shared/global/provider/RegisterDialogProvider'
@@ -14,9 +16,11 @@ export const NavigationBar = () => {
     const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext)
     const [signInDialogOpen, setSignInDialogOpen] = useContext(SignInDialogContext)
     const [registerDialogOpen, setRegisterDialogOpen] = useContext(RegisterDialogContext)
+    const [showDetails, setShowDetails,showDetailsDate, setShowDetailsDate] = useContext(ShowDetailsContext)
+
     return(
         <div className="navigationBarWrapper" >
-        <h1 className="appName" onClick={() => history.push(RoutingPath.homeView)}>Weatherprovider</h1>
+        <h1 className="appName" onClick={() => { return history.push(RoutingPath.homeView), setShowDetails(false)}}>Weatherprovider</h1>
         <span  className="myProfile">{authenticatedUser? <ProfileBar/> : <Typography className="sign-in" variant="h4" onClick={() => setSignInDialogOpen(true)}>Sign in</Typography> }</span>
         <SignInDialog></SignInDialog>
         <RegisterDialog></RegisterDialog>

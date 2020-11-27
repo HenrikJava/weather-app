@@ -1,0 +1,27 @@
+.details-header {font-weight: 800;}
+
+.details-weather-icon {
+    width: 4vh;
+}
+
+.weather-at-differents-time-grid {
+display: block;
+height: 2vh;
+margin: auto;
+width: 75%;
+
+}
+
+.different-times {
+    display: flex;
+}
+
+.different-times > div {
+    align-self: center;
+}
+.sunUpAndDown {
+    width: 7vw;
+}
+.suns-inline {
+    display: block;
+}
