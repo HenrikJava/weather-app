@@ -4,6 +4,10 @@ import { DataContext } from "../../shared/global/provider/DataProvider";
 import "./CityInput.css";
 import { useContext } from "react";
 import WeatherService from "../../shared/api/service/WeatherService";
+import SearchIcon from '@material-ui/icons/Search';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Button from '@material-ui/core/Button';
 
 export const CityInput = () => {
   const [city, setCity] = useContext(CityContext);
@@ -22,13 +26,21 @@ export const CityInput = () => {
           e.target.reset()
         }}
       >
-        <input
+        
+        <Input
           className="city-input"
           type="text"
           onChange={(event) => setCity(event.target.value)}
           placeholder="Search city..."
+          id="input-with-icon-adornment"
+          endAdornment={
+            <InputAdornment position="end">
+              <SearchIcon className="search-icon"/>
+            </InputAdornment>
+          }
         />
-        <input type="submit" value="Go" className="city-button"></input>
+         
+        <Button type="submit" variant="contained" id="city-button">Search</Button>
       </form>
     </div>
   );

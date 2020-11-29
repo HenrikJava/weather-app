@@ -3,9 +3,12 @@
     margin: 2vh auto;
 }
 
-.city-input, .city-button {
-    margin-left: 0.5vw;
-    font-size: 3vh;
 
 
+#city-button {
+    font-size: 1vh;
+    size: 2vh;
+    color: black;
+    background-color: lightblue;
+    margin-left: 2%;
 }
