@@ -5,8 +5,7 @@
 }
 
 .weather-at-differents-time-grid {
-display: block;
-height: 2vh;
+
 margin: auto;
 width: 75%;
 
@@ -23,5 +22,21 @@ width: 75%;
     width: 7vw;
 }
 .suns-inline {
+    display: flex;
+}
+.clothes-image {
+    width: 12vh
+}
+.clothesAndTemp {
+    display: flex;
+    place-content: space-evenly;
+}
+.main-container {
+    display: flex;
+}
+.temperatures {
     display: block;
+}
+.details-containers {
+    align-self: center;
 }
