@@ -12,7 +12,7 @@ export const MainWeather = () => {
 
   const mainContent = () => {
     return (
-      showDetails? <WeatherDetails/> : <CurrentWeather/>    )
+      showDetailsDate? <WeatherDetails/> : <CurrentWeather/>    )
   }
 
   return (

@@ -1,7 +1,8 @@
 .fore-cast-wrapper {
     display: flex;
     flex:50%;
-    background-image: url('../../shared/images/beach.jpg');
     grid-template-columns: repeat(5, 1fr);
     justify-content: space-around;
+    background-color: lightskyblue;
+
 }
