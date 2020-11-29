@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../shared/global/provider/UserProvider";
-import "./ProfileBar.css";
+import "./Links.css";
 import { useHistory } from "react-router-dom";
 import RoutingPath from "../../routes/RoutingPath";
-import { Icon, Typography } from "@material-ui/core";
 import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-export const ProfileBar = () => {
+export const Links = () => {
   const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext);
   const history = useHistory();
 
@@ -18,17 +17,17 @@ export const ProfileBar = () => {
   };
   return (
     
-      <div className="profile-wrapper">
+      <div className="links-wrapper">
         <div className="username-image"><span className="username">
-          <Typography variant="h5">{authenticatedUser}</Typography>
+          <h2>{authenticatedUser}</h2>
         </span><img
           src="https://www.thispersondoesnotexist.com/image"
           alt="picture"
-          className="navbar-img"
+          className="links-image"
         />
         </div>
         
-        <div className="profile-subBar">
+        <div className="links-icons">
           <a onClick={() => history.push(RoutingPath.profileView)} className="links">
             <PersonIcon id="icons"/>
           </a>

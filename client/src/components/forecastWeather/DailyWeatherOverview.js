@@ -1,9 +1,9 @@
 import React,{useContext} from "react";
 import { Typography } from "@material-ui/core";
 import "./DailyWeatherOverview.css";
-import { ShowDetailsContext } from "../../shared/global/provider/ShowDetailsProvider";
+import { DisplayCurrentContext } from "../../shared/global/provider/DisplayCurrentProvider";
 export const DailyWeatherOverview = (props) => {
-  const [showDetails, setShowDetails,showDetailsDate, setShowDetailsDate] = useContext(ShowDetailsContext)
+  const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(DisplayCurrentContext)
 
   const getDay = (dayLength) => { 
     if (dayLength==='long') {return new Date(props.day.dt * 1000).toLocaleString("en-us", {
@@ -15,7 +15,7 @@ export const DailyWeatherOverview = (props) => {
   };
 
   return (
-    <div className="daily-weather" onClick={() => setShowDetailsDate(getDay('long'), setShowDetails(true))}>
+    <div className="daily-weather" onClick={() => setWeekday(getDay('long'), setDisplayCurrent(false))}>
       <h1 className="weekday">{getDay('short')}</h1>
       <div className="image-and-temp">
         <img

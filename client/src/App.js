@@ -3,28 +3,27 @@ import { Routing } from "./routes/Routing";
 import { NavigationBar } from "./components/navigationBar/NavigationBar";
 import "./shared/global/css/Global.css";
 import { UserProvider } from "./shared/global/provider/UserProvider";
-import { DataProvider } from "./shared/global/provider/DataProvider";
-import { ShowDetailsProvider } from "./shared/global/provider/ShowDetailsProvider";
-
+import { WeatherProvider } from "./shared/global/provider/WeatherProvider";
+import { DisplayCurrentProvider } from "./shared/global/provider/DisplayCurrentProvider";
 import { CityProvider } from "./shared/global/provider/CityProvider";
 import { SignInDialogProvider } from "./shared/global/provider/SignInDialogProvider";
 import { RegisterDialogProvider } from "./shared/global/provider/RegisterDialogProvider";
 
 const App = () => (
   <UserProvider>
-    <DataProvider>
+    <WeatherProvider>
       <CityProvider>
         <SignInDialogProvider>
           <RegisterDialogProvider>
-            <ShowDetailsProvider>
+            <DisplayCurrentProvider>
               <Routing>
                 <NavigationBar></NavigationBar>
               </Routing>
-            </ShowDetailsProvider>
+            </DisplayCurrentProvider>
           </RegisterDialogProvider>
         </SignInDialogProvider>
       </CityProvider>
-    </DataProvider>
+    </WeatherProvider>
   </UserProvider>
 );
 

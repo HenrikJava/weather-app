@@ -1,0 +1,16 @@
+
+
+.clothes-image {
+    width: 12vh
+}
+.clothesAndTemp {
+    display: flex;
+    place-content: space-evenly;
+}
+.clothesAndTemp2 {
+    display: flex;
+    place-content: space-evenly;
+}
+.temperatures {
+    display: block;
+}

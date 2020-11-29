@@ -1,4 +1,4 @@
-.navbar-img {
+.links-image {
     width: 4vw;
     border-radius: 100%;
 }
@@ -11,13 +11,11 @@
     grid-column: 1/4;
 
 }
-.profile-wrapper {
+.links-wrapper {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
-    height: 100%;
-    align-content: center;
 }
-.profile-subBar {
+.links-icons {
     display: flex;
     grid-column: 6/10;
     justify-content: space-around

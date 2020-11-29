@@ -1,25 +1,25 @@
 import React, { useContext } from "react";
-import { DataContext } from "../../shared/global/provider/DataProvider";
+import { WeatherContext } from "../../shared/global/provider/WeatherProvider";
 import { Typography } from "@material-ui/core";
 
 import './CurrentWeather.css'
 
 export const CurrentWeather = () => {
-  const [data] = useContext(DataContext);
+  const [weather] = useContext(WeatherContext);
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   return (
-    <div className="current-weather-wrapper">
+    <div>
       <Typography variant='h5' className='current-header'>Current weather</Typography>
       <Typography variant="h3">
-        {capitalizeFirstLetter(data.list[0].weather[0].description)}
+        {capitalizeFirstLetter(weather.list[0].weather[0].description)}
       </Typography>
-      <div className="image-and-temp">
+      <div>
       <img className="weather-icon"
-        src={`http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`} alt="Weather Icon"
+        src={`http://openweathermap.org/img/wn/${weather.list[0].weather[0].icon}@2x.png`} alt="Weather Icon"
       ></img>
-      <Typography variant="h1">{Math.round(data.list[0].main.temp)+`°`}</Typography>
+      <Typography variant="h1">{Math.round(weather.list[0].main.temp)+`°`}</Typography>
       </div>
     </div>
   );

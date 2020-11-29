@@ -2,5 +2,9 @@
     flex: 70%;
     background-color: lightskyblue;
     text-align: center;
-    padding-top: 5%
+    padding-top: 5%;
+    
+}
+.grid-cointainer {
+    align-items: center;
 }

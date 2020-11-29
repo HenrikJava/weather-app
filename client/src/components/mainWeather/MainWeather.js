@@ -1,26 +1,29 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { CityInfo } from "../cityInfo/CityInfo";
 import { CityInput } from "../cityInput/CityInput";
-import { CurrentWeather} from './CurrentWeather'
-import { WeatherDetails} from './WeatherDetails'
+import { CurrentWeather } from "../currentWeather/CurrentWeather";
+import { MaxMin } from "../maxMin/MaxMin";
+import { SunTimes } from "../sunTimes/SunTimes";
+import { DifferentTimes } from "../differentTimes/DifferentTimes";
+import { DisplayCurrentContext } from "../../shared/global/provider/DisplayCurrentProvider";
 
-import { ShowDetailsContext } from "../../shared/global/provider/ShowDetailsProvider";
-
-import './MainWeather.css'
+import "./MainWeather.css";
+import { Grid } from "@material-ui/core";
 export const MainWeather = () => {
-  const [showDetails, setShowDetails,showDetailsDate, setShowDetailsDate] = useContext(ShowDetailsContext)
-
-  const mainContent = () => {
-    return (
-      showDetailsDate? <WeatherDetails/> : <CurrentWeather/>    )
-  }
+  const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
+    DisplayCurrentContext
+  );
 
   return (
-    <div className='main-weather-wrapper'>
+    <div className="main-weather-wrapper">
       <CityInput></CityInput>
       <CityInfo></CityInfo>
-      
-      {mainContent()}
+      <Grid container className="grid-cointainer">
+      <Grid item xs={12}></Grid>
+      <Grid item xs={4}>  <SunTimes></SunTimes></Grid>
+      <Grid item xs={4}>  {displayCurrent ? <CurrentWeather /> : <DifferentTimes />}</Grid>
+      <Grid item xs={4}> <MaxMin></MaxMin></Grid>
+      </Grid>
     </div>
   );
 };

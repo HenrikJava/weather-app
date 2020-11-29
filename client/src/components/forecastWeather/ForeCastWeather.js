@@ -1,10 +1,10 @@
 import React, {useContext} from 'react'
-import {DataContext} from '../../shared/global/provider/DataProvider'
+import {WeatherContext} from '../../shared/global/provider/WeatherProvider'
 import {DailyWeatherOverview} from './DailyWeatherOverview'
 import './ForeCastWeather.css'
 export const ForeCastWeather = () => {
-    const [data, setData] = useContext(DataContext)
-    const weatherAtMiddleOfDay =data.list.filter(partOfDay => partOfDay.dt_txt.includes('12:00:00'))
+    const [weather] = useContext(WeatherContext)
+    const weatherAtMiddleOfDay =weather.list.filter(partOfDay => partOfDay.dt_txt.includes('12:00:00'))
 
     return(
         <div className="fore-cast-wrapper">

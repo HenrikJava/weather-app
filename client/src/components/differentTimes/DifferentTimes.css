@@ -1,0 +1,23 @@
+.details-header {font-weight: 800;}
+
+.details-weather-icon {
+    width: 4vh;
+}
+
+.weather-at-differents-time-grid {
+
+margin: auto;
+width: 75%;
+
+}
+
+.different-times {
+    display: flex;
+}
+
+.different-times > div {
+    align-self: center;
+}
+.day-to-display {
+    text-align: center;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { CityContext } from "../../shared/global/provider/CityProvider";
-import { DataContext } from "../../shared/global/provider/DataProvider";
+import { WeatherContext } from "../../shared/global/provider/WeatherProvider";
 import "./CityInput.css";
 import { useContext } from "react";
 import WeatherService from "../../shared/api/service/WeatherService";
@@ -11,10 +11,10 @@ import Button from '@material-ui/core/Button';
 
 export const CityInput = () => {
   const [city, setCity] = useContext(CityContext);
-  const [data, setData] = useContext(DataContext);
+  const [weather, setWeather] = useContext(WeatherContext);
   const fetchDataFromExternalApi = () => {
     WeatherService.searchCity(city)
-      .then((response) => setData(response.data))
+      .then((response) => setWeather(response.data))
       .catch((error) => console.log(error));
   };
   return (
