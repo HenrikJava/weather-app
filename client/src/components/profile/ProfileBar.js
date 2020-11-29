@@ -3,8 +3,10 @@ import { UserContext } from "../../shared/global/provider/UserProvider";
 import "./ProfileBar.css";
 import { useHistory } from "react-router-dom";
 import RoutingPath from "../../routes/RoutingPath";
-import { Typography } from "@material-ui/core";
-
+import { Icon, Typography } from "@material-ui/core";
+import PersonIcon from '@material-ui/icons/Person';
+import SettingsIcon from '@material-ui/icons/Settings';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 export const ProfileBar = () => {
   const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext);
   const history = useHistory();
@@ -17,24 +19,25 @@ export const ProfileBar = () => {
   return (
     
       <div className="profile-wrapper">
-        <img
+        <div className="username-image"><span className="username">
+          <Typography variant="h5">{authenticatedUser}</Typography>
+        </span><img
           src="https://www.thispersondoesnotexist.com/image"
           alt="picture"
           className="navbar-img"
         />
-        <span className="username">
-          <Typography variant="h5">{authenticatedUser}</Typography>
-        </span>
+        </div>
+        
         <div className="profile-subBar">
-          <a onClick={() => history.push(RoutingPath.profileView)}>
-            <Typography variant="h5">Profile</Typography>
+          <a onClick={() => history.push(RoutingPath.profileView)} className="links">
+            <PersonIcon id="icons"/>
           </a>
-          <a onClick={() => history.push(RoutingPath.settingsView)}>
-            <Typography variant="h5">Settings</Typography>
+          <a onClick={() => history.push(RoutingPath.settingsView)} className="links">
+            <SettingsIcon id="icons"/>
           </a>
 
-          <a onClick={() => logout()}>
-            <Typography variant="h5">Log out</Typography>
+          <a onClick={() => logout()} className="links">
+            <ExitToAppIcon id="icons"/>
           </a>
         </div>
       </div>

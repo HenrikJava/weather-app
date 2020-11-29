@@ -11,6 +11,8 @@ import {SignInDialogContext} from '../../shared/global/provider/SignInDialogProv
 import { SignInDialog } from '../signInDialog/SignInDialog'
 import {RegisterDialogContext} from '../../shared/global/provider/RegisterDialogProvider'
 import { RegisterDialog } from '../registerDialog/RegisterDialog'
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+
 export const NavigationBar = () => {
     const history = useHistory()
     const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext)
@@ -20,8 +22,8 @@ export const NavigationBar = () => {
 
     return(
         <div className="navigationBarWrapper" >
-        <h1 className="appName" onClick={() => { return history.push(RoutingPath.homeView), setShowDetails(false)}}>Weatherprovider</h1>
-        <span  className="myProfile">{authenticatedUser? <ProfileBar/> : <Typography className="sign-in" variant="h4" onClick={() => setSignInDialogOpen(true)}>Sign in</Typography> }</span>
+        <h1 className="appName" onClick={() => { return history.push(RoutingPath.homeView), setShowDetails(false)}}>Zebra weather</h1>
+        <span  className="myProfile">{authenticatedUser? <ProfileBar/> : <MeetingRoomIcon id="sign-in" variant="h4" onClick={() => setSignInDialogOpen(true)}/> }</span>
         <SignInDialog></SignInDialog>
         <RegisterDialog></RegisterDialog>
         </div>

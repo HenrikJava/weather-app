@@ -1,9 +1,9 @@
 .navigationBarWrapper {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    background-color: lightskyblue;
+     background-color: lightblue;
     background-size: cover;
-    height: 18%;
+    height: 8%;
   
 
 }/* .homeImage {
@@ -13,19 +13,19 @@
 } */
 .myProfile {
     grid-column: 10/13;
-    align-self: center;
     cursor: pointer;
-   
+    text-align-last: center;
+    align-self: center;
 }
 .appName {
-    margin: auto;
-    grid-column: 5/8;
+    
+    grid-column: 1/3;
     text-align: center;
-    font-size: 7vh;
+    font-size: 3vh;
     cursor: pointer;
 
-
 }
-.sign-in {
+#sign-in {
     text-align: center;
+    font-size: 5vh;
 }

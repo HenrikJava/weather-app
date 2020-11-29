@@ -1,19 +1,31 @@
 .navbar-img {
-    width: 7vw;
+    width: 4vw;
     border-radius: 100%;
-    grid-column: 1/4;
 }
 .username {
     align-self: center;
+    margin-right: 15%;
+}
+.username-image {
     display: flex;
-    grid-column: 6/8;
+    grid-column: 1/4;
+
 }
 .profile-wrapper {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
+    height: 100%;
+    align-content: center;
 }
 .profile-subBar {
     display: flex;
-    grid-column: 1/8;
+    grid-column: 6/10;
     justify-content: space-around
 }
+.links {
+    align-self: center;
+}
+#icons {
+    font-size: 4vh;
+}
+
