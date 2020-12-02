@@ -1,18 +1,20 @@
 import React, { useContext } from "react";
-import { WeatherContext } from "../../shared/global/provider/WeatherProvider";
-import { DisplayCurrentContext } from "../../shared/global/provider/DisplayCurrentProvider";
+import { WeatherContext } from "../../shared/global/provider/AppProvider";
+import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
 import "./DifferentTimes.css";
 
 import Grid from "@material-ui/core/Grid";
 export const DifferentTimes = () => {
   const [weather] = useContext(WeatherContext);
-  const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(DisplayCurrentContext);
-  const getDay = (fragment) => {
+  const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
+    DisplayCurrentContext
+  );
+  const timesArray = ["00:00:00", "06:00:00", "12:00:00", "18:00:00"];
+  const getDayName = (fragment) => {
     return new Date(fragment * 1000).toLocaleString("en-us", {
       weekday: "long",
     });
   };
-  const timesArray = ["00:00:00", "06:00:00", "12:00:00", "18:00:00"];
   const getSpecificTimes = (time) => {
     let condition = false;
     timesArray.forEach((element) => {
@@ -23,7 +25,7 @@ export const DifferentTimes = () => {
     return condition;
   };
   const weatherAtCurrentDay = weather.list.filter(
-    (fragment) => getDay(fragment.dt) === weekday
+    (fragment) => getDayName(fragment.dt) === weekday
   );
   const specificTimes = weatherAtCurrentDay.filter(
     (fragment) => getSpecificTimes(fragment.dt_txt) === true
@@ -43,7 +45,7 @@ export const DifferentTimes = () => {
           className="different-times"
         >
           <Grid item xs={3}>
-            <h5> {specificTimes[index].dt_txt.slice(11, 13)} </h5>
+            <h3> {specificTimes[index].dt_txt.slice(11, 13)} </h3>
           </Grid>
           <Grid item xs={3}>
             <img
@@ -53,16 +55,16 @@ export const DifferentTimes = () => {
             ></img>
           </Grid>
           <Grid item xs={3}>
-            <h5 variant="h4">
+            <h3>
               {Math.round(specificTimes[index].main.temp) + `°`}
-            </h5>
+            </h3>
           </Grid>
           <Grid item xs={3}>
-            <p>
+            <h4>
               {capitalizeFirstLetter(
                 specificTimes[index].weather[0].description
               )}
-            </p>
+            </h4>
           </Grid>
         </Grid>
       );

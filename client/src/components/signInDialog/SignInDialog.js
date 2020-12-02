@@ -6,12 +6,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import {SignInDialogContext} from '../../shared/global/provider/SignInDialogProvider'
-import {UserContext} from '../../shared/global/provider/UserProvider'
-import {RegisterDialogContext} from '../../shared/global/provider/RegisterDialogProvider'
-import { RegisterDialog } from '../registerDialog/RegisterDialog'
+import {SignInDialogContext} from '../../shared/global/provider/AppProvider'
+import {UserContext} from '../../shared/global/provider/AppProvider'
+import {RegisterDialogContext} from '../../shared/global/provider/AppProvider'
 import { useHistory } from 'react-router-dom';
-export const SignInDialog = (props) =>{
+export const SignInDialog = () =>{
   const history = useHistory()
   const [signInDialogOpen, setSignInDialogOpen] = useContext(SignInDialogContext)
   const [loginUsername, setLoginUsername] = useState()
@@ -69,7 +68,7 @@ export const SignInDialog = (props) =>{
             Log in
           </Button>
         </DialogActions>
-        <DialogContentText className="link-bewteen-dialogs"><span onClick={()=> openRegisterDialog()} >Don't have an account yet?</span></DialogContentText>
+        <DialogContentText className="link-between-dialogs"><span onClick={()=> openRegisterDialog()} >Don't have an account yet?</span></DialogContentText>
       </Dialog>
     
   );

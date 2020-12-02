@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, {  useContext } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -6,11 +6,11 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { UserContext } from "../../shared/global/provider/UserProvider";
-import {SignInDialogContext} from '../../shared/global/provider/SignInDialogProvider'
+import { UserContext } from "../../shared/global/provider/AppProvider";
+import {SignInDialogContext} from '../../shared/global/provider/AppProvider'
 
-import { RegisterDialogContext } from "../../shared/global/provider/RegisterDialogProvider";
-export const RegisterDialog = (props) => {
+import { RegisterDialogContext } from "../../shared/global/provider/AppProvider";
+export const RegisterDialog = () => {
     const [signInDialogOpen, setSignInDialogOpen] = useContext(SignInDialogContext)
 
   const [
@@ -94,7 +94,7 @@ export const RegisterDialog = (props) => {
           Register
         </Button>
       </DialogActions>
-      <DialogContentText className="link-bewteen-dialogs">
+      <DialogContentText className="link-between-dialogs">
         <span onClick={() => openSignInDialog()} >
           Already have an account?
         </span>

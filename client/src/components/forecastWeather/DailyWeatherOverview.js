@@ -1,7 +1,6 @@
 import React,{useContext} from "react";
-import { Typography } from "@material-ui/core";
 import "./DailyWeatherOverview.css";
-import { DisplayCurrentContext } from "../../shared/global/provider/DisplayCurrentProvider";
+import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
 export const DailyWeatherOverview = (props) => {
   const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(DisplayCurrentContext)
 
@@ -21,11 +20,11 @@ export const DailyWeatherOverview = (props) => {
         <img
           src={`http://openweathermap.org/img/wn/${props.day.weather[0].icon}@2x.png`}
           alt="Weather Icon"
-          style={{ width: "15vh" }}
+          id="daily-icon"
         ></img>
-        <Typography variant="h2">
+        <h1 id="degree">
           {Math.round(props.day.main.temp) + `°`}
-        </Typography>
+        </h1>
       </div>
     </div>
   );

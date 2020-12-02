@@ -8,22 +8,24 @@
 }
 .username-image {
     display: flex;
-    grid-column: 1/4;
-
+    width: 50%;
+align-items: center;
 }
 .links-wrapper {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    display: flex;
+   
+
 }
 .links-icons {
     display: flex;
-    grid-column: 6/10;
-    justify-content: space-around
+    width: 50%;
+    justify-content: space-around;
+    cursor: pointer;
 }
 .links {
     align-self: center;
 }
 #icons {
-    font-size: 4vh;
+    font-size: 2vw;
 }
 

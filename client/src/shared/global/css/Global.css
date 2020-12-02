@@ -5,22 +5,21 @@ body, html , #root {
     width: 100%;
     height: 100%;
 }
-.home-view, .profile-view, .empty-view {
+.home-view, .profile-view, .empty-view, .settings-view {
     width: 100%;
     height: 92%;
 }
-.profile-view, .empty-view {
+.profile-view, .empty-view, .settings-view {
     background-color: lightskyblue;
 }
 .image-and-temp {
     display:flex;
     justify-content: center;
-    margin-top: 3vh
 }
-.link-bewteen-dialogs {
+.link-between-dialogs {
     text-align: center;
     cursor: pointer;
 }
-.link-bewteen-dialogs:hover {
+.link-between-dialogs:hover {
     color: #3f51b5;
 }

@@ -1,23 +1,27 @@
-.details-header {font-weight: 800;}
+.details-header {
+  font-weight: 800;
+}
 
 .details-weather-icon {
-    width: 4vh;
+  width: 4vw;
 }
 
 .weather-at-differents-time-grid {
-
-margin: auto;
-width: 75%;
-
+  margin: auto;
+  width: 75%;
+  font-size: 1vw;
+  white-space: nowrap;
 }
 
 .different-times {
-    display: flex;
+  display: flex;
 }
 
 .different-times > div {
-    align-self: center;
+  align-self: center;
 }
 .day-to-display {
-    text-align: center;
+  text-align: center;
+  font-size: 2vw;
+  margin-block: auto;
 }

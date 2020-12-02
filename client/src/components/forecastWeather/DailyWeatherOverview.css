@@ -11,3 +11,11 @@
 .daily-weather:hover {
     background-color: gainsboro;
 }
+.weekday {
+    font-size: 2vw;
+}
+#degree {
+    font-size: 3vw;
+
+}
+#daily-icon { width: 9vw }

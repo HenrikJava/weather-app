@@ -1,6 +1,14 @@
-.current-header {font-weight: 800;}
 
 .weather-icon {
-    width: 15vh;
+    width: 8vw;
 }
-
+.temp {
+    font-size: 4vw;
+    margin: 0; 
+}
+#current-header {
+    font-size: 2vw;
+}
+#weather-description {
+    font-size: 3vw;
+}

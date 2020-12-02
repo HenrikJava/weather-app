@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../shared/global/provider/UserProvider";
+import { UserContext } from "../../shared/global/provider/AppProvider";
 import "./Links.css";
 import { useHistory } from "react-router-dom";
 import RoutingPath from "../../routes/RoutingPath";

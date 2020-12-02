@@ -1,16 +1,19 @@
 
 
 .clothes-image {
-    width: 12vh
+    width: 8vw
 }
-.clothesAndTemp {
-    display: flex;
-    place-content: space-evenly;
-}
-.clothesAndTemp2 {
-    display: flex;
-    place-content: space-evenly;
-}
+
 .temperatures {
     display: block;
+}
+#clothes-max-min {
+    display: flex;
+    align-items: center;
+}
+.temp-degrees {
+    font-size: 1vw;
+}
+.temp-headers {
+    font-size: 1.3vw;
 }

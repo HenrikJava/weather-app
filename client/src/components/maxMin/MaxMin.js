@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { WeatherContext } from "../../shared/global/provider/WeatherProvider";
-import { DisplayCurrentContext } from "../../shared/global/provider/DisplayCurrentProvider";
+import { WeatherContext } from "../../shared/global/provider/AppProvider";
+import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
 import "./MaxMin.css";
 
 import winter from "../../shared/images/winter.jpg";
@@ -11,14 +11,14 @@ export const MaxMin = () => {
   const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
     DisplayCurrentContext
   );
-  const getDay = (fragment) => {
+  const getDayName = (fragment) => {
     return new Date(fragment * 1000).toLocaleString("en-us", {
       weekday: "long",
     });
   };
 
   const weatherAtCurrentDay = weather.list.filter(
-    (fragment) => getDay(fragment.dt) === weekday
+    (fragment) => getDayName(fragment.dt) === weekday
   );
 
   const getWeatherAtNoon = () => {
@@ -27,7 +27,11 @@ export const MaxMin = () => {
       noon = weatherAtCurrentDay.filter((fragment) =>
         fragment.dt_txt.includes("12:00:00")
       );
-      return Math.round(noon[0].main.feels_like) + `°`;
+      if (noon) {
+        return Math.round(noon[0].main.feels_like) + `°`;
+      } else {
+        return "N/A";
+      }
     } else {
       return Math.round(weather.list[0].main.feels_like) + `°`;
     }
@@ -41,7 +45,7 @@ export const MaxMin = () => {
         }
       });
     } else {
-      //TODO
+      
     }
     return Math.round(max) + `°`;
   };
@@ -60,26 +64,26 @@ export const MaxMin = () => {
   };
   const generateSuggestedClothes = () => {
     return (
-      <Grid container>
-        <Grid item xs={12}></Grid>
+      <Grid item xs={12} id="clothes-max-min">
         <Grid item xs={3}></Grid>
         <Grid item xs={3}>
           <img src={winter} className="clothes-image" />
         </Grid>
         <Grid item xs={3}>
           <div className="temperatures">
-            <h3>{!displayCurrent ? "Feels like at 12" : "Feels like now"}</h3>
-            <h5>{getWeatherAtNoon()}</h5>
-            <h3>Day max:</h3>
-            <h5>{getDayMax()}</h5>
-            <h3>Day min:</h3>
-            <h5>{getDayMin()}</h5>
+            <h3 className="temp-headers">{!displayCurrent ? "Feels like at 12" : "Feels like now"}</h3>
+            <h5 className="temp-degrees">{getWeatherAtNoon()}</h5>
+             {!displayCurrent && <div><h3 className="temp-headers">Day max:</h3>
+            <h5 className="temp-degrees">{getDayMax()}</h5>
+            <h3 className="temp-headers">Day min:</h3>
+            <h5 className="temp-degrees">{getDayMin()}</h5></div>}
+            
           </div>
         </Grid>
         <Grid item xs={3}></Grid>
-      </Grid>
+        </Grid>
     );
   };
 
-  return <>{generateSuggestedClothes()}</>;
+  return generateSuggestedClothes();
 };

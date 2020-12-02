@@ -1,6 +1,6 @@
 import React from "react";
-import { CityContext } from "../../shared/global/provider/CityProvider";
-import { WeatherContext } from "../../shared/global/provider/WeatherProvider";
+import { CityContext } from "../../shared/global/provider/AppProvider";
+import { WeatherContext } from "../../shared/global/provider/AppProvider";
 import "./CityInput.css";
 import { useContext } from "react";
 import WeatherService from "../../shared/api/service/WeatherService";
@@ -19,7 +19,7 @@ export const CityInput = () => {
   };
   return (
     <div className="city-input-wrapper">
-      <form id="cityForm"
+      <form id="city-form"
         onSubmit={(e) => {
           e.preventDefault();
           fetchDataFromExternalApi();
