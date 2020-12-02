@@ -5,7 +5,7 @@ import { ProfileView } from "../view/ProfileView";
 import { EmptyView } from "../view/EmptyView";
 import { SettingsView } from "../view/SettingsView";
 import { useEffect, useContext } from "react";
-import { UserContext } from "../shared/global/provider/UserProvider";
+import { UserContext } from "../shared/global/provider/AppProvider";
 import RoutingPath from "./RoutingPath";
 
 export const Routing = (props) => {

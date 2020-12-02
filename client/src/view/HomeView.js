@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { WeatherContext } from "../shared/global/provider/WeatherProvider";
-import { CityContext } from "../shared/global/provider/CityProvider";
+import { WeatherContext } from "../shared/global/provider/AppProvider";
+import { CityContext } from "../shared/global/provider/AppProvider";
 import { MainWeather } from "../components/mainWeather/MainWeather";
 import { ForeCastWeather } from "../components/forecastWeather/ForeCastWeather";
 import WeatherService from "../shared/api/service/WeatherService";

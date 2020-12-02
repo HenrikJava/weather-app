@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react"
-import {SignInDialogContext} from '../shared/global/provider/SignInDialogProvider'
+import {SignInDialogContext} from '../shared/global/provider/AppProvider'
 
 export const EmptyView = () => {
     const [signInDialogOpen, setSignInDialogOpen] = useContext(SignInDialogContext);
