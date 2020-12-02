@@ -1,0 +1,25 @@
+#settings-header {
+  font-size: 3vw;
+  text-align: center;
+}
+#settings-box {
+  height: 20vw;
+  width: 25vw;
+  margin: auto;
+  padding-top: 10%;
+}
+
+#temp-name {
+  font-size: 1.5vw;
+  margin: 0;
+  height: 2vw;
+}
+#switch {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 2vw;
+}
+#switch p {
+    font-size: 1vw;
+}
