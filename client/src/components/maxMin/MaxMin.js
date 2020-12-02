@@ -1,12 +1,18 @@
 import React, { useContext } from "react";
 import { WeatherContext } from "../../shared/global/provider/AppProvider";
 import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
+import { UserContext } from "../../shared/global/provider/AppProvider";
+import {scale} from '../../shared/global/functions'
 import "./MaxMin.css";
 
 import winter from "../../shared/images/winter.jpg";
 
 import Grid from "@material-ui/core/Grid";
 export const MaxMin = () => {
+  const [authenticatedUser, setAuthenticatedUser,firstname,
+    setFirstname,
+    lastname,
+setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteCity, setFavoriteCity,celciusOn, setcelciusOn] = useContext(UserContext);
   const [weather] = useContext(WeatherContext);
   const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
     DisplayCurrentContext
@@ -28,12 +34,12 @@ export const MaxMin = () => {
         fragment.dt_txt.includes("12:00:00")
       );
       if (noon) {
-        return Math.round(noon[0].main.feels_like) + `°`;
+        return Math.round(noon[0].main.feels_like) + scale(celciusOn);
       } else {
         return "N/A";
       }
     } else {
-      return Math.round(weather.list[0].main.feels_like) + `°`;
+      return Math.round(weather.list[0].main.feels_like) + scale(celciusOn);
     }
   };
   const getDayMax = () => {
@@ -47,7 +53,7 @@ export const MaxMin = () => {
     } else {
       
     }
-    return Math.round(max) + `°`;
+    return Math.round(max) + scale(celciusOn);
   };
   const getDayMin = () => {
     let min = 100;
@@ -60,7 +66,7 @@ export const MaxMin = () => {
     } else {
       //TODO
     }
-    return Math.round(min) + `°`;
+    return Math.round(min) + scale(celciusOn);
   };
   const generateSuggestedClothes = () => {
     return (

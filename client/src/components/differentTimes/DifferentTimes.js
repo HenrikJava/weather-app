@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
 import { WeatherContext } from "../../shared/global/provider/AppProvider";
 import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
+import { UserContext } from "../../shared/global/provider/AppProvider";
+import {scale} from '../../shared/global/functions'
 import "./DifferentTimes.css";
 
 import Grid from "@material-ui/core/Grid";
 export const DifferentTimes = () => {
+  const [authenticatedUser, setAuthenticatedUser,firstname,
+    setFirstname,
+    lastname,
+setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteCity, setFavoriteCity,celciusOn, setcelciusOn] = useContext(UserContext);
   const [weather] = useContext(WeatherContext);
   const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
     DisplayCurrentContext
@@ -56,7 +62,7 @@ export const DifferentTimes = () => {
           </Grid>
           <Grid item xs={3}>
             <h3>
-              {Math.round(specificTimes[index].main.temp) + `°`}
+              {Math.round(specificTimes[index].main.temp) + scale(celciusOn)}
             </h3>
           </Grid>
           <Grid item xs={3}>
