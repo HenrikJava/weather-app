@@ -2,17 +2,31 @@ import React, { useContext } from "react";
 import { WeatherContext } from "../../shared/global/provider/AppProvider";
 import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
 import { UserContext } from "../../shared/global/provider/AppProvider";
-import {scale} from '../../shared/global/functions'
-import {Wind} from '../wind/Wind'
+import { scale } from "../../shared/global/functions";
+import { Wind } from "../wind/Wind";
 
 import "./DifferentTimes.css";
 
 import Grid from "@material-ui/core/Grid";
 export const DifferentTimes = () => {
-  const [authenticatedUser, setAuthenticatedUser,firstname,
+  const [
+    authenticatedUser,
+    setAuthenticatedUser,
+    firstname,
     setFirstname,
     lastname,
-setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteCity, setFavoriteCity,celciusOn, setcelciusOn] = useContext(UserContext);
+    setLastname,
+    username,
+    setUsername,
+    password,
+    setPassword,
+    mail,
+    setMail,
+    favoriteCity,
+    setFavoriteCity,
+    celciusOn,
+    setcelciusOn,
+  ] = useContext(UserContext);
   const [weather] = useContext(WeatherContext);
   const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
     DisplayCurrentContext
@@ -53,12 +67,12 @@ setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteC
           className="different-times"
         >
           <Grid item xs={2}>
-            <h3> {specificTimes[index].dt_txt.slice(11, 13)} </h3>
+            <p> {specificTimes[index].dt_txt.slice(11, 13)} </p>
           </Grid>
           <Grid item xs={2}>
-            <h3>
+            <p>
               {Math.round(specificTimes[index].main.temp) + scale(celciusOn)}
-            </h3>
+            </p>
           </Grid>
           <Grid item xs={2}>
             <img
@@ -68,17 +82,19 @@ setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteC
             ></img>
           </Grid>
           <Grid item xs={4}>
-            <h4>
+            <p>
               {capitalizeFirstLetter(
                 specificTimes[index].weather[0].description
               )}
-            </h4>
+            </p>
           </Grid>
           <Grid item xs={2}>
-          <Wind speed={specificTimes[index].wind.speed} deg={specificTimes[index].wind.deg} celciusOn={celciusOn}></Wind>
+            <Wind
+              speed={specificTimes[index].wind.speed}
+              deg={specificTimes[index].wind.deg}
+              celciusOn={celciusOn}
+            ></Wind>
           </Grid>
-          
-          
         </Grid>
       );
     }
@@ -87,7 +103,7 @@ setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteC
 
   return (
     <>
-      <h4 className="day-to-display">{weekday}</h4>
+      <p className="day-to-display">{weekday}</p>
 
       <div className="weather-at-differents-time-grid">
         {generateDifferentTimes()}

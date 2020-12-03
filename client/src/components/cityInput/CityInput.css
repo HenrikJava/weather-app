@@ -1,15 +1,13 @@
 .city-input-wrapper {
-    height: 3vw;
-    margin: 1vw auto;
+  height: 3vw;
+  margin: 1vw auto;
 }
 #city-form {
-    font-size: 2vw;
+  font-size: 2vw;
 }
 
-
 #city-button {
-   
-    color: black;
-    background-color: lightblue;
-    margin-left: 2%;
+  color: black;
+  background-color: lightblue;
+  margin-left: 2%;
 }

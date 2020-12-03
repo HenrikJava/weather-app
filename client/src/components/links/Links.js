@@ -27,7 +27,7 @@ export const Links = () => {
       <div className="links-wrapper">
         <div className="username-image">
           <span className="username">
-            <h2>{authenticatedUser}</h2>
+            <p>{authenticatedUser}</p>
           </span>
           <img
             src="https://www.thispersondoesnotexist.com/image"
@@ -37,38 +37,30 @@ export const Links = () => {
         </div>
 
         <div className="links-icons">
-          <a
-            onClick={() => history.push(RoutingPath.profileView)}
-            
-          >
+          <a onClick={() => history.push(RoutingPath.profileView)}>
             <PersonIcon id="icons" />
           </a>
-          <a
-            onClick={() => history.push(RoutingPath.settingsView)}
-           
-          >
+          <a onClick={() => history.push(RoutingPath.settingsView)}>
             <SettingsIcon id="icons" />
           </a>
 
-          <a onClick={() => logout()} >
+          <a onClick={() => logout()}>
             <ExitToAppIcon id="icons" />
           </a>
         </div>
       </div>
     ) : (
       <div className="links-wrapper">
-      <div className="icons-not-logged-in">
-        <a onClick={() => setSignInDialogOpen(true)}>
-          <MeetingRoomIcon id="not-logged-in-icons" />
-        </a>
+        <div className="icons-not-logged-in">
+          <a onClick={() => setSignInDialogOpen(true)}>
+            <MeetingRoomIcon id="not-logged-in-icons" />
+          </a>
 
-        <a
-          onClick={() => history.push(RoutingPath.settingsView)}
-          
-        >
-          <SettingsIcon id="not-logged-in-icons" />
-        </a>
-      </div></div>
+          <a onClick={() => history.push(RoutingPath.settingsView)}>
+            <SettingsIcon id="not-logged-in-icons" />
+          </a>
+        </div>
+      </div>
     );
   };
   return (
@@ -78,6 +70,4 @@ export const Links = () => {
       <RegisterDialog></RegisterDialog>
     </>
   );
-
-  
 };

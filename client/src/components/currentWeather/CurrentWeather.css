@@ -1,14 +1,13 @@
-
 .weather-icon {
-    width: 8vw;
+  width: 8vw;
 }
 .temp {
-    font-size: 3vw;
-    margin: 0; 
+  font-size: 3vw;
+  margin: 0;
 }
 #current-header {
-    font-size: 2vw;
+  font-size: 2vw;
 }
 #weather-description {
-    font-size: 3vw;
+  font-size: 3vw;
 }

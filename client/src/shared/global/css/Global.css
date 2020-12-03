@@ -1,25 +1,32 @@
-body, html , #root {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
+body,
+html,
+#root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
-.home-view, .profile-view, .empty-view, .settings-view {
-    width: 100%;
-    height: 92%;
+.home-view,
+.profile-view,
+.empty-view,
+.settings-view {
+  width: 100%;
+  height: 92%;
 }
-.profile-view, .empty-view, .settings-view {
-    background-color: lightskyblue;
+.profile-view,
+.empty-view,
+.settings-view, #error {
+  background-color: lightskyblue;
 }
 .image-and-details {
-    display:flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .link-between-dialogs {
-    text-align: center;
-    cursor: pointer;
+  text-align: center;
+  cursor: pointer;
 }
 .link-between-dialogs:hover {
-    color: #3f51b5;
+  color: #3f51b5;
 }

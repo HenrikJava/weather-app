@@ -8,6 +8,7 @@ export const calcTime = (offset, sunTime) => {
   return new Date(localComparingToUTC + 1000 * offset);
 };
 export const scale = (celciusOn) => {
-  if (celciusOn) {return `°`}
-  else return `°F`
-}
+  if (celciusOn) {
+    return `°`;
+  } else return `°F`;
+};

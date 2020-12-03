@@ -1,19 +1,17 @@
-
-
 .clothes-image {
-    width: 8vw
+  width: 8vw;
 }
 
 .temperatures {
-    display: block;
+  display: block;
 }
 #clothes-max-min {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .temp-degrees {
-    font-size: 1vw;
+  font-size: 1vw;
 }
 .temp-headers {
-    font-size: 1.3vw;
+  font-size: 1.3vw;
 }

@@ -1,13 +1,27 @@
 import React, { useContext, useState } from "react";
 import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
-import { UserContext} from '../shared/global/provider/AppProvider'
+import { UserContext } from "../shared/global/provider/AppProvider";
 import "./SettingsView.css";
 export const SettingsView = () => {
-  const [authenticatedUser, setAuthenticatedUser,firstname,
+  const [
+    authenticatedUser,
+    setAuthenticatedUser,
+    firstname,
     setFirstname,
     lastname,
-setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteCity, setFavoriteCity,celciusOn, setcelciusOn] = useContext(UserContext);
+    setLastname,
+    username,
+    setUsername,
+    password,
+    setPassword,
+    mail,
+    setMail,
+    favoriteCity,
+    setFavoriteCity,
+    celciusOn,
+    setcelciusOn,
+  ] = useContext(UserContext);
   const handleChange = () => {
     setcelciusOn(!celciusOn);
   };

@@ -25,6 +25,7 @@
   font-size: 2vw;
   margin-block: auto;
 }
-#speed, #arrow {
+#speed,
+#arrow {
   font-size: 1vw;
 }

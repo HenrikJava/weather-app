@@ -14,7 +14,8 @@ export const NavigationBar = () => {
       <h1
         className="app-name"
         onClick={() => {
-          history.push(RoutingPath.homeView); setDisplayCurrent(true);
+          history.push(RoutingPath.homeView);
+          setDisplayCurrent(true);
         }}
       >
         Zebra weather

@@ -1,11 +1,9 @@
 .main-weather-wrapper {
-    flex: 70%;
-    background-color: lightskyblue;
-    text-align: center;
-    
-    
+  flex: 70%;
+  background-color: lightskyblue;
+  text-align: center;
 }
 .grid-cointainer {
-    align-items: center;
-    height: 60%;
+  align-items: center;
+  height: 60%;
 }

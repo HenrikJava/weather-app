@@ -1,21 +1,24 @@
 .daily-weather {
-    border: 1px solid black;
-    border-radius: 5%;
-    background-color: lightblue;
-    width: 14vw;
-    height: 14vw;
-    margin: auto;
-    text-align: center;
-    cursor: pointer;
+  border: 1px solid black;
+  border-radius: 5%;
+  background-color: lightblue;
+  width: 14vw;
+  height: 14vw;
+  margin: auto;
+  text-align: center;
+  cursor: pointer;
 }
 .daily-weather:hover {
-    background-color: gainsboro;
+  background-color: gainsboro;
 }
 .weekday {
-    font-size: 2vw;
+  font-size: 2vw;
 }
 #degree {
-    font-size: 2vw;
-
+  font-size: 2vw;
+  margin-bottom: auto;
 }
-#daily-icon { width: 9vw }
+#daily-icon {
+  width: 9vw;
+}
+

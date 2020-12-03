@@ -2,17 +2,31 @@ import React, { useContext } from "react";
 import { WeatherContext } from "../../shared/global/provider/AppProvider";
 import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
 import { UserContext } from "../../shared/global/provider/AppProvider";
-import {scale} from '../../shared/global/functions'
+import { scale } from "../../shared/global/functions";
 import "./MaxMin.css";
 
 import winter from "../../shared/images/winter.jpg";
 
 import Grid from "@material-ui/core/Grid";
 export const MaxMin = () => {
-  const [authenticatedUser, setAuthenticatedUser,firstname,
+  const [
+    authenticatedUser,
+    setAuthenticatedUser,
+    firstname,
     setFirstname,
     lastname,
-setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteCity, setFavoriteCity,celciusOn, setcelciusOn] = useContext(UserContext);
+    setLastname,
+    username,
+    setUsername,
+    password,
+    setPassword,
+    mail,
+    setMail,
+    favoriteCity,
+    setFavoriteCity,
+    celciusOn,
+    setcelciusOn,
+  ] = useContext(UserContext);
   const [weather] = useContext(WeatherContext);
   const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
     DisplayCurrentContext
@@ -50,8 +64,6 @@ setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteC
           max = fragment.main.temp_max;
         }
       });
-    } else {
-      
     }
     return Math.round(max) + scale(celciusOn);
   };
@@ -63,8 +75,6 @@ setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteC
           min = fragment.main.temp_min;
         }
       });
-    } else {
-      //TODO
     }
     return Math.round(min) + scale(celciusOn);
   };
@@ -77,17 +87,22 @@ setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteC
         </Grid>
         <Grid item xs={3}>
           <div className="temperatures">
-            <h3 className="temp-headers">{!displayCurrent ? "Feels like at 12" : "Feels like now"}</h3>
-            <h5 className="temp-degrees">{getWeatherAtNoon()}</h5>
-             {!displayCurrent && <div><h3 className="temp-headers">Day max:</h3>
-            <h5 className="temp-degrees">{getDayMax()}</h5>
-            <h3 className="temp-headers">Day min:</h3>
-            <h5 className="temp-degrees">{getDayMin()}</h5></div>}
-            
+            <p className="temp-headers">
+              {!displayCurrent ? "Feels like at 12" : "Feels like now"}
+            </p>
+            <p className="temp-degrees">{getWeatherAtNoon()}</p>
+            {!displayCurrent && (
+              <div>
+                <p className="temp-headers">Day max:</p>
+                <p className="temp-degrees">{getDayMax()}</p>
+                <p className="temp-headers">Day min:</p>
+                <p className="temp-degrees">{getDayMin()}</p>
+              </div>
+            )}
           </div>
         </Grid>
         <Grid item xs={3}></Grid>
-        </Grid>
+      </Grid>
     );
   };
 

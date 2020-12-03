@@ -2,18 +2,20 @@
   width: 50%;
   margin: auto;
   height: 50%;
-  
+
   padding-top: 10%;
 }
-
 
 .profile-form {
   width: 100%;
 }
-#user-pass, #mail-city, #first-last {
-  display: flex
+#user-pass,
+#mail-city,
+#first-last {
+  display: flex;
 }
-#profile-image-cointainer, #profile-button {
+#profile-image-cointainer,
+#profile-button {
   text-align: center;
 }
 
@@ -22,11 +24,9 @@
 }
 
 .profile-image {
-  
   width: 12vw;
   border-radius: 100%;
-  
-} 
+}
 .align-right {
   text-align: right;
 }

@@ -15,7 +15,7 @@ export const ProfileView = () => {
     firstname,
     setFirstname,
     lastname,
-setLastname,
+    setLastname,
     username,
     setUsername,
     password,
@@ -40,11 +40,11 @@ setLastname,
         </Grid>
 
         <form className="profile-form">
-        <Grid item xs={12} id="first-last">
+          <Grid item xs={12} id="first-last">
             <Grid item xs={5}>
               <TextField
-                inputProps={{ style: { fontSize: 30 } }} 
-                InputLabelProps={{ style: { fontSize: 20 } }} 
+                inputProps={{ style: { fontSize: 30 } }}
+                InputLabelProps={{ style: { fontSize: 20 } }}
                 label="First name"
                 value={firstname}
                 onChange={(e) => setFirstname(e.target.value)}
@@ -53,11 +53,9 @@ setLastname,
             <Grid item xs={2}></Grid>
             <Grid item xs={5} className="align-right">
               <TextField
-              
-                inputProps={{ style: { fontSize: 30 } }} 
-                InputLabelProps={{ style: { fontSize: 20 } }} 
+                inputProps={{ style: { fontSize: 30 } }}
+                InputLabelProps={{ style: { fontSize: 20 } }}
                 label="Last name"
-          
                 value={lastname}
                 onChange={(e) => setLastname(e.target.value)}
               />
@@ -66,8 +64,8 @@ setLastname,
           <Grid item xs={12} id="user-pass">
             <Grid item xs={5}>
               <TextField
-                inputProps={{ style: { fontSize: 30 } }} 
-                InputLabelProps={{ style: { fontSize: 20 } }} 
+                inputProps={{ style: { fontSize: 30 } }}
+                InputLabelProps={{ style: { fontSize: 20 } }}
                 label="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -76,9 +74,8 @@ setLastname,
             <Grid item xs={2}></Grid>
             <Grid item xs={5} className="align-right">
               <TextField
-              
-                inputProps={{ style: { fontSize: 30 } }} 
-                InputLabelProps={{ style: { fontSize: 20 } }} 
+                inputProps={{ style: { fontSize: 30 } }}
+                InputLabelProps={{ style: { fontSize: 20 } }}
                 label="Password"
                 type="password"
                 value={password}
@@ -89,8 +86,8 @@ setLastname,
           <Grid item xs={12} id="mail-city">
             <Grid item xs={5}>
               <TextField
-                inputProps={{ style: { fontSize: 30 } }} 
-                InputLabelProps={{ style: { fontSize: 20 } }} 
+                inputProps={{ style: { fontSize: 30 } }}
+                InputLabelProps={{ style: { fontSize: 20 } }}
                 label="Email"
                 type="email"
                 value={mail}
@@ -100,8 +97,8 @@ setLastname,
             <Grid item xs={2}></Grid>
             <Grid item xs={5} className="align-right">
               <TextField
-                inputProps={{ style: { fontSize: 30 } }} 
-                InputLabelProps={{ style: { fontSize: 20 } }} 
+                inputProps={{ style: { fontSize: 30 } }}
+                InputLabelProps={{ style: { fontSize: 20 } }}
                 label="Favorite city"
                 value={favoriteCity}
                 onChange={(e) => setFavoriteCity(e.target.value)}

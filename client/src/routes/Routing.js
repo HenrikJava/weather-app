@@ -28,10 +28,7 @@ export const Routing = (props) => {
           path={RoutingPath.profileView}
           component={blockRouteIfNotAuthenticated(ProfileView)}
         ></Route>
-        <Route
-          path={RoutingPath.settingsView}
-          component={SettingsView}
-        ></Route>
+        <Route path={RoutingPath.settingsView} component={SettingsView}></Route>
 
         <Route component={HomeView}></Route>
       </Switch>
