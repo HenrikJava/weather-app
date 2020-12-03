@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { WeatherContext } from "../shared/global/provider/AppProvider";
 import { CityContext } from "../shared/global/provider/AppProvider";
 import { MainWeather } from "../components/mainWeather/MainWeather";
@@ -28,11 +28,12 @@ export const HomeView = () => {
   ] = useContext(UserContext);
   const [weather, setWeather] = useContext(WeatherContext);
   const [city] = useContext(CityContext);
+  const [error, setError] = useState()
 
   useEffect(() => {
     WeatherService.searchCity(city, celciusOn)
       .then((response) => setWeather(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => {console.log(error); setError(true)});
   }, []);
 
   const displayWeather = () => {
@@ -43,7 +44,9 @@ export const HomeView = () => {
           <ForeCastWeather></ForeCastWeather>
         </div>
       );
-    } else return <Error></Error>;
+    } 
+    if (error) return <Error></Error>;
+    else return null
   
   };
   return displayWeather();

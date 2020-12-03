@@ -42,7 +42,7 @@ export const CurrentWeather = () => {
           src={`http://openweathermap.org/img/wn/${weather.list[0].weather[0].icon}@2x.png`}
           alt="Weather Icon"
         ></img>
-        <div>
+        <div id="temp-wind">
           <p className="temp">
             {Math.round(weather.list[0].main.temp) + scale(celciusOn)}
           </p>

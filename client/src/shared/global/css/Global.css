@@ -22,6 +22,7 @@ html,
 .image-and-details {
   display: flex;
   justify-content: center;
+  height: 8vw;
 }
 .link-between-dialogs {
   text-align: center;

@@ -10,4 +10,8 @@
 }
 #weather-description {
   font-size: 3vw;
+  margin: 0;
+}
+#temp-wind {
+  align-self: center;
 }
