@@ -30,7 +30,7 @@ export const Routing = (props) => {
         ></Route>
         <Route
           path={RoutingPath.settingsView}
-          component={blockRouteIfNotAuthenticated(SettingsView)}
+          component={SettingsView}
         ></Route>
 
         <Route component={HomeView}></Route>
