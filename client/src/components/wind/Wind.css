@@ -1,0 +1,8 @@
+#wind {
+    display: flex;
+    align-items: center;
+    
+}
+#speed, #arrow {
+    font-size: 1.5vw;
+}

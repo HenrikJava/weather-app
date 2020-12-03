@@ -3,6 +3,7 @@ import "./DailyWeatherOverview.css";
 import { UserContext } from "../../shared/global/provider/AppProvider";
 import {scale} from '../../shared/global/functions'
 import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
+import {Wind} from '../wind/Wind'
 export const DailyWeatherOverview = (props) => {
   const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(DisplayCurrentContext)
   const [authenticatedUser, setAuthenticatedUser,firstname,
@@ -21,15 +22,18 @@ setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteC
   return (
     <div className="daily-weather" onClick={() => setWeekday(getDay('long'), setDisplayCurrent(false))}>
       <h1 className="weekday">{getDay('short')}</h1>
-      <div className="image-and-temp">
+      <div className="image-and-details">
         <img
           src={`http://openweathermap.org/img/wn/${props.day.weather[0].icon}@2x.png`}
           alt="Weather Icon"
           id="daily-icon"
         ></img>
-        <h1 id="degree">
+        <div><h1 id="degree">
           {Math.round(props.day.main.temp) + scale(celciusOn)}
         </h1>
+        <Wind speed={props.day.wind.speed} deg={props.day.wind.deg} celciusOn={celciusOn}></Wind></div>
+        
+
       </div>
     </div>
   );

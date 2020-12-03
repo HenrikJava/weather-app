@@ -3,6 +3,8 @@ import { WeatherContext } from "../../shared/global/provider/AppProvider";
 import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
 import { UserContext } from "../../shared/global/provider/AppProvider";
 import {scale} from '../../shared/global/functions'
+import {Wind} from '../wind/Wind'
+
 import "./DifferentTimes.css";
 
 import Grid from "@material-ui/core/Grid";
@@ -50,28 +52,33 @@ setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteC
           key={specificTimes[index].dt}
           className="different-times"
         >
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <h3> {specificTimes[index].dt_txt.slice(11, 13)} </h3>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
+            <h3>
+              {Math.round(specificTimes[index].main.temp) + scale(celciusOn)}
+            </h3>
+          </Grid>
+          <Grid item xs={2}>
             <img
               className="details-weather-icon"
               src={`http://openweathermap.org/img/wn/${specificTimes[index].weather[0].icon}@2x.png`}
               alt="Weather Icon"
             ></img>
           </Grid>
-          <Grid item xs={3}>
-            <h3>
-              {Math.round(specificTimes[index].main.temp) + scale(celciusOn)}
-            </h3>
-          </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <h4>
               {capitalizeFirstLetter(
                 specificTimes[index].weather[0].description
               )}
             </h4>
           </Grid>
+          <Grid item xs={2}>
+          <Wind speed={specificTimes[index].wind.speed} deg={specificTimes[index].wind.deg} celciusOn={celciusOn}></Wind>
+          </Grid>
+          
+          
         </Grid>
       );
     }
