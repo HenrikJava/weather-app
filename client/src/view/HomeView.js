@@ -15,13 +15,10 @@ setLastname,username, setUsername,password, setPassword, mail, setMail,favoriteC
   const [city] = useContext(CityContext);
 
   useEffect(() => {
-    fetchDataFromExternalApi();
-  }, []);
-const fetchDataFromExternalApi = () => {
-    WeatherService.searchCity(city, celciusOn)
-      .then((response) => setWeather(response.data))
-      .catch((error) => console.log(error));
-  };
+    WeatherService.searchCity(city,celciusOn)
+    .then((response) => setWeather(response.data))
+    .catch((error) => console.log(error));  }, []);
+
   const displayWeather = () => {
     if (weather) {
       return (
