@@ -5,7 +5,7 @@
   
 
 }
-.links {
+.nav-links {
     width: 20%;
 
 }
@@ -15,9 +15,4 @@
     cursor: pointer;
     width: 75%;
     font-size: 2vw;
-}
-#sign-in-icon {
-    text-align: center;
-    font-size: 3vw;
-    cursor: pointer;
 }

@@ -13,19 +13,30 @@ align-items: center;
 }
 .links-wrapper {
     display: flex;
-   
+   height: 100%;
 
+}
+.icons-not-logged-in {
+    width: 100%;
+    text-align: right;
+    
+    cursor: pointer;
+    align-self: center;
+    margin-right: 10%;
 }
 .links-icons {
     display: flex;
     width: 50%;
     justify-content: space-around;
     cursor: pointer;
-}
-.links {
     align-self: center;
 }
+
 #icons {
     font-size: 2vw;
+}  
+#not-logged-in-icons {
+    font-size: 3vw;
+    margin-left: 6%
 }
 
