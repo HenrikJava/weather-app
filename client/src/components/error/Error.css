@@ -1,0 +1,18 @@
+#error-image {
+    width: 24vw;
+    height: 18vw;
+    align-self: center;
+}
+#error-container {
+    background-color: lightskyblue;
+    width: 100%;
+    height: 92%;
+    display: flex;
+    
+}
+#error-inner-container {
+    text-align: center;
+    margin: auto;
+    width: 40%;
+    height: 55%;
+}
