@@ -33,8 +33,12 @@
 
 #icons {
   font-size: 2vw;
+  color: black;
 }
 #not-logged-in-icons {
   font-size: 3vw;
   margin-left: 6%;
+  color: black;
+  
+
 }
