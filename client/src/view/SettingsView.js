@@ -4,26 +4,9 @@ import Grid from "@material-ui/core/Grid";
 import { UserContext } from "../shared/global/provider/AppProvider";
 import "./SettingsView.css";
 export const SettingsView = () => {
-  const [
-    authenticatedUser,
-    setAuthenticatedUser,
-    firstname,
-    setFirstname,
-    lastname,
-    setLastname,
-    username,
-    setUsername,
-    password,
-    setPassword,
-    mail,
-    setMail,
-    favoriteCity,
-    setFavoriteCity,
-    celciusOn,
-    setcelciusOn,
-  ] = useContext(UserContext);
+  const user = useContext(UserContext);
   const handleChange = () => {
-    setcelciusOn(!celciusOn);
+    user.setcelciusOn(!user.celciusOn);
   };
 
   return (
@@ -39,7 +22,7 @@ export const SettingsView = () => {
         <Grid item xs={6} id="switch">
           <p>Fahrenheit</p>
           <Switch
-            checked={celciusOn}
+            checked={user.celciusOn}
             onChange={handleChange}
             color="primary"
             inputProps={{ "aria-label": "primary checkbox" }}

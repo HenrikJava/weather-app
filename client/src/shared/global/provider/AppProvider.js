@@ -62,9 +62,10 @@ export const UserProvider = (props) => {
 
   return (
     <UserContext.Provider
-      value={[
+      value={{
         authenticatedUser,
         setAuthenticatedUser,
+        
         firstname,
         setFirstname,
         lastname,
@@ -79,7 +80,7 @@ export const UserProvider = (props) => {
         setFavoriteCity,
         celciusOn,
         setcelciusOn,
-      ]}
+      }}
     >
       {props.children}
     </UserContext.Provider>

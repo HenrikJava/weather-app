@@ -9,24 +9,9 @@ export const ProfileView = () => {
     SignInDialogContext
   );
 
-  const [
-    authenticatedUser,
-    setAuthenticatedUser,
-    firstname,
-    setFirstname,
-    lastname,
-    setLastname,
-    username,
-    setUsername,
-    password,
-    setPassword,
-    mail,
-    setMail,
-    favoriteCity,
-    setFavoriteCity,
-  ] = useContext(UserContext);
+  const user = useContext(UserContext);
   useEffect(() => {
-    !authenticatedUser ? setSignInDialogOpen(true) : setSignInDialogOpen(false);
+    !user.authenticatedUser ? setSignInDialogOpen(true) : setSignInDialogOpen(false);
   });
   return (
     <div className="profile-view">
@@ -46,8 +31,8 @@ export const ProfileView = () => {
                 inputProps={{ style: { fontSize: 30 } }}
                 InputLabelProps={{ style: { fontSize: 20 } }}
                 label="First name"
-                value={firstname}
-                onChange={(e) => setFirstname(e.target.value)}
+                value={user.firstname}
+                onChange={(e) => user.setFirstname(e.target.value)}
               />
             </Grid>
             <Grid item xs={2}></Grid>
@@ -56,8 +41,8 @@ export const ProfileView = () => {
                 inputProps={{ style: { fontSize: 30 } }}
                 InputLabelProps={{ style: { fontSize: 20 } }}
                 label="Last name"
-                value={lastname}
-                onChange={(e) => setLastname(e.target.value)}
+                value={user.lastname}
+                onChange={(e) => user.setLastname(e.target.value)}
               />
             </Grid>
           </Grid>
@@ -67,8 +52,8 @@ export const ProfileView = () => {
                 inputProps={{ style: { fontSize: 30 } }}
                 InputLabelProps={{ style: { fontSize: 20 } }}
                 label="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={user.username}
+                onChange={(e) => user.setUsername(e.target.value)}
               />
             </Grid>
             <Grid item xs={2}></Grid>
@@ -78,8 +63,8 @@ export const ProfileView = () => {
                 InputLabelProps={{ style: { fontSize: 20 } }}
                 label="Password"
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={user.password}
+                onChange={(e) => user.setPassword(e.target.value)}
               />
             </Grid>
           </Grid>
@@ -90,8 +75,8 @@ export const ProfileView = () => {
                 InputLabelProps={{ style: { fontSize: 20 } }}
                 label="Email"
                 type="email"
-                value={mail}
-                onChange={(e) => setMail(e.target.value)}
+                value={user.mail}
+                onChange={(e) => user.setMail(e.target.value)}
               />
             </Grid>{" "}
             <Grid item xs={2}></Grid>
@@ -100,8 +85,8 @@ export const ProfileView = () => {
                 inputProps={{ style: { fontSize: 30 } }}
                 InputLabelProps={{ style: { fontSize: 20 } }}
                 label="Favorite city"
-                value={favoriteCity}
-                onChange={(e) => setFavoriteCity(e.target.value)}
+                value={user.favoriteCity}
+                onChange={(e) => user.setFavoriteCity(e.target.value)}
               />
             </Grid>
           </Grid>

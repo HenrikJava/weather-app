@@ -9,24 +9,7 @@ import winter from "../../shared/images/winter.jpg";
 
 import Grid from "@material-ui/core/Grid";
 export const MaxMin = () => {
-  const [
-    authenticatedUser,
-    setAuthenticatedUser,
-    firstname,
-    setFirstname,
-    lastname,
-    setLastname,
-    username,
-    setUsername,
-    password,
-    setPassword,
-    mail,
-    setMail,
-    favoriteCity,
-    setFavoriteCity,
-    celciusOn,
-    setcelciusOn,
-  ] = useContext(UserContext);
+  const user = useContext(UserContext);
   const [weather] = useContext(WeatherContext);
   const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
     DisplayCurrentContext
@@ -48,12 +31,12 @@ export const MaxMin = () => {
         fragment.dt_txt.includes("12:00:00")
       );
       if (noon) {
-        return Math.round(noon[0].main.feels_like) + scale(celciusOn);
+        return Math.round(noon[0].main.feels_like) + scale(user.celciusOn);
       } else {
         return "N/A";
       }
     } else {
-      return Math.round(weather.list[0].main.feels_like) + scale(celciusOn);
+      return Math.round(weather.list[0].main.feels_like) + scale(user.celciusOn);
     }
   };
   const getDayMax = () => {
@@ -65,7 +48,7 @@ export const MaxMin = () => {
         }
       });
     }
-    return Math.round(max) + scale(celciusOn);
+    return Math.round(max) + scale(user.celciusOn);
   };
   const getDayMin = () => {
     let min = 100;
@@ -76,7 +59,7 @@ export const MaxMin = () => {
         }
       });
     }
-    return Math.round(min) + scale(celciusOn);
+    return Math.round(min) + scale(user.celciusOn);
   };
   const generateSuggestedClothes = () => {
     return (

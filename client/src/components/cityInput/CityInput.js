@@ -11,28 +11,11 @@ import Button from "@material-ui/core/Button";
 import { UserContext } from "../../shared/global/provider/AppProvider";
 
 export const CityInput = () => {
-  const [
-    authenticatedUser,
-    setAuthenticatedUser,
-    firstname,
-    setFirstname,
-    lastname,
-    setLastname,
-    username,
-    setUsername,
-    password,
-    setPassword,
-    mail,
-    setMail,
-    favoriteCity,
-    setFavoriteCity,
-    celciusOn,
-    setcelciusOn,
-  ] = useContext(UserContext);
+  const user = useContext(UserContext);
   const [city, setCity] = useContext(CityContext);
   const [weather, setWeather] = useContext(WeatherContext);
   const fetchDataFromExternalApi = () => {
-    WeatherService.searchCity(city, celciusOn)
+    WeatherService.searchCity(city, user.celciusOn)
       .then((response) => setWeather(response.data))
       .catch((error) => console.log(error));
   };

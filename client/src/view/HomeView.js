@@ -8,30 +8,13 @@ import { UserContext } from "../shared/global/provider/AppProvider";
 import {Error} from "../components/error/Error"
 import "./HomeView.css";
 export const HomeView = () => {
-  const [
-    authenticatedUser,
-    setAuthenticatedUser,
-    firstname,
-    setFirstname,
-    lastname,
-    setLastname,
-    username,
-    setUsername,
-    password,
-    setPassword,
-    mail,
-    setMail,
-    favoriteCity,
-    setFavoriteCity,
-    celciusOn,
-    setcelciusOn,
-  ] = useContext(UserContext);
+  const user = useContext(UserContext);
   const [weather, setWeather] = useContext(WeatherContext);
   const [city] = useContext(CityContext);
   const [error, setError] = useState()
 
   useEffect(() => {
-    WeatherService.searchCity(city, celciusOn)
+    WeatherService.searchCity(city, user.celciusOn)
       .then((response) => setWeather(response.data))
       .catch((error) => {console.log(error); setError(true)});
   }, []);

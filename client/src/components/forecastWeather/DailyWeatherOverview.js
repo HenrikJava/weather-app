@@ -8,24 +8,7 @@ export const DailyWeatherOverview = (props) => {
   const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
     DisplayCurrentContext
   );
-  const [
-    authenticatedUser,
-    setAuthenticatedUser,
-    firstname,
-    setFirstname,
-    lastname,
-    setLastname,
-    username,
-    setUsername,
-    password,
-    setPassword,
-    mail,
-    setMail,
-    favoriteCity,
-    setFavoriteCity,
-    celciusOn,
-    setcelciusOn,
-  ] = useContext(UserContext);
+  const user = useContext(UserContext);
   const getDay = (dayLength) => {
     if (dayLength === "long") {
       return new Date(props.day.dt * 1000).toLocaleString("en-us", {
@@ -52,12 +35,12 @@ export const DailyWeatherOverview = (props) => {
         ></img>
         <div>
           <p id="degree">
-            {Math.round(props.day.main.temp) + scale(celciusOn)}
+            {Math.round(props.day.main.temp) + scale(user.celciusOn)}
           </p>
           <Wind
             speed={props.day.wind.speed}
             deg={props.day.wind.deg}
-            celciusOn={celciusOn}
+            celciusOn={user.celciusOn}
           ></Wind>
         </div>
       </div>

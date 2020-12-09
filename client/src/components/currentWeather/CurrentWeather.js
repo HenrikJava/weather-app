@@ -8,24 +8,7 @@ import "./CurrentWeather.css";
 export const CurrentWeather = () => {
   const [weather] = useContext(WeatherContext);
   console.log(weather);
-  const [
-    authenticatedUser,
-    setAuthenticatedUser,
-    firstname,
-    setFirstname,
-    lastname,
-    setLastname,
-    username,
-    setUsername,
-    password,
-    setPassword,
-    mail,
-    setMail,
-    favoriteCity,
-    setFavoriteCity,
-    celciusOn,
-    setcelciusOn,
-  ] = useContext(UserContext);
+  const user = useContext(UserContext);
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -44,12 +27,12 @@ export const CurrentWeather = () => {
         ></img>
         <div id="temp-wind">
           <p className="temp">
-            {Math.round(weather.list[0].main.temp) + scale(celciusOn)}
+            {Math.round(weather.list[0].main.temp) + scale(user.celciusOn)}
           </p>
           <Wind
             speed={weather.list[0].wind.speed}
             deg={weather.list[0].wind.deg}
-            celciusOn={celciusOn}
+            celciusOn={user.celciusOn}
           ></Wind>
         </div>
       </div>

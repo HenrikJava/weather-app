@@ -9,24 +9,7 @@ import "./DifferentTimes.css";
 
 import Grid from "@material-ui/core/Grid";
 export const DifferentTimes = () => {
-  const [
-    authenticatedUser,
-    setAuthenticatedUser,
-    firstname,
-    setFirstname,
-    lastname,
-    setLastname,
-    username,
-    setUsername,
-    password,
-    setPassword,
-    mail,
-    setMail,
-    favoriteCity,
-    setFavoriteCity,
-    celciusOn,
-    setcelciusOn,
-  ] = useContext(UserContext);
+  const user = useContext(UserContext);
   const [weather] = useContext(WeatherContext);
   const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
     DisplayCurrentContext
@@ -71,7 +54,7 @@ export const DifferentTimes = () => {
           </Grid>
           <Grid item xs={2}>
             <p>
-              {Math.round(specificTimes[index].main.temp) + scale(celciusOn)}
+              {Math.round(specificTimes[index].main.temp) + scale(user.celciusOn)}
             </p>
           </Grid>
           <Grid item xs={2}>
@@ -92,7 +75,7 @@ export const DifferentTimes = () => {
             <Wind
               speed={specificTimes[index].wind.speed}
               deg={specificTimes[index].wind.deg}
-              celciusOn={celciusOn}
+              celciusOn={user.celciusOn}
             ></Wind>
           </Grid>
         </Grid>
