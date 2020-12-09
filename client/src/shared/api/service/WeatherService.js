@@ -1,10 +1,10 @@
 import WeatherService from '../WeatherApi'  
-import Axios from 'axios'
-
+import axios from 'axios'
+const weatherInstance = axios.create();
 
 const searchCity = (city,celciusOn) => {
-  if  (celciusOn)  return Axios.get(WeatherService.weatherApi+city+WeatherService.celcius+WeatherService.apiKey)
-  else return Axios.get(WeatherService.weatherApi+city+WeatherService.fahrenheit+WeatherService.apiKey)
+  if  (celciusOn)  return weatherInstance.get(WeatherService.weatherApi+city+WeatherService.celcius+WeatherService.apiKey)
+  else return axios.get(WeatherService.weatherApi+city+WeatherService.fahrenheit+WeatherService.apiKey)
     
 }
 

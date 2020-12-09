@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const calcTime = (offset, sunTime) => {
   let timeNow;
   if (sunTime) {
@@ -12,3 +14,11 @@ export const scale = (celciusOn) => {
     return `°`;
   } else return `°F`;
 };
+
+export const setAuthToken = (token) => {
+  if (token) {
+    axios.defaults.headers.common['x-auth-token'] = token
+  } else {
+    delete axios.defaults.headers.common['x-auth-token']
+  }
+}
