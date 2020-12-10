@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../shared/global/provider/AppProvider";
+import { UserContext } from "../../shared/global/provider/Provider";
 import "./Links.css";
 import { useHistory } from "react-router-dom";
 import RoutingPath from "../../routes/RoutingPath";
@@ -8,18 +8,23 @@ import PersonIcon from "@material-ui/icons/Person";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
-import { SignInDialogContext } from "../../shared/global/provider/AppProvider";
+import { AppContext } from "../../shared/global/provider/Provider";
 import { SignInDialog } from "../signInDialog/SignInDialog";
 import { RegisterDialog } from "../registerDialog/RegisterDialog";
 export const Links = () => {
   const user = useContext(UserContext);
-  const [setSignInDialog, setSignInDialogOpen] = useContext(
-    SignInDialogContext
+  const app = useContext(
+    AppContext
   );
   const history = useHistory();
   const logout = () => {
-
-    user.setAuthenticatedUser();
+    user.setFirstname()
+    user.setLastname()
+    user.setUsername()
+    user.setEmail()
+    user.setFavouriteCity()
+    user.setAvatar()
+    user.setAuthenticatedUser()
     localStorage.removeItem("token");
     history.push(RoutingPath.homeView);
     
@@ -29,11 +34,11 @@ export const Links = () => {
       <div className="links-wrapper">
         <div className="username-image">
           <span className="username">
-            <p>Todo</p>
+    <p>{user.firstname}</p>
           </span>
           <img
-            src="https://www.thispersondoesnotexist.com/image"
-            alt="picture"
+            src={user.avatar}
+            alt="profile"
             className="links-image"
           />
         </div>
@@ -54,7 +59,7 @@ export const Links = () => {
     ) : (
       <div className="links-wrapper">
         <div className="icons-not-logged-in">
-          <span onClick={() => setSignInDialogOpen(true)}>
+          <span onClick={() => app.setSignInDialogOpen(true)}>
             <MeetingRoomIcon id="not-logged-in-icons" />
           </span>
 
