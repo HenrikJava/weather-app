@@ -13,7 +13,7 @@ const User = require("../../models/User");
 router.post(
   "/",
   [
-    check("username", "Username is required").not().isEmpty(),
+    check("firstname", "Firstname is required").not().isEmpty(),
     check("email", "Please enter a valid email").isEmail(),
     check(
       "password",
@@ -28,10 +28,10 @@ router.post(
     const {
       firstname,
       lastname,
-      username,
       password,
       email,
       favouriteCity,
+      celciusOn,
     } = req.body;
 
     try {
@@ -49,17 +49,16 @@ router.post(
       user = new User({
         firstname,
         lastname,
-        username,
         password,
         email,
         favourite_city: favouriteCity,
-        avatar
+        avatar,
+        celciusOn
       });
       const salt = await bcrypt.genSalt(10);
 
       user.password = await bcrypt.hash(password, salt);
       await user.save();
-      console.log(user);
 
       const payload = {
         user: {
@@ -87,7 +86,7 @@ router.put(
   [
     auth,
     [
-      check("username", "Username is required").not().isEmpty(),
+      check("firstname", "Firstname is required").not().isEmpty(),
       check("email", "Please enter a valid email").isEmail(),
       check(
         "password",
@@ -118,6 +117,8 @@ router.put(
       user.password = req.body.password;
       user.email = req.body.email;
       user.favourite_city = req.body.favouriteCity;
+      user.celciusOn = req.body.celciusOn
+      user.avatar = avatar
 
       const salt = await bcrypt.genSalt(10);
 
