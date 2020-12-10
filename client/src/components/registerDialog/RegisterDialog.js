@@ -6,39 +6,45 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { registerUser } from "../../shared/api/service/User";
+import { registerUser, loadUser } from "../../shared/api/service/UserService";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { SignInDialogContext } from "../../shared/global/provider/AppProvider";
-import { UserContext } from "../../shared/global/provider/AppProvider";
+import { UserContext } from "../../shared/global/provider/Provider";
 
-import { RegisterDialogContext } from "../../shared/global/provider/AppProvider";
+import { AppContext } from "../../shared/global/provider/Provider";
 export const RegisterDialog = () => {
-  const [signInDialogOpen, setSignInDialogOpen] = useContext(
-    SignInDialogContext
-  );
-  const [registerDialogOpen, setRegisterDialogOpen] = useContext(
-    RegisterDialogContext
+  
+  const app = useContext(
+    AppContext
   );
   const user = useContext(UserContext);
   const handleClose = () => {
-    setRegisterDialogOpen(false);
+    app.setRegisterDialogOpen(false);
   };
 
   const register = async (values) => {
-    const res = await registerUser(values);
-    user.setAuthenticatedUser(res.status===200);
+    await registerUser(values);
+    const loggedInUser = await loadUser();
+
+     if (loggedInUser) {
+       user.setFirstname(loggedInUser.data.firstname);
+       user.setLastname(loggedInUser.data.lastname);
+       user.setEmail(loggedInUser.data.email);
+       user.setFavouriteCity(loggedInUser.data.favourite_city);
+       user.setAvatar(loggedInUser.data.avatar);
+       user.setAuthenticatedUser(true);
+     }
     handleClose();
   };
 
   const openSignInDialog = () => {
     handleClose();
-    setSignInDialogOpen(true);
+    app.setSignInDialogOpen(true);
   };
 
   return (
-    <Dialog open={registerDialogOpen} onClose={handleClose}>
+    <Dialog open={app.registerDialogOpen} onClose={handleClose}>
       <DialogTitle id="form-dialog-title">Register</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -46,7 +52,6 @@ export const RegisterDialog = () => {
         </DialogContentText>
         <Formik
           initialValues={{
-            username: "",
             firstname: "",
             lastname: "",
             email: "",
@@ -55,9 +60,7 @@ export const RegisterDialog = () => {
             favouriteCity: "",
           }}
           onSubmit={(values) => {
-            /*   setAuthenticatedUser(values.username); */
-            /*             localStorage.setItem("username", values.username);
-             */ register(values);
+             register(values);
           }}
           validationSchema={Yup.object().shape({
             email: Yup.string().email().required("Required"),
@@ -89,18 +92,7 @@ export const RegisterDialog = () => {
             } = props;
             return (
               <form onSubmit={handleSubmit}>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="username"
-                  label="Username"
-                  name="username"
-                  value={values.username}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  type="text"
-                  fullWidth
-                />
+                
                 <TextField
                   error={errors.firstname && touched.firstname}
                   margin="dense"
