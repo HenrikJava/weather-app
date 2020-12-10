@@ -5,19 +5,35 @@ import { ProfileView } from "../view/ProfileView";
 import { EmptyView } from "../view/EmptyView";
 import { SettingsView } from "../view/SettingsView";
 import { useEffect, useContext } from "react";
-import { UserContext } from "../shared/global/provider/AppProvider";
+import { UserContext } from "../shared/global/provider/Provider";
+import { loadUser } from "../shared/api/service/UserService";
 import RoutingPath from "./RoutingPath";
 
 export const Routing = (props) => {
-  const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext);
+  const user = useContext(UserContext);
 
   const blockRouteIfNotAuthenticated = (navigateToView) => {
-    if (!authenticatedUser) {
+    if (!user.authenticatedUser) {
       return EmptyView;
     } else return navigateToView;
   };
   useEffect(() => {
-    setAuthenticatedUser(localStorage.getItem("username"));
+   
+    const fetchData = async () => {
+      const loggedInUser = await loadUser();
+
+      if (loggedInUser) {
+        user.setFirstname(loggedInUser.data.firstname);
+        user.setLastname(loggedInUser.data.lastname);
+        user.setEmail(loggedInUser.data.email);
+        user.setFavouriteCity(loggedInUser.data.favourite_city);
+        user.setAvatar(loggedInUser.data.avatar);
+        user.setAuthenticatedUser(true);
+        user.setCelciusOn(loggedInUser.data.celciusOn)
+      }
+    };
+    
+    fetchData();
   }, []);
   return (
     <Router>
