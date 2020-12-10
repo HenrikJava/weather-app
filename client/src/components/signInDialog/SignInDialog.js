@@ -6,54 +6,65 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { SignInDialogContext } from "../../shared/global/provider/AppProvider";
-import { UserContext } from "../../shared/global/provider/AppProvider";
-import { RegisterDialogContext } from "../../shared/global/provider/AppProvider";
+import { loginUser, loadUser } from "../../shared/api/service/UserService";
+
+import { SignInDialogContext } from "../../shared/global/provider/Provider";
+import { UserContext } from "../../shared/global/provider/Provider";
+import { AppContext } from "../../shared/global/provider/Provider";
 import { useHistory } from "react-router-dom";
 export const SignInDialog = () => {
   const history = useHistory();
-  const [signInDialogOpen, setSignInDialogOpen] = useContext(
-    SignInDialogContext
+  
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const user = useContext(UserContext);
+  const app = useContext(
+    AppContext
   );
-  const [loginUsername, setLoginUsername] = useState();
-  const [loginPassword, setloginPassword] = useState();
-  const [authenticatedUser, setAuthenticatedUser] = useContext(UserContext);
-  const [registerDialogOpen, setRegisterDialogOpen] = useContext(
-    RegisterDialogContext
-  );
-  const login = () => {
-    if (true) {
-      setAuthenticatedUser(loginUsername);
-      localStorage.setItem("username", loginUsername);
-      handleClose();
-    }
+  const login = async () => {
+
+     await loginUser(email,password);
+     const loggedInUser = await loadUser();
+
+     if (loggedInUser) {
+       user.setFirstname(loggedInUser.data.firstname);
+       user.setLastname(loggedInUser.data.lastname);
+       user.setEmail(loggedInUser.data.email);
+       user.setFavouriteCity(loggedInUser.data.favourite_city);
+       user.setAvatar(loggedInUser.data.avatar);
+       user.setAuthenticatedUser(true);
+     }
+   
+    
+    handleClose();
+    
   };
 
   const handleClose = () => {
     history.push("/");
-    setSignInDialogOpen(false);
+    app.setSignInDialogOpen(false);
   };
 
   const openRegisterDialog = () => {
     handleClose();
-    setRegisterDialogOpen(true);
+    app.setRegisterDialogOpen(true);
   };
 
   return (
-    <Dialog open={signInDialogOpen} onClose={handleClose}>
+    <Dialog open={app.signInDialogOpen} onClose={handleClose}>
       <DialogTitle id="form-dialog-title">Log in</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Please enter your username and password to log in.
+          Please enter your email and password to log in.
         </DialogContentText>
         <TextField
           autoFocus
           margin="dense"
-          id="username"
-          label="Username"
-          type="text"
+          id="email"
+          label="Email"
+          type="email"
           fullWidth
-          onChange={(event) => setLoginUsername(event.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
         />
         <TextField
           margin="dense"
@@ -61,7 +72,7 @@ export const SignInDialog = () => {
           label="Password"
           type="password"
           fullWidth
-          onChange={(event) => setloginPassword(event.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
         />
       </DialogContent>
       <DialogActions>
