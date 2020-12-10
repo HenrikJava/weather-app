@@ -1,6 +1,6 @@
 import React from "react";
-import { CityContext } from "../../shared/global/provider/AppProvider";
-import { WeatherContext } from "../../shared/global/provider/AppProvider";
+import { AppContext } from "../../shared/global/provider/Provider";
+import { WeatherContext } from "../../shared/global/provider/Provider";
 import "./CityInput.css";
 import { useContext } from "react";
 import WeatherService from "../../shared/api/service/WeatherService";
@@ -8,14 +8,14 @@ import SearchIcon from "@material-ui/icons/Search";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from "@material-ui/core/Button";
-import { UserContext } from "../../shared/global/provider/AppProvider";
+import { UserContext } from "../../shared/global/provider/Provider";
 
 export const CityInput = () => {
   const user = useContext(UserContext);
-  const [city, setCity] = useContext(CityContext);
+  const app = useContext(AppContext);
   const [weather, setWeather] = useContext(WeatherContext);
   const fetchDataFromExternalApi = () => {
-    WeatherService.searchCity(city, user.celciusOn)
+    WeatherService.searchCity(app.city, user.celciusOn)
       .then((response) => setWeather(response.data))
       .catch((error) => console.log(error));
   };
@@ -32,7 +32,7 @@ export const CityInput = () => {
         <Input
           className="city-input"
           type="text"
-          onChange={(event) => setCity(event.target.value)}
+          onChange={(event) => app.setCity(event.target.value)}
           placeholder="Search city..."
           id="input-with-icon-adornment"
           endAdornment={

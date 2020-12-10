@@ -1,19 +1,33 @@
 import React, { useState, createContext } from "react";
 
-export const RegisterDialogContext = createContext();
-export const RegisterDialogProvider = (props) => {
+export const AppContext = createContext();
+export const AppProvider = (props) => {
   const [registerDialogOpen, setRegisterDialogOpen] = useState(false);
-
+  const [signInDialogOpen, setSignInDialogOpen] = useState(false);
+  const [city, setCity] = useState("stockholm");
+  const [displayCurrent, setDisplayCurrent] = useState(true);
+  const [weekday, setWeekday] = useState();
   return (
-    <RegisterDialogContext.Provider
-      value={[registerDialogOpen, setRegisterDialogOpen]}
+    <AppContext.Provider
+      value={{
+        registerDialogOpen,
+        setRegisterDialogOpen,
+        signInDialogOpen,
+        setSignInDialogOpen,
+        city,
+        setCity,
+        displayCurrent,
+        setDisplayCurrent,
+        weekday,
+        setWeekday,
+      }}
     >
       {props.children}
-    </RegisterDialogContext.Provider>
+    </AppContext.Provider>
   );
 };
 
-export const SignInDialogContext = createContext();
+/* export const SignInDialogContext = createContext();
 export const SignInDialogProvider = (props) => {
   const [signInDialogOpen, setSignInDialogOpen] = useState(false);
 
@@ -47,39 +61,40 @@ export const DisplayCurrentProvider = (props) => {
       {props.children}
     </DisplayCurrentContext.Provider>
   );
-};
+}; */
 export const UserContext = createContext();
 export const UserProvider = (props) => {
   const [authenticatedUser, setAuthenticatedUser] = useState();
   const [firstname, setFirstname] = useState();
   const [lastname, setLastname] = useState();
 
-  const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [mail, setMail] = useState();
-  const [favoriteCity, setFavoriteCity] = useState();
-  const [celciusOn, setcelciusOn] = useState(true);
+  const [email, setEmail] = useState();
+  const [favouriteCity, setFavouriteCity] = useState();
+  const [celciusOn, setCelciusOn] = useState(true);
+  const [avatar, setAvatar] = useState();
 
   return (
     <UserContext.Provider
       value={{
         authenticatedUser,
         setAuthenticatedUser,
-        
+
         firstname,
         setFirstname,
         lastname,
         setLastname,
-        username,
-        setUsername,
+
         password,
         setPassword,
-        mail,
-        setMail,
-        favoriteCity,
-        setFavoriteCity,
+        email,
+        setEmail,
+        favouriteCity,
+        setFavouriteCity,
         celciusOn,
-        setcelciusOn,
+        setCelciusOn,
+        avatar,
+        setAvatar,
       }}
     >
       {props.children}

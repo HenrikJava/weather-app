@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { WeatherContext } from "../../shared/global/provider/AppProvider";
-import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
-import { UserContext } from "../../shared/global/provider/AppProvider";
+import { WeatherContext } from "../../shared/global/provider/Provider";
+import { AppContext } from "../../shared/global/provider/Provider";
+import { UserContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
 import { Wind } from "../wind/Wind";
 
@@ -11,9 +11,7 @@ import Grid from "@material-ui/core/Grid";
 export const DifferentTimes = () => {
   const user = useContext(UserContext);
   const [weather] = useContext(WeatherContext);
-  const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
-    DisplayCurrentContext
-  );
+  const app = useContext(AppContext);
   const timesArray = ["00:00:00", "06:00:00", "12:00:00", "18:00:00"];
   const getDayName = (fragment) => {
     return new Date(fragment * 1000).toLocaleString("en-us", {
@@ -30,7 +28,7 @@ export const DifferentTimes = () => {
     return condition;
   };
   const weatherAtCurrentDay = weather.list.filter(
-    (fragment) => getDayName(fragment.dt) === weekday
+    (fragment) => getDayName(fragment.dt) === app.weekday
   );
   const specificTimes = weatherAtCurrentDay.filter(
     (fragment) => getSpecificTimes(fragment.dt_txt) === true
@@ -86,7 +84,7 @@ export const DifferentTimes = () => {
 
   return (
     <>
-      <p className="day-to-display">{weekday}</p>
+      <p className="day-to-display">{app.weekday}</p>
 
       <div className="weather-at-differents-time-grid">
         {generateDifferentTimes()}

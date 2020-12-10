@@ -5,12 +5,12 @@ import { CurrentWeather } from "../currentWeather/CurrentWeather";
 import { MaxMin } from "../maxMin/MaxMin";
 import { SunTimes } from "../sunTimes/SunTimes";
 import { DifferentTimes } from "../differentTimes/DifferentTimes";
-import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
+import { AppContext } from "../../shared/global/provider/Provider";
 
 import "./MainWeather.css";
 import { Grid } from "@material-ui/core";
 export const MainWeather = () => {
-  const [displayCurrent, setDisplayCurrent] = useContext(DisplayCurrentContext);
+  const app = useContext(AppContext);
 
   return (
     <div className="main-weather-wrapper">
@@ -21,7 +21,7 @@ export const MainWeather = () => {
           <SunTimes></SunTimes>
         </Grid>
         <Grid item xs={4}>
-          {displayCurrent ? <CurrentWeather /> : <DifferentTimes />}
+          {app.displayCurrent ? <CurrentWeather /> : <DifferentTimes />}
         </Grid>
         <Grid item xs={4}>
           <MaxMin></MaxMin>

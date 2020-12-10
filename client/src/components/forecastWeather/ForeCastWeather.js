@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { WeatherContext } from "../../shared/global/provider/AppProvider";
+import { WeatherContext } from "../../shared/global/provider/Provider";
 import { DailyWeatherOverview } from "./DailyWeatherOverview";
 import "./ForeCastWeather.css";
 export const ForeCastWeather = () => {

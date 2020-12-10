@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { WeatherContext } from "../../shared/global/provider/AppProvider";
+import { WeatherContext } from "../../shared/global/provider/Provider";
 import "./SunTimes.css";
 import sunrise from "../../shared/images/sunrise.png";
 import sunset from "../../shared/images/sunset.png";

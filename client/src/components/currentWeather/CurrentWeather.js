@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { WeatherContext } from "../../shared/global/provider/AppProvider";
-import { UserContext } from "../../shared/global/provider/AppProvider";
+import { WeatherContext } from "../../shared/global/provider/Provider";
+import { UserContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
 import { Wind } from "../wind/Wind";
 import "./CurrentWeather.css";

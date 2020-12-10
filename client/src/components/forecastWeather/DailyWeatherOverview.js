@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import "./DailyWeatherOverview.css";
-import { UserContext } from "../../shared/global/provider/AppProvider";
+import { UserContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
-import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
+import { AppContext } from "../../shared/global/provider/Provider";
 import { Wind } from "../wind/Wind";
 export const DailyWeatherOverview = (props) => {
-  const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
-    DisplayCurrentContext
+  const app = useContext(
+    AppContext
   );
   const user = useContext(UserContext);
   const getDay = (dayLength) => {
@@ -24,7 +24,7 @@ export const DailyWeatherOverview = (props) => {
   return (
     <div
       className="daily-weather"
-      onClick={() => setWeekday(getDay("long"), setDisplayCurrent(false))}
+      onClick={() => app.setWeekday(getDay("long"), app.setDisplayCurrent(false))}
     >
       <p className="weekday">{getDay("short")}</p>
       <div className="image-and-details">

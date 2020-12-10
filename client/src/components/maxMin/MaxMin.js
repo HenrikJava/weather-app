@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { WeatherContext } from "../../shared/global/provider/AppProvider";
-import { DisplayCurrentContext } from "../../shared/global/provider/AppProvider";
-import { UserContext } from "../../shared/global/provider/AppProvider";
+import { WeatherContext } from "../../shared/global/provider/Provider";
+import { AppContext } from "../../shared/global/provider/Provider";
+import { UserContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
 import "./MaxMin.css";
 
@@ -11,8 +11,8 @@ import Grid from "@material-ui/core/Grid";
 export const MaxMin = () => {
   const user = useContext(UserContext);
   const [weather] = useContext(WeatherContext);
-  const [displayCurrent, setDisplayCurrent, weekday, setWeekday] = useContext(
-    DisplayCurrentContext
+  const app = useContext(
+    AppContext
   );
   const getDayName = (fragment) => {
     return new Date(fragment * 1000).toLocaleString("en-us", {
@@ -21,12 +21,12 @@ export const MaxMin = () => {
   };
 
   const weatherAtCurrentDay = weather.list.filter(
-    (fragment) => getDayName(fragment.dt) === weekday
+    (fragment) => getDayName(fragment.dt) === app.weekday
   );
 
   const getWeatherAtNoon = () => {
     let noon;
-    if (!displayCurrent) {
+    if (!app.displayCurrent) {
       noon = weatherAtCurrentDay.filter((fragment) =>
         fragment.dt_txt.includes("12:00:00")
       );
@@ -41,7 +41,7 @@ export const MaxMin = () => {
   };
   const getDayMax = () => {
     let max = -100;
-    if (!displayCurrent) {
+    if (!app.displayCurrent) {
       weatherAtCurrentDay.forEach((fragment) => {
         if (fragment.main.temp_max > max) {
           max = fragment.main.temp_max;
@@ -52,7 +52,7 @@ export const MaxMin = () => {
   };
   const getDayMin = () => {
     let min = 100;
-    if (!displayCurrent) {
+    if (!app.displayCurrent) {
       weatherAtCurrentDay.forEach((fragment) => {
         if (fragment.main.temp_min < min) {
           min = fragment.main.temp_min;
@@ -71,10 +71,10 @@ export const MaxMin = () => {
         <Grid item xs={3}>
           <div className="temperatures">
             <p className="temp-headers">
-              {!displayCurrent ? "Feels like at 12" : "Feels like now"}
+              {!app.displayCurrent ? "Feels like at 12" : "Feels like now"}
             </p>
             <p className="temp-degrees">{getWeatherAtNoon()}</p>
-            {!displayCurrent && (
+            {!app.displayCurrent && (
               <div>
                 <p className="temp-headers">Day max:</p>
                 <p className="temp-degrees">{getDayMax()}</p>

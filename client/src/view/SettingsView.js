@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
-import { UserContext } from "../shared/global/provider/AppProvider";
+import { UserContext } from "../shared/global/provider/Provider";
 import "./SettingsView.css";
 export const SettingsView = () => {
   const user = useContext(UserContext);
   const handleChange = () => {
-    user.setcelciusOn(!user.celciusOn);
+    user.setCelciusOn(!user.celciusOn);
   };
 
   return (

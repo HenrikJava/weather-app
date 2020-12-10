@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { WeatherContext } from "../../shared/global/provider/AppProvider";
+import { WeatherContext } from "../../shared/global/provider/Provider";
 import { calcTime } from "../../shared/global/functions";
 import "./CityInfo.css";
 export const CityInfo = () => {
