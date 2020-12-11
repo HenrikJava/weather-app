@@ -8,16 +8,13 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { registerUser, loadUser } from "../../shared/api/service/UserService";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 import { UserContext } from "../../shared/global/provider/Provider";
 
 import { AppContext } from "../../shared/global/provider/Provider";
 export const RegisterDialog = () => {
-  
-  const app = useContext(
-    AppContext
-  );
+  const app = useContext(AppContext);
   const user = useContext(UserContext);
   const handleClose = () => {
     app.setRegisterDialogOpen(false);
@@ -27,14 +24,14 @@ export const RegisterDialog = () => {
     await registerUser(values);
     const loggedInUser = await loadUser();
 
-     if (loggedInUser) {
-       user.setFirstname(loggedInUser.data.firstname);
-       user.setLastname(loggedInUser.data.lastname);
-       user.setEmail(loggedInUser.data.email);
-       user.setFavouriteCity(loggedInUser.data.favourite_city);
-       user.setAvatar(loggedInUser.data.avatar);
-       user.setAuthenticatedUser(true);
-     }
+    if (loggedInUser) {
+      user.setFirstname(loggedInUser.data.firstname);
+      user.setLastname(loggedInUser.data.lastname);
+      user.setEmail(loggedInUser.data.email);
+      user.setFavouriteCity(loggedInUser.data.favourite_city);
+      user.setAvatar(loggedInUser.data.avatar);
+      user.setAuthenticatedUser(true);
+    }
     handleClose();
   };
 
@@ -56,11 +53,11 @@ export const RegisterDialog = () => {
             lastname: "",
             email: "",
             password: "",
-            password2: "",
+            confirmPassword: "",
             favouriteCity: "",
           }}
           onSubmit={(values) => {
-             register(values);
+            register(values);
           }}
           validationSchema={Yup.object().shape({
             email: Yup.string().email().required("Required"),
@@ -74,7 +71,7 @@ export const RegisterDialog = () => {
                 /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
                 "Password must contain at least 8 characters, one uppercase, one number and one special case character"
               ),
-            password2: Yup.string().oneOf(
+            confirmPassword: Yup.string().oneOf(
               [Yup.ref("password"), null],
               "Passwords must match"
             ),
@@ -92,7 +89,6 @@ export const RegisterDialog = () => {
             } = props;
             return (
               <form onSubmit={handleSubmit}>
-                
                 <TextField
                   error={errors.firstname && touched.firstname}
                   margin="dense"
@@ -123,7 +119,7 @@ export const RegisterDialog = () => {
                   error={errors.email && touched.email}
                   margin="dense"
                   id="mail"
-                  label="E-mail"
+                  label="Email"
                   name="email"
                   value={values.email}
                   onChange={handleChange}
@@ -148,16 +144,16 @@ export const RegisterDialog = () => {
                   fullWidth
                 />
                 <TextField
-                  error={errors.password2 && touched.password2}
+                  error={errors.confirmPassword && touched.confirmPassword}
                   margin="dense"
-                  id="password2"
-                  label="Password2"
-                  name="password2"
-                  value={values.password2}
+                  id="confirmPassword"
+                  label="Confirm password"
+                  name="confirmPassword"
+                  value={values.confirmPassword}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={
-                    errors.password2 && touched.password2 && errors.password2
+                    errors.confirmPassword && touched.confirmPassword && errors.confirmPassword
                   }
                   type="password"
                   fullWidth
