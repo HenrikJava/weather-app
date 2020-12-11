@@ -7,7 +7,8 @@ export const EmptyView = () => {
   );
 
   useEffect(() => {
-    app.setSignInDialogOpen(true);
-  });
+/*     localStorage.getItem('token')? app.setSignInDialogOpen(false) :
+ */    app.setSignInDialogOpen(true);
+  },[]);
   return <div className="empty-view"></div>;
 };
