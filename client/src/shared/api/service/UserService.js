@@ -46,6 +46,34 @@ export const registerUser = async (values) => {
   return null
 };
 
+export const updateUser = async (values) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token)
+      }
+  
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify(values);
+  console.log(body);
+  try {
+    const res = await axios.put("/api/user", body, config);
+    if (res.status === 201) {
+      console.log('sad');
+      localStorage.setItem("token", res.data.token);
+      return res
+    } else {
+      localStorage.removeItem("token");
+      return null
+
+    }
+  } catch (err) {
+    console.log(err);
+  }
+  return null
+};
 export const loginUser = async (email, password) => {
   
   const config = {

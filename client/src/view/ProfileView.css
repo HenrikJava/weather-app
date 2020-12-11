@@ -9,7 +9,7 @@
 .profile-form {
   width: 100%;
 }
-#user-pass,
+#passwords,
 #mail-city,
 #first-last {
   display: flex;
