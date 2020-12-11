@@ -11,6 +11,7 @@ import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import { AppContext } from "../../shared/global/provider/Provider";
 import { SignInDialog } from "../signInDialog/SignInDialog";
 import { RegisterDialog } from "../registerDialog/RegisterDialog";
+import { setAuthToken } from "../../shared/global/functions";
 export const Links = () => {
   const user = useContext(UserContext);
   const app = useContext(
@@ -18,14 +19,15 @@ export const Links = () => {
   );
   const history = useHistory();
   const logout = () => {
+    localStorage.removeItem("token");
+    setAuthToken()
     user.setFirstname()
     user.setLastname()
-    user.setUsername()
     user.setEmail()
     user.setFavouriteCity()
     user.setAvatar()
     user.setAuthenticatedUser()
-    localStorage.removeItem("token");
+    
     history.push(RoutingPath.homeView);
     
   };
