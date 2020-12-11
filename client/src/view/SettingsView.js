@@ -1,28 +1,29 @@
 import React, { useContext, useState } from "react";
 import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
-import { AppContext,WeatherContext } from "../shared/global/provider/Provider";
+import { AppContext,UserContext,WeatherContext } from "../shared/global/provider/Provider";
 import WeatherService from "../shared/api/service/WeatherService";
+import {loadUser} from '../shared/api/service/UserService'
+import {updateApp} from '../shared/api/service/AppService'
+
 import "./SettingsView.css";
 export const SettingsView = () => {
-  const [weather, setWeather] = useContext(WeatherContext);
-
+  const user = useContext(UserContext)
   const app = useContext(AppContext);
 
-  const updateWeather = () => {
-    WeatherService.searchCity(
-      app.city,
-     !app.fahrenheitOn
-   )
-     .then((response) => {setWeather(response.data)})
-     .catch((error) => {
-       console.log(error);
-     });
-  }
-  const handleChange = () => {
-    updateWeather()
-    app.setFahrenheitOn(!app.fahrenheitOn);
-    
+  
+  const handleChange =  async() => {
+    if (!user.authenticatedUser) {
+    app.setFahrenheitOn(!app.fahrenheitOn);}
+    else {
+      await updateApp({email: user.email, fahrenheitOn: !app.fahrenheitOn});
+    const loggedInUser = await loadUser();
+
+    if (loggedInUser) {
+     
+      app.setFahrenheitOn(loggedInUser.data.fahrenheit_on)
+    }
+    }
     
   };
 
