@@ -31,12 +31,12 @@ export const MaxMin = () => {
         fragment.dt_txt.includes("12:00:00")
       );
       if (noon) {
-        return Math.round(noon[0].main.feels_like) + scale(user.celciusOn);
+        return Math.round(noon[0].main.feels_like) + scale(app.fahrenheitOn);
       } else {
         return "N/A";
       }
     } else {
-      return Math.round(weather.list[0].main.feels_like) + scale(user.celciusOn);
+      return Math.round(weather.list[0].main.feels_like) + scale(app.fahrenheitOn);
     }
   };
   const getDayMax = () => {
@@ -48,7 +48,7 @@ export const MaxMin = () => {
         }
       });
     }
-    return Math.round(max) + scale(user.celciusOn);
+    return Math.round(max) + scale(app.fahrenheitOn);
   };
   const getDayMin = () => {
     let min = 100;
@@ -59,7 +59,7 @@ export const MaxMin = () => {
         }
       });
     }
-    return Math.round(min) + scale(user.celciusOn);
+    return Math.round(min) + scale(app.fahrenheitOn);
   };
   const generateSuggestedClothes = () => {
     return (

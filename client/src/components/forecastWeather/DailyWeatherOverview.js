@@ -35,12 +35,12 @@ export const DailyWeatherOverview = (props) => {
         ></img>
         <div>
           <p id="degree">
-            {Math.round(props.day.main.temp) + scale(user.celciusOn)}
+            {Math.round(props.day.main.temp) + scale(app.fahrenheitOn)}
           </p>
           <Wind
             speed={props.day.wind.speed}
             deg={props.day.wind.deg}
-            celciusOn={user.celciusOn}
+            fahrenheit={app.fahrenheitOn}
           ></Wind>
         </div>
       </div>

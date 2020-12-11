@@ -9,10 +9,10 @@ export const calcTime = (offset, sunTime) => {
     timeNow.getTime() + timeNow.getTimezoneOffset() * 60000;
   return new Date(localComparingToUTC + 1000 * offset);
 };
-export const scale = (celciusOn) => {
-  if (celciusOn) {
-    return `°`;
-  } else return `°F`;
+export const scale = (fahrenheitOn) => {
+  if (fahrenheitOn) {
+    return `°F`;
+  } else return `°`;
 };
 
 export const setAuthToken = (token) => {

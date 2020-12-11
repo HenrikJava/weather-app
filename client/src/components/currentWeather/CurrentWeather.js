@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import { WeatherContext } from "../../shared/global/provider/Provider";
-import { UserContext } from "../../shared/global/provider/Provider";
+import { UserContext, AppContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
 import { Wind } from "../wind/Wind";
 import "./CurrentWeather.css";
 
 export const CurrentWeather = () => {
   const [weather] = useContext(WeatherContext);
-  console.log(weather);
   const user = useContext(UserContext);
+  const app = useContext(AppContext);
+
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -27,12 +28,12 @@ export const CurrentWeather = () => {
         ></img>
         <div id="temp-wind">
           <p className="temp">
-            {Math.round(weather.list[0].main.temp) + scale(user.celciusOn)}
+            {Math.round(weather.list[0].main.temp) + scale(app.fahrenheitOn)}
           </p>
           <Wind
             speed={weather.list[0].wind.speed}
             deg={weather.list[0].wind.deg}
-            celciusOn={user.celciusOn}
+            fahrenheitOn={app.fahrenheitOn}
           ></Wind>
         </div>
       </div>

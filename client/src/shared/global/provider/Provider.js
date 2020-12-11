@@ -7,6 +7,7 @@ export const AppProvider = (props) => {
   const [city, setCity] = useState("stockholm");
   const [displayCurrent, setDisplayCurrent] = useState(true);
   const [weekday, setWeekday] = useState();
+  const [fahrenheitOn, setFahrenheitOn] = useState(false)
   return (
     <AppContext.Provider
       value={{
@@ -20,6 +21,7 @@ export const AppProvider = (props) => {
         setDisplayCurrent,
         weekday,
         setWeekday,
+        fahrenheitOn, setFahrenheitOn
       }}
     >
       {props.children}
@@ -27,51 +29,14 @@ export const AppProvider = (props) => {
   );
 };
 
-/* export const SignInDialogContext = createContext();
-export const SignInDialogProvider = (props) => {
-  const [signInDialogOpen, setSignInDialogOpen] = useState(false);
 
-  return (
-    <SignInDialogContext.Provider
-      value={[signInDialogOpen, setSignInDialogOpen]}
-    >
-      {props.children}
-    </SignInDialogContext.Provider>
-  );
-};
-export const CityContext = createContext();
-export const CityProvider = (props) => {
-  const [city, setCity] = useState("stockholm");
-
-  return (
-    <CityContext.Provider value={[city, setCity]}>
-      {props.children}
-    </CityContext.Provider>
-  );
-};
-export const DisplayCurrentContext = createContext();
-export const DisplayCurrentProvider = (props) => {
-  const [displayCurrent, setDisplayCurrent] = useState(true);
-  const [weekday, setWeekday] = useState();
-
-  return (
-    <DisplayCurrentContext.Provider
-      value={[displayCurrent, setDisplayCurrent, weekday, setWeekday]}
-    >
-      {props.children}
-    </DisplayCurrentContext.Provider>
-  );
-}; */
 export const UserContext = createContext();
 export const UserProvider = (props) => {
   const [authenticatedUser, setAuthenticatedUser] = useState();
   const [firstname, setFirstname] = useState();
   const [lastname, setLastname] = useState();
-
-  const [password, setPassword] = useState();
   const [email, setEmail] = useState();
   const [favouriteCity, setFavouriteCity] = useState();
-  const [celciusOn, setCelciusOn] = useState(true);
   const [avatar, setAvatar] = useState();
 
   return (
@@ -85,14 +50,12 @@ export const UserProvider = (props) => {
         lastname,
         setLastname,
 
-        password,
-        setPassword,
+       
         email,
         setEmail,
         favouriteCity,
         setFavouriteCity,
-        celciusOn,
-        setCelciusOn,
+        
         avatar,
         setAvatar,
       }}

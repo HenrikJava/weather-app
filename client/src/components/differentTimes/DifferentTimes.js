@@ -52,7 +52,7 @@ export const DifferentTimes = () => {
           </Grid>
           <Grid item xs={2}>
             <p>
-              {Math.round(specificTimes[index].main.temp) + scale(user.celciusOn)}
+              {Math.round(specificTimes[index].main.temp) + scale(app.fahrenheitOn)}
             </p>
           </Grid>
           <Grid item xs={2}>
@@ -73,7 +73,7 @@ export const DifferentTimes = () => {
             <Wind
               speed={specificTimes[index].wind.speed}
               deg={specificTimes[index].wind.deg}
-              celciusOn={user.celciusOn}
+              fahrenheitOn={app.fahrenheitOn}
             ></Wind>
           </Grid>
         </Grid>

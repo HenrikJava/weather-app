@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
     avatar: {
         type: String
     },
-    celciusOn: {
+    fahrenheit_on: {
         type: Boolean
     }
 })

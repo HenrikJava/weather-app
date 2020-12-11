@@ -7,7 +7,7 @@ export const Wind = (props) => {
     <div id="wind">
       <p id="speed">
         {Math.round(props.speed)}
-        {props.celciusOn ? " m/s" : " mph"}
+        {props.fahrenheitOn ? " mph" : " m/s"}
       </p>
       <ArrowRightAltIcon
         id="arrow"

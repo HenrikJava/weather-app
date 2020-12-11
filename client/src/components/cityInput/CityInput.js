@@ -15,7 +15,7 @@ export const CityInput = () => {
   const app = useContext(AppContext);
   const [weather, setWeather] = useContext(WeatherContext);
   const fetchDataFromExternalApi = () => {
-    WeatherService.searchCity(app.city, user.celciusOn)
+    WeatherService.searchCity(app.city, app.fahrenheitOn)
       .then((response) => setWeather(response.data))
       .catch((error) => console.log(error));
   };
