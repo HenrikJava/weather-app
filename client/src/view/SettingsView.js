@@ -1,12 +1,29 @@
 import React, { useContext, useState } from "react";
 import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
-import { UserContext } from "../shared/global/provider/Provider";
+import { AppContext,WeatherContext } from "../shared/global/provider/Provider";
+import WeatherService from "../shared/api/service/WeatherService";
 import "./SettingsView.css";
 export const SettingsView = () => {
-  const user = useContext(UserContext);
+  const [weather, setWeather] = useContext(WeatherContext);
+
+  const app = useContext(AppContext);
+
+  const updateWeather = () => {
+    WeatherService.searchCity(
+      app.city,
+     !app.fahrenheitOn
+   )
+     .then((response) => {setWeather(response.data)})
+     .catch((error) => {
+       console.log(error);
+     });
+  }
   const handleChange = () => {
-    user.setCelciusOn(!user.celciusOn);
+    updateWeather()
+    app.setFahrenheitOn(!app.fahrenheitOn);
+    
+    
   };
 
   return (
@@ -20,14 +37,14 @@ export const SettingsView = () => {
           Temperature:
         </Grid>
         <Grid item xs={6} id="switch">
-          <p>Fahrenheit</p>
+          <p>Celcius</p>
           <Switch
-            checked={user.celciusOn}
+            checked={app.fahrenheitOn}
             onChange={handleChange}
             color="primary"
             inputProps={{ "aria-label": "primary checkbox" }}
           />
-          <p>Celcius</p>
+          <p>Fahrenheit</p>
         </Grid>
       </Grid>
     </div>
