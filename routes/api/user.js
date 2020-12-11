@@ -20,10 +20,13 @@ router.post(
       "Please enter a password with 6 or more characters"
     ).isLength({ min: 6 }),
   ],
-  async (req, res) => {
+  
+  (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+       res
+        .status(400)
+        .json({ message: { msgBody: errors.array(), msgError: true } });
     }
     const {
       firstname,
@@ -34,51 +37,79 @@ router.post(
       fahrenheitOn,
     } = req.body;
 
-    try {
-      let user = await User.findOne({ email });
-      if (user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: "User already exists" }] });
+    User.findOne({ email }, async (err, user) => {
+      if (err) {
+        res
+          .status(500)
+          .json({ message: { msgBody: "Something wrong at server, please try again later.", msgError: true } });
       }
-      const avatar = gravatar.url(email, {
-        s: "200",
-        r: "pg",
-        d: "mm",
-      });
-      user = new User({
-        firstname,
-        lastname,
-        password,
-        email,
-        favourite_city: favouriteCity,
-        avatar,
-        fahrenheit_on: fahrenheitOn
-      });
-      const salt = await bcrypt.genSalt(10);
+      if (user) {
+         res.status(400).json({
+          message: { msgBody: "User already exists, choose another email.", msgError: true },
+        });
+      } else {
+        const avatar = gravatar.url(email, {
+          s: "200",
+          r: "pg",
+          d: "mm",
+        });
+        const newUser = new User({
+          firstname,
+          lastname,
+          password,
+          email,
+          favourite_city: favouriteCity,
+          avatar,
+          fahrenheit_on: fahrenheitOn,
+        });
+        const salt = await bcrypt.genSalt(10);
 
-      user.password = await bcrypt.hash(password, salt);
-      await user.save();
-
-      const payload = {
-        user: {
-          id: user.id,
-        },
-      };
-      //TODO change expires
-      jwt.sign(
-        payload,
-        config.jwtSecret,
-        { expiresIn: 60 * 60 * 24 * 100 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
-    } catch (err) {
-      console.log(err.message);
-      res.status(500).send("Server error");
-    }
+        newUser.password = await bcrypt.hash(password, salt);
+         newUser.save((err, doc) => {
+          if (err) {
+            res
+              .status(500)
+              .json({
+                message: { msgBody: "Something wrong at server, please try again later.", msgError: true },
+              });
+          } else {
+            const payload = {
+              user: {
+                id: doc._id,
+              },
+            };
+            //TODO change expires
+            jwt.sign(
+              payload,
+              config.jwtSecret,
+              { expiresIn: 60 * 60 * 24 * 100 },
+              (err, token) => {
+                if (err) {
+                  res
+                    .status(500)
+                    .json({
+                      message: { msgBody: "Something wrong at server, please try again later.", msgError: true },
+                    });
+                } else {
+                  res
+                    .status(200)
+                    .json(
+                     
+                      {
+                        token,
+                        message: {
+                          msgBody: "Account successfully created.",
+                          msgError: false,
+                        },
+                      }
+                    );
+                }
+              }
+            );
+          }
+        });
+      }
+    });
   }
 );
 router.put(
@@ -88,7 +119,6 @@ router.put(
     [
       check("firstname", "Firstname is required").not().isEmpty(),
       check("email", "Please enter a valid email").isEmail(),
-      
     ],
   ],
   async (req, res) => {
@@ -112,10 +142,9 @@ router.put(
       user.lastname = req.body.lastname;
       user.email = req.body.email;
       user.favourite_city = req.body.favouriteCity;
-      user.fahrenheit_on = req.body.fahrenheitOn
-      user.avatar = avatar
+      user.fahrenheit_on = req.body.fahrenheitOn;
+      user.avatar = avatar;
 
-      
       user = await User.findOneAndUpdate(
         { email: user.email },
         {
@@ -124,7 +153,7 @@ router.put(
             lastname: user.lastname,
             email: user.email,
             favourite_city: user.favourite_city,
-            fahrenheit_on: user.fahrenheit_on
+            fahrenheit_on: user.fahrenheit_on,
           },
         },
         { upsert: true, new: true }
@@ -152,16 +181,12 @@ router.put(
   }
 );
 
-  
-
 //Only for development
 router.get("/", async (req, res) => {
   try {
-    const users = await User.find({}).populate().select(['username','email'])
-    
-    console.log(
-      users
-    );
+    const users = await User.find({}).populate().select(["username", "email"]);
+
+    console.log(users);
     res.json(users);
   } catch (err) {
     console.log(err.message);
@@ -171,8 +196,8 @@ router.get("/", async (req, res) => {
 
 router.delete("/", auth, async (req, res) => {
   try {
-     await User.findOneAndRemove({_id: req.user.id})
-    res.json({msg: 'User removed'});
+    await User.findOneAndRemove({ _id: req.user.id });
+    res.json({ msg: "User removed" });
   } catch (err) {
     console.log(err.message);
     res.status(500).send("Server error");

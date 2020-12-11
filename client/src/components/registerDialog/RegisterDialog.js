@@ -11,9 +11,10 @@ import { registerUser, loadUser } from "../../shared/api/service/UserService";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { UserContext } from "../../shared/global/provider/Provider";
-
+import './RegisterDialog.css'
 import { AppContext } from "../../shared/global/provider/Provider";
 export const RegisterDialog = () => {
+  const [errorMessage, setErrorMessage] = useState();
   const app = useContext(AppContext);
   const user = useContext(UserContext);
   const handleClose = () => {
@@ -21,18 +22,22 @@ export const RegisterDialog = () => {
   };
 
   const register = async (values) => {
-    await registerUser(values);
-    const loggedInUser = await loadUser();
+    const response = await registerUser(values);
+    if (response.data.message.msgError === true) {
+      setErrorMessage(response.data.message.msgBody);
+    } else {
+      const loggedInUser = await loadUser();
 
-    if (loggedInUser) {
-      user.setFirstname(loggedInUser.data.firstname);
-      user.setLastname(loggedInUser.data.lastname);
-      user.setEmail(loggedInUser.data.email);
-      user.setFavouriteCity(loggedInUser.data.favourite_city);
-      user.setAvatar(loggedInUser.data.avatar);
-      user.setAuthenticatedUser(true);
+      if (loggedInUser) {
+        user.setFirstname(loggedInUser.data.firstname);
+        user.setLastname(loggedInUser.data.lastname);
+        user.setEmail(loggedInUser.data.email);
+        user.setFavouriteCity(loggedInUser.data.favourite_city);
+        user.setAvatar(loggedInUser.data.avatar);
+        user.setAuthenticatedUser(true);
+      }
+      handleClose();
     }
-    handleClose();
   };
 
   const openSignInDialog = () => {
@@ -47,6 +52,7 @@ export const RegisterDialog = () => {
         <DialogContentText>
           Please enter the fields to create an account.
         </DialogContentText>
+        <DialogContentText id="errorMessage">{errorMessage}</DialogContentText>
         <Formik
           initialValues={{
             firstname: "",
@@ -153,7 +159,9 @@ export const RegisterDialog = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={
-                    errors.confirmPassword && touched.confirmPassword && errors.confirmPassword
+                    errors.confirmPassword &&
+                    touched.confirmPassword &&
+                    errors.confirmPassword
                   }
                   type="password"
                   fullWidth
