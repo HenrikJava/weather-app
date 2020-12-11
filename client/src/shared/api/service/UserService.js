@@ -61,7 +61,6 @@ export const updateUser = async (values) => {
   try {
     const res = await axios.put("/api/user", body, config);
     if (res.status === 201) {
-      console.log('sad');
       localStorage.setItem("token", res.data.token);
       return res
     } else {

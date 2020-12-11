@@ -12,8 +12,6 @@ export const ProfileView = () => {
   
   const update = async (values) => {
     
-    values.fahrenheitOn =  app.fahrenheitOn
-
     await updateUser(values);
     const loggedInUser = await loadUser();
 
@@ -24,7 +22,6 @@ export const ProfileView = () => {
       user.setFavouriteCity(loggedInUser.data.favourite_city);
       user.setAvatar(loggedInUser.data.avatar);
       user.setAuthenticatedUser(true);
-      app.setFahrenheitOn(loggedInUser.data.fahrenheit_on)
     }
    
   };
