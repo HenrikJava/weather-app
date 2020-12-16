@@ -225,12 +225,25 @@ router.get("/", async (req, res) => {
 });
 
 router.delete("/", auth, async (req, res) => {
-  try {
-    await User.findOneAndRemove({ _id: req.user.id });
-    res.json({ msg: "User removed" });
-  } catch (err) {
-    console.log(err.message);
-    res.status(500).send("Server error");
-  }
+  
+    User.findOneAndRemove({ _id: req.user.id }, (err) => {
+      if (err) {
+        res.status(500).json({
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        });
+      } else {
+        res.status(200).json({
+            message: {
+            msgBody: "Account successfully deleted.",
+            msgError: false,
+          },
+        });
+      }
+    });
+   
+  
 });
 module.exports = router;

@@ -3,6 +3,8 @@ import { UserContext } from "../shared/global/provider/Provider";
 import { AppContext } from "../shared/global/provider/Provider";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
+import DeleteIcon from '@material-ui/icons/Delete';
+import {DeleteConfirmDialog} from '../components/deleteConfirmDialog/DeleteConfirmDialog'
 import * as Yup from "yup";
 import { updateUser, loadUser } from "../shared/api/service/UserService";
 import "./ProfileView.css";
@@ -29,6 +31,9 @@ export const ProfileView = () => {
     }
 
   };
+  const openDeleteConfirm = () => {
+    app.setDeleteConfirmDialogOpen(true)
+  }
   useEffect(() => {
     !user.authenticatedUser
       ? app.setSignInDialogOpen(true)
@@ -36,8 +41,11 @@ export const ProfileView = () => {
   }, []);
   return (
     <div className="profile-view">
+          <DeleteConfirmDialog></DeleteConfirmDialog>
+
       <Grid container id="main-grid">
         <Grid item xs={12} id="profile-image-cointainer">
+          <DeleteIcon fontSize="large" id="delete-icon" color="primary" onClick={openDeleteConfirm}></DeleteIcon>
           <img src={user.avatar} alt="profile" className="profile-image" />
         </Grid>
 

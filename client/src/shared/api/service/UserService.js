@@ -12,6 +12,8 @@ export const loadUser =  async () => {
       return response;
     }
   } catch (error) {
+    console.log(error.response);
+
     localStorage.removeItem("token");
     return error.response.data.message
       ? error.response
@@ -127,3 +129,29 @@ export const loginUser =  async (email, password) => {
   }
   
 };
+export const deleteUser = async () => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  
+
+  try {
+const response = await axios.delete('/api/user')
+if (response.status === 200) {
+  localStorage.removeItem("token");
+
+  return response
+}
+  } catch (error) {
+    return error.response.data.message
+      ? error.response
+      : {
+        data: {
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        },
+      };
+  }
+}

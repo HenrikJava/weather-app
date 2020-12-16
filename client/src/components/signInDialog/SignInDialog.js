@@ -7,8 +7,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { loginUser, loadUser } from "../../shared/api/service/UserService";
-
-import { SignInDialogContext } from "../../shared/global/provider/Provider";
 import { UserContext } from "../../shared/global/provider/Provider";
 import { AppContext } from "../../shared/global/provider/Provider";
 import { useHistory } from "react-router-dom";
