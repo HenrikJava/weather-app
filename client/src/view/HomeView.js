@@ -15,46 +15,49 @@ export const HomeView = () => {
   const app = useContext(AppContext);
   const [error, setError] = useState();
 
+  const defaultWeatherCall = () => {
+    WeatherService.searchCity(app.city, app.fahrenheitOn).then(
+      (response) => {
+        if (response.status === 200) {
+          setWeather(response.data);
+        } else {
+          console.log(response.data.message.msgBody);
+        }
+      }
+    );
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const loggedInUser = await loadUser();
-      if (loggedInUser) {
-        user.setFirstname(loggedInUser.data.firstname);
-        user.setLastname(loggedInUser.data.lastname);
-        user.setEmail(loggedInUser.data.email);
-        user.setAvatar(loggedInUser.data.avatar);
-        user.setAuthenticatedUser(true);
-        user.setFavouriteCity(
-          loggedInUser.data.favourite_city
-            
-        );
-        app.setFahrenheitOn(
-          loggedInUser.data.fahrenheit_on
-            
-        );
+      if (loggedInUser.data.message.msgError===false) {
+        
+        user.setFavouriteCity(loggedInUser.data.user.favourite_city);
         WeatherService.searchCity(
-          loggedInUser.data.favourite_city
-            ? loggedInUser.data.favourite_city
+          loggedInUser.data.user.favourite_city
+            ? loggedInUser.data.user.favourite_city
             : app.city,
-          loggedInUser.data.fahrenheit_on
-        )
-          .then((response) => setWeather(response.data))
-          .catch((error) => {
-            console.log(error);
-            setError(true);
-          });
+          loggedInUser.data.user.fahrenheit_on
+        ).then((response) => {
+          if (response.status === 200) {
+            setWeather(response.data);
+          }
+          else if (
+            response.data.message.msgBody ===
+            "No city with that name, check favourite city and change it."
+          ) {
+            console.log(response.data.message.msgBody);
+            defaultWeatherCall()
+          } else {
+            console.log(response.data.message.msgBody);
+          }
+        });
       } else {
-        WeatherService.searchCity(
-           app.city,
-          app.fahrenheitOn
-        )
-          .then((response) => setWeather(response.data))
-          .catch((error) => {
-            console.log(error);
-            setError(true);
-          });
+        user.setAuthenticatedUser(false);
+
+        defaultWeatherCall()
+
       }
-      
     };
 
     fetchData();
