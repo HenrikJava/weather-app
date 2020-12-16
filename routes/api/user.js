@@ -20,17 +20,16 @@ router.post(
       "Please enter a password with 6 or more characters"
     ).isLength({ min: 6 }),
   ],
-  
+
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-       res
+      res
         .status(400)
         .json({ message: { msgBody: errors.array(), msgError: true } });
     }
     const {
       firstname,
-      lastname,
       password,
       email,
       favouriteCity,
@@ -39,13 +38,19 @@ router.post(
 
     User.findOne({ email }, async (err, user) => {
       if (err) {
-        res
-          .status(500)
-          .json({ message: { msgBody: "Something wrong at server, please try again later.", msgError: true } });
+        res.status(500).json({
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        });
       }
       if (user) {
-         res.status(400).json({
-          message: { msgBody: "User already exists, choose another email.", msgError: true },
+        res.status(400).json({
+          message: {
+            msgBody: "User already exists, choose another email.",
+            msgError: true,
+          },
         });
       } else {
         const avatar = gravatar.url(email, {
@@ -55,7 +60,6 @@ router.post(
         });
         const newUser = new User({
           firstname,
-          lastname,
           password,
           email,
           favourite_city: favouriteCity,
@@ -65,13 +69,14 @@ router.post(
         const salt = await bcrypt.genSalt(10);
 
         newUser.password = await bcrypt.hash(password, salt);
-         newUser.save((err, doc) => {
+        newUser.save((err, doc) => {
           if (err) {
-            res
-              .status(500)
-              .json({
-                message: { msgBody: "Something wrong at server, please try again later.", msgError: true },
-              });
+            res.status(500).json({
+              message: {
+                msgBody: "Something wrong at server, please try again later.",
+                msgError: true,
+              },
+            });
           } else {
             const payload = {
               user: {
@@ -85,24 +90,21 @@ router.post(
               { expiresIn: 60 * 60 * 24 * 100 },
               (err, token) => {
                 if (err) {
-                  res
-                    .status(500)
-                    .json({
-                      message: { msgBody: "Something wrong at server, please try again later.", msgError: true },
-                    });
+                  res.status(500).json({
+                    message: {
+                      msgBody:
+                        "Something wrong at server, please try again later.",
+                      msgError: true,
+                    },
+                  });
                 } else {
-                  res
-                    .status(200)
-                    .json(
-                     
-                      {
-                        token,
-                        message: {
-                          msgBody: "Account successfully created.",
-                          msgError: false,
-                        },
-                      }
-                    );
+                  res.status(200).json({
+                    token,
+                    message: {
+                      msgBody: "Account successfully created.",
+                      msgError: false,
+                    },
+                  });
                 }
               }
             );
@@ -124,60 +126,88 @@ router.put(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res
+        .status(400)
+        .json({ message: { msgBody: errors.array(), msgError: true } });
     }
-    const email = req.body.email;
-    try {
-      let user = await User.findOne({ email });
-      if (!user) {
-        return res.status(400).json({ errors: [{ msg: "User dont exists" }] });
-      }
-      const avatar = gravatar.url(email, {
-        s: "200",
-        r: "pg",
-        d: "mm",
-      });
 
-      user.firstname = req.body.firstname;
-      user.lastname = req.body.lastname;
-      user.email = req.body.email;
-      user.favourite_city = req.body.favouriteCity;
-      user.fahrenheit_on = req.body.fahrenheitOn;
-      user.avatar = avatar;
+    const avatar = gravatar.url(req.body.email, {
+      s: "200",
+      r: "pg",
+      d: "mm",
+    });
 
-      user = await User.findOneAndUpdate(
-        { email: user.email },
-        {
-          $set: {
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-            favourite_city: user.favourite_city,
-            fahrenheit_on: user.fahrenheit_on,
+    const user = await User.findById(req.user.id, async (err) => {
+      if (err) {
+        res.status(500).json({
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
           },
-        },
-        { upsert: true, new: true }
-      ).exec();
+        });
+      }
+    });
+    if (req.body.password) {
+      const isMatch = await bcrypt.compare(req.body.oldPassword, user.password)
 
-      const payload = {
-        user: {
-          id: user.id,
-        },
-      };
-      //TODO change expires
-      jwt.sign(
-        payload,
-        config.jwtSecret,
-        { expiresIn: 60 * 60 * 24 * 100 },
-        (err, token) => {
-          if (err) throw err;
-          res.status(201).json({ token });
-        }
-      );
-    } catch (err) {
-      console.log(err.message);
-      res.status(500).send("Server error");
+      if (isMatch) {
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(req.body.password, salt);
+      } else {
+        res.status(500).json({
+          message: {
+            msgBody: "Old password doesnt match, please try again.",
+            msgError: true,
+          },
+        });
+      }
     }
+
+    user.firstname = req.body.firstname;
+    user.email = req.body.email;
+    user.favourite_city = req.body.favouriteCity;
+    user.fahrenheit_on = req.body.fahrenheitOn;
+    user.avatar = avatar;
+    user.save((err) => {
+      if (err) {
+        res.status(500).json({
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        });
+      } else {
+        const payload = {
+          user: {
+            id: req.user.id,
+          },
+        };
+        //TODO change expires
+        jwt.sign(
+          payload,
+          config.jwtSecret,
+          { expiresIn: 60 * 60 * 24 * 100 },
+          (err, token) => {
+            if (err) {
+              res.status(500).json({
+                message: {
+                  msgBody: "Something wrong at server, please try again later.",
+                  msgError: true,
+                },
+              });
+            } else {
+              res.status(201).json({
+                token,
+                message: {
+                  msgBody: "Account successfully updated.",
+                  msgError: false,
+                },
+              });
+            }
+          }
+        );
+      }
+    });
   }
 );
 
