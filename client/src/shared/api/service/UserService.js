@@ -2,20 +2,33 @@ import axios from "axios";
 
 import { setAuthToken } from "../../global/functions";
 
-export const loadUser = async () => {
+export const loadUser =  async () => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
-  try {
-    const res = await axios.get("/api/auth");
-    return res;
-  } catch (err) {
+   try {
+    const response = await axios.get("/api/auth");
+    if (response.status === 200) {
+      return response;
+    }
+  } catch (error) {
     localStorage.removeItem("token");
-    return null;
+    return error.response.data.message
+      ? error.response
+      : {
+        data: {
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        },
+      };
   }
+  
+ 
 };
 
-export const registerUser = async (values) => {
+export const registerUser =  async (values) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -24,23 +37,30 @@ export const registerUser = async (values) => {
   delete values.confirmPassword;
   const body = JSON.stringify(values);
 
-  return axios
-    .post("/api/user", body, config)
-    .then((response) => {
-      if (response.status === 200) {
-        localStorage.setItem("token", response.data.token);
-        return response;
-      }
-    })
-    .catch((error) => {
-      console.log(error.response);
-      localStorage.removeItem("token");
-
-      return error.response.data.message? error.response : {data: {message: { msgBody: "Something wrong at server, please try again later.", msgError: true }}};
-    });
+  try {
+    const response = await axios
+      .post("/api/user", body, config);
+    if (response.status === 200) {
+      localStorage.setItem("token", response.data.token);
+      return response;
+    }
+  } catch (error) {
+    console.log(error.response);
+    localStorage.removeItem("token");
+    return error.response.data.message
+      ? error.response
+      : {
+        data: {
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        },
+      };
+  }
 };
 
-export const updateUser = async (values) => {
+export const updateUser =  async (values) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -50,41 +70,60 @@ export const updateUser = async (values) => {
       "Content-Type": "application/json",
     },
   };
+  delete values.confirmPassword;
+
   const body = JSON.stringify(values);
-  console.log(body);
+
   try {
-    const res = await axios.put("/api/user", body, config);
-    if (res.status === 201) {
-      localStorage.setItem("token", res.data.token);
-      return res;
-    } else {
-      localStorage.removeItem("token");
-      return null;
+    const response = await axios
+      .put("/api/user", body, config);
+    if (response.status === 201) {
+      localStorage.setItem("token", response.data.token);
+
+      return response;
+
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error.response);
+    return error.response.data.message
+      ? error.response
+      : {
+        data: {
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        },
+      };
   }
-  return null;
 };
-export const loginUser = async (email, password) => {
+export const loginUser =  async (email, password) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
   const body = JSON.stringify({ email, password });
-  try {
-    const res = await axios.post("/api/auth", body, config);
-    if (res.status === 200) {
-      localStorage.setItem("token", res.data.token);
+
+    try {
+    const response = await axios.post("/api/auth", body, config);
+    if (response.status === 200) {
+      localStorage.setItem("token", response.data.token);
       setAuthToken(localStorage.token);
-      return res;
-    } else {
-      localStorage.removeItem("token");
-      return null;
+      return response;
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    localStorage.removeItem("token");
+    return error.response.data.message
+      ? error.response
+      : {
+        data: {
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        },
+      };
   }
-  return null;
+  
 };
