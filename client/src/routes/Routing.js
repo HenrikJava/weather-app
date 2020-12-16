@@ -23,22 +23,24 @@ export const Routing = (props) => {
     const fetchData = async () => {
       const loggedInUser = await loadUser();
 
-      if (loggedInUser) {
-        user.setFirstname(loggedInUser.data.firstname);
-        user.setLastname(loggedInUser.data.lastname);
-        user.setEmail(loggedInUser.data.email);
-        user.setAvatar(loggedInUser.data.avatar);
+      if (loggedInUser.data.message.msgError===false) {
+        user.setFirstname(loggedInUser.data.user.firstname);
+        user.setEmail(loggedInUser.data.user.email);
+        user.setAvatar(loggedInUser.data.user.avatar);
         user.setAuthenticatedUser(true);
         user.setFavouriteCity(
-          loggedInUser.data.favourite_city
-            ? loggedInUser.data.favourite_city
+          loggedInUser.data.user.favourite_city
+            ? loggedInUser.data.user.favourite_city
             : ""
         );
         app.setFahrenheitOn(
-          loggedInUser.data.fahrenheit_on
-            ? loggedInUser.data.fahrenheit_on
+          loggedInUser.data.user.fahrenheit_on
+            ? loggedInUser.data.user.fahrenheit_on
             : false
         );
+      } else {
+        user.setAuthenticatedUser(false);
+
       }
     };
     

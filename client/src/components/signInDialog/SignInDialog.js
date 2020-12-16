@@ -14,7 +14,8 @@ import { AppContext } from "../../shared/global/provider/Provider";
 import { useHistory } from "react-router-dom";
 export const SignInDialog = () => {
   const history = useHistory();
-  
+  const [errorMessage, setErrorMessage] = useState();
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const user = useContext(UserContext);
@@ -23,21 +24,29 @@ export const SignInDialog = () => {
   );
   const login = async () => {
 
-     await loginUser(email,password);
-     const loggedInUser = await loadUser();
+     const response = await loginUser(email,password);
+     if (response.data.message.msgError===true) {
+      setErrorMessage(response.data.message.msgBody);
 
-     if (loggedInUser) {
-       user.setFirstname(loggedInUser.data.firstname);
-       user.setLastname(loggedInUser.data.lastname);
-       user.setEmail(loggedInUser.data.email);
-       user.setFavouriteCity(loggedInUser.data.favourite_city);
-       user.setAvatar(loggedInUser.data.avatar);
-       user.setAuthenticatedUser(true);
+     } else {
+      const loggedInUser = await loadUser();
+
+      if (loggedInUser.data.message.msgError===false) {
+        user.setFirstname(loggedInUser.data.user.firstname);
+        user.setEmail(loggedInUser.data.user.email);
+        user.setFavouriteCity(loggedInUser.data.user.favourite_city);
+        user.setAvatar(loggedInUser.data.user.avatar);
+        user.setAuthenticatedUser(true);
+        handleClose();
+ 
+      } else {
+       setErrorMessage(loggedInUser.data.message.msgBody);
+ 
+      }
      }
-   
-    
-    handleClose();
-    
+
+     
+           
   };
 
   const handleClose = () => {
@@ -56,6 +65,9 @@ export const SignInDialog = () => {
       <DialogContent>
         <DialogContentText>
           Please enter your email and password to log in.
+        </DialogContentText>
+        <DialogContentText>
+          {errorMessage}
         </DialogContentText>
         <TextField
           autoFocus

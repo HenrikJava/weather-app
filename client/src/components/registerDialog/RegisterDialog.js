@@ -27,16 +27,17 @@ export const RegisterDialog = () => {
       setErrorMessage(response.data.message.msgBody);
     } else {
       const loggedInUser = await loadUser();
-
-      if (loggedInUser) {
-        user.setFirstname(loggedInUser.data.firstname);
-        user.setLastname(loggedInUser.data.lastname);
-        user.setEmail(loggedInUser.data.email);
-        user.setFavouriteCity(loggedInUser.data.favourite_city);
-        user.setAvatar(loggedInUser.data.avatar);
+      if (loggedInUser.data.message.msgError===false) {
+        user.setFirstname(loggedInUser.data.user.firstname);
+        user.setEmail(loggedInUser.data.user.email);
+        user.setFavouriteCity(loggedInUser.data.user.favourite_city);
+        user.setAvatar(loggedInUser.data.user.avatar);
         user.setAuthenticatedUser(true);
+        handleClose();
+      } else {
+        setErrorMessage(loggedInUser.data.message.msgBody);
       }
-      handleClose();
+      
     }
   };
 
@@ -56,7 +57,7 @@ export const RegisterDialog = () => {
         <Formik
           initialValues={{
             firstname: "",
-            lastname: "",
+           
             email: "",
             password: "",
             confirmPassword: "",
@@ -110,17 +111,7 @@ export const RegisterDialog = () => {
                   type="text"
                   fullWidth
                 />
-                <TextField
-                  margin="dense"
-                  id="lastname"
-                  label="Last name"
-                  name="lastname"
-                  value={values.lastname}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  type="text"
-                  fullWidth
-                />
+                
                 <TextField
                   error={errors.email && touched.email}
                   margin="dense"
