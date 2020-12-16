@@ -4,26 +4,30 @@ import { AppContext } from "../shared/global/provider/Provider";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import {updateUser, loadUser} from '../shared/api/service/UserService'
+import { updateUser, loadUser } from "../shared/api/service/UserService";
 import "./ProfileView.css";
 export const ProfileView = () => {
   const app = useContext(AppContext);
   const user = useContext(UserContext);
-  
+  const [responseMessage, setResponseMessage] = useState();
   const update = async (values) => {
+    const response = await updateUser(values);
+    setResponseMessage(response.data.message.msgBody);
     
-    await updateUser(values);
-    const loggedInUser = await loadUser();
+   const  loggedInUser = await loadUser();
 
-    if (loggedInUser) {
-      user.setFirstname(loggedInUser.data.firstname);
-      user.setLastname(loggedInUser.data.lastname);
-      user.setEmail(loggedInUser.data.email);
-      user.setFavouriteCity(loggedInUser.data.favourite_city);
-      user.setAvatar(loggedInUser.data.avatar);
+     if (loggedInUser.data.message.msgError===false) {
+      user.setFirstname(loggedInUser.data.user.firstname);
+      user.setEmail(loggedInUser.data.user.email);
+      user.setFavouriteCity(loggedInUser.data.user.favourite_city);
+      user.setAvatar(loggedInUser.data.user.avatar);
       user.setAuthenticatedUser(true);
+    } else{
+      setResponseMessage(loggedInUser.data.message.msgBody);
+      user.setAuthenticatedUser(false);
+
     }
-   
+
   };
   useEffect(() => {
     !user.authenticatedUser
@@ -40,30 +44,47 @@ export const ProfileView = () => {
         <Formik
           initialValues={{
             firstname: user.firstname,
-            lastname: user.lastname? user.lastname : '',
+
             email: user.email,
-            favouriteCity: user.favouriteCity? user.favouriteCity : '',
+            favouriteCity: user.favouriteCity ? user.favouriteCity : "",
+            oldPassword: "",
             password: "",
             confirmPassword: "",
           }}
-          onSubmit={(values) => {
+          onSubmit={(values, actions) => {
             update(values);
+            actions.resetForm()
+            actions.setFieldValue("favouriteCity", values.favouriteCity);
+
+
           }}
+          
           validationSchema={Yup.object().shape({
             email: Yup.string().email().required("Required"),
             firstname: Yup.string()
               .required("Required")
               .min(3, "Name must be at least 3 characters"),
+
             password: Yup.string()
               .min(8, "Password is too short - should be 8 chars minimum.")
               .matches(
                 /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
                 "Password must contain at least 8 characters, one uppercase, one number and one special case character"
               ),
-            confirmPassword: Yup.string().oneOf(
-              [Yup.ref("password"), null],
-              "Passwords must match"
-            ),
+            confirmPassword: Yup.string().when("password", {
+              is: val => val && val.length > 0,
+              then: Yup.string()
+                .oneOf([Yup.ref("password")], "Both passwords need to be the same")
+                .required()
+            }),
+            oldPassword: Yup.string().when("password", {
+              is: (password) =>  password && password.length > 0
+              ,
+              then: Yup.string().required(
+                "Old password is required when entering a new one"
+              ),
+              otherwise: Yup.string(),
+            }),
           })}
         >
           {(props) => {
@@ -71,7 +92,6 @@ export const ProfileView = () => {
               values,
               touched,
               errors,
-
               handleChange,
               handleBlur,
               handleSubmit,
@@ -103,9 +123,9 @@ export const ProfileView = () => {
                     <TextField
                       inputProps={{ style: { fontSize: 20 } }}
                       InputLabelProps={{ style: { fontSize: 15 } }}
-                      label="Last name"
-                      name="lastname"
-                      value={values.lastname}
+                      label="Favourite city"
+                      name="favouriteCity"
+                      value={values.favouriteCity}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       type="text"
@@ -132,14 +152,18 @@ export const ProfileView = () => {
                   <Grid item xs={2}></Grid>
                   <Grid item xs={5} className="align-right">
                     <TextField
+                      error={errors.oldPassword && touched.oldPassword}
                       inputProps={{ style: { fontSize: 20 } }}
                       InputLabelProps={{ style: { fontSize: 15 } }}
-                      label="Favourite city"
-                      name="favouriteCity"
-                      value={values.favouriteCity}
+                      label="Old password"
+                      type="password"
+                      name="oldPassword"
+                      value={values.oldPassword}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      type="text"
+                      helperText={
+                        errors.oldPassword && touched.oldPassword && errors.oldPassword
+                      }
                       fullWidth
                     />
                   </Grid>
@@ -184,7 +208,9 @@ export const ProfileView = () => {
                   </Grid>
                 </Grid>
 
-                <Grid item xs={12} id="profile-button">
+                <Grid item xs={12} id="response-button">
+                  <p>{responseMessage}</p>
+
                   <Button type="submit" variant="contained" color="primary">
                     Update profile
                   </Button>

@@ -15,13 +15,13 @@
   display: flex;
 }
 #profile-image-cointainer,
-#profile-button {
+#response-button {
   text-align: center;
+  margin-top: 4%;
+
 }
 
-#profile-button {
-  margin-top: 4%;
-}
+
 
 .profile-image {
   width: 12vw;
