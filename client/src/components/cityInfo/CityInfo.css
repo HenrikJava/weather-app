@@ -1,6 +1,9 @@
 #city-info {
   font-size: 3vw;
+  margin: auto;
 }
 #time {
   font-size: 1vw;
 }
+#no-city-text {font-size: 0.8vw;
+margin: 0;}

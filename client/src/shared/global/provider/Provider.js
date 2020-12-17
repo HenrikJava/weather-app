@@ -7,6 +7,7 @@ export const AppProvider = (props) => {
   const [deleteConfirmDialogOpen, setDeleteConfirmDialogOpen] = useState(false);
 
   const [city, setCity] = useState("stockholm");
+  const [noCityText, setnoCityText] = useState("");
   const [displayCurrent, setDisplayCurrent] = useState(true);
   const [weekday, setWeekday] = useState();
   const [fahrenheitOn, setFahrenheitOn] = useState(false)
@@ -20,6 +21,8 @@ export const AppProvider = (props) => {
         deleteConfirmDialogOpen, setDeleteConfirmDialogOpen,
         city,
         setCity,
+        noCityText,
+        setnoCityText,
         displayCurrent,
         setDisplayCurrent,
         weekday,
