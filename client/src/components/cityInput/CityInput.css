@@ -1,13 +1,33 @@
-.city-input-wrapper {
-  height: 3vw;
-  margin: 1vw auto;
+#city-input-wrapper {
+  margin: 1% auto 0 auto;
+   
+    width: 20vw;
+    height: 4vw;
+
 }
-#city-form {
-  font-size: 2vw;
+#form {
+  display: flex;
+  width: 100%;
+}
+
+#input-with-icon-adornment {
+  font-size: 1vw;
+  width: 13vw;
+
 }
 
 #city-button {
   color: black;
   background-color: lightblue;
   margin-left: 2%;
+  font-size: 0.6vw;
+  width: 4vw;
+  min-width: 0;
+  padding: 0;
+  text-transform: none;
+ 
+}
+
+#search-icon {
+  font-size: 1.6vw;
 }
