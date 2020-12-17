@@ -5,6 +5,7 @@
 .username {
   align-self: center;
   margin-right: 15%;
+  font-size: 1vw;
 }
 .username-image {
   display: flex;

@@ -1,9 +1,9 @@
 .main-weather-wrapper {
-  flex: 70%;
+  flex: 60%;
   background-color: lightskyblue;
   text-align: center;
 }
 .grid-cointainer {
   align-items: center;
-  height: 60%;
+  height: 75%;
 }
