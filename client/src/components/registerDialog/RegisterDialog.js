@@ -78,7 +78,7 @@ export const RegisterDialog = () => {
                 /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
                 "Password must contain at least 8 characters, one uppercase, one number and one special case character"
               ),
-            confirmPassword: Yup.string().oneOf(
+            confirmPassword: Yup.string().required("Required").oneOf(
               [Yup.ref("password"), null],
               "Passwords must match"
             ),
