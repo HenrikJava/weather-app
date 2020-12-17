@@ -8,23 +8,31 @@ export const ForeCastWeather = () => {
   const [weather] = useContext(WeatherContext);
   const app = useContext(AppContext
   );
-let isAfternoon = true
      let i = 0;
 
   while (weather.list[i]) {
     if (weather.list[i].dt_txt.includes("12:00:00")) {
-      isAfternoon = false
+      app.isAfternoon = false
     }
     if (weather.list[i].dt_txt.includes("0:00:00")) break;
     i++;
   }
   let daysAdded = 0;
   let weatherAtMiddleOfDay = []
-    for (let j = isAfternoon? 0 : i; j<weather.list.length; j++) {
-      if (j === 0 || weather.list[j].dt_txt.includes("12:00:00")) {
-        weatherAtMiddleOfDay.push(weather.list[j]);
-        daysAdded ++
+    for (let j = app.isAfternoon? i : 0; j<weather.list.length; j++) {
+      if (app.isAfternoon) {
+        if (j === 0 || weather.list[j].dt_txt.includes("12:00:00")) {
+          weatherAtMiddleOfDay.push(weather.list[j]);
+          daysAdded ++
+        }
+      } else {
+        if (weather.list[j].dt_txt.includes("12:00:00")) {
+          weatherAtMiddleOfDay.push(weather.list[j]);
+          daysAdded ++
+        }
       }
+      
+      
       if (daysAdded===5) break
     }
   return (

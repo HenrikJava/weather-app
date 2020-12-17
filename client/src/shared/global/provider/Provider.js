@@ -9,8 +9,9 @@ export const AppProvider = (props) => {
   const [city, setCity] = useState("stockholm");
   const [noCityText, setnoCityText] = useState("");
   const [displayCurrent, setDisplayCurrent] = useState(true);
+  const [isAfternoon, setIsAfternoon] = useState(true);
   const [weekday, setWeekday] = useState();
-  const [fahrenheitOn, setFahrenheitOn] = useState(false)
+  const [fahrenheitOn, setFahrenheitOn] = useState(false);
   return (
     <AppContext.Provider
       value={{
@@ -18,23 +19,26 @@ export const AppProvider = (props) => {
         setRegisterDialogOpen,
         signInDialogOpen,
         setSignInDialogOpen,
-        deleteConfirmDialogOpen, setDeleteConfirmDialogOpen,
+        deleteConfirmDialogOpen,
+        setDeleteConfirmDialogOpen,
         city,
         setCity,
         noCityText,
         setnoCityText,
         displayCurrent,
         setDisplayCurrent,
+        isAfternoon,
+        setIsAfternoon,
         weekday,
         setWeekday,
-        fahrenheitOn, setFahrenheitOn
+        fahrenheitOn,
+        setFahrenheitOn,
       }}
     >
       {props.children}
     </AppContext.Provider>
   );
 };
-
 
 export const UserContext = createContext();
 export const UserProvider = (props) => {
@@ -56,12 +60,11 @@ export const UserProvider = (props) => {
         lastname,
         setLastname,
 
-       
         email,
         setEmail,
         favouriteCity,
         setFavouriteCity,
-        
+
         avatar,
         setAvatar,
       }}

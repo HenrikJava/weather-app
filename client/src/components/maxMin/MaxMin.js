@@ -4,16 +4,22 @@ import { AppContext } from "../../shared/global/provider/Provider";
 import { UserContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
 import "./MaxMin.css";
+import Tooltip from '@material-ui/core/Tooltip';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
+import HelpIcon from '@material-ui/icons/Help';
 import winter from "../../shared/images/winter.jpg";
 
 import Grid from "@material-ui/core/Grid";
 export const MaxMin = () => {
-  const user = useContext(UserContext);
   const [weather] = useContext(WeatherContext);
   const app = useContext(
     AppContext
   );
+  const [open, setOpen] = React.useState(false);
+
+  let isToday
+
   const getDayName = (fragment) => {
     return new Date(fragment * 1000).toLocaleString("en-us", {
       weekday: "long",
@@ -22,16 +28,26 @@ export const MaxMin = () => {
 
   const weatherAtCurrentDay = weather.list.filter(
     (fragment) => getDayName(fragment.dt) === app.weekday
+    
   );
-
+  if(weatherAtCurrentDay[0]) { isToday = new Date(weatherAtCurrentDay[0].dt * 1000).toLocaleDateString()===new Date().toLocaleDateString()
+  }
   const getWeatherAtNoon = () => {
-    let noon;
+
+    let feelsLike;
     if (!app.displayCurrent) {
-      noon = weatherAtCurrentDay.filter((fragment) =>
-        fragment.dt_txt.includes("12:00:00")
-      );
-      if (noon) {
-        return Math.round(noon[0].main.feels_like) + scale(app.fahrenheitOn);
+      
+      if (isToday) {
+        feelsLike = weatherAtCurrentDay[0]
+      }
+      weatherAtCurrentDay.forEach(fragment => {
+        if (fragment.dt_txt.includes("12:00:00")) {
+          feelsLike = fragment
+        }
+
+      });
+      if (feelsLike) {
+        return Math.round(feelsLike.main.feels_like) + scale(app.fahrenheitOn);
       } else {
         return "N/A";
       }
@@ -61,18 +77,46 @@ export const MaxMin = () => {
     }
     return Math.round(min) + scale(app.fahrenheitOn);
   };
-  const generateSuggestedClothes = () => {
+
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setOpen(true);
+  };
+   const generateSuggestedClothes = () => {
     return (
       <Grid item xs={12} id="clothes-max-min">
         <Grid item xs={3}></Grid>
         <Grid item xs={3}>
           <img src={winter} className="clothes-image" />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={5}>
           <div className="temperatures">
-            <p className="temp-headers">
-              {!app.displayCurrent ? "Feels like at 12" : "Feels like now"}
-            </p>
+            <div id="header-and-tooltip"><p className="temp-headers">
+              {!app.displayCurrent && !(isToday && !app.isAfternoon) ? "Feels like at 12" : "Feels like now"}
+            </p><ClickAwayListener onClickAway={handleTooltipClose}>
+            <div>
+              <Tooltip
+                PopperProps={{
+                  disablePortal: true,
+                }}
+                onClose={handleTooltipClose}
+                open={open}
+                disableFocusListener
+                disableHoverListener
+                disableTouchListener
+                title={<p id='tooltip-text'>This is calculated by severals conditions such as pressure and wind and shows the temperature what it feels like for a human.</p>}
+              >
+                <HelpIcon id='tooltip' onClick={handleTooltipOpen}></HelpIcon>
+
+              </Tooltip>
+            </div>
+          </ClickAwayListener>
+            </div>
+            
             <p className="temp-degrees">{getWeatherAtNoon()}</p>
             {!app.displayCurrent && (
               <div>
@@ -84,7 +128,7 @@ export const MaxMin = () => {
             )}
           </div>
         </Grid>
-        <Grid item xs={3}></Grid>
+        <Grid item xs={1}></Grid>
       </Grid>
     );
   };
