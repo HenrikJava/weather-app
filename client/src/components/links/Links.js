@@ -53,7 +53,8 @@ export const Links = () => {
             <SettingsIcon id="icons" />
           </Link>
 
-          <span onClick={() => logout()}>
+          <span onClick={() => {logout();           app.setnoCityText('')}
+}>
             <ExitToAppIcon id="icons" />
           </span>
         </div>

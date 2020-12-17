@@ -44,10 +44,12 @@ export const HomeView = () => {
           }
           else if (
             response.data.message.msgBody ===
-            "No city with that name, check favourite city and change it."
+            "No city with that name in the database."
           ) {
             console.log(response.data.message.msgBody);
             defaultWeatherCall()
+            app.setnoCityText("Your favourite city does not exist in the database, please change it.");
+
           } else {
             console.log(response.data.message.msgBody);
           }

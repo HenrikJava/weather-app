@@ -16,6 +16,8 @@ export const NavigationBar = () => {
         onClick={() => {
           history.push(RoutingPath.homeView);
           app.setDisplayCurrent(true);
+          app.setnoCityText('');
+
         }}
       >
         Zebra weather
