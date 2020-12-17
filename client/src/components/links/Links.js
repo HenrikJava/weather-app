@@ -62,7 +62,8 @@ export const Links = () => {
     ) : (
       <div className="links-wrapper">
         <div className="icons-not-logged-in">
-          <span onClick={() => app.setSignInDialogOpen(true)}>
+          <span onClick={() => {app.setSignInDialogOpen(true);       app.setnoCityText('')}
+}>
             <MeetingRoomIcon id="not-logged-in-icons" />
           </span>
 
