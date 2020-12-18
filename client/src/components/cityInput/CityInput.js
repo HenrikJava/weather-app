@@ -16,7 +16,7 @@ export const CityInput = () => {
   const fetchDataFromExternalApi = async () => {
     const response = await WeatherService.searchCity(city, app.fahrenheitOn);
     if (response.status === 200) {
-      app.setCity(response.data.city);
+      app.setCity(response.data.city.name);
       app.setnoCityText('');
 
       setWeather(response.data);

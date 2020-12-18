@@ -8,7 +8,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 import HelpIcon from '@material-ui/icons/Help';
-import winter from "../../shared/images/winter.jpg";
+import wetSloth from "../../shared/images/WetSloth.png";
+import mildSloth from "../../shared/images/MildSloth.png";
+import coldSloth from "../../shared/images/ColdSloth.png";
+import hotSloth from "../../shared/images/HotSloth.png";
 
 import Grid from "@material-ui/core/Grid";
 export const MaxMin = () => {
@@ -17,6 +20,7 @@ export const MaxMin = () => {
     AppContext
   );
   const [open, setOpen] = React.useState(false);
+  let sloth = mildSloth
 
   let isToday
 
@@ -86,52 +90,82 @@ export const MaxMin = () => {
   const handleTooltipOpen = () => {
     setOpen(true);
   };
-   const generateSuggestedClothes = () => {
-    return (
-      <Grid item xs={12} id="clothes-max-min">
-        <Grid item xs={3}></Grid>
-        <Grid item xs={3}>
-          <img src={winter} className="clothes-image" />
-        </Grid>
-        <Grid item xs={5}>
-          <div className="temperatures">
-            <div id="header-and-tooltip"><p className="temp-headers">
-              {!app.displayCurrent && !(isToday && !app.isAfternoon) ? "Feels like at 12" : "Feels like now"}
-            </p><ClickAwayListener onClickAway={handleTooltipClose}>
-            <div>
-              <Tooltip
-                PopperProps={{
-                  disablePortal: true,
-                }}
-                onClose={handleTooltipClose}
-                open={open}
-                disableFocusListener
-                disableHoverListener
-                disableTouchListener
-                title={<p id='tooltip-text'>This is calculated by severals conditions such as pressure and wind and shows the temperature what it feels like for a human.</p>}
-              >
-                <HelpIcon id='tooltip' onClick={handleTooltipOpen}></HelpIcon>
+  
+const generateSloths = () => {
+  let outsideHours = []
+  const outsideTimeStamps = ["12:00:00", "15:00:00", "18:00:00"]
+  weatherAtCurrentDay.forEach(fragment => {
+    let isOutsideHour = outsideTimeStamps.some((time) => fragment.dt_txt.includes(time))
+    isOutsideHour && outsideHours.push(fragment) 
+  
+  });
+  
+  for (let i = 0;i<outsideHours.length;i++) {
+      if (app.fahrenheitOn) {
+        if(outsideHours[i].main.feels_like <= 41 ) {
+          sloth = coldSloth; 
+        }
+        if(outsideHours[i].main.feels_like >= 73 ) {
+          sloth = hotSloth; 
+        }
+      } else {
+        if(outsideHours[i].main.feels_like <= 5) {
+          sloth = coldSloth; 
+        }
+        if(outsideHours[i].main.feels_like >= 23 ) {
+          sloth = hotSloth; 
+        }
+      }
+      if (outsideHours[i].weather[0].description.includes('rain'))
+      {sloth = wetSloth; break }
+    }
+  
+  
+  return sloth
 
-              </Tooltip>
-            </div>
-          </ClickAwayListener>
-            </div>
-            
-            <p className="temp-degrees">{getWeatherAtNoon()}</p>
-            {!app.displayCurrent && (
-              <div>
-                <p className="temp-headers">Day max:</p>
-                <p className="temp-degrees">{getDayMax()}</p>
-                <p className="temp-headers">Day min:</p>
-                <p className="temp-degrees">{getDayMin()}</p>
-              </div>
-            )}
-          </div>
-        </Grid>
-        <Grid item xs={1}></Grid>
-      </Grid>
-    );
-  };
+}
+  return (<Grid item xs={12} id="clothes-max-min">
+  <Grid item xs={2}></Grid>
+  <Grid item xs={4}>
+    <img src={generateSloths()} className="clothes-image" />
+  </Grid>
+  <Grid item xs={5}>
+    <div className="temperatures">
+      <div id="header-and-tooltip"><p className="temp-headers">
+        {!app.displayCurrent && !(isToday && !app.isAfternoon) ? "Feels like at 12" : "Feels like now"}
+      </p><ClickAwayListener onClickAway={handleTooltipClose}>
+      <div>
+        <Tooltip
+          PopperProps={{
+            disablePortal: true,
+          }}
+          onClose={handleTooltipClose}
+          open={open}
+          disableFocusListener
+          disableHoverListener
+          disableTouchListener
+          title={<p id='tooltip-text'>This is calculated by severals conditions such as pressure and wind and shows the temperature what it feels like for a human.</p>}
+        >
+          <HelpIcon id='tooltip' onClick={handleTooltipOpen}></HelpIcon>
 
-  return generateSuggestedClothes();
+        </Tooltip>
+      </div>
+    </ClickAwayListener>
+      </div>
+      
+      <p className="temp-degrees">{getWeatherAtNoon()}</p>
+      {!app.displayCurrent && (
+        <div>
+          <p className="temp-headers">Day max:</p>
+          <p className="temp-degrees">{getDayMax()}</p>
+          <p className="temp-headers">Day min:</p>
+          <p className="temp-degrees">{getDayMin()}</p>
+        </div>
+      )}
+    </div>
+  </Grid>
+  <Grid item xs={1}></Grid>
+</Grid>
+);
 };
+

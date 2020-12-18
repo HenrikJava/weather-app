@@ -40,7 +40,7 @@ export const DailyWeatherOverview = (props) => {
           <Wind
             speed={props.day.wind.speed}
             deg={props.day.wind.deg}
-            fahrenheit={app.fahrenheitOn}
+            fahrenheitOn={app.fahrenheitOn}
           ></Wind>
         </div>
       </div>
