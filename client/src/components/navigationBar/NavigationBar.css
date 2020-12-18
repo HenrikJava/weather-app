@@ -8,8 +8,10 @@
 }
 
 .app-name {
-  margin-left: 5%;
   cursor: pointer;
   width: 75%;
   font-size: 2vw;
+}
+#sloth{
+  width: 5vw
 }
