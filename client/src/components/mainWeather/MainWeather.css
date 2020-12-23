@@ -7,3 +7,24 @@
   align-items: center;
   height: 70%;
 }
+
+@media screen and (max-width: 1024px) {
+  .main-weather-wrapper {
+    flex: 50%;
+    background-color: lightskyblue;
+    text-align: center;
+  }
+  .grid-cointainer {
+    align-items: center;
+    height: 60%;
+  }
+.hide-if-responsive
+{
+  display: none;
+}
+#grow-if-responsive {
+  flex-grow: 1;
+  max-width: 50%;
+  height: 100%;
+}
+}

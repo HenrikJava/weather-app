@@ -17,13 +17,13 @@ export const MainWeather = () => {
       <CityInput></CityInput>
       <CityInfo></CityInfo>
       <Grid container className="grid-cointainer">
-        <Grid item xs={4}>
+        <Grid item xs={4} className="hide-if-responsive">
           <SunTimes></SunTimes>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} id="grow-if-responsive">
           {app.displayCurrent ? <CurrentWeather /> : <DifferentTimes />}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} id="grow-if-responsive">
           <MaxMin></MaxMin>
         </Grid>
       </Grid>

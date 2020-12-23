@@ -20,10 +20,9 @@ export const DailyWeatherOverview = (props) => {
       });
     }
   };
-
   return (
     <div
-      className="daily-weather"
+      className={` daily-weather template${props.index}`}
       onClick={() => app.setWeekday(getDay("long"), app.setDisplayCurrent(false))}
     >
       <p className="weekday">{getDay("short")}</p>

@@ -19,11 +19,7 @@ html,
 .settings-view, #error {
   background-color: lightskyblue;
 }
-.image-and-details {
-  display: flex;
-  justify-content: center;
-  height: 8vw;
-}
+
 .link-between-dialogs {
   text-align: center;
   cursor: pointer;
@@ -31,3 +27,4 @@ html,
 .link-between-dialogs:hover {
   color: #3f51b5;
 }
+

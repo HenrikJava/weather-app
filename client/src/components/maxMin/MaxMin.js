@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { WeatherContext } from "../../shared/global/provider/Provider";
 import { AppContext } from "../../shared/global/provider/Provider";
-import { UserContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
 import "./MaxMin.css";
 import Tooltip from '@material-ui/core/Tooltip';
@@ -22,7 +21,6 @@ export const MaxMin = () => {
   const [open, setOpen] = React.useState(false);
   let sloth = mildSloth
 
-  let isToday
 
   const getDayName = (fragment) => {
     return new Date(fragment * 1000).toLocaleString("en-us", {
@@ -34,7 +32,8 @@ export const MaxMin = () => {
     (fragment) => getDayName(fragment.dt) === app.weekday
     
   );
-  if(weatherAtCurrentDay[0]) { isToday = new Date(weatherAtCurrentDay[0].dt * 1000).toLocaleDateString()===new Date().toLocaleDateString()
+  let isToday
+  if (weatherAtCurrentDay[0]) {   isToday =(new Date(weatherAtCurrentDay[0].dt * 1000).toLocaleDateString()===new Date().toLocaleDateString())
   }
   const getWeatherAtNoon = () => {
 
@@ -124,12 +123,13 @@ const generateSloths = () => {
   return sloth
 
 }
+
   return (<Grid item xs={12} id="clothes-max-min">
   <Grid item xs={2}></Grid>
   <Grid item xs={4}>
-    <img src={generateSloths()} className="clothes-image" />
+    <img src={generateSloths()} className="clothes-image" alt="clothes" />
   </Grid>
-  <Grid item xs={5}>
+  <Grid item xs={6}>
     <div className="temperatures">
       <div id="header-and-tooltip"><p className="temp-headers">
         {!app.displayCurrent && !(isToday && !app.isAfternoon) ? "Feels like at 12" : "Feels like now"}
@@ -164,7 +164,6 @@ const generateSloths = () => {
       )}
     </div>
   </Grid>
-  <Grid item xs={1}></Grid>
 </Grid>
 );
 };

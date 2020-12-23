@@ -16,9 +16,39 @@
 }
 #degree {
   font-size: 2vw;
-  margin-bottom: auto;
+  margin-bottom: -20%;
 }
 #daily-icon {
-  width: 9vw;
+  width: 8vw;
 }
-
+#speed,
+#arrow {
+  font-size: 1vw;
+}
+@media screen and (max-width: 1024px) {
+  .daily-weather {
+   
+    width: 35vw;
+    height: 25vw;
+  
+  }
+  
+  .weekday {
+    margin: 0;
+    height: 22%;
+    font-size: 4vw;
+  }
+  #speed,
+  #arrow {
+    font-size: 2vw;
+  }
+  #degree {
+    font-size: 4vw;
+  }
+  #daily-icon {
+    width:22vw;
+  }
+  .template4 {
+    display: none;
+  }
+}

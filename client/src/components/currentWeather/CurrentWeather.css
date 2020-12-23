@@ -1,3 +1,8 @@
+.current-image-and-details {
+  display: flex;
+  justify-content: center;
+  height: 70%;
+}
 .weather-icon {
   width: 8vw;
 }
@@ -14,4 +19,34 @@
 }
 #temp-wind {
   align-self: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .current-image-and-details {
+    display: flex;
+    justify-content: center;
+    height: 70%;
+  }
+  .current-wrapper {
+    height: 100%;
+  }
+  .weather-icon {
+    width: 25vw;
+  }
+  .temp {
+    font-size: 6vw;
+    margin: 0;
+  }
+  #current-header {
+    font-size: 4vw;
+    margin: 0;
+    height: 20%;
+  }
+  #weather-description {
+    font-size: 2.5vw;
+    margin: 0;
+    height: 10%;
+
+  }
+  
 }

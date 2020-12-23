@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./NavigationBar.css";
 import { useHistory } from "react-router-dom";
-import { Links } from "../links/Links";
+import { Menu } from "../menu/Menu";
 import RoutingPath from "../../routes/RoutingPath";
 import { AppContext } from "../../shared/global/provider/Provider";
 import defaultSloth from '../../shared/images/DefaultSloth.png'
@@ -11,21 +11,22 @@ export const NavigationBar = () => {
   const app = useContext(AppContext);
 
   return (
-    <div className="navigation-bar-wrapper">
-     <img id="sloth" src={defaultSloth}></img>
-      <h1
-        className="app-name"
-        onClick={() => {
+    <div className="navbar-wrapper">
+      <div className="navbar-logo" onClick={() => {
           history.push(RoutingPath.homeView);
           app.setDisplayCurrent(true);
           app.setnoCityText('');
 
-        }}
+        }}><img className="navbar-icon" src={defaultSloth}></img>
+      <p
+        className="navbar-name"
+        
       >
         Sloth weather
-      </h1>
-      <span className="nav-links">
-        <Links />
+      </p></div>
+     
+      <span className="navbar-menu">
+        <Menu />
       </span>
     </div>
   );

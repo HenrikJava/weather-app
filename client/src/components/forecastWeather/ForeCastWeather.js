@@ -17,6 +17,7 @@ export const ForeCastWeather = () => {
     if (weather.list[i].dt_txt.includes("0:00:00")) break;
     i++;
   }
+ 
   let daysAdded = 0;
   let weatherAtMiddleOfDay = []
     for (let j = app.isAfternoon? i : 0; j<weather.list.length; j++) {
@@ -37,8 +38,8 @@ export const ForeCastWeather = () => {
     }
   return (
     <div className="fore-cast-wrapper">
-      {weatherAtMiddleOfDay.map((day) => (
-        <DailyWeatherOverview day={day} key={day.dt}></DailyWeatherOverview>
+      {weatherAtMiddleOfDay.map((day,index)  => (
+        <DailyWeatherOverview day={day} key={index} index={index}></DailyWeatherOverview>
       ))}
     </div>
   );

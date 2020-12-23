@@ -15,12 +15,12 @@ export const CurrentWeather = () => {
   };
 
   return (
-    <div>
+    <div className="current-wrapper">
       <p id="current-header">Current weather</p>
       <p id="weather-description">
         {capitalizeFirstLetter(weather.list[0].weather[0].description)}
       </p>
-      <div className="image-and-details">
+      <div className="current-image-and-details">
         <img
           className="weather-icon"
           src={`http://openweathermap.org/img/wn/${weather.list[0].weather[0].icon}@2x.png`}

@@ -8,6 +8,7 @@
 #clothes-max-min {
   display: flex;
   align-items: center;
+  height: 100%;
 }
 .temp-degrees {
   font-size: 1vw;
@@ -29,4 +30,43 @@ margin-left: 0.4vw;}
 
 #tooltip-text {
   font-size: 1vw; max-width: 14vw; line-height: 1vw
+}
+@media screen and (max-width: 1024px) { 
+  .clothes-image {
+    width: 27vw;
+    height: 90%;
+    margin-left: -7vw;
+    margin-top: 3vw;
+
+  }
+  #clothes-max-min > div{
+    
+    height: 100%;
+  }
+  .temperatures {
+    height: 100%;
+    display: inline-grid;
+    margin-top: 5%;
+    width: 100%;
+  }
+  
+  .temp-degrees {
+    font-size: 2.4vw;
+  }
+  .temp-headers {
+    font-size: 3vw;
+    margin: 1%;
+  }
+  #header-and-tooltip {
+    
+    margin-bottom: -1vw;
+  }
+  #tooltip {
+ 
+  font-size: 1.4vw;
+  margin-left: 0.4vw;}
+  
+  #tooltip-text {
+    font-size: 1vw; max-width: 14vw; line-height: 1vw
+  }
 }

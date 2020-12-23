@@ -16,7 +16,7 @@ export const CityInfo = () => {
     return () => clearInterval(interval);
   }, [weather]);
   return (
-    <div>
+    <div className="city-wrapper">
       {app.noCityText? <p id="no-city-text">{app.noCityText}</p> :  ''}
       <p id="city-info">{`${weather.city.name}, ${weather.city.country}`}</p>
       <p id="time">{`The local time in  ${weather.city.name} is ${time}`}</p>

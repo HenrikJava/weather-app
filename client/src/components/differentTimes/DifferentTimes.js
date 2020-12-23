@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { WeatherContext } from "../../shared/global/provider/Provider";
 import { AppContext } from "../../shared/global/provider/Provider";
-import { UserContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
 import { Wind } from "../wind/Wind";
 
@@ -9,7 +8,6 @@ import "./DifferentTimes.css";
 
 import Grid from "@material-ui/core/Grid";
 export const DifferentTimes = () => {
-  const user = useContext(UserContext);
   const [weather] = useContext(WeatherContext);
   const app = useContext(AppContext);
   const timesArray = ["00:00:00", "06:00:00", "12:00:00", "18:00:00"];
@@ -27,13 +25,17 @@ export const DifferentTimes = () => {
     });
     return condition;
   };
+  
+  
   const weatherAtCurrentDay = weather.list.filter(
     (fragment) => getDayName(fragment.dt) === app.weekday
   );
+  
+  const isToday =(new Date(weatherAtCurrentDay[0].dt * 1000).toLocaleDateString()===new Date().toLocaleDateString())
   const specificTimes = weatherAtCurrentDay.filter(
     (fragment) => getSpecificTimes(fragment.dt_txt) === true
   );
-
+  
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -50,7 +52,7 @@ export const DifferentTimes = () => {
           <Grid item xs={2}>
             <p> {specificTimes[index].dt_txt.slice(11, 13)} </p>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <p>
               {Math.round(specificTimes[index].main.temp) + scale(app.fahrenheitOn)}
             </p>
@@ -62,7 +64,7 @@ export const DifferentTimes = () => {
               alt="Weather Icon"
             ></img>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <p>
               {capitalizeFirstLetter(
                 specificTimes[index].weather[0].description
@@ -83,12 +85,12 @@ export const DifferentTimes = () => {
   };
 
   return (
-    <>
-      <p className="day-to-display">{app.weekday}</p>
+    <div className="day-details">
+      <p className="day-to-display">{isToday? 'Today' :app.weekday}</p>
 
       <div className="weather-at-differents-time-grid">
         {generateDifferentTimes()}
       </div>
-    </>
+    </div>
   );
 };

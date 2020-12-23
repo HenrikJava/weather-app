@@ -3,3 +3,21 @@
   flex: 40%;
   background-color: lightskyblue;
 }
+.image-and-details {
+  display: flex;
+  justify-content: center;
+  height: 8vw;
+}
+@media screen and (max-width: 1024px) {
+  .fore-cast-wrapper {
+    flex: 50%;
+    grid-template-columns: repeat(2, 50%);
+    display: grid;
+  }
+  
+
+
+    .image-and-details {
+      height: 78%;
+        }
+}
