@@ -20,7 +20,7 @@ export const ForeCastWeather = () => {
  
   let daysAdded = 0;
   let weatherAtMiddleOfDay = []
-    for (let j = app.isAfternoon? i : 0; j<weather.list.length; j++) {
+    for (let j = app.isAfternoon? 0 : i; j<weather.list.length; j++) {
       if (app.isAfternoon) {
         if (j === 0 || weather.list[j].dt_txt.includes("12:00:00")) {
           weatherAtMiddleOfDay.push(weather.list[j]);

@@ -124,6 +124,7 @@ const generateSloths = () => {
 
 }
 
+
   return (<Grid item xs={12} id="clothes-max-min">
   <Grid item xs={2}></Grid>
   <Grid item xs={4}>
@@ -132,7 +133,7 @@ const generateSloths = () => {
   <Grid item xs={6}>
     <div className="temperatures">
       <div id="header-and-tooltip"><p className="temp-headers">
-        {!app.displayCurrent && !(isToday && !app.isAfternoon) ? "Feels like at 12" : "Feels like now"}
+        {!app.displayCurrent && !(isToday && app.isAfternoon) ? "Feels like at 12" : "Feels like now"}
       </p><ClickAwayListener onClickAway={handleTooltipClose}>
       <div>
         <Tooltip
