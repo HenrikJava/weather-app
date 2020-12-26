@@ -5,6 +5,7 @@ export const AppProvider = (props) => {
   const [registerDialogOpen, setRegisterDialogOpen] = useState(false);
   const [signInDialogOpen, setSignInDialogOpen] = useState(false);
   const [deleteConfirmDialogOpen, setDeleteConfirmDialogOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState();
 
   const [city, setCity] = useState("stockholm");
   const [noCityText, setnoCityText] = useState("");
@@ -21,6 +22,7 @@ export const AppProvider = (props) => {
         setSignInDialogOpen,
         deleteConfirmDialogOpen,
         setDeleteConfirmDialogOpen,
+        menuOpen, setMenuOpen,
         city,
         setCity,
         noCityText,

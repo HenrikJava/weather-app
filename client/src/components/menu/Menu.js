@@ -18,7 +18,6 @@ export const Menu = () => {
   const user = useContext(UserContext);
   const app = useContext(AppContext);
   const history = useHistory();
-  const [menuOpen, setMenuOpen] = useState();
   const logout = () => {
     localStorage.removeItem("token");
     setAuthToken();
@@ -33,7 +32,7 @@ export const Menu = () => {
   };
   const showMenu = () => {
     if (window.innerWidth >= 960) {
-      setMenuOpen(false)
+      app.setMenuOpen(false)
     }
   }
   window.addEventListener('resize', showMenu)
@@ -46,23 +45,23 @@ export const Menu = () => {
           </span>
           <img src={user.avatar} alt="profile" className="menu-image" />
         </div>
-<div  onClick={() => setMenuOpen(!menuOpen)} className="menu-icon-wrapper">
-          {menuOpen ? <CloseIcon id="menu-icon"/> : <MenuIcon id="menu-icon"/>}
+<div  onClick={() => app.setMenuOpen(!app.menuOpen)} className="menu-icon-wrapper">
+          {app.menuOpen ? <CloseIcon id="menu-icon"/> : <MenuIcon id="menu-icon"/>}
         </div>
         
-        <div className={menuOpen ? "menu-wrapper active" : "menu-wrapper"}>
+        <div className={app.menuOpen ? "menu-wrapper active" : "menu-wrapper"}>
         
 
         <div className="menu">
-          <Link to={RoutingPath.profileView} className="menu-item">
-          {menuOpen ? (
+          <Link to={RoutingPath.profileView} className="menu-item" onClick={() => {app.setMenuOpen(false)}}>
+          {app.menuOpen ? (
               <p>Profile</p>
             ) : (
               <PersonIcon id="icon" />
             )}
           </Link>
-          <Link to={RoutingPath.settingsView} className="menu-item">
-          {menuOpen ? (
+          <Link to={RoutingPath.settingsView} className="menu-item" onClick={() => {app.setMenuOpen(false)}}>
+          {app.menuOpen ? (
               <p>Settings</p>
             ) : (
               <SettingsIcon id="icon" />
@@ -73,9 +72,10 @@ export const Menu = () => {
           <span
             onClick={() => {
               logout();
+              app.setMenuOpen(false)
               app.setnoCityText("");
             }} className="menu-item"
-          >{menuOpen ? (
+          >{app.menuOpen ? (
             <p>Log out</p>
           ) : (
             <ExitToAppIcon id="icon" />
@@ -86,28 +86,29 @@ export const Menu = () => {
       </div>
     ) : (
       <div className="menu-container">
-      <div  onClick={() => setMenuOpen(!menuOpen)} className="menu-icon-wrapper">
-          {menuOpen ? <CloseIcon id="menu-icon"/> : <MenuIcon id="menu-icon"/>}
+      <div  onClick={() => app.setMenuOpen(!app.menuOpen)} className="menu-icon-wrapper">
+          {app.menuOpen ? <CloseIcon id="menu-icon"/> : <MenuIcon id="menu-icon"/>}
         </div>
-      <div className={menuOpen ? "menu-wrapper active" : "menu-wrapper"}>
+      <div className={app.menuOpen ? "menu-wrapper active" : "menu-wrapper"}>
         
 
         <div className="not-logged-in-menu">
           <span
             onClick={() => {
               app.setSignInDialogOpen(true);
+              app.setMenuOpen(false)
               app.setnoCityText("");
             }} className="menu-item"
           >
-            {menuOpen ? (
+            {app.menuOpen ? (
               <p>Log in</p>
             ) : (
               <MeetingRoomIcon id="not-logged-in-icon" />
             )}
           </span>
 
-          <Link to={RoutingPath.settingsView} className="menu-item">
-            {menuOpen ? (
+          <Link to={RoutingPath.settingsView} className="menu-item" onClick={() => {app.setMenuOpen(false)}}>
+            {app.menuOpen ? (
               <p>Settings</p>
             ) : (
               <SettingsIcon id="not-logged-in-icon" />
