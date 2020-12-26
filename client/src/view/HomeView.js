@@ -39,12 +39,13 @@ export const HomeView = () => {
             : app.city,
           loggedInUser.data.user.fahrenheit_on
         ).then((response) => {
+          console.log(response.data);
           if (response.status === 200) {
             setWeather(response.data);
           }
           else if (
             response.data.message.msgBody ===
-            "No city with that name in the database."
+            "No city with that name in the database, please try again."
           ) {
             console.log(response.data.message.msgBody);
             defaultWeatherCall()

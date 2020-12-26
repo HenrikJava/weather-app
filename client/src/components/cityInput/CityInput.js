@@ -20,12 +20,12 @@ export const CityInput = () => {
       app.setnoCityText('');
 
       setWeather(response.data);
-    } else if (
+    } /* else if (
       response.data.message.msgBody ===
       "No city with that name in the database."
     ) {
-      app.setnoCityText("No city with that name in the database.");
-    } else {
+      app.setnoCityText("No city with that name in the database, please try again.");
+    }  */else {
       app.setnoCityText(response.data.message.msgBody);
     }
   };
