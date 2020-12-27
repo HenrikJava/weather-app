@@ -23,7 +23,8 @@ export const DailyWeatherOverview = (props) => {
   return (
     <div
       className={` daily-weather template${props.index}`}
-      onClick={() => app.setWeekday(getDay("long"), app.setDisplayCurrent(false))}
+      onClick={() => {app.setWeekday(getDay("long")); app.setDisplayCurrent(false); 
+      document.documentElement.scrollTop = 0;}}
     >
       <p className="weekday">{getDay("short")}</p>
       <div className="image-and-details">
@@ -40,6 +41,7 @@ export const DailyWeatherOverview = (props) => {
             speed={props.day.wind.speed}
             deg={props.day.wind.deg}
             fahrenheitOn={app.fahrenheitOn}
+            className="daily-overview-wind"
           ></Wind>
         </div>
       </div>
