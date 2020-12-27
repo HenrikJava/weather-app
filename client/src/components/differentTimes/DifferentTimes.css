@@ -26,8 +26,7 @@
   font-size: 2vw;
   margin-block: auto;
 }
-#speed
-#arrow {
+.different-wind {
   font-size: 1vw;
 }
 @media screen and (max-width: 1024px) { 
@@ -50,9 +49,30 @@
     font-size: 3vw;
     margin-bottom: 0%;
   }
-  #speed
-  #arrow {
-    font-size: 1vw;
+  .different-wind {
+    font-size: 2vw;
   }
 }
+@media screen and (max-width: 512px) { 
+  
+  .details-weather-icon {
+    width: 16vw;
+  }
+  
+  .weather-at-differents-time-grid {
+ 
+
+    font-size: 4.2vw;
+  }
+  
+  
+  .day-to-display {
+   
+    font-size: 7vw;
+  }
+  .different-wind {
+    font-size: 4vw;
+  }
+}
+
 

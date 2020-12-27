@@ -128,3 +128,39 @@
 
   
 }
+@media screen and (max-width: 512px) {
+  .menu-image {
+    width: 12vw;
+  }
+  .username {
+    font-size: 3.5vw;
+  }
+  
+  .menu-wrapper {
+    
+    height: 90%;
+  
+    top: 10%;
+   
+  }
+
+  
+  
+  
+  .menu-item {
+    
+    font-size: 9vw;
+  }
+  
+  
+  
+  #menu-icon {
+    
+    
+    font-size: 10vw;
+   
+}
+ 
+
+  
+}

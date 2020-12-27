@@ -1,9 +1,8 @@
 #city-input-wrapper {
   margin: 1% auto 0 auto;
-   
-    width: 20vw;
-    height: 10%;
 
+  width: 20vw;
+  height: 10%;
 }
 #form {
   display: flex;
@@ -14,7 +13,6 @@
 #input-with-icon-adornment {
   font-size: 1vw;
   width: 13vw;
-
 }
 
 #city-button {
@@ -27,7 +25,6 @@
   min-width: 0;
   padding: 0;
   text-transform: none;
- 
 }
 
 #search-icon {
@@ -38,24 +35,36 @@
   #city-input-wrapper {
     margin: 1% auto -3% auto;
 
-     
-      width: 35vw;
-      height: 15%;
-  
+    width: 35vw;
+    height: 15%;
   }
   #input-with-icon-adornment {
     font-size: 3vw;
     width: 20vw;
-  
   }
   #city-button {
-    
     font-size: 1.6vw;
     width: 10vw;
-    
-   
   }
   #search-icon {
     font-size: 2.6vw;
+  }
+}
+@media screen and (max-width: 512px) {
+  #city-input-wrapper {
+
+    width: 55vw;
+    height: 14%;
+  }
+  #input-with-icon-adornment {
+    font-size: 5vw;
+    width: 33vw;
+  }
+  #city-button {
+    font-size: 3.6vw;
+    width: 16vw;
+  }
+  #search-icon {
+    font-size: 5vw;
   }
 }

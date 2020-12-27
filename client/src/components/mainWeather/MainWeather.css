@@ -7,24 +7,56 @@
   align-items: center;
   height: 70%;
 }
-
+#suns{
+  align-items: center;
+  display: flex;
+}
+.mobile-sloth {
+  display: none
+}
 @media screen and (max-width: 1024px) {
   .main-weather-wrapper {
     flex: 50%;
     background-color: lightskyblue;
     text-align: center;
   }
-  .grid-cointainer {
+  #grid-container {
     align-items: center;
     height: 60%;
   }
-.hide-if-responsive
-{
-  display: none;
-}
-#grow-if-responsive {
+#suns  {
+    display: none;
+  }
+#current-different, #sloth-temps {
   flex-grow: 1;
   max-width: 50%;
   height: 100%;
+}
+
+}
+@media screen and (max-width: 512px) {
+  .main-weather-wrapper {
+    flex: 100%;
+    height: inherit;
+  }
+  #grid-container {
+    align-items: center;
+    height: auto;
+    display: block;
+  }
+  #current-different {
+    flex-grow: 1;
+    max-width: 100%;
+    height: 100%;
+  }
+
+#sloth-temps, #suns {
+  display: none;
+
+}
+.mobile-sloth {
+  width: 27vw;
+display: inline-block;
+  margin-top: -11vw;
 }
 }

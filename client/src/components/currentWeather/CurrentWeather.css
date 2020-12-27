@@ -17,7 +17,7 @@
   font-size: 3vw;
   margin: 0;
 }
-#temp-wind {
+.temp-wind {
   align-self: center;
 }
 
@@ -49,4 +49,26 @@
 
   }
   
+}
+@media screen and (max-width: 512px) {
+  
+  
+  .weather-icon {
+    width: 50vw;
+  }
+  .temp {
+    font-size: 14vw;
+  }
+  #current-header {
+    font-size: 7vw;
+  
+  }
+  #weather-description {
+    font-size: 5.5vw;
+   
+
+  }
+  .current-wind {
+    font-size: 5vw;
+}
 }

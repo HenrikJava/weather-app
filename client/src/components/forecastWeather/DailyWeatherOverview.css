@@ -21,8 +21,7 @@
 #daily-icon {
   width: 8vw;
 }
-#speed,
-#arrow {
+.daily-overview-wind {
   font-size: 1vw;
 }
 @media screen and (max-width: 1024px) {
@@ -38,8 +37,7 @@
     height: 22%;
     font-size: 4vw;
   }
-  #speed,
-  #arrow {
+  .daily-overview-wind {
     font-size: 2vw;
   }
   #degree {
@@ -50,5 +48,31 @@
   }
   .template4 {
     display: none;
+  }
+}
+@media screen and (max-width: 512px) {
+  .daily-weather {
+   
+    width: 50vw;
+    height: 50vw;
+  margin-top: 5%;
+  }
+  
+  .weekday {
+    
+    font-size: 8vw;
+  }
+  
+  #degree {
+    font-size: 11vw;
+  }
+  #daily-icon {
+    width:44vw;
+  }
+  .template4 {
+    display: block;
+  }
+  .daily-overview-wind {
+    font-size: 5vw;
   }
 }
