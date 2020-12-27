@@ -26,7 +26,7 @@ export const CurrentWeather = () => {
           src={`http://openweathermap.org/img/wn/${weather.list[0].weather[0].icon}@2x.png`}
           alt="Weather Icon"
         ></img>
-        <div id="temp-wind">
+        <div className="temp-wind">
           <p className="temp">
             {Math.round(weather.list[0].main.temp) + scale(app.fahrenheitOn)}
           </p>
@@ -34,6 +34,7 @@ export const CurrentWeather = () => {
             speed={weather.list[0].wind.speed}
             deg={weather.list[0].wind.deg}
             fahrenheitOn={app.fahrenheitOn}
+            className="current-wind"
           ></Wind>
         </div>
       </div>

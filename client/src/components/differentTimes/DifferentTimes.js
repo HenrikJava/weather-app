@@ -76,6 +76,7 @@ export const DifferentTimes = () => {
               speed={specificTimes[index].wind.speed}
               deg={specificTimes[index].wind.deg}
               fahrenheitOn={app.fahrenheitOn}
+              className="different-wind"
             ></Wind>
           </Grid>
         </Grid>
