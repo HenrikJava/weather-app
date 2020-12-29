@@ -45,7 +45,7 @@ export const ForeCastWeather = () => {
           index={index}
         ></DailyWeatherOverview>
       ))}
-      <Button type="submit" variant="primary" id="back-to-top-button" onClick={() => {
+      <Button type="submit" variant="contained" id="back-to-top-button" onClick={() => {
         document.documentElement.scrollTop = 0;
       }}>  <KeyboardArrowUpIcon /></Button>
       

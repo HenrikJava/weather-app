@@ -39,7 +39,6 @@ export const HomeView = () => {
             : app.city,
           loggedInUser.data.user.fahrenheit_on
         ).then((response) => {
-          console.log(response.data);
           if (response.status === 200) {
             setWeather(response.data);
           }
@@ -69,7 +68,7 @@ export const HomeView = () => {
   const displayWeather = () => {
     if (weather) {
       return (
-        <div className="home-container">
+        <div className="home-view">
           <MainWeather></MainWeather>
           <ForeCastWeather></ForeCastWeather>
         </div>

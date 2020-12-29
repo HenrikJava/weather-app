@@ -23,3 +23,52 @@
 #switch p {
   font-size: 1vw;
 }
+@media screen and (max-width: 1024px) {
+  #settings-header {
+    font-size: 8vw;
+  }
+  #settings-box {
+    height: 25vw;
+    width: 55vw;
+    
+  }
+  
+  #temp-name {
+    font-size: 4vw;
+    height: 5vw;
+  }
+  #switch {
+    
+    height: 5vw;
+  }
+  #switch p {
+    font-size: 3vw;
+  }
+}
+
+@media screen and (max-width: 512px) {
+  #settings-header {
+    font-size: 11vw;
+  }
+  #settings-box {
+    height: 25vw;
+    width: 75vw;
+    display: block;
+  }
+  
+  #temp-name {
+    font-size: 5vw;
+    height: 8vw;
+    margin: auto;
+    text-align: center;
+  }
+  #switch {
+    margin: auto;
+    text-align: center;
+    height: 7vw;
+    justify-content: center;
+  }
+  #switch p {
+    font-size: 4.5vw;
+  }
+}

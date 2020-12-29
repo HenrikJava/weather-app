@@ -106,12 +106,13 @@ export const ProfileView = () => {
             } = props;
             return (
               <form className="profile-form" onSubmit={handleSubmit}>
-                <Grid item xs={12} id="first-last">
+                <Grid item xs={12} id="name-city">
                   <Grid item xs={5}>
                     <TextField
+                    id="first-name"
                       error={errors.firstname && touched.firstname}
-                      inputProps={{ style: { fontSize: 20 } }}
-                      InputLabelProps={{ style: { fontSize: 15 } }}
+                      inputProps={{ style: { fontSize: 24 } }}
+                      InputLabelProps={{ style: { fontSize: 24 } }}
                       label="First name"
                       name="firstname"
                       value={values.firstname}
@@ -129,11 +130,11 @@ export const ProfileView = () => {
                   <Grid item xs={2}></Grid>
                   <Grid item xs={5} className="align-right">
                     <TextField
-                      inputProps={{ style: { fontSize: 20 } }}
-                      InputLabelProps={{ style: { fontSize: 15 } }}
+                      inputProps={{ style: { fontSize: 24 } }}
+                      InputLabelProps={{ style: { fontSize: 24 } }}
                       label="Favourite city"
                       name="favouriteCity"
-                      value={values.favouriteCity}
+                      value={values.favouriteCity.charAt(0).toUpperCase()+values.favouriteCity.slice(1).toLowerCase()}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       type="text"
@@ -141,12 +142,12 @@ export const ProfileView = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid item xs={12} id="mail-city">
+                <Grid item xs={12} id="mail-old">
                   <Grid item xs={5}>
                     <TextField
                       error={errors.email && touched.email}
-                      inputProps={{ style: { fontSize: 20 } }}
-                      InputLabelProps={{ style: { fontSize: 15 } }}
+                      inputProps={{ style: { fontSize: 24 } }}
+                      InputLabelProps={{ style: { fontSize: 24 } }}
                       label="Email"
                       type="email"
                       name="email"
@@ -161,8 +162,8 @@ export const ProfileView = () => {
                   <Grid item xs={5} className="align-right">
                     <TextField
                       error={errors.oldPassword && touched.oldPassword}
-                      inputProps={{ style: { fontSize: 20 } }}
-                      InputLabelProps={{ style: { fontSize: 15 } }}
+                      inputProps={{ style: { fontSize: 24 } }}
+                      InputLabelProps={{ style: { fontSize: 24 } }}
                       label="Old password"
                       type="password"
                       name="oldPassword"
@@ -180,8 +181,8 @@ export const ProfileView = () => {
                   <Grid item xs={5}>
                     <TextField
                       error={errors.password && touched.password}
-                      inputProps={{ style: { fontSize: 20 } }}
-                      InputLabelProps={{ style: { fontSize: 15 } }}
+                      inputProps={{ style: { fontSize: 24 } }}
+                      InputLabelProps={{ style: { fontSize: 24 } }}
                       label="New password"
                       type="password"
                       name="password"
@@ -198,8 +199,8 @@ export const ProfileView = () => {
                   <Grid item xs={5} className="align-right">
                     <TextField
                       error={errors.confirmPassword && touched.confirmPassword}
-                      inputProps={{ style: { fontSize: 20 } }}
-                      InputLabelProps={{ style: { fontSize: 15 } }}
+                      inputProps={{ style: { fontSize: 24 } }}
+                      InputLabelProps={{ style: { fontSize: 24 } }}
                       label="Confirm password"
                       type="password"
                       name="confirmPassword"
@@ -216,7 +217,7 @@ export const ProfileView = () => {
                   </Grid>
                 </Grid>
 
-                <Grid item xs={12} id="response-button">
+                <Grid item xs={12} id="profile-button">
                   <p>{responseMessage}</p>
 
                   <Button type="submit" variant="contained" color="primary">

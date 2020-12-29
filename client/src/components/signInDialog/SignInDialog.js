@@ -50,21 +50,23 @@ export const SignInDialog = () => {
   const handleClose = () => {
     history.push("/");
     app.setSignInDialogOpen(false);
+    setErrorMessage()
   };
 
   const openRegisterDialog = () => {
     handleClose();
     app.setRegisterDialogOpen(true);
+
   };
 
   return (
-    <Dialog open={app.signInDialogOpen} onClose={handleClose}>
+    <Dialog open={app.signInDialogOpen} onClose={handleClose} id="dialog-container">
       <DialogTitle id="form-dialog-title">Log in</DialogTitle>
       <DialogContent>
-        <DialogContentText>
+        <DialogContentText id="user-friendly-text">
           Please enter your email and password to log in.
         </DialogContentText>
-        <DialogContentText>
+        <DialogContentText id="errorMessage">
           {errorMessage}
         </DialogContentText>
         <TextField
@@ -85,7 +87,7 @@ export const SignInDialog = () => {
           onChange={(event) => setPassword(event.target.value)}
         />
       </DialogContent>
-      <DialogActions>
+      <DialogActions id="dialog-buttons">
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>

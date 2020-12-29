@@ -10,25 +10,89 @@
   width: 100%;
 }
 #passwords,
-#mail-city,
-#first-last {
+#mail-old,
+#name-city {
   display: flex;
 }
 #profile-image-cointainer,
-#response-button {
+#profile-button {
   text-align: center;
   margin-top: 4%;
-
 }
 #delete-icon {
   float: left;
 }
 
-
 .profile-image {
-  width: 12vw;
+  width: 26%;
   border-radius: 100%;
+  margin-left: 37%;
+  display: flex;
 }
 .align-right {
   text-align: right;
 }
+@media screen and (max-width: 1024px) {
+  #main-grid {
+    width: 50%;
+    margin: auto;
+    height: 100%;
+
+    padding-top: 10%;
+  }
+
+  #profile-image-cointainer {
+    height: 20%;
+  }
+
+  .profile-image {
+    width: 44%;
+    margin-left: 28%;
+  }
+  .profile-form {
+    height: 100%;
+  }
+  #passwords, #mail-old,#name-city {
+    display: block;
+  }
+   
+  #passwords > div, #mail-old > div, #name-city > div {
+    max-width: 75%;
+    margin: 3% auto;
+  }
+ #profile-button > button {
+  width: 22vw;
+  font-size: 2vw;
+}
+ }
+ @media screen and (max-width: 512px) {
+  #main-grid {
+    width: 100%;
+    margin: auto;
+    height: 90%;
+
+    padding-top: 0%;
+  }
+
+  #profile-image-cointainer {
+    height: 17%;
+  }
+
+  .profile-image {
+    width: 28%;
+    margin-left: 36%;
+  }
+  
+   
+  #passwords > div, #mail-old > div, #name-city > div {
+    max-width: 90%;
+    margin: 3% auto;
+  }
+ #profile-button > button {
+  width: 30vw;
+  font-size: 3vw;
+}
+
+ }
+
+

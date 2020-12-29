@@ -36,8 +36,7 @@
   #back-to-top-button {
       display: flex;
      
-      width: 7vw;
-      height: 11vw;
+      width: 2%;
      
       margin: -10vw 2vw 10vw auto;
       background-color: lightblue;

@@ -7,16 +7,12 @@ html,
   width: 100%;
   height: 100%;
 }
-.home-view,
-.profile-view,
-.empty-view,
-.settings-view {
-  width: 100%;
-  height: 92%;
-}
+
 .profile-view,
 .empty-view,
 .settings-view, #error {
+  width: 100%;
+  height: 92%;
   background-color: lightskyblue;
 }
 
@@ -27,4 +23,53 @@ html,
 .link-between-dialogs:hover {
   color: #3f51b5;
 }
+#errorMessage {
+  color:red
+}
+@media screen and (max-width: 1024px) {
+  #dialog-container > div > div {
+    height: 40%;
+    width: 80%;
+  }
+  #form-dialog-title {
+    text-align: center;
+  }
+  #form-dialog-title > h2 {
+    font-size: 5vw;
+  }
+  #user-friendly-text  {
+    font-size: 3vw
+  }
+  #email-label, #password-label, #first-name-label,
+  #favourite-city-label, #confirm-password-label {
+    font-size: 3vw;
+  }
+  #email, #password, #first-name, #favourite-city, #confirm-password  {
+    height: 4vw;
+    font-size: 3vw;
+  }
+  .link-between-dialogs > span {
+    font-size: 3vw;
+  }
 
+  #dialog-buttons > button {
+    width: 15vw;
+    font-size: 2vw;
+  }
+  #errorMessage {
+    font-size: 3vw;
+  }
+}
+@media screen and (max-width: 512px) {
+  .home-view,
+.profile-view,
+.empty-view,
+.settings-view {
+    height: -webkit-fill-available; 
+    margin-top: 18vw;  
+  }
+  #dialog-container > div > div {
+    height: 40%;
+    width: 80%;
+  }
+}

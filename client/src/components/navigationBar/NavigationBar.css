@@ -39,7 +39,11 @@
 }
 @media screen and (max-width: 512px) {
   .navbar-wrapper {
-    height: 10%;
+    height: 18vw;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    top: 0;
   }
   .navbar-menu {
     width: 35%;

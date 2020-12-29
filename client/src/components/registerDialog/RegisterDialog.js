@@ -11,7 +11,6 @@ import { registerUser, loadUser } from "../../shared/api/service/UserService";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { UserContext } from "../../shared/global/provider/Provider";
-import './RegisterDialog.css'
 import { AppContext } from "../../shared/global/provider/Provider";
 export const RegisterDialog = () => {
   const [errorMessage, setErrorMessage] = useState();
@@ -19,6 +18,8 @@ export const RegisterDialog = () => {
   const user = useContext(UserContext);
   const handleClose = () => {
     app.setRegisterDialogOpen(false);
+    setErrorMessage()
+
   };
 
   const register = async (values) => {
@@ -50,7 +51,7 @@ export const RegisterDialog = () => {
     <Dialog open={app.registerDialogOpen} onClose={handleClose}>
       <DialogTitle id="form-dialog-title">Register</DialogTitle>
       <DialogContent>
-        <DialogContentText>
+        <DialogContentText id="user-friendly-text">
           Please enter the fields to create an account.
         </DialogContentText>
         <DialogContentText id="errorMessage">{errorMessage}</DialogContentText>
@@ -99,7 +100,7 @@ export const RegisterDialog = () => {
                 <TextField
                   error={errors.firstname && touched.firstname}
                   margin="dense"
-                  id="firstname"
+                  id="first-name"
                   label="First name"
                   name="firstname"
                   value={values.firstname}
@@ -115,7 +116,7 @@ export const RegisterDialog = () => {
                 <TextField
                   error={errors.email && touched.email}
                   margin="dense"
-                  id="mail"
+                  id="email"
                   label="Email"
                   name="email"
                   value={values.email}
@@ -143,7 +144,7 @@ export const RegisterDialog = () => {
                 <TextField
                   error={errors.confirmPassword && touched.confirmPassword}
                   margin="dense"
-                  id="confirmPassword"
+                  id="confirm-password"
                   label="Confirm password"
                   name="confirmPassword"
                   value={values.confirmPassword}
@@ -159,7 +160,7 @@ export const RegisterDialog = () => {
                 />
                 <TextField
                   margin="dense"
-                  id="favouriteCity"
+                  id="favourite-city"
                   label="Favourite city"
                   name="favouriteCity"
                   value={values.favouriteCity}
@@ -169,7 +170,7 @@ export const RegisterDialog = () => {
                   fullWidth
                 />
 
-                <DialogActions>
+                <DialogActions id="dialog-buttons">
                   <Button onClick={handleClose} color="primary">
                     Cancel
                   </Button>
