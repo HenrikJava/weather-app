@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Menu } from "../menu/Menu";
 import RoutingPath from "../../routes/RoutingPath";
 import { AppContext } from "../../shared/global/provider/Provider";
-import defaultSloth from '../../shared/images/DefaultSloth.png'
+import defaultSloth from '../../shared/images/sloths/DefaultSloth.png'
 
 export const NavigationBar = () => {
   const history = useHistory();

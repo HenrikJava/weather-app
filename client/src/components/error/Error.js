@@ -1,5 +1,5 @@
 import React from "react";
-import confusedSloth from '../../shared/images/confusedSloth.png'
+import confusedSloth from '../../shared/images/sloths/confusedSloth.png'
 import './Error.css'
 export const Error = () => {
  

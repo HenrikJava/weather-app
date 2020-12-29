@@ -7,10 +7,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 import HelpIcon from '@material-ui/icons/Help';
-import wetSloth from "../../shared/images/WetSloth.png";
-import mildSloth from "../../shared/images/MildSloth.png";
-import coldSloth from "../../shared/images/ColdSloth.png";
-import hotSloth from "../../shared/images/HotSloth.png";
+import wetSloth from "../../shared/images/sloths/WetSloth.png";
+import mildSloth from "../../shared/images/sloths/MildSloth.png";
+import coldSloth from "../../shared/images/sloths/ColdSloth.png";
+import hotSloth from "../../shared/images/sloths/HotSloth.png";
 
 import Grid from "@material-ui/core/Grid";
 export const MaxMin = () => {
