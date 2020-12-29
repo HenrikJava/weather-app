@@ -32,9 +32,12 @@ export const DifferentTimes = () => {
   );
   
   const isToday =(new Date(weatherAtCurrentDay[0].dt * 1000).toLocaleDateString()===new Date().toLocaleDateString())
-  const specificTimes = weatherAtCurrentDay.filter(
+  let specificTimes = weatherAtCurrentDay.filter(
     (fragment) => getSpecificTimes(fragment.dt_txt) === true
   );
+  if (specificTimes.length===0) {
+    specificTimes.push(weatherAtCurrentDay[0])
+  }
   
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
