@@ -39,8 +39,8 @@
 }
 @media screen and (max-width: 512px) {
   .navbar-wrapper {
-    height: 18vw;
-    position: fixed;
+    height: 10%;
+    position: sticky;
     width: 100%;
     z-index: 1;
     top: 0;

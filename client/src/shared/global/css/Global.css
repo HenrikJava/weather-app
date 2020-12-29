@@ -61,15 +61,45 @@ html,
   }
 }
 @media screen and (max-width: 512px) {
-  .home-view,
-.profile-view,
+  .home-view {
+
+    height: -webkit-fill-available; 
+    
+  }
+  .profile-view,
 .empty-view,
 .settings-view {
-    height: -webkit-fill-available; 
-    margin-top: 18vw;  
-  }
+  height: 90%
+}
   #dialog-container > div > div {
-    height: 40%;
-    width: 80%;
+    height: 62%;
+    width: 95%;
+    margin: auto;
+  }
+  
+  #form-dialog-title > h2 {
+    font-size: 9vw;
+  }
+  #user-friendly-text  {
+    font-size: 6vw
+  }
+  #email-label, #password-label, #first-name-label,
+  #favourite-city-label, #confirm-password-label {
+    font-size: 5vw;
+  }
+  #email, #password, #first-name, #favourite-city, #confirm-password  {
+    height: 4vw;
+    font-size: 5vw;
+  }
+  .link-between-dialogs > span {
+    font-size: 5vw;
+  }
+
+  #dialog-buttons > button {
+    width: 22vw;
+    font-size: 4vw;
+  }
+  #errorMessage {
+    font-size: 6vw;
   }
 }

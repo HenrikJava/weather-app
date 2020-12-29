@@ -29,12 +29,18 @@
   margin-left: 37%;
   display: flex;
 }
+#profile-field-label {
+  font-size: 1.4vw;
+}
+#profile-field {
+  font-size: 1.4vw;
+}
 .align-right {
   text-align: right;
 }
 @media screen and (max-width: 1024px) {
   #main-grid {
-    width: 50%;
+    width: 60%;
     margin: auto;
     height: 100%;
 
@@ -42,7 +48,7 @@
   }
 
   #profile-image-cointainer {
-    height: 20%;
+    height: 25%;
   }
 
   .profile-image {
@@ -57,8 +63,14 @@
   }
    
   #passwords > div, #mail-old > div, #name-city > div {
-    max-width: 75%;
+    max-width: 100%;
     margin: 3% auto;
+  }
+  #profile-field-label {
+    font-size: 3vw;
+  }
+  #profile-field {
+    font-size: 4vw;
   }
  #profile-button > button {
   width: 22vw;
@@ -69,11 +81,13 @@
   #main-grid {
     width: 100%;
     margin: auto;
-    height: 90%;
+    height: 100%;
 
     padding-top: 0%;
   }
-
+  #delete-icon {
+    font-size: 8vw;
+  }
   #profile-image-cointainer {
     height: 17%;
   }
@@ -83,13 +97,21 @@
     margin-left: 36%;
   }
   
-   
+  .profile-form {
+    height: 79%;
+  }
   #passwords > div, #mail-old > div, #name-city > div {
     max-width: 90%;
-    margin: 3% auto;
+    margin: 1% auto;
+  }
+  #profile-field-label {
+    font-size: 6vw;
+  }
+  #profile-field {
+    font-size: 6vw;
   }
  #profile-button > button {
-  width: 30vw;
+  width: 42vw;
   font-size: 3vw;
 }
 
