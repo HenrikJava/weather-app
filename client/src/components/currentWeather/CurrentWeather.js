@@ -13,7 +13,6 @@ export const CurrentWeather = () => {
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-
   return (
     <div className="current-wrapper">
       <p id="current-header">Current weather</p>
@@ -23,7 +22,8 @@ export const CurrentWeather = () => {
       <div className="current-image-and-details">
         <img
           className="weather-icon"
-          src={`http://openweathermap.org/img/wn/${weather.list[0].weather[0].icon}@2x.png`}
+          src={`/icons/${weather.list[0].weather[0].icon}.png`}
+
           alt="Weather Icon"
         ></img>
         <div className="temp-wind">

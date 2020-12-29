@@ -63,7 +63,8 @@ export const DifferentTimes = () => {
           <Grid item xs={2}>
             <img
               className="details-weather-icon"
-              src={`http://openweathermap.org/img/wn/${specificTimes[index].weather[0].icon}@2x.png`}
+              
+              src={`/icons/${specificTimes[index].weather[0].icon}.png`}
               alt="Weather Icon"
             ></img>
           </Grid>

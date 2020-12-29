@@ -29,7 +29,8 @@ export const DailyWeatherOverview = (props) => {
       <p className="weekday">{getDay("short")}</p>
       <div className="image-and-details">
         <img
-          src={`http://openweathermap.org/img/wn/${props.day.weather[0].icon}@2x.png`}
+                  src={`/icons/${props.day.weather[0].icon}.png`}
+
           alt="Weather Icon"
           id="daily-icon"
         ></img>
