@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { WeatherContext } from "../../shared/global/provider/Provider";
 import { AppContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
@@ -19,8 +19,7 @@ export const MaxMin = () => {
     AppContext
   );
   const [open, setOpen] = React.useState(false);
-  let sloth = mildSloth
-
+  let sloth 
 
   const getDayName = (fragment) => {
     return new Date(fragment * 1000).toLocaleString("en-us", {
@@ -91,6 +90,7 @@ export const MaxMin = () => {
   };
   
 const generateSloths = () => {
+sloth = mildSloth
   let outsideHours = []
   const outsideTimeStamps = ["12:00:00", "15:00:00", "18:00:00"]
   weatherAtCurrentDay.forEach(fragment => {
@@ -98,7 +98,10 @@ const generateSloths = () => {
     isOutsideHour && outsideHours.push(fragment) 
   
   });
-  
+  if (outsideHours.length===0) {
+    outsideHours.push(weather.list[0])
+  }
+
   for (let i = 0;i<outsideHours.length;i++) {
       if (app.fahrenheitOn) {
         if(outsideHours[i].main.feels_like <= 41 ) {
@@ -106,23 +109,33 @@ const generateSloths = () => {
         }
         if(outsideHours[i].main.feels_like >= 73 ) {
           sloth = hotSloth; 
+
         }
       } else {
         if(outsideHours[i].main.feels_like <= 5) {
           sloth = coldSloth; 
+
         }
         if(outsideHours[i].main.feels_like >= 23 ) {
           sloth = hotSloth; 
+
         }
       }
       if (outsideHours[i].weather[0].description.includes('rain'))
-      {sloth = wetSloth; break }
+      {sloth = wetSloth; 
+        break 
+      }
     }
-  
   
   return sloth
 
 }
+useEffect(() => {
+
+  app.setSloth(generateSloths()
+  )
+},[app,sloth,weather])
+
 
 
   return (<Grid item xs={12} id="clothes-max-min">

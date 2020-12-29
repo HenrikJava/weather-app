@@ -13,6 +13,8 @@ export const AppProvider = (props) => {
   const [isAfternoon, setIsAfternoon] = useState(true);
   const [weekday, setWeekday] = useState();
   const [fahrenheitOn, setFahrenheitOn] = useState(false);
+  const [sloth,
+    setSloth] = useState('defaultSloth')
   return (
     <AppContext.Provider
       value={{
@@ -35,6 +37,8 @@ export const AppProvider = (props) => {
         setWeekday,
         fahrenheitOn,
         setFahrenheitOn,
+        sloth,
+        setSloth
       }}
     >
       {props.children}
