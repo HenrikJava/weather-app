@@ -1,7 +1,7 @@
 .fore-cast-wrapper {
   display: flex;
   flex: 40%;
-  background-color: lightskyblue;
+  background-color: black;
 }
 .image-and-details {
   display: flex;

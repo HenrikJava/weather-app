@@ -1,7 +1,8 @@
 .navbar-wrapper {
   display: flex;
-  background-color: lightblue;
+  background-color: rgb(143, 138, 138);
   height: 8%;
+  color: black
 }
 .navbar-menu {
   width: 75%;

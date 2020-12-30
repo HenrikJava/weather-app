@@ -1,6 +1,6 @@
 .main-weather-wrapper {
   flex: 60%;
-  background-color: lightskyblue;
+  background-color: black;
   text-align: center;
 }
 .grid-cointainer {
@@ -17,11 +17,9 @@
 @media screen and (max-width: 1024px) {
   .main-weather-wrapper {
     flex: 50%;
-    background-color: lightskyblue;
-    text-align: center;
+    
   }
   #grid-container {
-    align-items: center;
     height: 60%;
   }
 #suns  {

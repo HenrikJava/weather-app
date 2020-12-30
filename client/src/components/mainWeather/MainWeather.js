@@ -14,9 +14,7 @@ import { Grid } from "@material-ui/core";
 export const MainWeather = () => {
   const app = useContext(AppContext);
  
-  useEffect(() => {
-
-  },[app.sloth])
+  
   
   return (
     <div className="main-weather-wrapper">

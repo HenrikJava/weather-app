@@ -1,12 +1,13 @@
 .daily-weather {
   border: 1px solid black;
   border-radius: 5%;
-  background-color: lightblue;
+  background-color: rgb(143, 138, 138);
   width: 14vw;
   height: 14vw;
   margin: auto;
   text-align: center;
   cursor: pointer;
+  color: black;
 }
 .daily-weather:hover {
   background-color: gainsboro;

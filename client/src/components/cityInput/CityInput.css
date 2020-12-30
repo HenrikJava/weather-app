@@ -9,10 +9,13 @@
   width: 100%;
   height: 60%;
 }
-
+#form > div::after {
+  border-bottom: 2px solid white;
+}
 #input-with-icon-adornment {
   font-size: 1vw;
   width: 13vw;
+  color: white;
 }
 
 #city-button {

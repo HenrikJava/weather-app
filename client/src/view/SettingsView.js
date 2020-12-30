@@ -4,9 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import {
   AppContext,
   UserContext,
-  WeatherContext,
 } from "../shared/global/provider/Provider";
-import WeatherService from "../shared/api/service/WeatherService";
 import { loadUser } from "../shared/api/service/UserService";
 import { updateApp } from "../shared/api/service/AppService";
 
