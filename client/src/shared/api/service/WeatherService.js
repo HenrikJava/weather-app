@@ -1,6 +1,14 @@
 import ApiConstants from "../WeatherApi";
 import axios from "axios";
 const weatherInstance = axios.create();
+const adjustTimeZone = (response) => {
+  response.data.list.forEach(timestamp => {
+
+    timestamp.dt_txt = new Date((timestamp.dt+response.data.city.timezone)*1000).toISOString().replace(/T/, ' ').replace(/\..+/, '')
+});
+
+  return response
+}
 
 const searchCity = async (city, fahrenheitOn) => {
   let scale;
@@ -12,7 +20,8 @@ const searchCity = async (city, fahrenheitOn) => {
     const response = await weatherInstance
       .get(ApiConstants.weatherApi + city + scale + ApiConstants.apiKey);
     if (response.status === 200) {
-      return response;
+      
+      return adjustTimeZone(response)
     }
   } catch (error) {
     console.log(error.response);
