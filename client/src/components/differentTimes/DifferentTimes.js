@@ -10,11 +10,20 @@ import Grid from "@material-ui/core/Grid";
 export const DifferentTimes = () => {
   const [weather] = useContext(WeatherContext);
   const app = useContext(AppContext);
-  const timesArray = ["00:00:00", "06:00:00", "12:00:00", "18:00:00"];
+  const timesArray = ["00:00:00","00:30:00","01:00:00","01:30:00","02:00:00","02:30:00", "06:00:00","06:30:00","07:00:00","07:30:00","08:00:00", "08:30:00","12:00:00" ,"12:30:00","13:00:00","13:30:00","14:00:00","14:30:00", "18:00:00","18:30:00","19:00:00","19:30:00","20:00:00","20:30:00"];
+  const weekday = []
+  weekday[0] = "Sunday";
+  weekday[1] = "Monday";
+  weekday[2] = "Tuesday";
+  weekday[3] = "Wednesday";
+  weekday[4] = "Thursday";
+  weekday[5] = "Friday";
+  weekday[6] = "Saturday";
+  
   const getDayName = (fragment) => {
-    return new Date(fragment * 1000).toLocaleString("en-us", {
-      weekday: "long",
-    });
+
+    return weekday[new Date((fragment.dt+weather.city.timezone) * 1000).getUTCDay()]
+   
   };
   const getSpecificTimes = (time) => {
     let condition = false;
@@ -28,10 +37,9 @@ export const DifferentTimes = () => {
   
   
   const weatherAtCurrentDay = weather.list.filter(
-    (fragment) => getDayName(fragment.dt) === app.weekday
+    (fragment) => getDayName(fragment) === app.weekday
   );
-  
-  const isToday =(new Date(weatherAtCurrentDay[0].dt * 1000).toLocaleDateString()===new Date().toLocaleDateString())
+  const isToday =(new Date((weatherAtCurrentDay[0].dt+weather.city.timezone )* 1000).getUTCDay()===new Date(Date.now()+weather.city.timezone* 1000).getUTCDay())
   let specificTimes = weatherAtCurrentDay.filter(
     (fragment) => getSpecificTimes(fragment.dt_txt) === true
   );

@@ -35,6 +35,8 @@ export const CityInput = () => {
         id="form"
         onSubmit={(e) => {
           e.preventDefault();
+          app.setDisplayCurrent(true);
+
           fetchDataFromExternalApi();
           e.target.reset();
         }}

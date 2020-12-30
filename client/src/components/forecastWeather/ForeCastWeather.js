@@ -8,34 +8,50 @@ import { DailyWeatherOverview } from "./DailyWeatherOverview";
 import "./ForeCastWeather.css";
 export const ForeCastWeather = () => {
   const [weather] = useContext(WeatherContext);
-  const app = useContext(AppContext);
   let i = 0;
-
-  while (weather.list[i]) {
-    if (weather.list[i].dt_txt.includes("12:00:00")) {
-      app.isAfternoon = false;
+  const noonArray = ["12:00:00","12:30:00", "13:00:00","13:30:00", "14:00:00","14:30:00"];
+  const midNightArray = ["22:00:00","22:30:00", "23:00:00","23:30:00", "00:00:00","00:30:00"];
+  let isAfternoon = true
+  let loopIfTrue = true;
+  while (loopIfTrue) {
+    for (let j = 0; j < noonArray.length; j++) {
+      if (weather.list[i].dt_txt.includes(noonArray[j])) {
+isAfternoon = false      }
+      for (let k = 0; k < midNightArray.length; k++) {
+        if (weather.list[i].dt_txt.includes(midNightArray[k])) {
+          loopIfTrue = false;
+        }
+      }
     }
-    if (weather.list[i].dt_txt.includes("0:00:00")) break;
     i++;
   }
-
   let daysAdded = 0;
   let weatherAtMiddleOfDay = [];
   for (let j = 0; j < weather.list.length; j++) {
-    if (app.isAfternoon) {
-      if (j === 0 || weather.list[j].dt_txt.includes("12:00:00")) {
+    if (isAfternoon) {
+      if (j === 0) {
+
         weatherAtMiddleOfDay.push(weather.list[j]);
         daysAdded++;
       }
+      for (let k = 0; k < noonArray.length; k++) {
+        if (weather.list[j].dt_txt.includes(noonArray[k])) {
+          weatherAtMiddleOfDay.push(weather.list[j]);
+          daysAdded++;
+        }
+      }
+      
     } else {
-      if (weather.list[j].dt_txt.includes("12:00:00")) {
-        weatherAtMiddleOfDay.push(weather.list[j]);
-        daysAdded++;
+      for (let k = 0; k < noonArray.length; k++) {
+        if (weather.list[j].dt_txt.includes(noonArray[k])) {
+          weatherAtMiddleOfDay.push(weather.list[j]);
+          daysAdded++;
+        }
       }
     }
-
     if (daysAdded === 5) break;
   }
+
   return (
     <div className="fore-cast-wrapper">
       {weatherAtMiddleOfDay.map((day, index) => (
@@ -43,12 +59,20 @@ export const ForeCastWeather = () => {
           day={day}
           key={index}
           index={index}
+          isAfternoon={isAfternoon}
         ></DailyWeatherOverview>
       ))}
-      <Button type="submit" variant="contained" id="back-to-top-button" onClick={() => {
-        document.documentElement.scrollTop = 0;
-      }}>  <KeyboardArrowUpIcon /></Button>
-      
+      <Button
+        type="submit"
+        variant="contained"
+        id="back-to-top-button"
+        onClick={() => {
+          document.documentElement.scrollTop = 0;
+        }}
+      >
+        {" "}
+        <KeyboardArrowUpIcon />
+      </Button>
     </div>
   );
 };
