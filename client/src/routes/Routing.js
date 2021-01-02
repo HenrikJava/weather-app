@@ -18,7 +18,7 @@ export const Routing = (props) => {
       return EmptyView;
     } else return navigateToView;
   };
-  useEffect(() => {
+  /* useEffect(() => {
    
     const fetchData = async () => {
       const loggedInUser = await loadUser();
@@ -45,7 +45,7 @@ export const Routing = (props) => {
     };
     
     fetchData();
-  }, []);
+  }, []); */
   return (
     <Router>
       {props.children}

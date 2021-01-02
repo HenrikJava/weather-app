@@ -63,7 +63,7 @@ export const HomeView = () => {
     };
 
     fetchData();
-  }, [user.authenticatedUser]);
+  }, [/* user.authenticatedUser */]);
 
   const displayWeather = () => {
     if (weather) {
