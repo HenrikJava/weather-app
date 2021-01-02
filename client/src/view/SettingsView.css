@@ -23,6 +23,12 @@
 #switch p {
   font-size: 1vw;
 }
+#switch > span > :last-child  {
+  background-color:grey
+}
+#switch > span > span > span {
+  color:white;
+}
 @media screen and (max-width: 1024px) {
   #settings-header {
     font-size: 8vw;

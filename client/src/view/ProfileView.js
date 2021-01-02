@@ -111,7 +111,7 @@ export const ProfileView = () => {
                     <TextField
                     id="first-name"
                       error={errors.firstname && touched.firstname}
-                      id="profile-field"
+                      id="profile-first"
                       label="First name"
                       name="firstname"
                       value={values.firstname}
@@ -129,7 +129,7 @@ export const ProfileView = () => {
                   <Grid item xs={2}></Grid>
                   <Grid item xs={5} className="align-right">
                     <TextField
-                      id="profile-field"
+                      id="profile-city"
                       label="Favourite city"
                       name="favouriteCity"
                       value={values.favouriteCity.charAt(0).toUpperCase()+values.favouriteCity.slice(1).toLowerCase()}
@@ -144,7 +144,7 @@ export const ProfileView = () => {
                   <Grid item xs={5}>
                     <TextField
                       error={errors.email && touched.email}
-                      id="profile-field"
+                      id="profile-email"
                       label="Email"
                       type="email"
                       name="email"
@@ -159,7 +159,7 @@ export const ProfileView = () => {
                   <Grid item xs={5} className="align-right">
                     <TextField
                       error={errors.oldPassword && touched.oldPassword}
-                      id="profile-field"
+                      id="profile-old"
                       label="Old password"
                       type="password"
                       name="oldPassword"
@@ -176,7 +176,7 @@ export const ProfileView = () => {
                 <Grid item xs={12} id="passwords">
                   <Grid item xs={5}>
                     <TextField
-                    id="profile-field"
+                    id="profile-pass"
                       error={errors.password && touched.password}
                       label="New password"
                       type="password"
@@ -194,7 +194,7 @@ export const ProfileView = () => {
                   <Grid item xs={5} className="align-right">
                     <TextField
                       error={errors.confirmPassword && touched.confirmPassword}
-                      id="profile-field"
+                      id="profile-confirm"
                       label="Confirm password"
                       type="password"
                       name="confirmPassword"
