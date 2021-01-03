@@ -25,6 +25,8 @@
 .daily-overview-wind {
   font-size: 1vw;
 }
+#dailyPrecipitation {
+  margin-top: -13%;}
 @media screen and (max-width: 1024px) {
   .daily-weather {
    
