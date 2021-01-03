@@ -14,7 +14,7 @@ import hotSloth from "../../shared/images/sloths/HotSloth.png";
 
 import Grid from "@material-ui/core/Grid";
 export const MaxMin = () => {
-  const [weather] = useContext(WeatherContext);
+  const weather = useContext(WeatherContext);
   const app = useContext(AppContext);
   const [open, setOpen] = React.useState(false);
   const noonArray = [
@@ -34,7 +34,7 @@ export const MaxMin = () => {
     });
   };
 
-  const weatherAtCurrentDay = weather.list.filter(
+  const weatherAtCurrentDay = weather.weather.list.filter(
     (fragment) => getDayName(fragment.dt) === app.weekday
   );
   let isToday;
@@ -63,7 +63,7 @@ export const MaxMin = () => {
       }
     } else {
       return (
-        Math.round(weather.list[0].main.feels_like) + scale(app.fahrenheitOn)
+        Math.round(weather.weather.list[0].main.feels_like) + scale(app.fahrenheitOn)
       );
     }
   };
@@ -122,7 +122,7 @@ export const MaxMin = () => {
       isOutsideHour && outsideHours.push(fragment);
     });
     if (outsideHours.length === 0) {
-      outsideHours.push(weather.list[0]);
+      outsideHours.push(weather.weather.list[0]);
     }
 
     for (let i = 0; i < outsideHours.length; i++) {

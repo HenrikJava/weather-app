@@ -8,7 +8,7 @@ import "./DifferentTimes.css";
 
 import Grid from "@material-ui/core/Grid";
 export const DifferentTimes = () => {
-  const [weather] = useContext(WeatherContext);
+  const weather = useContext(WeatherContext);
   const app = useContext(AppContext);
   const timesArray = [
     "00:00:00",
@@ -47,7 +47,7 @@ export const DifferentTimes = () => {
 
   const getDayName = (fragment) => {
     return weekday[
-      new Date((fragment.dt + weather.city.timezone) * 1000).getUTCDay()
+      new Date((fragment.dt + weather.weather.city.timezone) * 1000).getUTCDay()
     ];
   };
   const getSpecificTimes = (time) => {
@@ -60,14 +60,14 @@ export const DifferentTimes = () => {
     return condition;
   };
 
-  const weatherAtCurrentDay = weather.list.filter(
+  const weatherAtCurrentDay = weather.weather.list.filter(
     (fragment) => getDayName(fragment) === app.weekday
   );
   const isToday =
     new Date(
-      (weatherAtCurrentDay[0].dt + weather.city.timezone) * 1000
+      (weatherAtCurrentDay[0].dt + weather.weather.city.timezone) * 1000
     ).getUTCDay() ===
-    new Date(Date.now() + weather.city.timezone * 1000).getUTCDay();
+    new Date(Date.now() + weather.weather.city.timezone * 1000).getUTCDay();
 
   let specificTimes = [];
   let stampAdded = false;

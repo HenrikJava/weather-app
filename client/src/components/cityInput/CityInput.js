@@ -12,14 +12,14 @@ import Button from "@material-ui/core/Button";
 export const CityInput = () => {
   const app = useContext(AppContext);
   const [city, setCity] = useState();
-  const [weather, setWeather] = useContext(WeatherContext);
+  const weather = useContext(WeatherContext);
   const fetchDataFromExternalApi = async () => {
     const response = await WeatherService.searchCity(city, app.fahrenheitOn);
     if (response.status === 200) {
       app.setCity(response.data.city.name);
       app.setnoCityText('');
 
-      setWeather(response.data);
+      weather.setWeather(response.data);
     } /* else if (
       response.data.message.msgBody ===
       "No city with that name in the database."

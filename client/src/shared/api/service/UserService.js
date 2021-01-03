@@ -12,7 +12,6 @@ export const loadUser =  async () => {
       return response;
     }
   } catch (error) {
-    console.log(error.response);
 
     localStorage.removeItem("token");
     return error.response.data.message

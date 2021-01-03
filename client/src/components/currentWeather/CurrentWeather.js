@@ -6,7 +6,7 @@ import { Wind } from "../wind/Wind";
 import "./CurrentWeather.css";
 
 export const CurrentWeather = () => {
-  const [weather] = useContext(WeatherContext);
+  const weather = useContext(WeatherContext);
   const user = useContext(UserContext);
   const app = useContext(AppContext);
 
@@ -17,22 +17,22 @@ export const CurrentWeather = () => {
     <div className="current-wrapper">
       <p id="current-header">Current weather</p>
       <p id="weather-description">
-        {capitalizeFirstLetter(weather.list[0].weather[0].description)}
+        {capitalizeFirstLetter(weather.weather.list[0].weather[0].description)}
       </p>
       <div className="current-image-and-details">
         <img
           className="weather-icon"
-          src={`/icons/${weather.list[0].weather[0].icon}.png`}
+          src={`/icons/${weather.weather.list[0].weather[0].icon}.png`}
 
           alt="Weather Icon"
         ></img>
         <div className="temp-wind">
           <p className="temp">
-            {Math.round(weather.list[0].main.temp) + scale(app.fahrenheitOn)}
+            {Math.round(weather.weather.list[0].main.temp) + scale(app.fahrenheitOn)}
           </p>
           <Wind
-            speed={weather.list[0].wind.speed}
-            deg={weather.list[0].wind.deg}
+            speed={weather.weather.list[0].wind.speed}
+            deg={weather.weather.list[0].wind.deg}
             fahrenheitOn={app.fahrenheitOn}
             className="current-wind"
           ></Wind>

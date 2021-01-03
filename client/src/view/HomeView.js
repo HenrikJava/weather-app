@@ -11,7 +11,7 @@ import { loadUser } from "../shared/api/service/UserService";
 import "./HomeView.css";
 export const HomeView = () => {
   const user = useContext(UserContext);
-  const [weather, setWeather] = useContext(WeatherContext);
+  const weather = useContext(WeatherContext);
   const app = useContext(AppContext);
   const [error, setError] = useState();
 
@@ -19,7 +19,7 @@ export const HomeView = () => {
     WeatherService.searchCity(app.city, app.fahrenheitOn).then(
       (response) => {
         if (response.status === 200) {
-          setWeather(response.data);
+          weather.setWeather(response.data);
         } else {
           console.log(response.data.message.msgBody);
         }
@@ -40,7 +40,7 @@ export const HomeView = () => {
           loggedInUser.data.user.fahrenheit_on
         ).then((response) => {
           if (response.status === 200) {
-            setWeather(response.data);
+            weather.setWeather(response.data);
           }
           else if (
             response.data.message.msgBody ===
@@ -66,7 +66,7 @@ export const HomeView = () => {
   }, [/* user.authenticatedUser */]);
 
   const displayWeather = () => {
-    if (weather) {
+    if (weather.weather) {
       return (
         <div className="home-view">
           <MainWeather></MainWeather>

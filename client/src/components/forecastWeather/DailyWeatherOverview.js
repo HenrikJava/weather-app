@@ -22,14 +22,14 @@ weekday[5] = "Friday";
 weekday[6] = "Saturday";
   const getDay = (timestamp) => {
     if (timestamp) {
-      return new Date((timestamp+weather[0].city.timezone )* 1000).toUTCString().slice(0,3)
+      return new Date((timestamp+weather.weather.city.timezone )* 1000).toUTCString().slice(0,3)
 
     }
-      return new Date((props.day.dt+weather[0].city.timezone )* 1000).toUTCString().slice(0,3)
+      return new Date((props.day.dt+weather.weather.city.timezone )* 1000).toUTCString().slice(0,3)
       
    
   };
-weather[0].list.forEach(element => {
+  weather.weather.list.forEach(element => {
   
   if (element.rain && getDay(element.dt)===getDay()) {
     dailyPrecipitation += (Number(element.rain['3h']))
@@ -41,7 +41,7 @@ weather[0].list.forEach(element => {
   return (
     <div
       className={` daily-weather template${props.index}`}
-      onClick={() => {app.setWeekday(weekday[new Date((props.day.dt+weather[0].city.timezone )* 1000).getUTCDay()]); app.setIsAfternoon(props.isAfternoon); app.setDisplayCurrent(false); 
+      onClick={() => {app.setWeekday(weekday[new Date((props.day.dt+weather.weather.city.timezone )* 1000).getUTCDay()]); app.setIsAfternoon(props.isAfternoon); app.setDisplayCurrent(false); 
       document.documentElement.scrollTop = 0;}}
     >
       <p className="weekday">{getDay()}</p>

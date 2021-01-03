@@ -7,7 +7,7 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { DailyWeatherOverview } from "./DailyWeatherOverview";
 import "./ForeCastWeather.css";
 export const ForeCastWeather = () => {
-  const [weather] = useContext(WeatherContext);
+  const weather = useContext(WeatherContext);
   let i = 0;
   const noonArray = ["12:00:00","12:30:00", "13:00:00","13:30:00", "14:00:00","14:30:00"];
   const midNightArray = ["22:00:00","22:30:00", "23:00:00","23:30:00", "00:00:00","00:30:00"];
@@ -15,10 +15,10 @@ export const ForeCastWeather = () => {
   let loopIfTrue = true;
   while (loopIfTrue) {
     for (let j = 0; j < noonArray.length; j++) {
-      if (weather.list[i].dt_txt.includes(noonArray[j])) {
+      if (weather.weather.list[i].dt_txt.includes(noonArray[j])) {
 isAfternoon = false      }
       for (let k = 0; k < midNightArray.length; k++) {
-        if (weather.list[i].dt_txt.includes(midNightArray[k])) {
+        if (weather.weather.list[i].dt_txt.includes(midNightArray[k])) {
           loopIfTrue = false;
         }
       }
@@ -27,24 +27,24 @@ isAfternoon = false      }
   }
   let daysAdded = 0;
   let weatherAtMiddleOfDay = [];
-  for (let j = 0; j < weather.list.length; j++) {
+  for (let j = 0; j < weather.weather.list.length; j++) {
     if (isAfternoon) {
       if (j === 0) {
 
-        weatherAtMiddleOfDay.push(weather.list[j]);
+        weatherAtMiddleOfDay.push(weather.weather.list[j]);
         daysAdded++;
       }
       for (let k = 0; k < noonArray.length; k++) {
-        if (weather.list[j].dt_txt.includes(noonArray[k])) {
-          weatherAtMiddleOfDay.push(weather.list[j]);
+        if (weather.weather.list[j].dt_txt.includes(noonArray[k])) {
+          weatherAtMiddleOfDay.push(weather.weather.list[j]);
           daysAdded++;
         }
       }
       
     } else {
       for (let k = 0; k < noonArray.length; k++) {
-        if (weather.list[j].dt_txt.includes(noonArray[k])) {
-          weatherAtMiddleOfDay.push(weather.list[j]);
+        if (weather.weather.list[j].dt_txt.includes(noonArray[k])) {
+          weatherAtMiddleOfDay.push(weather.weather.list[j]);
           daysAdded++;
         }
       }
