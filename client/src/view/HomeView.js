@@ -3,7 +3,7 @@ import { WeatherContext } from "../shared/global/provider/Provider";
 import { AppContext } from "../shared/global/provider/Provider";
 import { MainWeather } from "../components/mainWeather/MainWeather";
 import { ForeCastWeather } from "../components/forecastWeather/ForeCastWeather";
-import WeatherService from "../shared/api/service/WeatherService";
+import searchCity from "../shared/api/service/WeatherService";
 import { UserContext } from "../shared/global/provider/Provider";
 import { Error } from "../components/error/Error";
 import { loadUser } from "../shared/api/service/UserService";
@@ -16,12 +16,13 @@ export const HomeView = () => {
   const [error, setError] = useState();
 
   const defaultWeatherCall = () => {
-    WeatherService.searchCity(app.city, app.fahrenheitOn).then(
+    searchCity(app.city, app.fahrenheitOn).then(
       (response) => {
         if (response.status === 200) {
           weather.setWeather(response.data);
         } else {
           console.log(response.data.message.msgBody);
+          setError(true)
         }
       }
     );
@@ -31,9 +32,12 @@ export const HomeView = () => {
     const fetchData = async () => {
       const loggedInUser = await loadUser();
       if (loggedInUser.data.message.msgError===false) {
-        
+        user.setFirstname(loggedInUser.data.user.firstname);
+        user.setEmail(loggedInUser.data.user.email);
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
-        WeatherService.searchCity(
+        user.setAvatar(loggedInUser.data.user.avatar);
+        user.setAuthenticatedUser(true);      
+        searchCity(
           loggedInUser.data.user.favourite_city
             ? loggedInUser.data.user.favourite_city
             : app.city,
@@ -52,6 +56,7 @@ export const HomeView = () => {
 
           } else {
             console.log(response.data.message.msgBody);
+            
           }
         });
       } else {
@@ -63,7 +68,8 @@ export const HomeView = () => {
     };
 
     fetchData();
-  }, [/* user.authenticatedUser */]);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
   const displayWeather = () => {
     if (weather.weather) {

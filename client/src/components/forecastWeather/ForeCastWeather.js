@@ -1,7 +1,6 @@
 import { Button } from "@material-ui/core";
 import React, { useContext } from "react";
 import { WeatherContext } from "../../shared/global/provider/Provider";
-import { AppContext } from "../../shared/global/provider/Provider";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 import { DailyWeatherOverview } from "./DailyWeatherOverview";

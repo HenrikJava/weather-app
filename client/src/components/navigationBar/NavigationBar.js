@@ -18,7 +18,7 @@ export const NavigationBar = () => {
           app.setMenuOpen(false)
           app.setnoCityText('');
 
-        }}><img className="navbar-icon" src={defaultSloth}></img>
+        }}><img className="navbar-icon" src={defaultSloth} alt="sloth"></img>
       <p
         className="navbar-name"
         

@@ -151,6 +151,7 @@ export const MaxMin = () => {
   };
   useEffect(() => {
     app.setSloth(generateSloths());
+   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [app, sloth, weather]);
 
   return (

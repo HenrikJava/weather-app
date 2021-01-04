@@ -1,4 +1,4 @@
-import ApiConstants from "../WeatherApi";
+import weatherApi from "../WeatherApi";
 import axios from "axios";
 const weatherInstance = axios.create();
 const adjustTimeZone = (response) => {
@@ -13,18 +13,17 @@ const adjustTimeZone = (response) => {
 const searchCity = async (city, fahrenheitOn) => {
   let scale;
   fahrenheitOn
-    ? (scale = ApiConstants.fahrenheit)
-    : (scale = ApiConstants.celcius);
+    ? (scale = weatherApi.fahrenheit)
+    : (scale = weatherApi.celcius);
 
   try {
     const response = await weatherInstance
-      .get(ApiConstants.weatherApi + city + scale + ApiConstants.apiKey);
+      .get(weatherApi.apiUrl + city + scale + weatherApi.apiKey);
     if (response.status === 200) {
-      
+
       return adjustTimeZone(response)
     }
   } catch (error) {
-    console.log(error.response);
     if (error.response.data.message === "city not found") {
       return {
         data: {
@@ -47,4 +46,4 @@ const searchCity = async (city, fahrenheitOn) => {
   }
 };
 
-export default { searchCity };
+export default  searchCity ;

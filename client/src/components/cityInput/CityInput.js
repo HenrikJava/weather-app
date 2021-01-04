@@ -3,7 +3,7 @@ import { AppContext } from "../../shared/global/provider/Provider";
 import { WeatherContext } from "../../shared/global/provider/Provider";
 import "./CityInput.css";
 import { useContext, useState } from "react";
-import WeatherService from "../../shared/api/service/WeatherService";
+import searchCity from "../../shared/api/service/WeatherService";
 import SearchIcon from "@material-ui/icons/Search";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -11,21 +11,17 @@ import Button from "@material-ui/core/Button";
 
 export const CityInput = () => {
   const app = useContext(AppContext);
-  const [city, setCity] = useState();
+  const [city, setCity] = useState('');
   const weather = useContext(WeatherContext);
   const fetchDataFromExternalApi = async () => {
-    const response = await WeatherService.searchCity(city, app.fahrenheitOn);
+    const response = await searchCity(city, app.fahrenheitOn);
     if (response.status === 200) {
       app.setCity(response.data.city.name);
+      setCity('')
       app.setnoCityText('');
 
       weather.setWeather(response.data);
-    } /* else if (
-      response.data.message.msgBody ===
-      "No city with that name in the database."
-    ) {
-      app.setnoCityText("No city with that name in the database, please try again.");
-    }  */else {
+    } else {
       app.setnoCityText(response.data.message.msgBody);
     }
   };
@@ -53,7 +49,7 @@ export const CityInput = () => {
           }
         />
 
-        <Button type="submit" variant="contained" id="city-button">
+        <Button disabled={city.length<1}type="submit" variant="contained" id="city-button">
           Search
         </Button>
       </form>

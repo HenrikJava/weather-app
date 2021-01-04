@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../../shared/global/provider/Provider";
 import "./Menu.css";
 import { useHistory } from "react-router-dom";

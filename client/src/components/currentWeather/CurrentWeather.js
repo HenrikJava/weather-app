@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 import { WeatherContext } from "../../shared/global/provider/Provider";
-import { UserContext, AppContext } from "../../shared/global/provider/Provider";
+import {  AppContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
 import { Wind } from "../wind/Wind";
 import "./CurrentWeather.css";
 
 export const CurrentWeather = () => {
   const weather = useContext(WeatherContext);
-  const user = useContext(UserContext);
   const app = useContext(AppContext);
 
   const capitalizeFirstLetter = (string) => {

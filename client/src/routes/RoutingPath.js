@@ -1,8 +1,5 @@
-const homeView = "/";
-const profileView = "/profile";
-const settingsView = "/settings";
-export default {
-  homeView,
-  profileView,
-  settingsView,
-};
+
+const RoutingPath = {homeView: "/",
+  profileView: "/profile",
+  settingsView: "/settings"}
+export default RoutingPath 

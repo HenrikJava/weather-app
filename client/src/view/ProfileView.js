@@ -11,6 +11,10 @@ import "./ProfileView.css";
 export const ProfileView = () => {
   const app = useContext(AppContext);
   const user = useContext(UserContext);
+  !user.authenticatedUser
+      ? app.setSignInDialogOpen(true)
+      : app.setSignInDialogOpen(false);
+
   const [responseMessage, setResponseMessage] = useState();
   const update = async (values) => {
     const response = await updateUser(values);
@@ -34,11 +38,9 @@ export const ProfileView = () => {
   const openDeleteConfirm = () => {
     app.setDeleteConfirmDialogOpen(true)
   }
-  useEffect(() => {
-    !user.authenticatedUser
-      ? app.setSignInDialogOpen(true)
-      : app.setSignInDialogOpen(false);
-  }, []);
+
+  
+  
   return (
     <div className="profile-view">
           <DeleteConfirmDialog></DeleteConfirmDialog>
@@ -109,7 +111,7 @@ export const ProfileView = () => {
                 <Grid item xs={12} id="name-city">
                   <Grid item xs={5}>
                     <TextField
-                    id="first-name"
+                    
                       error={errors.firstname && touched.firstname}
                       id="profile-first"
                       label="First name"

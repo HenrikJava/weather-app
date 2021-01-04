@@ -4,10 +4,11 @@ import { HomeView } from "../view/HomeView";
 import { ProfileView } from "../view/ProfileView";
 import { EmptyView } from "../view/EmptyView";
 import { SettingsView } from "../view/SettingsView";
-import { useEffect, useContext } from "react";
+import {  useContext, useEffect } from "react";
 import { UserContext, AppContext } from "../shared/global/provider/Provider";
-import { loadUser } from "../shared/api/service/UserService";
 import RoutingPath from "./RoutingPath";
+import {  loadUser } from "../shared/api/service/UserService";
+
 
 export const Routing = (props) => {
   const user = useContext(UserContext);
@@ -18,7 +19,7 @@ export const Routing = (props) => {
       return EmptyView;
     } else return navigateToView;
   };
-  /* useEffect(() => {
+  useEffect(() => {
    
     const fetchData = async () => {
       const loggedInUser = await loadUser();
@@ -45,7 +46,7 @@ export const Routing = (props) => {
     };
     
     fetchData();
-  }, []); */
+  }, []);
   return (
     <Router>
       {props.children}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { CityInfo } from "../cityInfo/CityInfo";
 import { CityInput } from "../cityInput/CityInput";
 import { CurrentWeather } from "../currentWeather/CurrentWeather";
