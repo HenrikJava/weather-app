@@ -1,0 +1,40 @@
+.about-wrapper {
+    height:92%
+}
+.main-about {
+    margin-top: 0%;
+    margin-bottom: 0%;
+    height: 85%;
+    display: flex;
+}
+.image-wrapper {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about-image {
+    width: 30vw;
+    height: 30vw;
+    border-radius: 100%;
+}
+
+.text-wrapper {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+.text-header {
+    font-size: 3vw;
+}
+.text-sub-header {
+    font-size: 2vw;
+    margin: 0;
+}
+.text-main {
+    font-size: 1.4vw;
+    width: 63%;
+
+}

@@ -4,6 +4,7 @@ import { HomeView } from "../view/HomeView";
 import { ProfileView } from "../view/ProfileView";
 import { EmptyView } from "../view/EmptyView";
 import { SettingsView } from "../view/SettingsView";
+import { AboutView } from "../view/AboutView"
 import {  useContext, useEffect } from "react";
 import { UserContext, AppContext } from "../shared/global/provider/Provider";
 import RoutingPath from "./RoutingPath";
@@ -57,7 +58,7 @@ export const Routing = (props) => {
           component={blockRouteIfNotAuthenticated(ProfileView)}
         ></Route>
         <Route path={RoutingPath.settingsView} component={SettingsView}></Route>
-
+<Route path={RoutingPath.AboutView} component={AboutView}></Route>
         <Route component={HomeView}></Route>
       </Switch>
     </Router>
