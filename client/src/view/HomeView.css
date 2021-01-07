@@ -5,3 +5,8 @@
   flex-direction: column;
 }
 
+@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+  .home-view {
+    height: 89%;
+  }
+}

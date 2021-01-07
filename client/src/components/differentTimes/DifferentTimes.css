@@ -1,15 +1,16 @@
 .day-details {
   height: 100%;
   display: grid;
+  min-width: 100%;
 }
 .details-weather-icon {
-  width: 4vw;
+  width: 3vw;
 }
 
 .weather-at-differents-time-grid {
   margin: auto;
-  width: 75%;
-  font-size: 1vw;
+  width: 100%;
+  font-size: 1.4vw;
   white-space: nowrap;
   height: 90%;
 }
@@ -20,6 +21,7 @@
 
 .different-times > div {
   align-self: center;
+  text-align: center;
 }
 .day-to-display {
   text-align: center;
@@ -27,19 +29,19 @@
   margin-block: auto;
 }
 .different-wind {
-  font-size: 1vw;
+  font-size: 1.4vw;
 }
-@media screen and (max-width: 1024px) { 
+@media screen and (max-width: 1400px) and  (min-height: 500px)  {
   
   .details-weather-icon {
-    width: 7vw;
+    width: 5vw;
   }
   
   .weather-at-differents-time-grid {
     margin: auto;
     width: 100%;
 
-    font-size: 2.2vw;
+    font-size: 1.6vw;
     white-space: nowrap;
   }
   
@@ -47,7 +49,26 @@
   .day-to-display {
    
     font-size: 3vw;
-    margin-bottom: 0%;
+  }
+  .different-wind {
+    font-size: 1.6vw;
+  }
+}
+@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
+  .details-weather-icon {
+    width: 4vw;
+  }
+  
+  .weather-at-differents-time-grid {
+    width: 100%;
+    font-size: 2vw;
+    
+  }
+  
+  
+  
+  .day-to-display {
+    font-size: 4vw;
   }
   .different-wind {
     font-size: 2vw;
@@ -60,14 +81,17 @@
   }
   
   .weather-at-differents-time-grid {
- 
+    margin: auto;
+    width: 100%;
+    white-space: nowrap;
 
     font-size: 4.2vw;
   }
   
   
   .day-to-display {
-   
+    margin-bottom: 0%;
+
     font-size: 7vw;
   }
   .different-wind {

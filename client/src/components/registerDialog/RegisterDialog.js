@@ -48,7 +48,7 @@ export const RegisterDialog = () => {
   };
 
   return (
-    <Dialog open={app.registerDialogOpen} onClose={handleClose}>
+    <Dialog open={app.registerDialogOpen} onClose={handleClose} id="register-dialog-container">
       <DialogTitle id="form-dialog-title">Register</DialogTitle>
       <DialogContent>
         <DialogContentText id="user-friendly-text">

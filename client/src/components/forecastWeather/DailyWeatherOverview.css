@@ -25,10 +25,42 @@
 .daily-overview-wind {
   font-size: 1vw;
 }
-#dailyPrecipitation {
-  margin-top: -13%;}
-@media screen and (max-width: 1024px) {
-  .daily-weather {
+#daily-precipitation {
+  margin-top: 20%;
+  font-size: 1vw;
+  margin-bottom: -20%;
+}
+.image-and-details {
+  display: flex;
+  justify-content: center;
+  height: 8vw;
+}
+@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+ 
+  .image-and-details {
+    height: 78%;
+  }
+  .weekday {
+    font-size: 3vw;
+    margin: 0;
+  }
+  #degree {
+    font-size: 2.4vw;
+    margin-top: 35%
+  }
+  #daily-icon {
+    width: 8vw;
+  }
+  .daily-overview-wind {
+    font-size: 1.4vw;
+  }
+  #daily-precipitation {
+    font-size: 1.6vw;
+    margin-bottom: -20%;
+  }
+}
+  @media screen and (max-width: 1024px) and  (min-height: 1024px)  {
+    .daily-weather {
    
     width: 35vw;
     height: 25vw;
@@ -41,7 +73,7 @@
     font-size: 4vw;
   }
   .daily-overview-wind {
-    font-size: 2vw;
+    font-size: 3vw;
   }
   #degree {
     font-size: 4vw;
@@ -52,17 +84,27 @@
   .template4 {
     display: none;
   }
+  #daily-precipitation {
+    margin-top: 20%;
+    font-size: 3vw;
+    margin-bottom: -20%;
+  }
+  .image-and-details {
+    height: 78%;
+  }
 }
+
 @media screen and (max-width: 512px) {
   .daily-weather {
    
-    width: 50vw;
-    height: 50vw;
+    width: 70vw;
+    height: 55vw;
   margin-top: 5%;
   }
   
   .weekday {
-    
+    margin: 0;
+    height: 22%;
     font-size: 8vw;
   }
   
@@ -77,5 +119,13 @@
   }
   .daily-overview-wind {
     font-size: 5vw;
+  }
+  #daily-precipitation {
+    margin-top: 20%;
+    font-size: 5vw;
+    margin-bottom: -20%;
+  }
+  .image-and-details {
+    height: 78%;
   }
 }

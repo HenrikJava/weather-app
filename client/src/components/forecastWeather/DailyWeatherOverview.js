@@ -56,13 +56,14 @@ weekday[6] = "Saturday";
           <p id="degree">
             {Math.round(props.day.main.temp) + scale(app.fahrenheitOn)}
           </p>
+          <p id="daily-precipitation">{Math.ceil(dailyPrecipitation)+' mm'}</p>
           <Wind
             speed={props.day.wind.speed}
             deg={props.day.wind.deg}
             fahrenheitOn={app.fahrenheitOn}
             className="daily-overview-wind"
           ></Wind>
-          <p id="dailyPrecipitation">{Math.ceil(dailyPrecipitation)+' mm'}</p>
+          
         </div>
       </div>
     </div>

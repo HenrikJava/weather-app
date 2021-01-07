@@ -3,24 +3,18 @@
   flex: 40%;
   background-color: black;
 }
-.image-and-details {
-  display: flex;
-  justify-content: center;
-  height: 8vw;
-}
+
 #back-to-top-button {
   display: none;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
   .fore-cast-wrapper {
     flex: 50%;
     grid-template-columns: repeat(2, 50%);
     display: grid;
   }
 
-  .image-and-details {
-    height: 78%;
-  }
+  
 }
 @media screen and (max-width: 512px) {
   .fore-cast-wrapper {
@@ -29,9 +23,7 @@
     display: grid;
   }
 
-  .image-and-details {
-    height: 78%;
-  }
+  
 
   #back-to-top-button {
       display: flex;

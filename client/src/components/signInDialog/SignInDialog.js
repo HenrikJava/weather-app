@@ -60,7 +60,7 @@ export const SignInDialog = () => {
   };
 
   return (
-    <Dialog open={app.signInDialogOpen} onClose={handleClose} id="dialog-container">
+    <Dialog open={app.signInDialogOpen} onClose={handleClose} id="sign-in-dialog-container">
       <DialogTitle id="form-dialog-title">Log in</DialogTitle>
       <DialogContent>
         <DialogContentText id="user-friendly-text">

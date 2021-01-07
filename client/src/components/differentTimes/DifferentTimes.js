@@ -127,7 +127,7 @@ export const DifferentTimes = () => {
           key={specificTimes[index].dt}
           className="different-times"
         >
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <p> {specificTimes[index].dt_txt.slice(11, 13)} </p>
           </Grid>
           <Grid item xs={1}>
@@ -153,7 +153,7 @@ export const DifferentTimes = () => {
               )}
             </p>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <Wind
               speed={specificTimes[index].wind.speed}
               deg={specificTimes[index].wind.deg}

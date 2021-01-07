@@ -174,6 +174,7 @@ export const MaxMin = () => {
                   PopperProps={{
                     disablePortal: true,
                   }}
+                  id="tooltip"
                   onClose={handleTooltipClose}
                   open={open}
                   disableFocusListener
@@ -187,7 +188,7 @@ export const MaxMin = () => {
                     </p>
                   }
                 >
-                  <HelpIcon id="tooltip" onClick={handleTooltipOpen}></HelpIcon>
+                  <HelpIcon id="tooltip-icon" onClick={handleTooltipOpen}></HelpIcon>
                 </Tooltip>
               </div>
             </ClickAwayListener>

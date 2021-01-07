@@ -16,7 +16,14 @@ html,
   width: 100%;
   height: 92%;
 }
-
+#register-dialog-container > div > div {
+  height: 45%;
+  width: 30%;
+}
+#sign-in-dialog-container > div > div {
+  height: 30%;
+  width: 30%;
+}
 .link-between-dialogs {
   text-align: center;
   cursor: pointer;
@@ -27,8 +34,49 @@ html,
 #errorMessage {
   color:red
 }
-@media screen and (max-width: 1024px) {
-  #dialog-container > div > div {
+@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+#register-dialog-container > div > div {
+    height: 75%;
+    width: 70%;
+  }
+  #sign-in-dialog-container > div > div {
+    height: 50%;
+    width: 85%;
+  }
+  
+  #form-dialog-title > h2 {
+    font-size: 3vw;
+  }
+  #user-friendly-text  {
+    font-size: 2vw
+  }
+  #email-label, #password-label, #first-name-label,
+  #favourite-city-label, #confirm-password-label {
+    font-size: 2vw;
+  }
+  #email, #password, #first-name, #favourite-city, #confirm-password  {
+    height: 3vw;
+    font-size: 2vw;
+  }
+  .link-between-dialogs > span {
+    font-size: 2vw;
+  }
+
+  #dialog-buttons > button {
+    width: 15vw;
+    font-size: 2vw;
+  }
+  #errorMessage {
+    font-size: 2vw;
+  }
+}
+@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
+  
+  #register-dialog-container > div > div {
+    height: 60%;
+    width: 70%;
+  }
+  #sign-in-dialog-container > div > div {
     height: 40%;
     width: 80%;
   }
@@ -61,7 +109,43 @@ html,
     font-size: 3vw;
   }
 }
-@media screen and (max-width: 512px) {
+@media screen and (max-width: 750px)  {
+  #register-dialog-container > div > div {
+    height: 90%;
+    width: 50%;
+  }
+  #sign-in-dialog-container > div > div {
+    height: 85%;
+    width: 50%;
+  }
+  
+  #form-dialog-title > h2 {
+    font-size: 3vw;
+  }
+  #user-friendly-text  {
+    font-size: 2vw
+  }
+  #email-label, #password-label, #first-name-label,
+  #favourite-city-label, #confirm-password-label {
+    font-size: 2vw;
+  }
+  #email, #password, #first-name, #favourite-city, #confirm-password  {
+    height: 4vw;
+    font-size: 2vw;
+  }
+  .link-between-dialogs > span {
+    font-size: 2vw;
+  }
+
+  #dialog-buttons > button {
+    width: 15vw;
+    font-size: 2vw;
+  }
+  #errorMessage {
+    font-size: 2vw;
+  }
+}
+@media screen and (max-width: 512px) and (min-height: 568px ) {
   .home-view {
 
     height: -webkit-fill-available; 
@@ -72,12 +156,17 @@ html,
 .settings-view {
   height: 90%
 }
-  #dialog-container > div > div {
-    height: 62%;
-    width: 95%;
-    margin: auto;
-  }
-  
+#register-dialog-container > div > div {
+  height: 90%;
+  width: 80%;
+}
+#sign-in-dialog-container > div > div {
+  height: 70%;
+  width: 90%;
+}
+#form-dialog-title {
+  text-align: center;
+}
   #form-dialog-title > h2 {
     font-size: 9vw;
   }

@@ -8,7 +8,7 @@
 
 .profile-form {
   width: 100%;
-  background-color: rgb(143, 138, 138);
+  background-color: gainsboro;
   margin-top: 3%;
   padding: 3%;
   border-radius: 2%;
@@ -56,7 +56,7 @@
 .align-right {
   text-align: right;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
   #main-grid {
     width: 60%;
     margin: auto;
@@ -74,7 +74,7 @@
     margin-left: 28%;
   }
   .profile-form {
-    height: 100%;
+    height: 65%;
   }
   #passwords, #mail-old,#name-city {
     display: block;
@@ -97,7 +97,7 @@
  }
  @media screen and (max-width: 512px) {
   #main-grid {
-    width: 100%;
+    width: 96%;
     margin: auto;
     height: 100%;
 
@@ -116,7 +116,10 @@
   }
   
   .profile-form {
-    height: 79%;
+    height: 73%;
+  }
+  #passwords, #mail-old,#name-city {
+    display: block;
   }
   #passwords > div, #mail-old > div, #name-city > div {
     max-width: 90%;

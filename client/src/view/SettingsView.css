@@ -29,7 +29,7 @@
 #switch > span > span > span {
   color:white;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
   #settings-header {
     font-size: 8vw;
   }

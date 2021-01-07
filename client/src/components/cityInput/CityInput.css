@@ -32,9 +32,33 @@
 
 #search-icon {
   font-size: 1.6vw;
-}
+  color: rgb(143, 138, 138);
 
-@media screen and (max-width: 1024px) {
+}
+@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+  #city-input-wrapper {
+    width: 30vw;
+    height: 12%;
+  }
+  
+  
+  #input-with-icon-adornment {
+    font-size: 2vw;
+    width: 17vw;
+  }
+  
+  #city-button {
+    
+    font-size: 1.6vw;
+    width: 7vw;
+    
+  }
+  
+  #search-icon {
+    font-size: 2.6vw;
+  }
+}
+@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
   #city-input-wrapper {
     margin: 1% auto -3% auto;
 
@@ -50,11 +74,14 @@
     width: 10vw;
   }
   #search-icon {
-    font-size: 2.6vw;
+    font-size: 4vw;
+
   }
 }
+
 @media screen and (max-width: 512px) {
   #city-input-wrapper {
+    margin: 1% auto -3% auto;
 
     width: 55vw;
     height: 14%;
