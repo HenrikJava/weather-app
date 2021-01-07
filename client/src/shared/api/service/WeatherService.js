@@ -28,7 +28,7 @@ const searchCity = async (city, fahrenheitOn) => {
       return {
         data: {
           message: {
-            msgBody: "No city with that name in the database, please try again.",
+            msgBody: `No city with name "${city}" in the database, please try again.`,
             msgError: true,
           },
         },
