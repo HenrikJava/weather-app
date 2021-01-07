@@ -1,4 +1,7 @@
 .current-wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
   height: 100%;
 }
 .current-image-and-details {
@@ -7,7 +10,7 @@
   height: 70%;
 }
 .weather-icon {
-  width: 14vw;
+  width: 12vw;
 }
 .temp {
   font-size: 3vw;

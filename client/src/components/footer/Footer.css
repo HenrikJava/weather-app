@@ -36,3 +36,41 @@
     color: gainsboro;
     cursor: pointer;
 }
+
+@media screen and (max-width: 1024px) and  (min-height: 1020px)  {
+    .icon-wrapper {
+        width: 8vw;
+        height: 8vw;
+        
+    }
+    #email-icon,#github-icon,#facebook-icon,#copyright-icon {
+        height: 5vw;
+    }
+    
+    #footer-label-contact,#footer-label-github,#footer-label-facebook,#footer-label-copyright {
+        font-size: 2.6vw;
+        
+    }
+   
+}
+@media screen and (max-width: 512px) {
+    .footer-wrapper {
+        height: 9%;
+      
+        
+    
+    }
+    .icon-wrapper {
+        width: 8vw;
+        height: 8vw;
+        
+    }
+    #email-icon,#github-icon,#facebook-icon,#copyright-icon {
+        height: 5vw;
+    }
+    
+    #footer-label-contact,#footer-label-github,#footer-label-facebook,#footer-label-copyright {
+        font-size: 2.6vw;
+        
+    }
+}
