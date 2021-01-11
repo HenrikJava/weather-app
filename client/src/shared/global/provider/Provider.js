@@ -50,7 +50,7 @@ export const UserContext = createContext();
 export const UserProvider = (props) => {
   const [authenticatedUser, setAuthenticatedUser] = useState();
   const [firstname, setFirstname] = useState();
-  const [lastname, setLastname] = useState();
+  const [photo, setPhoto] = useState();
   const [email, setEmail] = useState();
   const [favouriteCity, setFavouriteCity] = useState();
   const [avatar, setAvatar] = useState();
@@ -63,8 +63,8 @@ export const UserProvider = (props) => {
 
         firstname,
         setFirstname,
-        lastname,
-        setLastname,
+        photo,
+        setPhoto,
 
         email,
         setEmail,

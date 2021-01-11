@@ -1,5 +1,5 @@
 import axios from "axios";
-
+ 
 import { setAuthToken } from "../../global/functions";
 
 export const loadUser =  async () => {
@@ -154,3 +154,32 @@ if (response.status === 200) {
       };
   }
 }
+export const updateImage =  async (image) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  
+  try {
+    const response = await axios
+      .put("/api/user/image", image);
+    if (response.status === 201) {
+      localStorage.setItem("token", response.data.token);
+
+      return response;
+
+    }
+  } catch (error) {
+    console.log(error.response);
+    return error.response.data.message
+      ? error.response
+      : {
+        data: {
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        },
+      };
+  }
+};

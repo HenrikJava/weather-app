@@ -28,6 +28,7 @@ export const Routing = (props) => {
       if (loggedInUser.data.message.msgError===false) {
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);
+        user.setPhoto(`data:image/png;base64,${Buffer.from(loggedInUser.data.user.photo)}`);
         user.setAvatar(loggedInUser.data.user.avatar);
         user.setAuthenticatedUser(true);
         user.setFavouriteCity(

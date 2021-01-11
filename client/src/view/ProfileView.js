@@ -3,52 +3,94 @@ import { UserContext } from "../shared/global/provider/Provider";
 import { AppContext } from "../shared/global/provider/Provider";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
-import DeleteIcon from '@material-ui/icons/Delete';
-import {DeleteConfirmDialog} from '../components/deleteConfirmDialog/DeleteConfirmDialog'
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from '@material-ui/icons/Edit';
+import { DeleteConfirmDialog } from "../components/deleteConfirmDialog/DeleteConfirmDialog";
 import * as Yup from "yup";
-import { updateUser, loadUser } from "../shared/api/service/UserService";
+import {
+  updateUser,
+  loadUser,
+  updateImage,
+} from "../shared/api/service/UserService";
 import "./ProfileView.css";
 export const ProfileView = () => {
   const app = useContext(AppContext);
   const user = useContext(UserContext);
+  let photo;
   !user.authenticatedUser
-      ? app.setSignInDialogOpen(true)
-      : app.setSignInDialogOpen(false);
+    ? app.setSignInDialogOpen(true)
+    : app.setSignInDialogOpen(false);
 
   const [responseMessage, setResponseMessage] = useState();
+  const [hideImageInput, setHideImageInput] = useState(true)
+
+const loadUserAfterUpdate = async () => {
+  const loggedInUser = await loadUser();
+  if (loggedInUser.data.message.msgError === false) {
+    user.setFirstname(loggedInUser.data.user.firstname);
+    user.setEmail(loggedInUser.data.user.email);
+    user.setFavouriteCity(loggedInUser.data.user.favourite_city);
+    user.setPhoto(`data:image/png;base64,${Buffer.from(loggedInUser.data.user.photo)}`);
+    user.setAvatar(loggedInUser.data.user.avatar);
+    user.setAuthenticatedUser(true);
+  } else {
+    setResponseMessage(loggedInUser.data.message.msgBody);
+    user.setAuthenticatedUser(false);
+  }
+}
+
   const update = async (values) => {
     const response = await updateUser(values);
     setResponseMessage(response.data.message.msgBody);
+    loadUserAfterUpdate()
     
-   const  loggedInUser = await loadUser();
-
-     if (loggedInUser.data.message.msgError===false) {
-      user.setFirstname(loggedInUser.data.user.firstname);
-      user.setEmail(loggedInUser.data.user.email);
-      user.setFavouriteCity(loggedInUser.data.user.favourite_city);
-      user.setAvatar(loggedInUser.data.user.avatar);
-      user.setAuthenticatedUser(true);
-    } else{
-      setResponseMessage(loggedInUser.data.message.msgBody);
-      user.setAuthenticatedUser(false);
-
-    }
-
   };
   const openDeleteConfirm = () => {
-    app.setDeleteConfirmDialogOpen(true)
-  }
+    app.setDeleteConfirmDialogOpen(true);
+  };
+  const handlePhoto = async (event) => {
+    
+    photo = event.target.files[0];
+    let formData = new FormData();
 
+    formData.append("photo", photo);
+
+   const response =  await updateImage(formData);
+    setHideImageInput(true)
+    loadUserAfterUpdate()
+  };
   
-  
+
   return (
     <div className="profile-view">
-          <DeleteConfirmDialog></DeleteConfirmDialog>
+      <DeleteConfirmDialog></DeleteConfirmDialog>
 
       <Grid container id="main-grid">
         <Grid item xs={12} id="profile-image-cointainer">
-          <DeleteIcon fontSize="large" id="delete-icon" color="primary" onClick={openDeleteConfirm}></DeleteIcon>
-          <img src={user.avatar} alt="profile" className="profile-image" />
+          <DeleteIcon
+            fontSize="large"
+            id="delete-icon"
+            color="primary"
+            onClick={openDeleteConfirm}
+          ></DeleteIcon>
+          <span className="photo-wrapper"><img
+            src={user.avatar}
+            alt="profile"
+            className="profile-image"
+          />          <span className="edit-icon-wrapper"><EditIcon id="edit-icon" onClick={() => {setHideImageInput()} }/></span>
+          </span>
+          
+          <form /* onSubmit={handleUploadFile} */ encType="multipart/form-data">
+            <input
+            hidden={hideImageInput}
+            className="image-input"
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              name="photo"
+              onChange={handlePhoto}
+            ></input>
+            {/* <input type="submit" /> */}
+          </form>
         </Grid>
 
         <Formik
@@ -63,12 +105,9 @@ export const ProfileView = () => {
           }}
           onSubmit={(values, actions) => {
             update(values);
-            actions.resetForm()
+            actions.resetForm();
             actions.setFieldValue("favouriteCity", values.favouriteCity);
-
-
           }}
-          
           validationSchema={Yup.object().shape({
             email: Yup.string().email().required("Required"),
             firstname: Yup.string()
@@ -82,14 +121,16 @@ export const ProfileView = () => {
                 "Password must contain at least 8 characters, one uppercase, one number and one special case character"
               ),
             confirmPassword: Yup.string().when("password", {
-              is: val => val && val.length > 0,
+              is: (val) => val && val.length > 0,
               then: Yup.string()
-                .oneOf([Yup.ref("password")], "Both passwords need to be the same")
-                .required()
+                .oneOf(
+                  [Yup.ref("password")],
+                  "Both passwords need to be the same"
+                )
+                .required(),
             }),
             oldPassword: Yup.string().when("password", {
-              is: (password) =>  password && password.length > 0
-              ,
+              is: (password) => password && password.length > 0,
               then: Yup.string().required(
                 "Old password is required when entering a new one"
               ),
@@ -111,7 +152,6 @@ export const ProfileView = () => {
                 <Grid item xs={12} id="name-city">
                   <Grid item xs={5}>
                     <TextField
-                    
                       error={errors.firstname && touched.firstname}
                       id="profile-first"
                       label="First name"
@@ -134,7 +174,10 @@ export const ProfileView = () => {
                       id="profile-city"
                       label="Favourite city"
                       name="favouriteCity"
-                      value={values.favouriteCity.charAt(0).toUpperCase()+values.favouriteCity.slice(1).toLowerCase()}
+                      value={
+                        values.favouriteCity.charAt(0).toUpperCase() +
+                        values.favouriteCity.slice(1).toLowerCase()
+                      }
                       onChange={handleChange}
                       onBlur={handleBlur}
                       type="text"
@@ -169,7 +212,9 @@ export const ProfileView = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       helperText={
-                        errors.oldPassword && touched.oldPassword && errors.oldPassword
+                        errors.oldPassword &&
+                        touched.oldPassword &&
+                        errors.oldPassword
                       }
                       fullWidth
                     />
@@ -178,7 +223,7 @@ export const ProfileView = () => {
                 <Grid item xs={12} id="passwords">
                   <Grid item xs={5}>
                     <TextField
-                    id="profile-pass"
+                      id="profile-pass"
                       error={errors.password && touched.password}
                       label="New password"
                       type="password"
