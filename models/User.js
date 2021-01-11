@@ -23,6 +23,9 @@ const UserSchema = new mongoose.Schema({
     avatar: {
         type: String
     },
+    photo: {
+        type: Buffer
+    },
     fahrenheit_on: {
         type: Boolean
     }

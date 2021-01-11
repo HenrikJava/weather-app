@@ -9,7 +9,30 @@ const config = require("../../config/default.json");
 const { check, validationResult } = require("express-validator");
 
 const User = require("../../models/User");
+const multer = require('multer')
+const { v4: uuidv4} = require('uuid')
+let path = require('path');
+const fs= require('fs')
+const storage = multer.diskStorage({
+  
+  destination: function(req, file, cb) {
+    cb(null, 'tempImages')
+  },
+  filename: function(req, file, cb) {
+    cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname))
+  }
+})
 
+const fileFilter = (req, file, cb) => {
+  const validFiles = ['image/jpeg', 'image/jpg', 'image/png']
+
+  if (validFiles.includes(file.mimetype)) {
+    cb(null, true)
+  } else {
+    cb(null, false)
+  }
+}
+const saveOnDisk = multer({storage, fileFilter})
 router.post(
   "/",
   [
@@ -210,7 +233,68 @@ router.put(
     });
   }
 );
-
+router.put(
+  "/image",
+  [
+    auth,
+  saveOnDisk.single('photo')],
+  async (req, res) => {
+    const user = await User.findById(req.user.id, async (err) => {
+      if (err) {
+        res.status(500).json({
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        });
+      }
+    });
+    user.photo = fs.readFileSync(req.file.path)
+    
+    
+    fs.unlinkSync(req.file.path)
+    user.save((err) => {
+      if (err) {
+        res.status(500).json({
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        });
+      } else {
+        const payload = {
+          user: {
+            id: req.user.id,
+          },
+        };
+        //TODO change expires
+        jwt.sign(
+          payload,
+          config.jwtSecret,
+          { expiresIn: 60 * 60 * 24 * 100 },
+          (err, token) => {
+            if (err) {
+              res.status(500).json({
+                message: {
+                  msgBody: "Something wrong at server, please try again later.",
+                  msgError: true,
+                },
+              });
+            } else {
+              res.status(201).json({
+                token,
+                message: {
+                  msgBody: "Account successfully updated.",
+                  msgError: false,
+                },
+              });
+            }
+          }
+        );
+      }
+    });
+  }
+);
 //Only for development
 router.get("/", async (req, res) => {
   try {
