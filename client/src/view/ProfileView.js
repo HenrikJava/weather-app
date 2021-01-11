@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../shared/global/provider/Provider";
 import { AppContext } from "../shared/global/provider/Provider";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
 import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from "@material-ui/icons/Edit";
 import { DeleteConfirmDialog } from "../components/deleteConfirmDialog/DeleteConfirmDialog";
 import * as Yup from "yup";
 import {
@@ -17,49 +17,46 @@ export const ProfileView = () => {
   const app = useContext(AppContext);
   const user = useContext(UserContext);
   let photo;
-  !user.authenticatedUser
-    ? app.setSignInDialogOpen(true)
-    : app.setSignInDialogOpen(false);
-
+  
   const [responseMessage, setResponseMessage] = useState();
-  const [hideImageInput, setHideImageInput] = useState(true)
+  const [hideImageInput, setHideImageInput] = useState(true);
 
-const loadUserAfterUpdate = async () => {
-  const loggedInUser = await loadUser();
-  if (loggedInUser.data.message.msgError === false) {
-    user.setFirstname(loggedInUser.data.user.firstname);
-    user.setEmail(loggedInUser.data.user.email);
-    user.setFavouriteCity(loggedInUser.data.user.favourite_city);
-    user.setPhoto(`data:image/png;base64,${Buffer.from(loggedInUser.data.user.photo)}`);
-    user.setAvatar(loggedInUser.data.user.avatar);
-    user.setAuthenticatedUser(true);
-  } else {
-    setResponseMessage(loggedInUser.data.message.msgBody);
-    user.setAuthenticatedUser(false);
-  }
-}
-
+  const loadUserAfterUpdate = async () => {
+    const loggedInUser = await loadUser();
+    if (loggedInUser.data.message.msgError === false) {
+      user.setFirstname(loggedInUser.data.user.firstname);
+      user.setEmail(loggedInUser.data.user.email);
+      user.setFavouriteCity(loggedInUser.data.user.favourite_city);
+      user.setPhoto(
+        `data:image/png;base64,${loggedInUser.data.user.photo}`
+      );
+      user.setAvatar(loggedInUser.data.user.avatar);
+      user.setAuthenticatedUser(true);
+    } else {
+      setResponseMessage(loggedInUser.data.message.msgBody);
+      user.setAuthenticatedUser(false);
+    }
+  };
   const update = async (values) => {
     const response = await updateUser(values);
     setResponseMessage(response.data.message.msgBody);
-    loadUserAfterUpdate()
-    
+    loadUserAfterUpdate();
   };
   const openDeleteConfirm = () => {
     app.setDeleteConfirmDialogOpen(true);
   };
   const handlePhoto = async (event) => {
-    
     photo = event.target.files[0];
     let formData = new FormData();
 
     formData.append("photo", photo);
 
-   const response =  await updateImage(formData);
-    setHideImageInput(true)
-    loadUserAfterUpdate()
+    const response = await updateImage(formData);
+    setResponseMessage(response.data.message.msgBody);
+
+    setHideImageInput(true);
+    loadUserAfterUpdate();
   };
-  
 
   return (
     <div className="profile-view">
@@ -71,25 +68,34 @@ const loadUserAfterUpdate = async () => {
             fontSize="large"
             id="delete-icon"
             color="primary"
-            onClick={openDeleteConfirm}
+            onClick={() => {openDeleteConfirm()}}
           ></DeleteIcon>
-          <span className="photo-wrapper"><img
-            src={user.avatar}
-            alt="profile"
-            className="profile-image"
-          />          <span className="edit-icon-wrapper"><EditIcon id="edit-icon" onClick={() => {setHideImageInput()} }/></span>
+          <span className="photo-wrapper">
+            <img
+              src={user.photo ? user.photo : user.avatar}
+              alt="profile"
+              className="profile-image"
+            />{" "}
+            <span className="edit-icon-wrapper">
+              <EditIcon
+                id="edit-icon"
+                onClick={() => {
+                  setHideImageInput();
+                }}
+              />
+            </span>
           </span>
-          
-          <form /* onSubmit={handleUploadFile} */ encType="multipart/form-data">
+
+          <form encType="multipart/form-data">
             <input
-            hidden={hideImageInput}
-            className="image-input"
+              hidden={hideImageInput}
+              className="image-input"
               type="file"
               accept=".png, .jpg, .jpeg"
               name="photo"
               onChange={handlePhoto}
             ></input>
-            {/* <input type="submit" /> */}
+            
           </form>
         </Grid>
 
@@ -259,7 +265,7 @@ const loadUserAfterUpdate = async () => {
                 </Grid>
 
                 <Grid item xs={12} id="profile-button">
-                  <p>{responseMessage}</p>
+                  <p className={responseMessage === "Account successfully updated." ? "update-success" : "update-not-success"}>{responseMessage}</p>
 
                   <Button type="submit" variant="contained" color="primary">
                     Update profile

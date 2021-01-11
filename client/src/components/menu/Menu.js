@@ -23,7 +23,7 @@ export const Menu = () => {
     localStorage.removeItem("token");
     setAuthToken();
     user.setFirstname();
-    user.setLastname();
+    user.setPhoto();
     user.setEmail();
     user.setFavouriteCity();
     user.setAvatar();
@@ -44,7 +44,7 @@ export const Menu = () => {
           <span className="username">
             <p>{user.firstname}</p>
           </span>
-          <img src={user.avatar} alt="profile" className="menu-image" />
+          <img src={user.photo ? user.photo : user.avatar} alt="profile" className="menu-image" />
         </div>
         <div
           onClick={() => app.setMenuOpen(!app.menuOpen)}
