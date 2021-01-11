@@ -110,7 +110,17 @@ export const DifferentTimes = () => {
 
   if (specificTimes.length === 0) {
     specificTimes.push(weatherAtCurrentDay[0]);
-  }
+    if (specificTimes[0].snow) {
+      specificTimes[0].precipitation = Number(specificTimes[0].snow["3h"]);
+
+    } else if (specificTimes[0].rain) {
+
+      specificTimes[0].precipitation = Number(specificTimes[0].rain["3h"]);
+    } else {
+
+      specificTimes[0].precipitation = 0;
+      
+    }  }
 
  
 
