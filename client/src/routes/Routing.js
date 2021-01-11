@@ -26,24 +26,29 @@ export const Routing = (props) => {
       const loggedInUser = await loadUser();
 
       if (loggedInUser.data.message.msgError===false) {
-        user.setFirstname(loggedInUser.data.user.firstname);
-        user.setEmail(loggedInUser.data.user.email);
-        user.setPhoto(`data:image/png;base64,${Buffer.from(loggedInUser.data.user.photo)}`);
-        user.setAvatar(loggedInUser.data.user.avatar);
-        user.setAuthenticatedUser(true);
-        user.setFavouriteCity(
-          loggedInUser.data.user.favourite_city
-            ? loggedInUser.data.user.favourite_city
-            : ""
-        );
+        
+
         app.setFahrenheitOn(
           loggedInUser.data.user.fahrenheit_on
             ? loggedInUser.data.user.fahrenheit_on
             : false
         );
+        user.setFirstname(loggedInUser.data.user.firstname);
+        user.setEmail(loggedInUser.data.user.email);
+        user.setPhoto(loggedInUser.data.user.photo ? `data:image/png;base64,${loggedInUser.data.user.photo}` : '');
+        user.setAvatar(loggedInUser.data.user.avatar);
+                user.setFavouriteCity(
+          loggedInUser.data.user.favourite_city
+            ? loggedInUser.data.user.favourite_city
+            : ""
+        );
+        
+        user.setAuthenticatedUser(true);
+        
+
       } else {
         user.setAuthenticatedUser(false);
-
+        app.setSignInDialogOpen(true)
       }
     };
     
