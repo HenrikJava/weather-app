@@ -1,6 +1,7 @@
-
-const RoutingPath = {homeView: "/",
+const RoutingPath = {
+  homeView: "/",
   profileView: "/profile",
   settingsView: "/settings",
-aboutView: "/about"}
-export default RoutingPath 
+  aboutView: "/about",
+};
+export default RoutingPath;

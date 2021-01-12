@@ -1,7 +1,7 @@
 .about-wrapper {
     height:92%
 }
-.main-about {
+.about-main {
     margin-top: 0%;
     margin-bottom: 0%;
     height: 85%;
@@ -65,7 +65,7 @@
     .about-wrapper {
         height:92%
     }
-    .main-about {
+    .about-main {
         flex-direction: column;
     }
     .image-wrapper {
@@ -95,7 +95,7 @@
     .about-wrapper {
         height:90%
     }
-    .main-about {
+    .about-main {
         height: 91%;
         flex-direction: column;
     }

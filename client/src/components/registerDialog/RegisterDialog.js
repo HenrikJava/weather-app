@@ -7,7 +7,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { registerUser, loadUser } from "../../shared/api/service/UserService";
-
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { UserContext } from "../../shared/global/provider/Provider";
@@ -16,19 +15,14 @@ export const RegisterDialog = () => {
   const [errorMessage, setErrorMessage] = useState();
   const app = useContext(AppContext);
   const user = useContext(UserContext);
-  const handleClose = () => {
-    app.setRegisterDialogOpen(false);
-    setErrorMessage()
-
-  };
-
+  
   const register = async (values) => {
     const response = await registerUser(values);
     if (response.data.message.msgError === true) {
       setErrorMessage(response.data.message.msgBody);
     } else {
       const loggedInUser = await loadUser();
-      if (loggedInUser.data.message.msgError===false) {
+      if (loggedInUser.data.message.msgError === false) {
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
@@ -38,27 +32,37 @@ export const RegisterDialog = () => {
       } else {
         setErrorMessage(loggedInUser.data.message.msgBody);
       }
-      
     }
   };
 
+  const handleClose = () => {
+    history.push("/");
+    app.setRegisterDialogOpen(false);
+    setErrorMessage();
+  };
+
   const openSignInDialog = () => {
-    handleClose();
+    app.setRegisterDialogOpen(false);
+    setErrorMessage();
     app.setSignInDialogOpen(true);
   };
 
   return (
-    <Dialog open={app.registerDialogOpen} onClose={handleClose} id="register-dialog-container">
-      <DialogTitle id="form-dialog-title">Register</DialogTitle>
+    <Dialog
+      open={app.registerDialogOpen}
+      onClose={handleClose}
+      id="register-dialog-container"
+    >
+      <DialogTitle id="dialog-title">Register</DialogTitle>
       <DialogContent>
         <DialogContentText id="user-friendly-text">
           Please enter the fields to create an account.
         </DialogContentText>
-        <DialogContentText id="errorMessage">{errorMessage}</DialogContentText>
+        <DialogContentText id="error-message">{errorMessage}</DialogContentText>
         <Formik
           initialValues={{
             firstname: "",
-           
+
             email: "",
             password: "",
             confirmPassword: "",
@@ -79,10 +83,9 @@ export const RegisterDialog = () => {
                 /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
                 "Password must contain at least 8 characters, one uppercase, one number and one special case character"
               ),
-            confirmPassword: Yup.string().required("Required").oneOf(
-              [Yup.ref("password"), null],
-              "Passwords must match"
-            ),
+            confirmPassword: Yup.string()
+              .required("Required")
+              .oneOf([Yup.ref("password"), null], "Passwords must match"),
           })}
         >
           {(props) => {
@@ -112,7 +115,7 @@ export const RegisterDialog = () => {
                   type="text"
                   fullWidth
                 />
-                
+
                 <TextField
                   error={errors.email && touched.email}
                   margin="dense"
@@ -170,7 +173,7 @@ export const RegisterDialog = () => {
                   fullWidth
                 />
 
-                <DialogActions id="dialog-buttons">
+                <DialogActions id="dialog-button">
                   <Button onClick={handleClose} color="primary">
                     Cancel
                   </Button>

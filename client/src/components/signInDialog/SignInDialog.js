@@ -13,63 +13,59 @@ import { useHistory } from "react-router-dom";
 export const SignInDialog = () => {
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState();
-
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const user = useContext(UserContext);
-  const app = useContext(
-    AppContext
-  );
+  const app = useContext(AppContext);
+  
   const login = async () => {
-
-     const response = await loginUser(email,password);
-     if (response.data.message.msgError===true) {
+    const response = await loginUser(email, password);
+    if (response.data.message.msgError === true) {
       setErrorMessage(response.data.message.msgBody);
-
-     } else {
+    } else {
       const loggedInUser = await loadUser();
-
-      if (loggedInUser.data.message.msgError===false) {
+      if (loggedInUser.data.message.msgError === false) {
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
         user.setAvatar(loggedInUser.data.user.avatar);
-        user.setPhoto(`data:image/png;base64,${loggedInUser.data.user.photo}`);
-                user.setAuthenticatedUser(true);
+        if (loggedInUser.data.user.photo) {
+          user.setPhoto(
+            `data:image/png;base64,${loggedInUser.data.user.photo}`
+          );
+        }
+        user.setAuthenticatedUser(true);
         handleClose();
- 
       } else {
-       setErrorMessage(loggedInUser.data.message.msgBody);
- 
+        setErrorMessage(loggedInUser.data.message.msgBody);
       }
-     }
-
-     
-           
+    }
   };
 
   const handleClose = () => {
     history.push("/");
     app.setSignInDialogOpen(false);
-    setErrorMessage()
+    setErrorMessage();
   };
 
   const openRegisterDialog = () => {
-    handleClose();
+    app.setSignInDialogOpen(false);
+    setErrorMessage();
     app.setRegisterDialogOpen(true);
-
   };
 
   return (
-    <Dialog open={app.signInDialogOpen} onClose={handleClose} id="sign-in-dialog-container">
-      <DialogTitle id="form-dialog-title">Log in</DialogTitle>
+    <Dialog
+      open={app.signInDialogOpen}
+      onClose={handleClose}
+      id="sign-in-dialog-wrapper"
+    >
+      <DialogTitle id="dialog-title">Log in</DialogTitle>
       <DialogContent>
         <DialogContentText id="user-friendly-text">
           Please enter your email and password to log in.
         </DialogContentText>
-        <DialogContentText id="errorMessage">
-          {errorMessage}
-        </DialogContentText>
+        <DialogContentText id="error-message">{errorMessage}</DialogContentText>
         <TextField
           autoFocus
           margin="dense"
@@ -88,7 +84,7 @@ export const SignInDialog = () => {
           onChange={(event) => setPassword(event.target.value)}
         />
       </DialogContent>
-      <DialogActions id="dialog-buttons">
+      <DialogActions id="dialog-button">
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>

@@ -36,7 +36,9 @@ export const HomeView = () => {
         user.setEmail(loggedInUser.data.user.email);
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
         user.setAvatar(loggedInUser.data.user.avatar);
-        user.setPhoto(`data:image/png;base64,${Buffer.from(loggedInUser.data.user.photo)}`);        user.setAuthenticatedUser(true);
+        if (loggedInUser.data.user.photo) {
+          user.setPhoto(`data:image/png;base64,${loggedInUser.data.user.photo}`);     
+        }
         user.setAuthenticatedUser(true);      
         searchCity(
           loggedInUser.data.user.favourite_city

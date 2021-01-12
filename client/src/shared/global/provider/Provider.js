@@ -6,15 +6,13 @@ export const AppProvider = (props) => {
   const [signInDialogOpen, setSignInDialogOpen] = useState(false);
   const [deleteConfirmDialogOpen, setDeleteConfirmDialogOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState();
-
-  const [city, setCity] = useState("stockholm");
+  const [city, setCity] = useState("Göteborg");
   const [noCityText, setnoCityText] = useState("");
   const [displayCurrent, setDisplayCurrent] = useState(true);
   const [isAfternoon, setIsAfternoon] = useState(true);
   const [weekday, setWeekday] = useState();
   const [fahrenheitOn, setFahrenheitOn] = useState(false);
-  const [sloth,
-    setSloth] = useState('defaultSloth')
+  const [sloth, setSloth] = useState("defaultSloth");
   return (
     <AppContext.Provider
       value={{
@@ -24,7 +22,8 @@ export const AppProvider = (props) => {
         setSignInDialogOpen,
         deleteConfirmDialogOpen,
         setDeleteConfirmDialogOpen,
-        menuOpen, setMenuOpen,
+        menuOpen,
+        setMenuOpen,
         city,
         setCity,
         noCityText,
@@ -38,7 +37,7 @@ export const AppProvider = (props) => {
         fahrenheitOn,
         setFahrenheitOn,
         sloth,
-        setSloth
+        setSloth,
       }}
     >
       {props.children}
@@ -60,17 +59,14 @@ export const UserProvider = (props) => {
       value={{
         authenticatedUser,
         setAuthenticatedUser,
-
         firstname,
         setFirstname,
         photo,
         setPhoto,
-
         email,
         setEmail,
         favouriteCity,
         setFavouriteCity,
-
         avatar,
         setAvatar,
       }}
@@ -84,7 +80,7 @@ export const WeatherProvider = (props) => {
   const [weather, setWeather] = useState();
 
   return (
-    <WeatherContext.Provider value={{weather, setWeather}}>
+    <WeatherContext.Provider value={{ weather, setWeather }}>
       {props.children}
     </WeatherContext.Provider>
   );

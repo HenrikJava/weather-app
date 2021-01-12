@@ -10,16 +10,19 @@ import * as Yup from "yup";
 import {
   updateUser,
   loadUser,
-  updateImage,
+  updateUserPhoto,
 } from "../shared/api/service/UserService";
 import "./ProfileView.css";
 export const ProfileView = () => {
   const app = useContext(AppContext);
   const user = useContext(UserContext);
-  let photo;
-  
+// If user not logged the signin dialog should display
+  !user.authenticatedUser
+    ? app.setSignInDialogOpen(true)
+    : app.setSignInDialogOpen(false);
+
   const [responseMessage, setResponseMessage] = useState();
-  const [hideImageInput, setHideImageInput] = useState(true);
+  const [hidePhotoInput, setHidePhotoInput] = useState(true);
 
   const loadUserAfterUpdate = async () => {
     const loggedInUser = await loadUser();
@@ -27,9 +30,9 @@ export const ProfileView = () => {
       user.setFirstname(loggedInUser.data.user.firstname);
       user.setEmail(loggedInUser.data.user.email);
       user.setFavouriteCity(loggedInUser.data.user.favourite_city);
-      user.setPhoto(
-        `data:image/png;base64,${loggedInUser.data.user.photo}`
-      );
+      if (loggedInUser.data.user.photo) {
+        user.setPhoto(`data:image/png;base64,${loggedInUser.data.user.photo}`);
+      }
       user.setAvatar(loggedInUser.data.user.avatar);
       user.setAuthenticatedUser(true);
     } else {
@@ -45,42 +48,37 @@ export const ProfileView = () => {
   const openDeleteConfirm = () => {
     app.setDeleteConfirmDialogOpen(true);
   };
-  const handlePhoto = async (event) => {
-    photo = event.target.files[0];
+  const uploadPhoto = async (event) => {
     let formData = new FormData();
-
-    formData.append("photo", photo);
-
-    const response = await updateImage(formData);
+    formData.append("photo", event.target.files[0]);
+    const response = await updateUserPhoto(formData);
     setResponseMessage(response.data.message.msgBody);
-
-    setHideImageInput(true);
+    setHidePhotoInput(true);
     loadUserAfterUpdate();
   };
 
   return (
     <div className="profile-view">
       <DeleteConfirmDialog></DeleteConfirmDialog>
-
-      <Grid container id="main-grid">
-        <Grid item xs={12} id="profile-image-cointainer">
+      <Grid container id="profile-wrapper">
+        <Grid item xs={12} id="profile-upper-wrapper">
           <DeleteIcon
-            fontSize="large"
             id="delete-icon"
-            color="primary"
-            onClick={() => {openDeleteConfirm()}}
+            onClick={() => {
+              openDeleteConfirm();
+            }}
           ></DeleteIcon>
           <span className="photo-wrapper">
             <img
               src={user.photo ? user.photo : user.avatar}
               alt="profile"
-              className="profile-image"
+              className="profile-photo"
             />{" "}
             <span className="edit-icon-wrapper">
               <EditIcon
                 id="edit-icon"
                 onClick={() => {
-                  setHideImageInput();
+                  setHidePhotoInput();
                 }}
               />
             </span>
@@ -88,21 +86,19 @@ export const ProfileView = () => {
 
           <form encType="multipart/form-data">
             <input
-              hidden={hideImageInput}
-              className="image-input"
+              hidden={hidePhotoInput}
+              className="photo-input"
               type="file"
               accept=".png, .jpg, .jpeg"
               name="photo"
-              onChange={handlePhoto}
+              onChange={uploadPhoto}
             ></input>
-            
           </form>
         </Grid>
 
         <Formik
           initialValues={{
             firstname: user.firstname,
-
             email: user.email,
             favouriteCity: user.favouriteCity ? user.favouriteCity : "",
             oldPassword: "",
@@ -154,7 +150,7 @@ export const ProfileView = () => {
               handleSubmit,
             } = props;
             return (
-              <form className="profile-form" onSubmit={handleSubmit}>
+              <form className="profile-lower-wrapper" onSubmit={handleSubmit}>
                 <Grid item xs={12} id="name-city">
                   <Grid item xs={5}>
                     <TextField
@@ -191,7 +187,7 @@ export const ProfileView = () => {
                     />
                   </Grid>
                 </Grid>
-                <Grid item xs={12} id="mail-old">
+                <Grid item xs={12} id="email-old">
                   <Grid item xs={5}>
                     <TextField
                       error={errors.email && touched.email}
@@ -265,9 +261,17 @@ export const ProfileView = () => {
                 </Grid>
 
                 <Grid item xs={12} id="profile-button">
-                  <p className={responseMessage === "Account successfully updated." ? "update-success" : "update-not-success"}>{responseMessage}</p>
+                  <p
+                    className={
+                      responseMessage === "Account successfully updated."
+                        ? "update-success"
+                        : "update-not-success"
+                    }
+                  >
+                    {responseMessage}
+                  </p>
 
-                  <Button type="submit" variant="contained" color="primary">
+                  <Button type="submit" >
                     Update profile
                   </Button>
                 </Grid>

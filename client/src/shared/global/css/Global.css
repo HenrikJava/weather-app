@@ -20,7 +20,7 @@ html,
   height: 45%;
   width: 30%;
 }
-#sign-in-dialog-container > div > div {
+#sign-in-dialog-wrapper > div > div {
   height: 30%;
   width: 30%;
 }
@@ -31,7 +31,7 @@ html,
 .link-between-dialogs:hover {
   color: #3f51b5;
 }
-#errorMessage {
+#error-message {
   color:red
 }
 @media screen and (max-width: 1400px) and  (min-height: 500px)  {
@@ -45,12 +45,12 @@ html,
     height: 75%;
     width: 70%;
   }
-  #sign-in-dialog-container > div > div {
+  #sign-in-dialog-wrapper > div > div {
     height: 50%;
     width: 85%;
   }
   
-  #form-dialog-title > h2 {
+  #dialog-title > h2 {
     font-size: 3vw;
   }
   #user-friendly-text  {
@@ -68,11 +68,11 @@ html,
     font-size: 2vw;
   }
 
-  #dialog-buttons > button {
+  #dialog-button > button {
     width: 15vw;
     font-size: 2vw;
   }
-  #errorMessage {
+  #error-message {
     font-size: 2vw;
   }
 }
@@ -82,14 +82,14 @@ html,
     height: 60%;
     width: 70%;
   }
-  #sign-in-dialog-container > div > div {
+  #sign-in-dialog-wrapper > div > div {
     height: 40%;
     width: 80%;
   }
-  #form-dialog-title {
+  #dialog-title {
     text-align: center;
   }
-  #form-dialog-title > h2 {
+  #dialog-title > h2 {
     font-size: 5vw;
   }
   #user-friendly-text  {
@@ -107,11 +107,11 @@ html,
     font-size: 3vw;
   }
 
-  #dialog-buttons > button {
+  #dialog-button > button {
     width: 15vw;
     font-size: 2vw;
   }
-  #errorMessage {
+  #error-message {
     font-size: 3vw;
   }
 }
@@ -120,12 +120,12 @@ html,
     height: 90%;
     width: 50%;
   }
-  #sign-in-dialog-container > div > div {
+  #sign-in-dialog-wrapper > div > div {
     height: 85%;
     width: 50%;
   }
   
-  #form-dialog-title > h2 {
+  #dialog-title > h2 {
     font-size: 3vw;
   }
   #user-friendly-text  {
@@ -143,11 +143,11 @@ html,
     font-size: 2vw;
   }
 
-  #dialog-buttons > button {
+  #dialog-button > button {
     width: 15vw;
     font-size: 2vw;
   }
-  #errorMessage {
+  #error-message {
     font-size: 2vw;
   }
 }
@@ -166,14 +166,14 @@ html,
   height: 90%;
   width: 80%;
 }
-#sign-in-dialog-container > div > div {
+#sign-in-dialog-wrapper > div > div {
   height: 70%;
   width: 90%;
 }
-#form-dialog-title {
+#dialog-title {
   text-align: center;
 }
-  #form-dialog-title > h2 {
+  #dialog-title > h2 {
     font-size: 9vw;
   }
   #user-friendly-text  {
@@ -191,11 +191,11 @@ html,
     font-size: 5vw;
   }
 
-  #dialog-buttons > button {
+  #dialog-button > button {
     width: 22vw;
     font-size: 4vw;
   }
-  #errorMessage {
+  #error-message {
     font-size: 6vw;
   }
 }

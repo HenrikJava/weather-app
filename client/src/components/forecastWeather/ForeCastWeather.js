@@ -62,8 +62,7 @@ isAfternoon = false      }
         ></DailyWeatherOverview>
       ))}
       <Button
-        type="submit"
-        variant="contained"
+       
         id="back-to-top-button"
         onClick={() => {
           document.documentElement.scrollTop = 0;

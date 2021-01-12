@@ -1,12 +1,12 @@
-#main-grid {
+#profile-wrapper {
   width: 50%;
   margin: auto;
-  height: 50%;
-
-  padding-top: 5%;
+  height: 100%;
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
 
-.profile-form {
+.profile-lower-wrapper {
   width: 100%;
   background-color: gainsboro;
   margin-top: 3%;
@@ -14,11 +14,11 @@
   border-radius: 2%;
 }
 #passwords,
-#mail-old,
+#email-old,
 #name-city {
   display: flex;
 }
-#profile-image-cointainer,
+#profile-upper-wrapper,
 #profile-button {
   display: grid;
   text-align: center;
@@ -35,7 +35,7 @@
 }
 #delete-icon {
   position: absolute;
-
+  font-size: 2vw;
   color: rgb(143, 138, 138);
 }
 .photo-wrapper {
@@ -43,7 +43,7 @@
   display: flex;
   justify-content: center;
 }
-.profile-image {
+.profile-photo {
   width: 24vw;
   border-radius: 100%;
   display: flex;
@@ -52,7 +52,7 @@
 .edit-icon-wrapper {
   margin-top: 4%;
   position: absolute;
-  margin-left: 20%;
+  margin-left: 9%;
   width: 1.6vw;
   height: 1.6vw;
   background-color: gainsboro;
@@ -64,7 +64,7 @@
 #edit-icon {
   color: black;
 }
-.image-input {
+.photo-input {
   margin-top: 1%;
   text-align-last: center;
 }
@@ -94,16 +94,16 @@
   color: green;
 }
 @media screen and (max-width: 1400px) and (min-height: 500px) {
-  #main-grid {
+  #profile-wrapper {
     width: 80%;
     margin: auto;
     height: 100%;
 
     padding-top: 1%;
-    margin-bottom: 3%;
+    padding-bottom: 3%;
   }
 
-  .profile-image {
+  .profile-photo {
     width: 30vw;
     height: 30vw;
   }
@@ -112,18 +112,18 @@
     width: 3.6vw;
     height: 3.6vw;
   }
-  .profile-form {
+  .profile-lower-wrapper {
     height: 33%;
     margin-top: 0;
   }
   #passwords,
-  #mail-old,
+  #email-old,
   #name-city {
     display: flex;
   }
 
   #passwords > div,
-  #mail-old > div,
+  #email-old > div,
   #name-city > div {
     max-width: 100%;
     margin: 0.5% auto;
@@ -153,19 +153,18 @@
   }
 }
 @media screen and (max-width: 1024px) and (min-height: 1024px) {
-  #main-grid {
+  #profile-wrapper {
     width: 60%;
     margin: auto;
     height: 100%;
 
     padding-top: 1%;
-    margin-bottom: 3%;
+    padding-bottom: 3%;
   }
 
-  #profile-image-cointainer {
-  }
+  
 
-  .profile-image {
+  .profile-photo {
     width: 35vw;
     height: 35vw;
   }
@@ -174,17 +173,17 @@
     width: 3.6vw;
     height: 3.6vw;
   }
-  .profile-form {
+  .profile-lower-wrapper {
     height: 60%;
   }
   #passwords,
-  #mail-old,
+  #email-old,
   #name-city {
     display: block;
   }
 
   #passwords > div,
-  #mail-old > div,
+  #email-old > div,
   #name-city > div {
     max-width: 100%;
     margin: 3% auto;
@@ -211,7 +210,7 @@
   }
 }
 @media screen and (max-width: 512px) {
-  #main-grid {
+  #profile-wrapper {
     width: 96%;
     margin: auto;
     height: 100%;
@@ -221,24 +220,24 @@
   #delete-icon {
     font-size: 8vw;
   }
-  #profile-image-cointainer {
+  #profile-upper-wrapper {
     height: 17%;
   }
 
-  .profile-image {
+  .profile-photo {
     width: 28%;
   }
 
-  .profile-form {
+  .profile-lower-wrapper {
     height: 73%;
   }
   #passwords,
-  #mail-old,
+  #email-old,
   #name-city {
     display: block;
   }
   #passwords > div,
-  #mail-old > div,
+  #email-old > div,
   #name-city > div {
     max-width: 90%;
     margin: 1% auto;
@@ -265,113 +264,112 @@
   }
 }
 @media screen and (max-width: 736px) and (max-height: 414px) {
+  #profile-wrapper {
+    width: 50%;
+    margin: auto;
+    height: 100%;
 
+    padding-top: 2%;
+  }
 
-#main-grid {
-  width: 50%;
-  margin: auto;
-  height: 100%;
+  .profile-lower-wrapper {
+    width: 100%;
+    background-color: gainsboro;
+    margin-top: 3%;
+    padding: 3%;
+    border-radius: 2%;
+    height: 40%;
+  }
+  #passwords,
+  #email-old,
+  #name-city {
+    display: flex;
+  }
+  #passwords > div > div > div,
+  #email-old > div > div > div,
+  #name-city > div > div > div {
+    margin-top: 0;
+  }
+  #profile-upper-wrapper {
+    display: grid;
+    text-align: center;
+    height: 46%;
+  }
+  #profile-button {
+    height: 2vw;
+    width: 22vw;
+    margin: auto;
+  }
+  #profile-button > button {
+    color: black;
+    border: 1px solid black;
+    background-color: rgb(143, 138, 138);
+    margin: auto;
+    margin-top: 2%;
+    font-size: 1.6vw;
+  }
+  #profile-button > button:hover {
+    background-color: gainsboro;
+  }
+  #delete-icon {
+    position: absolute;
 
-  padding-top: 2%;
+    color: rgb(143, 138, 138);
+  }
+  .photo-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .profile-photo {
+    width: 24vw;
+    border-radius: 100%;
+    display: flex;
+    height: 24vw;
+  }
+  .edit-icon-wrapper {
+    margin-top: 4%;
+    position: absolute;
+    margin-left: 20%;
+    width: 3.6vw;
+    height: 3.6vw;
+    background-color: gainsboro;
+    border-radius: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #edit-icon {
+    color: black;
+    font-size: 3vw;
+  }
+  .photo-input {
+    margin-top: 1%;
+    text-align-last: center;
+  }
+  #profile-first-label,
+  #profile-city-label,
+  #profile-email-label,
+  #profile-old-label,
+  #profile-pass-label,
+  #profile-confirm-label {
+    font-size: 1vw;
+  }
+  #profile-first,
+  #profile-city,
+  #profile-email,
+  #profile-old,
+  #profile-pass,
+  #profile-confirm {
+    font-size: 1.4vw;
+  }
+  .align-right {
+    text-align: right;
+  }
+  .update-not-success {
+    color: red;
+  }
+  .update-success {
+    color: green;
+  }
 }
-
-.profile-form {
-  width: 100%;
-  background-color: gainsboro;
-  margin-top: 3%;
-  padding: 3%;
-  border-radius: 2%;
-  height: 40%;
-}
-#passwords,
-#mail-old,
-#name-city {
-  display: flex;
-}
-#passwords > div > div > div,
-#mail-old  > div > div > div,
-#name-city > div > div > div {
-  margin-top: 0;
-}
-#profile-image-cointainer{
-  display: grid;
-  text-align: center;
-  height: 46%;
-}
-#profile-button {
-  height: 2vw;
-  width: 22vw;
-  margin: auto;
-}
-#profile-button > button {
-  color: black;
-  border: 1px solid black;
-  background-color: rgb(143, 138, 138);
-  margin: auto;
-  margin-top: 2%;
-  font-size: 1.6vw;
-}
-#profile-button > button:hover {
-  background-color: gainsboro;
-}
-#delete-icon {
-  position: absolute;
-
-  color: rgb(143, 138, 138);
-}
-.photo-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.profile-image {
-  width: 24vw;
-  border-radius: 100%;
-  display: flex;
-  height: 24vw;
-}
-.edit-icon-wrapper {
-  margin-top: 4%;
-  position: absolute;
-  margin-left: 20%;
-  width: 3.6vw;
-  height: 3.6vw;
-  background-color: gainsboro;
-  border-radius: 100%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-#edit-icon {
-  color: black;
-  font-size: 3vw;
-}
-.image-input {
-  margin-top: 1%;
-  text-align-last: center;
-}
-#profile-first-label,
-#profile-city-label,
-#profile-email-label,
-#profile-old-label,
-#profile-pass-label,
-#profile-confirm-label {
-  font-size: 1vw;
-}
-#profile-first,
-#profile-city,
-#profile-email,
-#profile-old,
-#profile-pass,
-#profile-confirm {
-  font-size: 1.4vw;
-}
-.align-right {
-  text-align: right;
-}
-.update-not-success {
-  color: red;
-}
-.update-success {
-  color: green;
-}}

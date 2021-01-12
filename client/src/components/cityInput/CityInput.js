@@ -49,7 +49,7 @@ export const CityInput = () => {
           }
         />
 
-        <Button disabled={city.length<1}type="submit" variant="contained" id="city-button">
+        <Button disabled={city.length<1} type="submit" id="city-button">
           Search
         </Button>
       </form>

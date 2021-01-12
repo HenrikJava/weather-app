@@ -2,64 +2,61 @@
   display: flex;
   background-color: rgb(143, 138, 138);
   height: 8%;
-  color: black
+  color: black;
 }
-.navbar-menu {
-  width: 75%;
-}
-.navbar-logo {
+.navbar-logo-wrapper {
   display: flex;
   height: 100%;
   align-items: center;
   width: 25%;
 }
-.navbar-name {
+.navbar-logo-name {
   cursor: pointer;
   font-size: 3vw;
 }
-.navbar-icon {
+.navbar-logo-icon {
   width: 5vw;
 }
-@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+.navbar-menu {
+  width: 75%;
+}
+@media screen and (max-width: 1400px) and (min-height: 500px) {
   .navbar-wrapper {
-    
     height: 11%;
+  }
+  .navbar-logo-wrapper {
+    width: 40%;
+  }
+  .navbar-logo-name {
+    cursor: pointer;
+    font-size: 5vw;
+  }
+  .navbar-logo-icon {
+    width: 7vw;
   }
   .navbar-menu {
     width: 60%;
   }
-  .navbar-logo {
-   
-    width: 40%;
-  }
-  .navbar-name {
-    cursor: pointer;
-    font-size: 5vw;
-  }
-  .navbar-icon {
-    width: 7vw;
-  }
 }
-@media screen and (max-width: 1024px) and  (min-height: 1020px)  {
+@media screen and (max-width: 1024px) and (min-height: 1020px) {
   .navbar-wrapper {
-    
     height: 8%;
   }
-  .navbar-menu {
-    width: 30%;
-  }
-  .navbar-logo {
+  .navbar-logo-wrapper {
     display: flex;
     height: 100%;
     align-items: center;
     width: 70%;
   }
-  .navbar-name {
+  .navbar-logo-name {
     cursor: pointer;
     font-size: 6vw;
   }
-  .navbar-icon {
+  .navbar-logo-icon {
     width: 11vw;
+  }
+  .navbar-menu {
+    width: 30%;
   }
 }
 
@@ -71,22 +68,22 @@
     z-index: 1;
     top: 0;
   }
-  .navbar-menu {
-    width: 35%;
-  }
-  .navbar-logo {
+  .navbar-logo-wrapper {
     display: flex;
     height: 100%;
     align-items: center;
     width: 65%;
   }
-  .navbar-name {
+  .navbar-logo-name {
     cursor: pointer;
 
     font-size: 6vw;
     margin-left: -2%;
   }
-  .navbar-icon {
+  .navbar-logo-icon {
     width: 15vw;
+  }
+  .navbar-menu {
+    width: 35%;
   }
 }

@@ -28,22 +28,26 @@ export const Menu = () => {
     user.setFavouriteCity();
     user.setAvatar();
     user.setAuthenticatedUser();
-
     history.push(RoutingPath.homeView);
   };
+  //If screensize is smaller than 960 the menu will show
   const showMenu = () => {
     if (window.innerWidth >= 960) {
       app.setMenuOpen(false);
     }
   };
+  // A listener which calls the function showMenu everytime user resizes screen
   window.addEventListener("resize", showMenu);
-  const getMenu = () => {
-    return user.authenticatedUser ? (
+  
+  return (
+    <>
+     {user.authenticatedUser ? (
       <div className="menu-container">
         <div className="username-image">
           <span className="username">
             <p>{user.firstname}</p>
           </span>
+          {/* If user has uploaded photo show this. Else use the generated gravatar */}
           <img src={user.photo ? user.photo : user.avatar} alt="profile" className="menu-image" />
         </div>
         <div
@@ -153,11 +157,7 @@ export const Menu = () => {
           </div>
         </div>
       </div>
-    );
-  };
-  return (
-    <>
-      {getMenu()}
+    )}
       <SignInDialog></SignInDialog>
       <RegisterDialog></RegisterDialog>
     </>

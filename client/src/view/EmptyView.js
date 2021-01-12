@@ -7,6 +7,8 @@ export const EmptyView = () => {
   );
 
   useEffect(() => {
+    /*Empty view is used for both profilepage when not signed in and
+    as an '404' page. And the profilepage should have the signin dialog*/
     localStorage.getItem('token')? app.setSignInDialogOpen(false) :
     app.setSignInDialogOpen(true);
   },[app]);

@@ -2,14 +2,14 @@
   font-size: 3vw;
   text-align: center;
 }
-#settings-box {
+#settings-wrapper {
   height: 20vw;
   width: 25vw;
   margin: auto;
   padding-top: 10%;
 }
 
-#temp-name {
+#settings-field {
   font-size: 1.5vw;
   margin: 0;
   height: 2vw;
@@ -29,17 +29,29 @@
 #switch > span > span > span {
   color:white;
 }
+.update-not-success {
+  color: red;
+}
+.update-success {
+  color: green;
+}
+.update {
+  margin: auto;
+  width: 20vw;
+  font-size: 1vw;
+  text-align: center;
+}
 @media screen and (max-width: 1024px) and  (min-height: 1024px)  {
   #settings-header {
     font-size: 8vw;
   }
-  #settings-box {
+  #settings-wrapper {
     height: 25vw;
     width: 55vw;
     
   }
   
-  #temp-name {
+  #settings-field {
     font-size: 4vw;
     height: 5vw;
   }
@@ -56,13 +68,13 @@
   #settings-header {
     font-size: 11vw;
   }
-  #settings-box {
+  #settings-wrapper {
     height: 25vw;
     width: 75vw;
     display: block;
   }
   
-  #temp-name {
+  #settings-field {
     font-size: 5vw;
     height: 8vw;
     margin: auto;

@@ -4,12 +4,11 @@ import { HomeView } from "../view/HomeView";
 import { ProfileView } from "../view/ProfileView";
 import { EmptyView } from "../view/EmptyView";
 import { SettingsView } from "../view/SettingsView";
-import { AboutView } from "../view/AboutView"
-import {  useContext, useEffect } from "react";
+import { AboutView } from "../view/AboutView";
+import { useContext, useEffect } from "react";
 import { UserContext, AppContext } from "../shared/global/provider/Provider";
 import RoutingPath from "./RoutingPath";
-import {  loadUser } from "../shared/api/service/UserService";
-
+import { loadUser } from "../shared/api/service/UserService";
 
 export const Routing = (props) => {
   const user = useContext(UserContext);
@@ -21,13 +20,10 @@ export const Routing = (props) => {
     } else return navigateToView;
   };
   useEffect(() => {
-   
     const fetchData = async () => {
       const loggedInUser = await loadUser();
 
-      if (loggedInUser.data.message.msgError===false) {
-        
-
+      if (loggedInUser.data.message.msgError === false) {
         app.setFahrenheitOn(
           loggedInUser.data.user.fahrenheit_on
             ? loggedInUser.data.user.fahrenheit_on
@@ -35,23 +31,22 @@ export const Routing = (props) => {
         );
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);
-        user.setPhoto(loggedInUser.data.user.photo ? `data:image/png;base64,${loggedInUser.data.user.photo}` : '');
+        if (loggedInUser.data.user.photo) {
+          user.setPhoto(`data:image/png;base64,${loggedInUser.data.user.photo}`);     
+        }
         user.setAvatar(loggedInUser.data.user.avatar);
-                user.setFavouriteCity(
+        user.setFavouriteCity(
           loggedInUser.data.user.favourite_city
             ? loggedInUser.data.user.favourite_city
             : ""
         );
-        
-        user.setAuthenticatedUser(true);
-        
 
+        user.setAuthenticatedUser(true);
       } else {
         user.setAuthenticatedUser(false);
-        app.setSignInDialogOpen(true)
       }
     };
-    
+
     fetchData();
   }, []);
   return (
@@ -64,7 +59,7 @@ export const Routing = (props) => {
           component={blockRouteIfNotAuthenticated(ProfileView)}
         ></Route>
         <Route path={RoutingPath.settingsView} component={SettingsView}></Route>
-<Route path={RoutingPath.AboutView} component={AboutView}></Route>
+        <Route path={RoutingPath.AboutView} component={AboutView}></Route>
         <Route component={HomeView}></Route>
       </Switch>
     </Router>

@@ -27,10 +27,8 @@
 
   #back-to-top-button {
       display: flex;
-     
-      width: 2%;
-     
-      margin: -10vw 2vw 10vw auto;
+           width: 7vw;
+           margin: -10vw 2vw 10vw auto;
       background-color: lightblue;
       border-radius: 100%;
       min-width: 0%;

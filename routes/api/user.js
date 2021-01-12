@@ -9,30 +9,29 @@ const config = require("../../config/default.json");
 const { check, validationResult } = require("express-validator");
 
 const User = require("../../models/User");
-const multer = require('multer')
-const { v4: uuidv4} = require('uuid')
-let path = require('path');
-const fs= require('fs')
+const multer = require("multer");
+const { v4: uuidv4 } = require("uuid");
+let path = require("path");
+const fs = require("fs");
 const storage = multer.diskStorage({
-  
-  destination: function(req, file, cb) {
-    cb(null, 'tempImages')
+  destination: function (req, file, cb) {
+    cb(null, "tempImages");
   },
-  filename: function(req, file, cb) {
-    cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname))
-  }
-})
+  filename: function (req, file, cb) {
+    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
+  },
+});
 
 const fileFilter = (req, file, cb) => {
-  const validFiles = ['image/jpeg', 'image/jpg', 'image/png']
+  const validFiles = ["image/jpeg", "image/jpg", "image/png"];
 
   if (validFiles.includes(file.mimetype)) {
-    cb(null, true)
+    cb(null, true);
   } else {
-    cb(null, false)
+    cb(null, false);
   }
-}
-const saveOnDisk = multer({storage, fileFilter})
+};
+const saveOnDisk = multer({ storage, fileFilter });
 router.post(
   "/",
   [
@@ -171,7 +170,7 @@ router.put(
       }
     });
     if (req.body.password) {
-      const isMatch = await bcrypt.compare(req.body.oldPassword, user.password)
+      const isMatch = await bcrypt.compare(req.body.oldPassword, user.password);
 
       if (isMatch) {
         const salt = await bcrypt.genSalt(10);
@@ -233,27 +232,71 @@ router.put(
     });
   }
 );
-router.put(
-  "/image",
-  [
-    auth,
-  saveOnDisk.single('photo')],
-  async (req, res) => {
-    const user = await User.findById(req.user.id, async (err) => {
-      if (err) {
-        res.status(500).json({
-          message: {
-            msgBody: "Something wrong at server, please try again later.",
-            msgError: true,
-          },
-        });
-      }
-    });
-    user.photo = fs.readFileSync(req.file.path)
-    
-    
-    fs.unlinkSync(req.file.path)
-    user.save((err) => {
+router.put("/image", [auth, saveOnDisk.single("photo")], async (req, res) => {
+  const user = await User.findById(req.user.id, async (err) => {
+    if (err) {
+      res.status(500).json({
+        message: {
+          msgBody: "Something wrong at server, please try again later.",
+          msgError: true,
+        },
+      });
+    }
+  });
+  user.photo = fs.readFileSync(req.file.path);
+
+  fs.unlinkSync(req.file.path);
+  user.save((err) => {
+    if (err) {
+      res.status(500).json({
+        message: {
+          msgBody: "Something wrong at server, please try again later.",
+          msgError: true,
+        },
+      });
+    } else {
+      const payload = {
+        user: {
+          id: req.user.id,
+        },
+      };
+      //TODO change expires
+      jwt.sign(
+        payload,
+        config.jwtSecret,
+        { expiresIn: 60 * 60 * 24 * 100 },
+        (err, token) => {
+          if (err) {
+            res.status(500).json({
+              message: {
+                msgBody: "Something wrong at server, please try again later.",
+                msgError: true,
+              },
+            });
+          } else {
+            res.status(201).json({
+              token,
+              message: {
+                msgBody: "Account successfully updated.",
+                msgError: false,
+              },
+            });
+          }
+        }
+      );
+    }
+  });
+});
+router.put("/settings", [auth], async (req, res) => {
+  User.findOneAndUpdate(
+    { email: req.body.email },
+    {
+      $set: {
+        fahrenheit_on: req.body.fahrenheitOn,
+      },
+    },
+    { upsert: true, new: true },
+    async (err) => {
       if (err) {
         res.status(500).json({
           message: {
@@ -292,9 +335,9 @@ router.put(
           }
         );
       }
-    });
-  }
-);
+    }
+  );
+});
 //Only for development
 router.get("/", async (req, res) => {
   try {
@@ -309,25 +352,22 @@ router.get("/", async (req, res) => {
 });
 
 router.delete("/", auth, async (req, res) => {
-  
-    User.findOneAndRemove({ _id: req.user.id }, (err) => {
-      if (err) {
-        res.status(500).json({
-          message: {
-            msgBody: "Something wrong at server, please try again later.",
-            msgError: true,
-          },
-        });
-      } else {
-        res.status(200).json({
-            message: {
-            msgBody: "Account successfully deleted.",
-            msgError: false,
-          },
-        });
-      }
-    });
-   
-  
+  User.findOneAndRemove({ _id: req.user.id }, (err) => {
+    if (err) {
+      res.status(500).json({
+        message: {
+          msgBody: "Something wrong at server, please try again later.",
+          msgError: true,
+        },
+      });
+    } else {
+      res.status(200).json({
+        message: {
+          msgBody: "Account successfully deleted.",
+          msgError: false,
+        },
+      });
+    }
+  });
 });
 module.exports = router;
