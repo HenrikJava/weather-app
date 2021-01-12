@@ -11,10 +11,12 @@
 margin: 0;}
 @media screen and (max-width: 1400px) and  (min-height: 500px)  {
   #city-info {
-    font-size: 4vw;
+    font-size: 3vw;
+    margin: auto;
   }
   #time {
-    font-size: 2vw;
+    font-size: 1.6vw;
+    margin: auto;
   }
   #no-city-text {font-size: 1.4vw;
  }

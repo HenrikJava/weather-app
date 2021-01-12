@@ -1,5 +1,5 @@
 .main-weather-wrapper {
-  flex: 60%;
+  height: 70%;
   text-align: center;
 }
 #grid-cointainer {
@@ -16,11 +16,11 @@
 
 @media screen and (max-width: 1400px) and  (min-height: 500px)  {
   .main-weather-wrapper {
-    flex: 50%;
+    height: 70%;
     
   }
   #grid-container {
-    height: 70%;
+    height: 68%;
   }
 #suns  {
     display: flex;
@@ -34,7 +34,7 @@
 }
 @media screen and (max-width: 1024px) and  (min-height: 1024px)  {
   .main-weather-wrapper {
-    flex: 50%;
+    height: 57%;
     
   }
   #grid-container {

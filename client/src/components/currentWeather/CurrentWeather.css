@@ -31,7 +31,7 @@
 @media screen and (max-width: 1400px) and  (min-height: 500px)  {
   
   .weather-icon {
-    width: 20vw;
+    width: 12vw;
   }
   .temp {
     font-size: 4vw;

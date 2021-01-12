@@ -35,6 +35,12 @@ html,
   color:red
 }
 @media screen and (max-width: 1400px) and  (min-height: 500px)  {
+  .profile-view,
+.empty-view,
+.settings-view, #error {
+  width: 100%;
+  height: 89%;
+}
 #register-dialog-container > div > div {
     height: 75%;
     width: 70%;

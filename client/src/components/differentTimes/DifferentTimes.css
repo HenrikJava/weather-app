@@ -34,20 +34,20 @@
 @media screen and (max-width: 1400px) and  (min-height: 500px)  {
   
   .details-weather-icon {
-    width: 5vw;
+    width: 4vw;
   }
   
   .weather-at-differents-time-grid {
     margin: auto;
     width: 100%;
 
-    font-size: 1.6vw;
+    font-size: 1.4vw;
     white-space: nowrap;
   }
   
   
   .day-to-display {
-   
+   margin: auto;
     font-size: 3vw;
   }
   .different-wind {
