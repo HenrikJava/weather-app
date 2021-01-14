@@ -6,11 +6,12 @@ import CopyrightIcon from "@material-ui/icons/Copyright";
 import FacebookIcon from "@material-ui/icons/Facebook";
 
 import { Link } from "@material-ui/core";
+/* Footer is only used in aboutpage */
 export const Footer = () => {
   return (
     <div className="footer-wrapper">
       <div className="footer-item">
-        <span className="icon-wrapper">
+        <span className="footer-icon-wrapper">
           <EmailIcon id="email-icon" />
         </span>
         <Link
@@ -22,7 +23,7 @@ export const Footer = () => {
         </Link>
       </div>
       <div className="footer-item">
-        <span className="icon-wrapper">
+        <span className="footer-icon-wrapper">
           <GitHubIcon id="github-icon" />
         </span>
         <Link
@@ -34,7 +35,7 @@ export const Footer = () => {
         </Link>
       </div>
       <div className="footer-item">
-        <span className="icon-wrapper">
+        <span className="footer-icon-wrapper">
           <FacebookIcon id="facebook-icon" />
         </span>
         <Link
@@ -46,7 +47,7 @@ export const Footer = () => {
         </Link>
       </div>
       <div className="footer-item">
-        <span className="icon-wrapper">
+        <span className="footer-icon-wrapper">
           <CopyrightIcon id="copyright-icon" />
         </span>
         <Link id="footer-label-copyright">Copyright 2021</Link>

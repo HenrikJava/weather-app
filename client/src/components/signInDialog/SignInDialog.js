@@ -68,7 +68,6 @@ export const SignInDialog = () => {
         <DialogContentText id="error-message">{errorMessage}</DialogContentText>
         <TextField
           autoFocus
-          margin="dense"
           id="email"
           label="Email"
           type="email"
@@ -76,7 +75,6 @@ export const SignInDialog = () => {
           onChange={(event) => setEmail(event.target.value)}
         />
         <TextField
-          margin="dense"
           id="password"
           label="Password"
           type="password"

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { WeatherContext } from "../../shared/global/provider/Provider";
 import { AppContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
@@ -16,7 +16,9 @@ import Grid from "@material-ui/core/Grid";
 export const MaxMin = () => {
   const weather = useContext(WeatherContext);
   const app = useContext(AppContext);
-  const [open, setOpen] = React.useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  let isToday;
+  let sloth;
   const noonArray = [
     "12:00:00",
     "12:30:00",
@@ -26,30 +28,38 @@ export const MaxMin = () => {
     "14:30:00",
   ];
 
-  let sloth;
-
+  /* this function returns the arguments dayname */
   const getDayName = (fragment) => {
     return new Date(fragment * 1000).toLocaleString("en-us", {
       weekday: "long",
     });
   };
-
-  const weatherAtCurrentDay = weather.weather.list.filter(
+  /* Filtering out the actual days timestamps*/
+  const weatherAtActualDay = weather.weather.list.filter(
     (fragment) => getDayName(fragment.dt) === app.weekday
   );
-  let isToday;
-  if (weatherAtCurrentDay[0]) {
+  if (weatherAtActualDay>0) {
+    /* Assigning true if its today */
     isToday =
-      new Date(weatherAtCurrentDay[0].dt * 1000).toLocaleDateString() ===
+      new Date(weatherAtActualDay[0].dt * 1000).toLocaleDateString() ===
       new Date().toLocaleDateString();
   }
+  /* Function returning string what the weather feels like temp*/
   const getWeatherAtNoon = () => {
     let feelsLike;
-    if (!app.displayCurrent) {
+    // If app displaying current weather it will only return current feels like temp
+    if (app.displayCurrent) {
+      return (
+        Math.round(weather.weather.list[0].main.feels_like) +
+        scale(app.fahrenheitOn)
+      );
+    } else {
+      //If its today this make sure that feelslike gets an assignment
       if (isToday) {
-        feelsLike = weatherAtCurrentDay[0];
+        feelsLike = weatherAtActualDay[0];
       }
-      weatherAtCurrentDay.forEach((fragment) => {
+      // Assigning a value(or a new value) to feelslike if its in the noon array
+      weatherAtActualDay.forEach((fragment) => {
         for (let j = 0; j < noonArray.length; j++) {
           if (fragment.dt_txt.includes(noonArray[j])) {
             feelsLike = fragment;
@@ -61,16 +71,13 @@ export const MaxMin = () => {
       } else {
         return "N/A";
       }
-    } else {
-      return (
-        Math.round(weather.weather.list[0].main.feels_like) + scale(app.fahrenheitOn)
-      );
     }
   };
+  /* Function loops the actual day and return the max temp. */
   const getDayMax = () => {
     let max = -100;
     if (!app.displayCurrent) {
-      weatherAtCurrentDay.forEach((fragment) => {
+      weatherAtActualDay.forEach((fragment) => {
         if (fragment.main.temp_max > max) {
           max = fragment.main.temp_max;
         }
@@ -78,10 +85,12 @@ export const MaxMin = () => {
     }
     return Math.round(max) + scale(app.fahrenheitOn);
   };
+    /* Function loops the actual day and return the min temp. */
+
   const getDayMin = () => {
     let min = 100;
     if (!app.displayCurrent) {
-      weatherAtCurrentDay.forEach((fragment) => {
+      weatherAtActualDay.forEach((fragment) => {
         if (fragment.main.temp_min < min) {
           min = fragment.main.temp_min;
         }
@@ -91,16 +100,20 @@ export const MaxMin = () => {
   };
 
   const handleTooltipClose = () => {
-    setOpen(false);
+    setTooltipOpen(false);
   };
 
   const handleTooltipOpen = () => {
-    setOpen(true);
+    setTooltipOpen(true);
   };
 
+  /* Function generate the sloths clothes depending on the weather.  */
   const generateSloths = () => {
+    //default are sloth with ordinary clothes
     sloth = mildSloth;
+    //array to collect the temperatures
     let outsideHours = [];
+    //array with all the possible timestamps. A human is often outside these hours and not at night.
     const outsideTimeStamps = [
       "12:00:00",
       "12:30:00",
@@ -115,16 +128,20 @@ export const MaxMin = () => {
       "20:00:00",
       "20:30:00",
     ];
-    weatherAtCurrentDay.forEach((fragment) => {
+    //Filling the selection temp array
+    weatherAtActualDay.forEach((fragment) => {
       let isOutsideHour = outsideTimeStamps.some((time) =>
         fragment.dt_txt.includes(time)
       );
       isOutsideHour && outsideHours.push(fragment);
     });
+    //If the search are late at night current slot will be that timestamp
     if (outsideHours.length === 0) {
       outsideHours.push(weather.weather.list[0]);
     }
-
+    /* Making the sloth cold or hot depending on the timestamps temps. If one timestamp
+    are colder than +5C° the sloth became cold and hotter than +23C°. And if one timestamp includes
+    rain the sloth will be a wet sloth.*/
     for (let i = 0; i < outsideHours.length; i++) {
       if (app.fahrenheitOn) {
         if (outsideHours[i].main.feels_like <= 41) {
@@ -151,19 +168,19 @@ export const MaxMin = () => {
   };
   useEffect(() => {
     app.setSloth(generateSloths());
-   // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [app, sloth, weather]);
 
   return (
-    <Grid item xs={12} id="clothes-max-min">
+    <Grid item xs={12} id="max-min-inner-wrapper">
       <Grid item xs={2}></Grid>
       <Grid item xs={4}>
-        <img src={generateSloths()} className="clothes-image" alt="clothes" />
+        <img src={generateSloths()} className="max-min-sloth" alt="clothes" />
       </Grid>
       <Grid item xs={6}>
-        <div className="temperatures">
+        <div className="max-min-temperatures">
           <div id="header-and-tooltip">
-            <p className="temp-headers">
+            <p className="max-min-temp-headers">
               {!app.displayCurrent && !(isToday && app.isAfternoon)
                 ? "Feels like at noon"
                 : "Feels like now"}
@@ -176,7 +193,7 @@ export const MaxMin = () => {
                   }}
                   id="tooltip"
                   onClose={handleTooltipClose}
-                  open={open}
+                  open={tooltipOpen}
                   disableFocusListener
                   disableHoverListener
                   disableTouchListener
@@ -188,19 +205,22 @@ export const MaxMin = () => {
                     </p>
                   }
                 >
-                  <HelpIcon id="tooltip-icon" onClick={handleTooltipOpen}></HelpIcon>
+                  <HelpIcon
+                    id="tooltip-icon"
+                    onClick={handleTooltipOpen}
+                  ></HelpIcon>
                 </Tooltip>
               </div>
             </ClickAwayListener>
           </div>
 
-          <p className="temp-degrees">{getWeatherAtNoon()}</p>
+          <p className="max-min-temp-degrees">{getWeatherAtNoon()}</p>
           {!app.displayCurrent && (
             <div>
-              <p className="temp-headers">Day max:</p>
-              <p className="temp-degrees">{getDayMax()}</p>
-              <p className="temp-headers">Day min:</p>
-              <p className="temp-degrees">{getDayMin()}</p>
+              <p className="max-min-temp-headers">Day max:</p>
+              <p className="max-min-temp-degrees">{getDayMax()}</p>
+              <p className="max-min-temp-headers">Day min:</p>
+              <p className="max-min-temp-degrees">{getDayMin()}</p>
             </div>
           )}
         </div>

@@ -1,11 +1,11 @@
-.sun-up-and-down {
+.suns-images {
   width: 11vw;
 }
-.suns-inline {
+.suns-inner-wrapper {
   display: flex;
 }
 @media screen and (max-width: 1400px) and  (min-height: 500px)  {
-  .sun-up-and-down {
+  .suns-images {
     width: 12vw;
   }
 }

@@ -1,27 +1,30 @@
 import weatherApi from "../WeatherApi";
 import axios from "axios";
 const weatherInstance = axios.create();
+//Adjusting the timezones to get locale time at every timestamp
 const adjustTimeZone = (response) => {
-  response.data.list.forEach(timestamp => {
+  response.data.list.forEach((timestamp) => {
+    timestamp.dt_txt = new Date(
+      (timestamp.dt + response.data.city.timezone) * 1000
+    )
+      .toISOString()
+      .replace(/T/, " ")
+      .replace(/\..+/, "");
+  });
 
-    timestamp.dt_txt = new Date((timestamp.dt+response.data.city.timezone)*1000).toISOString().replace(/T/, ' ').replace(/\..+/, '')
-});
-
-  return response
-}
+  return response;
+};
 
 const searchCity = async (city, fahrenheitOn) => {
   let scale;
-  fahrenheitOn
-    ? (scale = weatherApi.fahrenheit)
-    : (scale = weatherApi.celcius);
+  fahrenheitOn ? (scale = weatherApi.fahrenheit) : (scale = weatherApi.celcius);
 
   try {
-    const response = await weatherInstance
-      .get(weatherApi.apiUrl + city + scale + weatherApi.apiKey);
+    const response = await weatherInstance.get(
+      weatherApi.apiUrl + city + scale + weatherApi.apiKey
+    );
     if (response.status === 200) {
-
-      return adjustTimeZone(response)
+      return adjustTimeZone(response);
     }
   } catch (error) {
     if (error.response.data.message === "city not found") {
@@ -46,4 +49,4 @@ const searchCity = async (city, fahrenheitOn) => {
   }
 };
 
-export default  searchCity ;
+export default searchCity;

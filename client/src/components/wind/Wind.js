@@ -4,7 +4,7 @@ import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
 export const Wind = (props) => {
   return (
-    <div className="wind">
+    <div className="wind-wrapper">
       <p className={props.className}>
         {Math.round(props.speed)}
         {props.fahrenheitOn ? " mph" : " m/s"}

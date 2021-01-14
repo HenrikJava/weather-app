@@ -10,9 +10,9 @@ export const SunTimes = () => {
 
   const generateSunTimes = () => {
     return (
-      <Grid item xs={12} className="suns-inline">
+      <Grid item xs={12} className="suns-inner-wrapper">
         <Grid item xs={6}>
-          <img src={sunrise} alt="sunrise" className="sun-up-and-down" />
+          <img src={sunrise} alt="sunrise" className="suns-images" />
           <p>
             {calcTime(weather.weather.city.timezone, weather.weather.city.sunrise)
               .toTimeString()
@@ -20,7 +20,7 @@ export const SunTimes = () => {
           </p>
         </Grid>
         <Grid item xs={6}>
-          <img src={sunset} alt="sunset" className="sun-up-and-down" />
+          <img src={sunset} alt="sunset" className="suns-images" />
           <p>
             {calcTime(weather.weather.city.timezone, weather.weather.city.sunset)
               .toTimeString()

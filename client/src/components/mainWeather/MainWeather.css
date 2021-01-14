@@ -2,53 +2,51 @@
   height: 70%;
   text-align: center;
 }
-#grid-cointainer {
+#middle-three-grids-wrapper {
   align-items: center;
   height: 70%;
 }
-#suns{
+#suns-wrapper {
   align-items: center;
   display: flex;
 }
 .mobile-sloth {
-  display: none
+  display: none;
 }
 
-@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+@media screen and (max-width: 1400px) and (min-height: 500px) {
   .main-weather-wrapper {
     height: 70%;
-    
   }
-  #grid-container {
+  #middle-three-grids-wrapper {
     height: 68%;
   }
-#suns  {
+  #suns-wrapper {
     display: flex;
   }
-#current-different, #sloth-temps {
-  flex-grow: 1;
-  height: 100%;
-  display: flex;
+  #current-different-wrapper,
+  #max-min-wrapper {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+  }
 }
-
-}
-@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
+@media screen and (max-width: 1024px) and (min-height: 1024px) {
   .main-weather-wrapper {
     height: 57%;
-    
   }
-  #grid-container {
+  #middle-three-grids-wrapper {
     height: 60%;
   }
-#suns  {
+  #suns-wrapper {
     display: none;
   }
-#current-different, #sloth-temps {
-  flex-grow: 1;
-  max-width: 50%;
-  height: 100%;
-}
-
+  #current-different-wrapper,
+  #max-min-wrapper {
+    flex-grow: 1;
+    max-width: 50%;
+    height: 100%;
+  }
 }
 
 @media screen and (max-width: 512px) {
@@ -56,25 +54,25 @@
     flex: 100%;
     height: inherit;
   }
-  #grid-container {
+  #middle-three-grids-wrapper {
     align-items: center;
     height: auto;
     display: block;
   }
-  #current-different {
+  #current-different-wrapper {
     flex-grow: 1;
     max-width: 100%;
     height: 100%;
     margin-left: 1%;
   }
 
-#sloth-temps, #suns {
-  display: none;
-
-}
-.mobile-sloth {
-  width: 27vw;
-display: inline-block;
-  margin-top: -11vw;
-}
+  #max-min-wrapper,
+  #suns-wrapper {
+    display: none;
+  }
+  .mobile-sloth {
+    width: 27vw;
+    display: inline-block;
+    margin-top: -11vw;
+  }
 }

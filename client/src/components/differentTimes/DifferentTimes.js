@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { WeatherContext } from "../../shared/global/provider/Provider";
 import { AppContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
@@ -10,6 +10,12 @@ import Grid from "@material-ui/core/Grid";
 export const DifferentTimes = () => {
   const weather = useContext(WeatherContext);
   const app = useContext(AppContext);
+  /* Because the weatherdata brings timestamps every third hour 
+  this array narrows it down to every sixth hour. And because of
+  the timezones it contains more timestamps than the four (01,07,13,19)
+  displayed on the page. To get for example (01) timestamp the array 
+  includes the timestamps (00.00, 00.30, 01.00, 01.30, 02.00, 02.30) to 
+  approximate get the (01) timestamp in specific city.*/
   const timesArray = [
     "00:00:00",
     "00:30:00",
@@ -36,6 +42,7 @@ export const DifferentTimes = () => {
     "20:00:00",
     "20:30:00",
   ];
+  //Array needed because the "getUTCDay" returns a day number.
   const weekday = [];
   weekday[0] = "Sunday";
   weekday[1] = "Monday";
@@ -50,7 +57,8 @@ export const DifferentTimes = () => {
       new Date((fragment.dt + weather.weather.city.timezone) * 1000).getUTCDay()
     ];
   };
-  const getSpecificTimes = (time) => {
+  //This function is a filter function using the long timesarray
+  const getTimesToDisplay = (time) => {
     let condition = false;
     timesArray.forEach((element) => {
       if (time.includes(element)) {
@@ -59,114 +67,107 @@ export const DifferentTimes = () => {
     });
     return condition;
   };
-
+  /*variable is a result of filtering the weather data to only contain
+the day the component will show*/
   const weatherAtCurrentDay = weather.weather.list.filter(
     (fragment) => getDayName(fragment) === app.weekday
   );
+  /*variable to keep track if the day to display actually is current day */
   const isToday =
     new Date(
       (weatherAtCurrentDay[0].dt + weather.weather.city.timezone) * 1000
     ).getUTCDay() ===
     new Date(Date.now() + weather.weather.city.timezone * 1000).getUTCDay();
 
-  let specificTimes = [];
+  
+  let timesToDisplay = [];
+  /* Because the component only displays every sixth hour this loop
+  adding the outfiltered timestamps precipitation and then adds it
+  to the display array*/
   let stampAdded = false;
   weatherAtCurrentDay.forEach((timestamp) => {
     if (stampAdded && timestamp.snow) {
-      
-      specificTimes[specificTimes.length - 1].precipitation += Number(
+      timesToDisplay[timesToDisplay.length - 1].precipitation += Number(
         timestamp.snow["3h"]
       );
-
-    } 
+    }
     if (stampAdded && timestamp.rain) {
-      
-      specificTimes[specificTimes.length - 1].precipitation += Number(
+      timesToDisplay[timesToDisplay.length - 1].precipitation += Number(
         timestamp.rain["3h"]
       );
-
-    } 
-      if (getSpecificTimes(timestamp.dt_txt) === true) {
-        if (timestamp.snow) {
-          timestamp.precipitation = Number(timestamp.snow["3h"]);
-
-        } else if (timestamp.rain) {
-
-          timestamp.precipitation = Number(timestamp.rain["3h"]);
-        } else {
-
-          timestamp.precipitation = 0;
-          
-        }
-        specificTimes.push(timestamp);
-        stampAdded = true;
-
+    }
+    if (getTimesToDisplay(timestamp.dt_txt) === true) {
+      if (timestamp.snow) {
+        timestamp.precipitation = Number(timestamp.snow["3h"]);
+      } else if (timestamp.rain) {
+        timestamp.precipitation = Number(timestamp.rain["3h"]);
       } else {
-        stampAdded = false;
+        timestamp.precipitation = 0;
       }
-
-   
-  });
-
-  if (specificTimes.length === 0) {
-    specificTimes.push(weatherAtCurrentDay[0]);
-    if (specificTimes[0].snow) {
-      specificTimes[0].precipitation = Number(specificTimes[0].snow["3h"]);
-
-    } else if (specificTimes[0].rain) {
-
-      specificTimes[0].precipitation = Number(specificTimes[0].rain["3h"]);
+      timesToDisplay.push(timestamp);
+      stampAdded = true;
     } else {
+      stampAdded = false;
+    }
+  });
+/* If the user search late at night(after 18-21) there is no todays
+weather and this if statement adds the next timestamp(last of the day)
+of the weatherdata and the user will be able to see this with 
+associated precipitation.*/
+  if (timesToDisplay.length === 0) {
+    timesToDisplay.push(weatherAtCurrentDay[0]);
+    if (timesToDisplay[0].snow) {
+      timesToDisplay[0].precipitation = Number(timesToDisplay[0].snow["3h"]);
+    } else if (timesToDisplay[0].rain) {
+      timesToDisplay[0].precipitation = Number(timesToDisplay[0].rain["3h"]);
+    } else {
+      timesToDisplay[0].precipitation = 0;
+    }
+  }
 
-      specificTimes[0].precipitation = 0;
-      
-    }  }
-
- 
-
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  const capitalizeFirstLetter = (weatherDescription) => {
+    return weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
   };
   const generateDifferentTimes = () => {
     const array = [];
-    for (let index = 0; index < specificTimes.length; index++) {
+    for (let index = 0; index < timesToDisplay.length; index++) {
       array.push(
         <Grid
           item
           xs={12}
-          key={specificTimes[index].dt}
+          key={timesToDisplay[index].dt}
           className="different-times"
         >
           <Grid item xs={1}>
-            <p> {specificTimes[index].dt_txt.slice(11, 13)} </p>
+            <p> {timesToDisplay[index].dt_txt.slice(11, 13)} </p>
           </Grid>
           <Grid item xs={1}>
             <p>
-              {Math.round(specificTimes[index].main.temp) +
+              {Math.round(timesToDisplay[index].main.temp) +
                 scale(app.fahrenheitOn)}
             </p>
           </Grid>
           <Grid item xs={2}>
             <img
               className="details-weather-icon"
-              src={`/icons/${specificTimes[index].weather[0].icon}.png`}
+              src={`/icons/${timesToDisplay[index].weather[0].icon}.png`}
               alt="Weather Icon"
             ></img>
           </Grid>
           <Grid item xs={1}>
-            <p>{Math.ceil(specificTimes[index].precipitation) + " mm"}</p>
+            <p>{Math.ceil(timesToDisplay[index].precipitation) + " mm"}</p>
           </Grid>
           <Grid item xs={4}>
             <p>
               {capitalizeFirstLetter(
-                specificTimes[index].weather[0].description
+                timesToDisplay[index].weather[0].description
               )}
             </p>
           </Grid>
           <Grid item xs={3}>
             <Wind
-              speed={specificTimes[index].wind.speed}
-              deg={specificTimes[index].wind.deg}
+              speed={timesToDisplay[index].wind.speed}
+              deg={timesToDisplay[index].wind.deg}
               fahrenheitOn={app.fahrenheitOn}
               className="different-wind"
             ></Wind>

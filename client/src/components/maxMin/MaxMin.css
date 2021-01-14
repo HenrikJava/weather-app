@@ -1,4 +1,4 @@
-.clothes-image {
+.max-min-sloth {
   
   width: 18vw;
     height: 90%;
@@ -6,20 +6,20 @@
     margin-top: 3vw;
 }
 
-.temperatures {
+.max-min-temperatures {
   display: block;
 }
-#clothes-max-min {
+#max-min-inner-wrapper {
   display: flex;
   align-items: center;
   height: 100%;
 }
-.temp-degrees {
+.max-min-temp-degrees {
   font-size: 1.4vw;
   margin: auto;
 
 }
-.temp-headers {
+.max-min-temp-headers {
   font-size: 1.8vw;
   
 }
@@ -40,18 +40,18 @@ margin-left: 0.4vw;}
   font-size: 1.8vw; max-width: 25vw; line-height: 1.8vw
 }
 @media screen and (max-width: 1400px) and  (min-height: 500px)  {
-  .clothes-image {
+  .max-min-sloth {
     width: 20vw;
     margin-left: -70%;
   }
   
   
   
-  .temp-degrees {
+  .max-min-temp-degrees {
     font-size: 1.6vw;
     margin: auto;
   }
-  .temp-headers {
+  .max-min-temp-headers {
     font-size: 1.8vw;
 
   }
@@ -68,27 +68,27 @@ margin-left: 0.4vw;}
   }
 }
 @media screen and (max-width: 1024px) and  (min-height: 1024px)  {
-  .clothes-image {
+  .max-min-sloth {
     width: 27vw;
     height: 90%;
     margin-left: -7vw;
     margin-top: 3vw;
 
   }
-  #clothes-max-min > div{
+  #max-min-inner-wrapper > div{
     display: flex;
     height: 100%;
   }
-  .temperatures {
+  .max-min-temperatures {
     width: 100%;
     align-self: center;
   }
   
-  .temp-degrees {
+  .max-min-temp-degrees {
     font-size: 2.4vw;
     margin: 1%;
   }
-  .temp-headers {
+  .max-min-temp-headers {
     font-size: 3vw;
     margin: 1%;
   }

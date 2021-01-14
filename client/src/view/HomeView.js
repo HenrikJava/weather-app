@@ -5,10 +5,9 @@ import { MainWeather } from "../components/mainWeather/MainWeather";
 import { ForeCastWeather } from "../components/forecastWeather/ForeCastWeather";
 import searchCity from "../shared/api/service/WeatherService";
 import { UserContext } from "../shared/global/provider/Provider";
-import { Error } from "../components/error/Error";
+import { ErrorView } from "./ErrorView";
 import { loadUser } from "../shared/api/service/UserService";
 
-import "./HomeView.css";
 export const HomeView = () => {
   const user = useContext(UserContext);
   const weather = useContext(WeatherContext);
@@ -18,6 +17,8 @@ export const HomeView = () => {
   const defaultWeatherCall = () => {
     searchCity(app.city, app.fahrenheitOn).then(
       (response) => {
+        console.log(response);
+
         if (response.status === 200) {
           weather.setWeather(response.data);
         } else {
@@ -83,7 +84,7 @@ export const HomeView = () => {
         </div>
       );
     }
-    if (error) return <Error></Error>;
+    if (error) return <ErrorView></ErrorView>;
     else return null;
   };
   return displayWeather();

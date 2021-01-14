@@ -9,13 +9,15 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { registerUser, loadUser } from "../../shared/api/service/UserService";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useHistory } from "react-router-dom";
 import { UserContext } from "../../shared/global/provider/Provider";
 import { AppContext } from "../../shared/global/provider/Provider";
 export const RegisterDialog = () => {
   const [errorMessage, setErrorMessage] = useState();
   const app = useContext(AppContext);
   const user = useContext(UserContext);
-  
+  const history = useHistory();
+
   const register = async (values) => {
     const response = await registerUser(values);
     if (response.data.message.msgError === true) {
@@ -62,7 +64,6 @@ export const RegisterDialog = () => {
         <Formik
           initialValues={{
             firstname: "",
-
             email: "",
             password: "",
             confirmPassword: "",
@@ -74,11 +75,10 @@ export const RegisterDialog = () => {
           validationSchema={Yup.object().shape({
             email: Yup.string().email().required("Required"),
             firstname: Yup.string()
-              .required("Required")
+              .required("First name required")
               .min(3, "Name must be at least 3 characters"),
             password: Yup.string()
-              .required("No password provided.")
-              .min(8, "Password is too short - should be 8 chars minimum.")
+              .required("Password required.")
               .matches(
                 /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
                 "Password must contain at least 8 characters, one uppercase, one number and one special case character"
@@ -93,7 +93,6 @@ export const RegisterDialog = () => {
               values,
               touched,
               errors,
-
               handleChange,
               handleBlur,
               handleSubmit,
@@ -101,8 +100,8 @@ export const RegisterDialog = () => {
             return (
               <form onSubmit={handleSubmit}>
                 <TextField
+                autoFocus
                   error={errors.firstname && touched.firstname}
-                  margin="dense"
                   id="first-name"
                   label="First name"
                   name="firstname"
@@ -110,7 +109,7 @@ export const RegisterDialog = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={
-                    errors.firstname && touched.firstname && errors.firstname
+                    errors.firstname
                   }
                   type="text"
                   fullWidth
@@ -118,20 +117,18 @@ export const RegisterDialog = () => {
 
                 <TextField
                   error={errors.email && touched.email}
-                  margin="dense"
                   id="email"
                   label="Email"
                   name="email"
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  helperText={errors.email && touched.email && errors.email}
+                  helperText={errors.email}
                   type="email"
                   fullWidth
                 />
                 <TextField
                   error={errors.password && touched.password}
-                  margin="dense"
                   id="password"
                   label="Password"
                   name="password"
@@ -139,14 +136,13 @@ export const RegisterDialog = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={
-                    errors.password && touched.password && errors.password
+                    errors.password 
                   }
                   type="password"
                   fullWidth
                 />
                 <TextField
                   error={errors.confirmPassword && touched.confirmPassword}
-                  margin="dense"
                   id="confirm-password"
                   label="Confirm password"
                   name="confirmPassword"
@@ -154,15 +150,12 @@ export const RegisterDialog = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={
-                    errors.confirmPassword &&
-                    touched.confirmPassword &&
                     errors.confirmPassword
-                  }
+                    }
                   type="password"
                   fullWidth
                 />
                 <TextField
-                  margin="dense"
                   id="favourite-city"
                   label="Favourite city"
                   name="favouriteCity"

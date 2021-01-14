@@ -6,7 +6,7 @@
     
 
 }
-.icon-wrapper {
+.footer-icon-wrapper {
     width: 6vw;
     height: 6vw;
     border-radius: 100%;
@@ -38,7 +38,7 @@
 }
 
 @media screen and (max-width: 1024px) and  (min-height: 1020px)  {
-    .icon-wrapper {
+    .footer-icon-wrapper {
         width: 8vw;
         height: 8vw;
         
@@ -60,7 +60,7 @@
         
     
     }
-    .icon-wrapper {
+    .footer-icon-wrapper {
         width: 8vw;
         height: 8vw;
         

@@ -14,11 +14,13 @@ export const Routing = (props) => {
   const user = useContext(UserContext);
   const app = useContext(AppContext);
 
+  //If the user are not logged in, the profile view will not display
   const blockRouteIfNotAuthenticated = (navigateToView) => {
     if (!user.authenticatedUser) {
       return EmptyView;
     } else return navigateToView;
   };
+  //Fetching the user data if there is some
   useEffect(() => {
     const fetchData = async () => {
       const loggedInUser = await loadUser();

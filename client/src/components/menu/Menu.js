@@ -30,7 +30,7 @@ export const Menu = () => {
     user.setAuthenticatedUser();
     history.push(RoutingPath.homeView);
   };
-  //If screensize is smaller than 960 the menu will show
+  //If screensize is smaller than 960 the slide-in menu will show
   const showMenu = () => {
     if (window.innerWidth >= 960) {
       app.setMenuOpen(false);
@@ -38,57 +38,72 @@ export const Menu = () => {
   };
   // A listener which calls the function showMenu everytime user resizes screen
   window.addEventListener("resize", showMenu);
-  
+
   return (
     <>
-     {user.authenticatedUser ? (
-      <div className="menu-container">
-        <div className="username-image">
-          <span className="username">
-            <p>{user.firstname}</p>
-          </span>
-          {/* If user has uploaded photo show this. Else use the generated gravatar */}
-          <img src={user.photo ? user.photo : user.avatar} alt="profile" className="menu-image" />
-        </div>
-        <div
-          onClick={() => app.setMenuOpen(!app.menuOpen)}
-          className="menu-icon-wrapper"
-        >
-          {app.menuOpen ? (
-            <CloseIcon id="menu-icon" />
-          ) : (
-            <MenuIcon id="menu-icon" />
-          )}
-        </div>
+      {user.authenticatedUser ? (
+        <div className="menu-wrapper">
+          <div className="menu-profile">
+            <span className="menu-firstname">
+              <p>{user.firstname}</p>
+            </span>
+            {/* If user has uploaded photo show this. Else use the generated gravatar */}
+            <img
+              src={user.photo ? user.photo : user.avatar}
+              alt="profile"
+              className="menu-image"
+            />
+          </div>
+          <div
+            onClick={() => app.setMenuOpen(!app.menuOpen)}
+            className="menu-symbol-icon-wrapper"
+          >
+            {app.menuOpen ? (
+              <CloseIcon id="menu-symbol-icon" />
+            ) : (
+              <MenuIcon id="menu-symbol-icon" />
+            )}
+          </div>
 
-        <div className={app.menuOpen ? "menu-wrapper active" : "menu-wrapper"}>
-          <div className="menu">
+          <div
+            className={
+              app.menuOpen ? "menu-links-wrapper active" : "menu-links-wrapper"
+            }
+          >
             <Link
               to={RoutingPath.profileView}
-              className="menu-item"
+              className="menu-link"
               onClick={() => {
                 app.setMenuOpen(false);
               }}
             >
-              {app.menuOpen ? <p>Profile</p> : <PersonIcon id="icon" />}
+              {app.menuOpen ? (
+                <p>Profile</p>
+              ) : (
+                <PersonIcon id="logged-in-icon" />
+              )}
             </Link>
             <Link
               to={RoutingPath.settingsView}
-              className="menu-item"
+              className="menu-link"
               onClick={() => {
                 app.setMenuOpen(false);
               }}
             >
-              {app.menuOpen ? <p>Settings</p> : <SettingsIcon id="icon" />}
+              {app.menuOpen ? (
+                <p>Settings</p>
+              ) : (
+                <SettingsIcon id="logged-in-icon" />
+              )}
             </Link>
             <Link
               to={RoutingPath.aboutView}
-              className="menu-item"
+              className="menu-link"
               onClick={() => {
                 app.setMenuOpen(false);
               }}
             >
-              {app.menuOpen ? <p>About</p> : <InfoIcon id="icon" />}
+              {app.menuOpen ? <p>About</p> : <InfoIcon id="logged-in-icon" />}
             </Link>
             <span
               onClick={() => {
@@ -96,34 +111,40 @@ export const Menu = () => {
                 app.setMenuOpen(false);
                 app.setnoCityText("");
               }}
-              className="menu-item"
+              className="menu-link"
             >
-              {app.menuOpen ? <p>Log out</p> : <ExitToAppIcon id="icon" />}
+              {app.menuOpen ? (
+                <p>Log out</p>
+              ) : (
+                <ExitToAppIcon id="logged-in-icon" />
+              )}
             </span>
           </div>
         </div>
-      </div>
-    ) : (
-      <div className="menu-container">
-        <div
-          onClick={() => app.setMenuOpen(!app.menuOpen)}
-          className="menu-icon-wrapper"
-        >
-          {app.menuOpen ? (
-            <CloseIcon id="menu-icon" />
-          ) : (
-            <MenuIcon id="menu-icon" />
-          )}
-        </div>
-        <div className={app.menuOpen ? "menu-wrapper active" : "menu-wrapper"}>
-          <div className="not-logged-in-menu">
+      ) : (
+        <div className="menu-wrapper">
+          <div
+            onClick={() => app.setMenuOpen(!app.menuOpen)}
+            className="menu-symbol-icon-wrapper"
+          >
+            {app.menuOpen ? (
+              <CloseIcon id="menu-symbol-icon" />
+            ) : (
+              <MenuIcon id="menu-symbol-icon" />
+            )}
+          </div>
+          <div
+            className={
+              app.menuOpen ? "menu-links-wrapper active" : "menu-links-wrapper"
+            }
+          >
             <span
               onClick={() => {
                 app.setSignInDialogOpen(true);
                 app.setMenuOpen(false);
                 app.setnoCityText("");
               }}
-              className="menu-item"
+              className="menu-link"
             >
               {app.menuOpen ? (
                 <p>Log in</p>
@@ -134,7 +155,7 @@ export const Menu = () => {
 
             <Link
               to={RoutingPath.settingsView}
-              className="menu-item"
+              className="menu-link"
               onClick={() => {
                 app.setMenuOpen(false);
               }}
@@ -147,17 +168,20 @@ export const Menu = () => {
             </Link>
             <Link
               to={RoutingPath.aboutView}
-              className="menu-item"
+              className="menu-link"
               onClick={() => {
                 app.setMenuOpen(false);
               }}
             >
-              {app.menuOpen ? <p>About</p> : <InfoIcon id="not-logged-in-icon" />}
+              {app.menuOpen ? (
+                <p>About</p>
+              ) : (
+                <InfoIcon id="not-logged-in-icon" />
+              )}
             </Link>
           </div>
         </div>
-      </div>
-    )}
+      )}
       <SignInDialog></SignInDialog>
       <RegisterDialog></RegisterDialog>
     </>

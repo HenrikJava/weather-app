@@ -1,7 +1,7 @@
 import React from "react";
 import { AppContext } from "../../shared/global/provider/Provider";
 import { WeatherContext } from "../../shared/global/provider/Provider";
-import "./CityInput.css";
+import "./CitySearch.css";
 import { useContext, useState } from "react";
 import searchCity from "../../shared/api/service/WeatherService";
 import SearchIcon from "@material-ui/icons/Search";
@@ -9,31 +9,29 @@ import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from "@material-ui/core/Button";
 
-export const CityInput = () => {
+export const CitySearch = () => {
   const app = useContext(AppContext);
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState("");
   const weather = useContext(WeatherContext);
-  const fetchDataFromExternalApi = async () => {
+  const searchWeather = async () => {
     const response = await searchCity(city, app.fahrenheitOn);
     if (response.status === 200) {
       app.setCity(response.data.city.name);
-      setCity('')
-      app.setnoCityText('');
-
+      setCity("");
+      app.setnoCityText("");
       weather.setWeather(response.data);
     } else {
       app.setnoCityText(response.data.message.msgBody);
     }
   };
   return (
-    <div id="city-input-wrapper">
+    <div className="city-search-wrapper">
       <form
-        id="form"
+        className="city-input-wrapper"
         onSubmit={(e) => {
           e.preventDefault();
           app.setDisplayCurrent(true);
-
-          fetchDataFromExternalApi();
+          searchWeather();
           e.target.reset();
         }}
       >
@@ -41,7 +39,7 @@ export const CityInput = () => {
           type="text"
           onChange={(event) => setCity(event.target.value)}
           placeholder="Enter city..."
-          id="input-with-icon-adornment"
+          id="search-icon-wrapper"
           endAdornment={
             <InputAdornment position="end">
               <SearchIcon id="search-icon" />
@@ -49,7 +47,7 @@ export const CityInput = () => {
           }
         />
 
-        <Button disabled={city.length<1} type="submit" id="city-button">
+        <Button disabled={city.length < 1} type="submit" id="city-button">
           Search
         </Button>
       </form>

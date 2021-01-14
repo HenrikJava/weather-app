@@ -9,37 +9,40 @@
   justify-content: center;
   height: 70%;
 }
-.weather-icon {
+.current-weather-icon {
   width: 12vw;
 }
-.temp {
+.current-temp {
   font-size: 3vw;
   margin: 0;
 }
-#current-header {
+.current-wind {
+  font-size: 1.8vw;
+
+}
+.current-header {
   font-size: 2.4vw;
 }
-#weather-description {
+.weather-description {
   font-size: 3vw;
   margin: 0;
 }
-.temp-wind {
+.current-temp-wind {
   align-self: center;
-  font-size: 1.8vw;
 
 }
 @media screen and (max-width: 1400px) and  (min-height: 500px)  {
   
-  .weather-icon {
+  .current-weather-icon {
     width: 12vw;
   }
-  .temp {
+  .current-temp {
     font-size: 4vw;
   }
-  #current-header {
+  .current-header {
     font-size: 2.6vw;
   }
-  #weather-description {
+  .weather-description {
     font-size: 3.4vw;
   }
   
@@ -53,19 +56,19 @@
   .current-wrapper {
     height: 100%;
   }
-  .weather-icon {
+  .current-weather-icon {
     width: 25vw;
   }
-  .temp {
+  .current-temp {
     font-size: 6vw;
     margin: 0;
   }
-  #current-header {
+  .current-header {
     font-size: 4vw;
     margin: 0;
     height: 20%;
   }
-  #weather-description {
+  .weather-description {
     font-size: 2.5vw;
     margin: 0;
     height: 10%;
@@ -84,20 +87,20 @@
     height: 100%;
   }
   
-  .weather-icon {
+  .current-weather-icon {
     width: 50vw;
   }
-  .temp {
+  .current-temp {
     font-size: 14vw;
     margin: 0;
 
   }
-  #current-header {
+  .current-header {
     font-size: 7vw;
     margin: 0;
     height: 20%;
   }
-  #weather-description {
+  .weather-description {
     font-size: 5.5vw;
     margin: 0;
     height: 10%;

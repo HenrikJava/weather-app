@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { WeatherContext } from "../../shared/global/provider/Provider";
 import { AppContext } from "../../shared/global/provider/Provider";
-
 import { calcTime } from "../../shared/global/functions";
 import "./CityInfo.css";
 export const CityInfo = () => {
@@ -17,9 +16,9 @@ export const CityInfo = () => {
   }, [weather.weather]);
   return (
     <div className="city-wrapper">
-      {app.noCityText? <p id="no-city-text">{app.noCityText}</p> :  ''}
-      <p id="city-info">{`${weather.weather.city.name}, ${weather.weather.city.country}`}</p>
-      <p id="time">{`The local time in  ${weather.weather.city.name} is ${time}`}</p>
+      {app.noCityText? <p className="no-city-text">{app.noCityText}</p> :  ''}
+      <p className="city-info">{`${weather.weather.city.name}, ${weather.weather.city.country}`}</p>
+      <p className="time">{`The local time in  ${weather.weather.city.name} is ${time}`}</p>
     </div>
   );
 };

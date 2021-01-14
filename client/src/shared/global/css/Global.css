@@ -7,14 +7,17 @@ html,
   width: 100%;
   height: 100%;
   background-color: black;
-  color:honeydew
+  color: honeydew;
 }
 
 .profile-view,
 .empty-view,
-.settings-view, #error {
+.settings-view,
+.error-view {
   width: 100%;
   height: 92%;
+  display: flex;
+  flex-direction: column;
 }
 #register-dialog-container > div > div {
   height: 45%;
@@ -32,16 +35,18 @@ html,
   color: #3f51b5;
 }
 #error-message {
-  color:red
+  color: red;
 }
-@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+@media screen and (max-width: 1400px) and (min-height: 500px) {
   .profile-view,
-.empty-view,
-.settings-view, #error {
-  width: 100%;
-  height: 89%;
-}
-#register-dialog-container > div > div {
+  .empty-view,
+  .settings-view,
+  .error-view,
+  .home-view {
+    width: 100%;
+    height: 89%;
+  }
+  #register-dialog-container > div > div {
     height: 75%;
     width: 70%;
   }
@@ -49,18 +54,25 @@ html,
     height: 50%;
     width: 85%;
   }
-  
+
   #dialog-title > h2 {
     font-size: 3vw;
   }
-  #user-friendly-text  {
-    font-size: 2vw
-  }
-  #email-label, #password-label, #first-name-label,
-  #favourite-city-label, #confirm-password-label {
+  #user-friendly-text {
     font-size: 2vw;
   }
-  #email, #password, #first-name, #favourite-city, #confirm-password  {
+  #email-label,
+  #password-label,
+  #first-name-label,
+  #favourite-city-label,
+  #confirm-password-label {
+    font-size: 2vw;
+  }
+  #email,
+  #password,
+  #first-name,
+  #favourite-city,
+  #confirm-password {
     height: 3vw;
     font-size: 2vw;
   }
@@ -76,8 +88,7 @@ html,
     font-size: 2vw;
   }
 }
-@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
-  
+@media screen and (max-width: 1024px) and (min-height: 1024px) {
   #register-dialog-container > div > div {
     height: 60%;
     width: 70%;
@@ -92,14 +103,21 @@ html,
   #dialog-title > h2 {
     font-size: 5vw;
   }
-  #user-friendly-text  {
-    font-size: 3vw
-  }
-  #email-label, #password-label, #first-name-label,
-  #favourite-city-label, #confirm-password-label {
+  #user-friendly-text {
     font-size: 3vw;
   }
-  #email, #password, #first-name, #favourite-city, #confirm-password  {
+  #email-label,
+  #password-label,
+  #first-name-label,
+  #favourite-city-label,
+  #confirm-password-label {
+    font-size: 3vw;
+  }
+  #email,
+  #password,
+  #first-name,
+  #favourite-city,
+  #confirm-password {
     height: 4vw;
     font-size: 3vw;
   }
@@ -115,7 +133,7 @@ html,
     font-size: 3vw;
   }
 }
-@media screen and (max-width: 750px)  {
+@media screen and (max-width: 750px) {
   #register-dialog-container > div > div {
     height: 90%;
     width: 50%;
@@ -124,18 +142,25 @@ html,
     height: 85%;
     width: 50%;
   }
-  
+
   #dialog-title > h2 {
     font-size: 3vw;
   }
-  #user-friendly-text  {
-    font-size: 2vw
-  }
-  #email-label, #password-label, #first-name-label,
-  #favourite-city-label, #confirm-password-label {
+  #user-friendly-text {
     font-size: 2vw;
   }
-  #email, #password, #first-name, #favourite-city, #confirm-password  {
+  #email-label,
+  #password-label,
+  #first-name-label,
+  #favourite-city-label,
+  #confirm-password-label {
+    font-size: 2vw;
+  }
+  #email,
+  #password,
+  #first-name,
+  #favourite-city,
+  #confirm-password {
     height: 4vw;
     font-size: 2vw;
   }
@@ -151,39 +176,44 @@ html,
     font-size: 2vw;
   }
 }
-@media screen and (max-width: 512px) and (min-height: 568px ) {
+@media screen and (max-width: 512px) and (min-height: 568px) {
   .home-view {
-
-    height: -webkit-fill-available; 
-    
+    height: -webkit-fill-available;
   }
   .profile-view,
-.empty-view,
-.settings-view {
-  height: 90%
-}
-#register-dialog-container > div > div {
-  height: 90%;
-  width: 80%;
-}
-#sign-in-dialog-wrapper > div > div {
-  height: 70%;
-  width: 90%;
-}
-#dialog-title {
-  text-align: center;
-}
+  .empty-view,
+  .settings-view {
+    height: 90%;
+  }
+  #register-dialog-container > div > div {
+    height: 90%;
+    width: 80%;
+  }
+  #sign-in-dialog-wrapper > div > div {
+    height: 70%;
+    width: 90%;
+  }
+  #dialog-title {
+    text-align: center;
+  }
   #dialog-title > h2 {
     font-size: 9vw;
   }
-  #user-friendly-text  {
-    font-size: 6vw
+  #user-friendly-text {
+    font-size: 6vw;
   }
-  #email-label, #password-label, #first-name-label,
-  #favourite-city-label, #confirm-password-label {
+  #email-label,
+  #password-label,
+  #first-name-label,
+  #favourite-city-label,
+  #confirm-password-label {
     font-size: 5vw;
   }
-  #email, #password, #first-name, #favourite-city, #confirm-password  {
+  #email,
+  #password,
+  #first-name,
+  #favourite-city,
+  #confirm-password {
     height: 4vw;
     font-size: 5vw;
   }
