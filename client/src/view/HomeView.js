@@ -38,7 +38,8 @@ export const HomeView = () => {
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
         user.setAvatar(loggedInUser.data.user.avatar);
         if (loggedInUser.data.user.photo) {
-          user.setPhoto(`data:image/png;base64,${loggedInUser.data.user.photo}`);     
+          const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')
+          user.setPhoto(`data:image/png;base64,${b64encoded}`);   
         }
         user.setAuthenticatedUser(true);      
         searchCity(
