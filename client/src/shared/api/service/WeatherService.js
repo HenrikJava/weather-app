@@ -1,52 +1,31 @@
-import weatherApi from "../WeatherApi";
 import axios from "axios";
-const weatherInstance = axios.create();
-//Adjusting the timezones to get locale time at every timestamp
-const adjustTimeZone = (response) => {
-  response.data.list.forEach((timestamp) => {
-    timestamp.dt_txt = new Date(
-      (timestamp.dt + response.data.city.timezone) * 1000
-    )
-      .toISOString()
-      .replace(/T/, " ")
-      .replace(/\..+/, "");
-  });
 
-  return response;
-};
 
-const searchCity = async (city, fahrenheitOn) => {
-  let scale;
-  fahrenheitOn ? (scale = weatherApi.fahrenheit) : (scale = weatherApi.celcius);
+export const searchCity = async (values) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify(values);
 
   try {
-    const response = await weatherInstance.get(
-      weatherApi.apiUrl + city + scale + weatherApi.apiKey
-    );
+    const response = await axios.post("/api/weather", body, config);
     if (response.status === 200) {
-      return adjustTimeZone(response);
+      return response;
     }
   } catch (error) {
-    if (error.response.data.message === "city not found") {
-      return {
-        data: {
-          message: {
-            msgBody: `No city with name "${city}" in the database, please try again.`,
-            msgError: true,
+    return error.response.data.message
+      ? error.response
+      : {
+          data: {
+            message: {
+              msgBody: "Something wrong at server, please try again later.",
+              msgError: true,
+            },
           },
-        },
-      };
-    } else {
-      return {
-        data: {
-          message: {
-            msgBody: "Something wrong at server, please try again later.",
-            msgError: true,
-          },
-        },
-      };
-    }
+        };
   }
 };
 
-export default searchCity;
+
