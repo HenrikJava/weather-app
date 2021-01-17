@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../shared/global/provider/Provider";
 import { AppContext } from "../shared/global/provider/Provider";
 import { Grid, TextField, Button } from "@material-ui/core";
@@ -16,10 +16,6 @@ import "./ProfileView.css";
 export const ProfileView = () => {
   const app = useContext(AppContext);
   const user = useContext(UserContext);
-// If user not logged the signin dialog should display
-  !user.authenticatedUser
-    ? app.setSignInDialogOpen(true)
-    : app.setSignInDialogOpen(false);
 
   const [responseMessage, setResponseMessage] = useState();
   const [hidePhotoInput, setHidePhotoInput] = useState(true);
@@ -57,7 +53,12 @@ export const ProfileView = () => {
     setHidePhotoInput(true);
     loadUserAfterUpdate();
   };
-
+useEffect(() => {
+// If user not logged the signin dialog should display
+  !user.authenticatedUser
+    ? app.setSignInDialogOpen(true)
+    : app.setSignInDialogOpen(false);
+},[])
   return (
     <div className="profile-view">
       <DeleteConfirmDialog></DeleteConfirmDialog>
