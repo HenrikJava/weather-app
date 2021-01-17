@@ -1,2 +1,4 @@
-{ "mongoURI": "mongodb://localhost:27017/wheater-app",
-"jwtSecret": "mysecrettoken"}
+{
+  "mongoURI": "mongodb://localhost:27017/wheater-app",
+  "jwtSecret": "tF7CU44sDBUV"
+}

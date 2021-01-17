@@ -3,35 +3,16 @@ const router = express.Router();
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const auth = require("../../middleware/auth");
-
 const jwt = require("jsonwebtoken");
 const config = require("../../config/default.json");
 const { check, validationResult } = require("express-validator");
-
 const User = require("../../models/User");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 let path = require("path");
 const fs = require("fs");
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "tempImages");
-  },
-  filename: function (req, file, cb) {
-    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
-  },
-});
 
-const fileFilter = (req, file, cb) => {
-  const validFiles = ["image/jpeg", "image/jpg", "image/png"];
-
-  if (validFiles.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-const saveOnDisk = multer({ storage, fileFilter });
+//Register user
 router.post(
   "/",
   [
@@ -75,6 +56,7 @@ router.post(
           },
         });
       } else {
+        //If user has a photo attached to their email it is grabbed here. Else a default photo.
         const avatar = gravatar.url(email, {
           s: "200",
           r: "pg",
@@ -88,8 +70,8 @@ router.post(
           avatar,
           fahrenheit_on: fahrenheitOn,
         });
+        //Encrypt the password
         const salt = await bcrypt.genSalt(10);
-
         newUser.password = await bcrypt.hash(password, salt);
         newUser.save((err, doc) => {
           if (err) {
@@ -100,13 +82,14 @@ router.post(
               },
             });
           } else {
+            //Creating token
             const payload = {
               user: {
                 id: doc._id,
               },
             };
             //TODO change expires
-            jwt.sign(
+                        jwt.sign(
               payload,
               config.jwtSecret,
               { expiresIn: 60 * 60 * 24 * 100 },
@@ -136,6 +119,7 @@ router.post(
     });
   }
 );
+//Update user info
 router.put(
   "/",
   [
@@ -158,10 +142,9 @@ router.put(
       r: "pg",
       d: "mm",
     });
-
     const user = await User.findById(req.user.id, async (err) => {
       if (err) {
-        res.status(500).json({
+       return res.status(500).json({
           message: {
             msgBody: "Something wrong at server, please try again later.",
             msgError: true,
@@ -176,7 +159,7 @@ router.put(
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(req.body.password, salt);
       } else {
-        res.status(500).json({
+       return res.status(500).json({
           message: {
             msgBody: "Old password doesnt match, please try again.",
             msgError: true,
@@ -199,6 +182,7 @@ router.put(
           },
         });
       } else {
+        //Creating token
         const payload = {
           user: {
             id: req.user.id,
@@ -232,10 +216,32 @@ router.put(
     });
   }
 );
-router.put("/image", [auth, saveOnDisk.single("photo")], async (req, res) => {
+//Multer used for save photo on disk.
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "tempProfilePhoto");
+  },
+  filename: function (req, file, cb) {
+    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
+  },
+});
+//Extra validation
+const fileFilter = (req, file, cb) => {
+  const validFiles = ["image/jpeg", "image/jpg", "image/png"];
+
+  if (validFiles.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+const saveOnDisk = multer({ storage, fileFilter });
+
+//Upload user photo
+router.put("/photo", [auth, saveOnDisk.single("photo")], async (req, res) => {
   const user = await User.findById(req.user.id, async (err) => {
     if (err) {
-      res.status(500).json({
+      return res.status(500).json({
         message: {
           msgBody: "Something wrong at server, please try again later.",
           msgError: true,
@@ -243,8 +249,16 @@ router.put("/image", [auth, saveOnDisk.single("photo")], async (req, res) => {
       });
     }
   });
+  if (!req.file.path) {
+    return res.status(500).json({
+      message: {
+        msgBody: "Something wrong at server, please try again later.",
+        msgError: true,
+      },
+    });
+  }
+  //Reading photo and deleting photo from disk
   user.photo = fs.readFileSync(req.file.path);
-
   fs.unlinkSync(req.file.path);
   user.save((err) => {
     if (err) {
@@ -255,6 +269,7 @@ router.put("/image", [auth, saveOnDisk.single("photo")], async (req, res) => {
         },
       });
     } else {
+      //Creating token
       const payload = {
         user: {
           id: req.user.id,
@@ -287,6 +302,7 @@ router.put("/image", [auth, saveOnDisk.single("photo")], async (req, res) => {
     }
   });
 });
+//Update user settings such as celcius/fahrenheit
 router.put("/settings", [auth], async (req, res) => {
   User.findOneAndUpdate(
     { email: req.body.email },
@@ -305,6 +321,7 @@ router.put("/settings", [auth], async (req, res) => {
           },
         });
       } else {
+        //Creating token
         const payload = {
           user: {
             id: req.user.id,
@@ -338,19 +355,8 @@ router.put("/settings", [auth], async (req, res) => {
     }
   );
 });
-//Only for development
-router.get("/", async (req, res) => {
-  try {
-    const users = await User.find({}).populate().select(["username", "email"]);
 
-    console.log(users);
-    res.json(users);
-  } catch (err) {
-    console.log(err.message);
-    res.status(500).send("Server error");
-  }
-});
-
+//Delete user
 router.delete("/", auth, async (req, res) => {
   User.findOneAndRemove({ _id: req.user.id }, (err) => {
     if (err) {
@@ -369,5 +375,17 @@ router.delete("/", auth, async (req, res) => {
       });
     }
   });
+});
+//Only for development
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.find({}).populate().select(["username", "email"]);
+
+    console.log(users);
+    res.json(users);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server error");
+  }
 });
 module.exports = router;
