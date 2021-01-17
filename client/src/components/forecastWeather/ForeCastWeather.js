@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core";
 import React, { useContext } from "react";
 import {
-  AppContext,
+ 
   WeatherContext,
 } from "../../shared/global/provider/Provider";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
@@ -10,7 +10,6 @@ import { DailyWeatherOverview } from "./DailyWeatherOverview";
 import "./ForeCastWeather.css";
 export const ForeCastWeather = () => {
   const weather = useContext(WeatherContext);
-  const app = useContext(AppContext);
 
   let i = 0;
   /* array used for determine which timestamp is the noon timestamp */
@@ -53,7 +52,6 @@ export const ForeCastWeather = () => {
     i++;
   }
   /* used in the max min component */
-  app.setIsAfternoon(isAfternoon);
   /* looping to add only the noon timestamp into the array,
   if its afternnon it add the next available timestamp to present
   actual day */
@@ -85,6 +83,7 @@ export const ForeCastWeather = () => {
           day={day}
           key={index}
           index={index}
+          isAfternoon={isAfternoon}
         ></DailyWeatherOverview>
       ))}
       <Button

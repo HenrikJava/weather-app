@@ -55,6 +55,8 @@ export const DailyWeatherOverview = (props) => {
         );
                 /* used in different places in the app  */
         app.setDisplayCurrent(false);
+        app.setIsAfternoon(props.isAfternoon);
+
         /* scroll to top if using mobile */
         document.documentElement.scrollTop = 0;
       }}
