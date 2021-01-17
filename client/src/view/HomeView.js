@@ -3,7 +3,7 @@ import { WeatherContext } from "../shared/global/provider/Provider";
 import { AppContext } from "../shared/global/provider/Provider";
 import { MainWeather } from "../components/mainWeather/MainWeather";
 import { ForeCastWeather } from "../components/forecastWeather/ForeCastWeather";
-import searchCity from "../shared/api/service/WeatherService";
+import {searchCity} from "../shared/api/service/WeatherService";
 import { UserContext } from "../shared/global/provider/Provider";
 import { ErrorView } from "./ErrorView";
 import { loadUser } from "../shared/api/service/UserService";
@@ -14,13 +14,11 @@ export const HomeView = () => {
   const app = useContext(AppContext);
   const [error, setError] = useState();
 
-  const defaultWeatherCall = () => {
-    searchCity(app.city, app.fahrenheitOn).then(
+  const defaultWeatherCall = async () => {
+    await searchCity({city:app.city, fahrenheitOn: app.fahrenheitOn}).then(
       (response) => {
-        console.log(response);
-
         if (response.status === 200) {
-          weather.setWeather(response.data);
+          weather.setWeather(response.data.weather);
         } else {
           console.log(response.data.message.msgBody);
           setError(true)
@@ -41,20 +39,21 @@ export const HomeView = () => {
           const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')
           user.setPhoto(`data:image/png;base64,${b64encoded}`);   
         }
-        user.setAuthenticatedUser(true);      
-        searchCity(
-          loggedInUser.data.user.favourite_city
+        user.setAuthenticatedUser(true); 
+        //TODO fix fahrenheit   
+        await searchCity(
+          {city:loggedInUser.data.user.favourite_city
             ? loggedInUser.data.user.favourite_city
             : app.city,
-          loggedInUser.data.user.fahrenheit_on
+          fahrenheitOn:           loggedInUser.data.user.fahrenheit_on
+        }
         ).then((response) => {
           if (response.status === 200) {
-            weather.setWeather(response.data);
+            weather.setWeather(response.data.weather);
           }
           else if (
             response.data.message.msgBody ===
-            "No city with that name in the database, please try again."
-          ) {
+            "city not found"          ) {
             console.log(response.data.message.msgBody);
             defaultWeatherCall()
             app.setnoCityText("Your favourite city does not exist in the database, please change it.");

@@ -3,7 +3,7 @@ import { AppContext } from "../../shared/global/provider/Provider";
 import { WeatherContext } from "../../shared/global/provider/Provider";
 import "./CitySearch.css";
 import { useContext, useState } from "react";
-import searchCity from "../../shared/api/service/WeatherService";
+import {searchCity} from "../../shared/api/service/WeatherService";
 import SearchIcon from "@material-ui/icons/Search";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -14,12 +14,19 @@ export const CitySearch = () => {
   const [city, setCity] = useState("");
   const weather = useContext(WeatherContext);
   const searchWeather = async () => {
-    const response = await searchCity(city, app.fahrenheitOn);
+    const response = await searchCity({
+      city: city,
+      fahrenheitOn: app.fahrenheitOn,
+    });
     if (response.status === 200) {
-      app.setCity(response.data.city.name);
+      app.setCity(response.data.weather.city.name);
       setCity("");
       app.setnoCityText("");
-      weather.setWeather(response.data);
+      weather.setWeather(response.data.weather);
+    } else if (response.data.message.msgBody === "city not found") {
+      app.setnoCityText(
+        `No city with name "${city}" in the database, please try again.`
+      );
     } else {
       app.setnoCityText(response.data.message.msgBody);
     }
