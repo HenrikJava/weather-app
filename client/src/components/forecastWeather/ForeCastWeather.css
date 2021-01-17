@@ -12,6 +12,8 @@
     height: 43%;
     grid-template-columns: repeat(2, 50%);
     display: grid;
+    grid-row-gap: 4%;
+
   }
 }
 @media screen and (max-width: 512px) {
@@ -20,12 +22,16 @@
     display: grid;
   }
 
-  #back-to-top-button {
+  #back-to-top-icon-wrapper {
     display: flex;
-    width: 7vw;
+    width: 9vw;
+    height: 9vw;
     margin: -10vw 2vw 10vw auto;
-    background-color: lightblue;
+    background-color: rgb(143, 138, 138);
     border-radius: 100%;
     min-width: 0%;
   }
+  #back-to-top-icon {
+    font-size: 8vw;
+}
 }

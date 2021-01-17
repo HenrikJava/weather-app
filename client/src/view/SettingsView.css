@@ -41,6 +41,31 @@
   font-size: 1vw;
   text-align: center;
 }
+@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+  #settings-header {
+    font-size: 4vw;
+  }
+  #settings-wrapper {
+    width: 35vw;
+   
+  }
+  #settings-field {
+    font-size: 2.5vw;
+  }
+  #switch {
+  
+    height: 3vw;
+  }
+  #switch p {
+    font-size: 2vw;
+  }
+  .update {
+    width: 20vw;
+    font-size: 2vw;
+   
+  }
+}
+
 @media screen and (max-width: 1024px) and  (min-height: 1024px)  {
   #settings-header {
     font-size: 8vw;
@@ -61,6 +86,11 @@
   }
   #switch p {
     font-size: 3vw;
+  }
+  .update {
+    width: 40vw;
+    font-size: 4vw;
+   
   }
 }
 

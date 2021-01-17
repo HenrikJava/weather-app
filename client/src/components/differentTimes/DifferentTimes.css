@@ -28,7 +28,7 @@
   font-size: 2vw;
   margin-block: auto;
 }
-.different-wind {
+#different-wind {
   font-size: 1.4vw;
 }
 @media screen and (max-width: 1400px) and  (min-height: 500px)  {
@@ -41,7 +41,7 @@
     margin: auto;
     width: 100%;
 
-    font-size: 1.4vw;
+    font-size: 1.6vw;
     white-space: nowrap;
   }
   
@@ -50,18 +50,21 @@
    margin: auto;
     font-size: 3vw;
   }
-  .different-wind {
+  #different-wind {
     font-size: 1.6vw;
   }
 }
 @media screen and (max-width: 1024px) and  (min-height: 1024px)  {
+  .day-details {
+    margin: 5%;
+  }
   .details-weather-icon {
     width: 4vw;
   }
   
   .weather-at-differents-time-grid {
     width: 100%;
-    font-size: 2vw;
+    font-size: 2.5vw;
     
   }
   
@@ -70,8 +73,8 @@
   .day-to-display {
     font-size: 4vw;
   }
-  .different-wind {
-    font-size: 2vw;
+  #different-wind {
+    font-size: 2.5vw;
   }
 }
 @media screen and (max-width: 512px) { 
@@ -94,7 +97,7 @@
 
     font-size: 7vw;
   }
-  .different-wind {
+  #different-wind {
     font-size: 4vw;
   }
 }

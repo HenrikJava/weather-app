@@ -9,8 +9,9 @@
 #suns-wrapper {
   align-items: center;
   display: flex;
+  margin-top: 5%;
 }
-.mobile-sloth {
+.mobile-sloth, .mobile-swipe-text {
   display: none;
 }
 
@@ -71,8 +72,11 @@
     display: none;
   }
   .mobile-sloth {
-    width: 27vw;
+    width: 42vw;
     display: inline-block;
-    margin-top: -11vw;
+    margin-top: -24vw;
+  }
+  .mobile-swipe-text {
+    display: inline-block;
   }
 }

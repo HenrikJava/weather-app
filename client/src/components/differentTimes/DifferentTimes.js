@@ -157,19 +157,19 @@ associated precipitation.*/
           <Grid item xs={1}>
             <p>{Math.ceil(timesToDisplay[index].precipitation) + " mm"}</p>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <p>
               {capitalizeFirstLetter(
                 timesToDisplay[index].weather[0].description
               )}
             </p>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <Wind
               speed={timesToDisplay[index].wind.speed}
               deg={timesToDisplay[index].wind.deg}
               fahrenheitOn={app.fahrenheitOn}
-              className="different-wind"
+              id="different-wind"
             ></Wind>
           </Grid>
         </Grid>

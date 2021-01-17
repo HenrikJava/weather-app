@@ -5,12 +5,12 @@ import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 export const Wind = (props) => {
   return (
     <div className="wind-wrapper">
-      <p className={props.className}>
+      <p id={props.id}>
         {Math.round(props.speed)}
         {props.fahrenheitOn ? " mph" : " m/s"}
       </p>
       <ArrowRightAltIcon
-       className={props.className}
+       id={props.id}
         style={{
           transform: `rotateZ(${props.deg + 90}deg)`,
         }}

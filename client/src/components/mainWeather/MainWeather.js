@@ -30,6 +30,9 @@ export const MainWeather = () => {
           <MaxMin></MaxMin>
         </Grid>
       </Grid>
+           {/* This text only appear in the mobile version  */ }
+
+      <p className="mobile-swipe-text">Swipe down to see more days</p>
     </div>
   );
 };

@@ -22,7 +22,7 @@
 #daily-overview-icon {
   width: 8vw;
 }
-.daily-overview-wind {
+#daily-overview-wind {
   font-size: 1vw;
 }
 #daily-overview-precipitation {
@@ -45,13 +45,13 @@
     margin: 0;
   }
   #daily-overview-degree {
-    font-size: 2.4vw;
+    font-size: 3.4vw;
     margin-top: 35%
   }
   #daily-overview-icon {
     width: 8vw;
   }
-  .daily-overview-wind {
+  #daily-overview-wind {
     font-size: 1.4vw;
   }
   #daily-overview-precipitation {
@@ -72,11 +72,11 @@
     height: 22%;
     font-size: 4vw;
   }
-  .daily-overview-wind {
+  #daily-overview-wind {
     font-size: 3vw;
   }
   #daily-overview-degree {
-    font-size: 4vw;
+    font-size: 6vw;
   }
   #daily-overview-icon {
     width:22vw;
@@ -117,7 +117,7 @@
   .template4 {
     display: block;
   }
-  .daily-overview-wind {
+  #daily-overview-wind {
     font-size: 5vw;
   }
   #daily-overview-precipitation {

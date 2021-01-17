@@ -87,13 +87,13 @@ export const ForeCastWeather = () => {
         ></DailyWeatherOverview>
       ))}
       <Button
-        id="back-to-top-button"
+        id="back-to-top-icon-wrapper"
         onClick={() => {
           document.documentElement.scrollTop = 0;
         }}
       >
         {" "}
-        <KeyboardArrowUpIcon />
+        <KeyboardArrowUpIcon id="back-to-top-icon" />
       </Button>
     </div>
   );

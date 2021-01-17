@@ -19,16 +19,16 @@
 }
 .menu-profile {
   display: flex;
-  width: 85%;
+  width: 75%;
   align-items: center;
-  margin-right: 5%;
 }
 .menu-links-wrapper {
-  width: 20%;
+  width: 25%;
   margin-left: auto;
   cursor: pointer;
   height: 100%;
   display: flex;
+  place-content: space-evenly;
 }
 
 .menu-link {
@@ -58,7 +58,6 @@
   }
   .menu-profile {
     width: 70%;
-    margin-right: 0%;
   }
   .menu-links-wrapper {
     width: 28%;

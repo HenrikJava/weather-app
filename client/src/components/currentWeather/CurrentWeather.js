@@ -33,7 +33,7 @@ export const CurrentWeather = () => {
             speed={weather.weather.list[0].wind.speed}
             deg={weather.weather.list[0].wind.deg}
             fahrenheitOn={app.fahrenheitOn}
-            className="current-wind"
+            id="current-wind"
           ></Wind>
         </div>
       </div>

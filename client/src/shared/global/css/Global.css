@@ -13,26 +13,53 @@ html,
 .profile-view,
 .empty-view,
 .settings-view,
-.error-view {
+.error-view,
+.home-view {
   width: 100%;
   height: 92%;
   display: flex;
   flex-direction: column;
 }
 #register-dialog-container > div > div {
-  height: 45%;
+  height: fit-content;
   width: 30%;
 }
 #sign-in-dialog-wrapper > div > div {
-  height: 30%;
+  height: fit-content;
+
   width: 30%;
 }
+#dialog-title > h2 {
+  font-size: 2vw;
+}
+#user-friendly-text {
+  font-size: 1.2vw;
+}
+#email-label,
+  #password-label,
+  #first-name-label,
+  #favourite-city-label,
+  #confirm-password-label {
+    font-size: 1.4vw;
+  }
+  #email,
+  #password,
+  #first-name,
+  #favourite-city,
+  #confirm-password {
+    height: 2vw;
+    font-size: 1.6vw;
+  }
 .link-between-dialogs {
   text-align: center;
   cursor: pointer;
 }
 .link-between-dialogs:hover {
   color: #3f51b5;
+}
+#dialog-button > button {
+  width: 8vw;
+  font-size: 1vw;
 }
 #error-message {
   color: red;
@@ -47,11 +74,11 @@ html,
     height: 89%;
   }
   #register-dialog-container > div > div {
-    height: 75%;
+    height: fit-content;
     width: 70%;
   }
   #sign-in-dialog-wrapper > div > div {
-    height: 50%;
+    height: fit-content;
     width: 85%;
   }
 
@@ -90,11 +117,11 @@ html,
 }
 @media screen and (max-width: 1024px) and (min-height: 1024px) {
   #register-dialog-container > div > div {
-    height: 60%;
+    height: fit-content;
     width: 70%;
   }
   #sign-in-dialog-wrapper > div > div {
-    height: 40%;
+    height: fit-content;
     width: 80%;
   }
   #dialog-title {
@@ -135,11 +162,11 @@ html,
 }
 @media screen and (max-width: 750px) {
   #register-dialog-container > div > div {
-    height: 90%;
+    height: fit-content;
     width: 50%;
   }
   #sign-in-dialog-wrapper > div > div {
-    height: 85%;
+    height: fit-content;
     width: 50%;
   }
 
@@ -186,11 +213,11 @@ html,
     height: 90%;
   }
   #register-dialog-container > div > div {
-    height: 90%;
+    height: fit-content;
     width: 80%;
   }
   #sign-in-dialog-wrapper > div > div {
-    height: 70%;
+    height: fit-content;
     width: 90%;
   }
   #dialog-title {
