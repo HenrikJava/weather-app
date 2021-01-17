@@ -123,7 +123,8 @@ export const RegisterDialog = () => {
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  helperText={errors.email}
+                  helperText={errors.email && touched.email && errors.email}
+             
                   type="email"
                   fullWidth
                 />
@@ -136,7 +137,7 @@ export const RegisterDialog = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={
-                    errors.password 
+                    errors.password && touched.password && errors.password 
                   }
                   type="password"
                   fullWidth
@@ -150,7 +151,7 @@ export const RegisterDialog = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={
-                    errors.confirmPassword
+                    errors.confirmPassword && touched.confirmPassword && errors.confirmPassword
                     }
                   type="password"
                   fullWidth

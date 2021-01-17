@@ -17,8 +17,9 @@ export const SignInDialog = () => {
   const [password, setPassword] = useState();
   const user = useContext(UserContext);
   const app = useContext(AppContext);
-  
-  const login = async () => {
+
+  const login = async (event) => {
+    event.preventDefault();
     const response = await loginUser(email, password);
     if (response.data.message.msgError === true) {
       setErrorMessage(response.data.message.msgBody);
@@ -30,7 +31,9 @@ export const SignInDialog = () => {
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
         user.setAvatar(loggedInUser.data.user.avatar);
         if (loggedInUser.data.user.photo) {
-          const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')
+          const b64encoded = new Buffer.from(
+            loggedInUser.data.user.photo.data
+          ).toString("base64");
           user.setPhoto(`data:image/png;base64,${b64encoded}`);
         }
         user.setAuthenticatedUser(true);
@@ -59,41 +62,45 @@ export const SignInDialog = () => {
       onClose={handleClose}
       id="sign-in-dialog-wrapper"
     >
-      <DialogTitle id="dialog-title">Log in</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="user-friendly-text">
-          Please enter your email and password to log in.
+      <form onSubmit={login}>
+        <DialogTitle id="dialog-title">Log in</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="user-friendly-text">
+            Please enter your email and password to log in.
+          </DialogContentText>
+          <DialogContentText id="error-message">
+            {errorMessage}
+          </DialogContentText>
+          <TextField
+            autoFocus
+            id="email"
+            label="Email"
+            type="email"
+            fullWidth
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <TextField
+            id="password"
+            label="Password"
+            type="password"
+            fullWidth
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </DialogContent>
+        <DialogActions id="dialog-button">
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button color="primary" type="submit">
+            Log in
+          </Button>
+        </DialogActions>
+        <DialogContentText className="link-between-dialogs">
+          <span onClick={() => openRegisterDialog()}>
+            Don't have an account yet?
+          </span>
         </DialogContentText>
-        <DialogContentText id="error-message">{errorMessage}</DialogContentText>
-        <TextField
-          autoFocus
-          id="email"
-          label="Email"
-          type="email"
-          fullWidth
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <TextField
-          id="password"
-          label="Password"
-          type="password"
-          fullWidth
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </DialogContent>
-      <DialogActions id="dialog-button">
-        <Button onClick={handleClose} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={() => login()} color="primary">
-          Log in
-        </Button>
-      </DialogActions>
-      <DialogContentText className="link-between-dialogs">
-        <span onClick={() => openRegisterDialog()}>
-          Don't have an account yet?
-        </span>
-      </DialogContentText>
+      </form>
     </Dialog>
   );
 };

@@ -22,7 +22,6 @@ export const ProfileView = () => {
 
   const loadUserAfterUpdate = async () => {
     const loggedInUser = await loadUser();
-    console.log(loggedInUser);
     if (loggedInUser.data.message.msgError === false) {
       user.setFirstname(loggedInUser.data.user.firstname);
       user.setEmail(loggedInUser.data.user.email);
@@ -59,7 +58,7 @@ useEffect(() => {
   !user.authenticatedUser
     ? app.setSignInDialogOpen(true)
     : app.setSignInDialogOpen(false);
-},[])
+},[app, user.authenticatedUser])
   return (
     <div className="profile-view">
       <DeleteConfirmDialog></DeleteConfirmDialog>

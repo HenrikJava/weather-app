@@ -38,7 +38,7 @@ export const MaxMin = () => {
   const weatherAtActualDay = weather.weather.list.filter(
     (fragment) => getDayName(fragment.dt) === app.weekday
   );
-  if (weatherAtActualDay>0) {
+  if (weatherAtActualDay.length>0) {
     /* Assigning true if its today */
     isToday =
       new Date(weatherAtActualDay[0].dt * 1000).toLocaleDateString() ===
