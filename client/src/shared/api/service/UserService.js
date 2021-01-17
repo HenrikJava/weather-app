@@ -152,7 +152,7 @@ export const updateUserPhoto = async (image) => {
   }
 
   try {
-    const response = await axios.put("/api/user/image", image);
+    const response = await axios.put("/api/user/photo", image);
     if (response.status === 201) {
       localStorage.setItem("token", response.data.token);
 
