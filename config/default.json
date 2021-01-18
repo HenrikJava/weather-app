@@ -1,5 +1,5 @@
 {
-"mongoURIAtlas": "process.env.MONGODB:URI",
+"mongoURIAtlas": "process.env.MONGODB_URI",
   "mongoURILocal":  "mongodb://localhost:27017/wheater-app",
   "jwtSecret": "tF7CU44sDBUV"
 }
