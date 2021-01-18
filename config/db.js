@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 
 const config = require("config");
-const db = config.get("mongoURI");
+const atlasDb = config.get("mongoURIAtlas");
+const localDb = config.get("mongoURILocal");
 //Creating mongodb connection
 const connectDB = async () => {
   try {
-    await mongoose.connect(db, {
+    await mongoose.connect(atlasDb || localDb, {
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedTopology: true,
