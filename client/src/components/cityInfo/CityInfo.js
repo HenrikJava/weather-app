@@ -11,7 +11,7 @@ export const CityInfo = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(calcTime(weather.weather.city.timezone).toLocaleString());
-    }, 60000);
+    }, 1000);
     return () => clearInterval(interval);
   }, [weather.weather]);
   return (
