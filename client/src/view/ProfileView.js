@@ -4,6 +4,7 @@ import { AppContext } from "../shared/global/provider/Provider";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Tooltip from "@material-ui/core/Tooltip"
 import EditIcon from "@material-ui/icons/Edit";
 import { DeleteConfirmDialog } from "../components/deleteConfirmDialog/DeleteConfirmDialog";
 import * as Yup from "yup";
@@ -64,12 +65,14 @@ useEffect(() => {
       <DeleteConfirmDialog></DeleteConfirmDialog>
       <Grid container id="profile-wrapper">
         <Grid item xs={12} id="profile-upper-wrapper">
-          <DeleteIcon
+        <Tooltip title={<p className="profile-delete-tooltip">Delete account</p>}><DeleteIcon
             id="delete-icon"
             onClick={() => {
               openDeleteConfirm();
             }}
-          ></DeleteIcon>
+          ></DeleteIcon></Tooltip>
+
+          
           <span className="photo-wrapper">
             <img
               src={user.photo ? user.photo : user.avatar}
