@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 
 const config = require("config");
-const atlasDb = config.get("mongoURIAtlas");
 const localDb = config.get("mongoURILocal");
 //Creating mongodb connection
 const connectDB = async () => {
   try {
-    await mongoose.connect(atlasDb || localDb, {
+    await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/wheater-app", {
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedTopology: true,
