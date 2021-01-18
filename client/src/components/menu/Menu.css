@@ -30,7 +30,9 @@
   display: flex;
   place-content: space-evenly;
 }
-
+#menu-tooltip {
+font-size: 1vw;
+}
 .menu-link {
   align-self: center;
   display: flex;

@@ -11,6 +11,7 @@ import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from "@material-ui/icons/Menu";
 import InfoIcon from "@material-ui/icons/Info";
+import Tooltip from "@material-ui/core/Tooltip"
 import { AppContext } from "../../shared/global/provider/Provider";
 import { SignInDialog } from "../signInDialog/SignInDialog";
 import { RegisterDialog } from "../registerDialog/RegisterDialog";
@@ -70,6 +71,7 @@ export const Menu = () => {
               app.menuOpen ? "menu-links-wrapper active" : "menu-links-wrapper"
             }
           >
+            
             <Link
               to={RoutingPath.profileView}
               className="menu-link"
@@ -79,8 +81,8 @@ export const Menu = () => {
             >
               {app.menuOpen ? (
                 <p>Profile</p>
-              ) : (
-                <PersonIcon id="logged-in-icon" />
+              ) : (<Tooltip title={<p id="menu-tooltip">Profile</p>} ><PersonIcon id="logged-in-icon" /></Tooltip>
+                
               )}
             </Link>
             <Link
@@ -92,8 +94,7 @@ export const Menu = () => {
             >
               {app.menuOpen ? (
                 <p>Settings</p>
-              ) : (
-                <SettingsIcon id="logged-in-icon" />
+              ) : ( <Tooltip title={<p id="menu-tooltip">Settings</p>} ><SettingsIcon id="logged-in-icon" /></Tooltip>
               )}
             </Link>
             <Link
@@ -103,7 +104,7 @@ export const Menu = () => {
                 app.setMenuOpen(false);
               }}
             >
-              {app.menuOpen ? <p>About</p> : <InfoIcon id="logged-in-icon" />}
+              {app.menuOpen ? <p>About</p> : <Tooltip title={<p id="menu-tooltip">About</p>} ><InfoIcon id="logged-in-icon" /></Tooltip> }
             </Link>
             <span
               onClick={() => {
@@ -115,8 +116,8 @@ export const Menu = () => {
             >
               {app.menuOpen ? (
                 <p>Log out</p>
-              ) : (
-                <ExitToAppIcon id="logged-in-icon" />
+              ) : ( <Tooltip title={<p id="menu-tooltip">Log out</p>} ><ExitToAppIcon id="logged-in-icon" /></Tooltip>
+                
               )}
             </span>
           </div>
@@ -148,8 +149,8 @@ export const Menu = () => {
             >
               {app.menuOpen ? (
                 <p>Log in</p>
-              ) : (
-                <MeetingRoomIcon id="not-logged-in-icon" />
+              ) : ( <Tooltip title={<p id="menu-tooltip">Log in</p>} ><MeetingRoomIcon id="not-logged-in-icon" /></Tooltip>
+                
               )}
             </span>
 
@@ -162,8 +163,7 @@ export const Menu = () => {
             >
               {app.menuOpen ? (
                 <p>Settings</p>
-              ) : (
-                <SettingsIcon id="not-logged-in-icon" />
+              ) : ( <Tooltip title={<p id="menu-tooltip">Settings</p>} ><SettingsIcon id="not-logged-in-icon" /></Tooltip>
               )}
             </Link>
             <Link
@@ -175,8 +175,7 @@ export const Menu = () => {
             >
               {app.menuOpen ? (
                 <p>About</p>
-              ) : (
-                <InfoIcon id="not-logged-in-icon" />
+              ) : ( <Tooltip title={<p id="menu-tooltip">About</p>} ><InfoIcon id="not-logged-in-icon" /></Tooltip>
               )}
             </Link>
           </div>
