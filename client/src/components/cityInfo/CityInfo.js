@@ -11,14 +11,14 @@ export const CityInfo = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(calcTime(weather.weather.city.timezone).toLocaleString());
-    }, 1000);
+    }, 60000);
     return () => clearInterval(interval);
   }, [weather.weather]);
   return (
     <div className="city-wrapper">
       {app.noCityText? <p className="no-city-text">{app.noCityText}</p> :  ''}
       <p className="city-info">{`${weather.weather.city.name}, ${weather.weather.city.country}`}</p>
-      <p className="time">{`The local time in  ${weather.weather.city.name} is ${time}`}</p>
+      <p className="time">{`The local time in  ${weather.weather.city.name} is ${time.slice(0,16)}`}</p>
     </div>
   );
 };
