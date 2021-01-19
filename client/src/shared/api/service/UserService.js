@@ -150,9 +150,13 @@ export const updateUserPhoto = async (image) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
-
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
   try {
-    const response = await axios.put("/api/user/photo", image);
+    const response = await axios.put("/api/user/photo", image, config);
     if (response.status === 201) {
       localStorage.setItem("token", response.data.token);
 
