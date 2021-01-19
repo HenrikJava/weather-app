@@ -11,7 +11,7 @@ import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from "@material-ui/icons/Menu";
 import InfoIcon from "@material-ui/icons/Info";
-import Tooltip from "@material-ui/core/Tooltip"
+import Tooltip from "@material-ui/core/Tooltip";
 import { AppContext } from "../../shared/global/provider/Provider";
 import { SignInDialog } from "../signInDialog/SignInDialog";
 import { RegisterDialog } from "../registerDialog/RegisterDialog";
@@ -44,17 +44,8 @@ export const Menu = () => {
     <>
       {user.authenticatedUser ? (
         <div className="menu-wrapper">
-          <div className="menu-profile">
-            <span className="menu-firstname">
-              <p>{user.firstname}</p>
-            </span>
-            {/* If user has uploaded photo show this. Else use the generated gravatar */}
-            <img
-              src={user.photo ? user.photo : user.avatar}
-              alt="profile"
-              className="menu-image"
-            />
-          </div>
+          
+
           <div
             onClick={() => app.setMenuOpen(!app.menuOpen)}
             className="menu-symbol-icon-wrapper"
@@ -71,20 +62,29 @@ export const Menu = () => {
               app.menuOpen ? "menu-links-wrapper active" : "menu-links-wrapper"
             }
           >
-            
             <Link
-              to={RoutingPath.profileView}
-              className="menu-link"
-              onClick={() => {
-                app.setMenuOpen(false);
-              }}
-            >
-              {app.menuOpen ? (
-                <p>Profile</p>
-              ) : (<Tooltip title={<p id="menu-tooltip">Profile</p>} ><PersonIcon id="logged-in-icon" /></Tooltip>
-                
-              )}
-            </Link>
+            to={RoutingPath.profileView}
+            className="menu-link"
+            onClick={() => {
+              app.setMenuOpen(false);
+            }}
+          >
+            {app.menuOpen ? (
+              <p>Profile</p>
+            ) : (<Tooltip title={<p id="menu-tooltip">Profile</p>}>
+            <div className="menu-name-photo">
+                <p className="menu-firstname">{user.firstname}</p>
+                {/* If user has uploaded photo show this. Else use the generated gravatar */}
+                <img
+                  src={user.photo ? user.photo : user.avatar}
+                  alt="profile"
+                  className="menu-image"
+                />
+              </div>
+          </Tooltip>
+              
+            )}
+          </Link>
             <Link
               to={RoutingPath.settingsView}
               className="menu-link"
@@ -94,7 +94,10 @@ export const Menu = () => {
             >
               {app.menuOpen ? (
                 <p>Settings</p>
-              ) : ( <Tooltip title={<p id="menu-tooltip">Settings</p>} ><SettingsIcon id="logged-in-icon" /></Tooltip>
+              ) : (
+                <Tooltip title={<p id="menu-tooltip">Settings</p>}>
+                  <SettingsIcon id="logged-in-icon" />
+                </Tooltip>
               )}
             </Link>
             <Link
@@ -104,7 +107,13 @@ export const Menu = () => {
                 app.setMenuOpen(false);
               }}
             >
-              {app.menuOpen ? <p>About</p> : <Tooltip title={<p id="menu-tooltip">About</p>} ><InfoIcon id="logged-in-icon" /></Tooltip> }
+              {app.menuOpen ? (
+                <p>About</p>
+              ) : (
+                <Tooltip title={<p id="menu-tooltip">About</p>}>
+                  <InfoIcon id="logged-in-icon" />
+                </Tooltip>
+              )}
             </Link>
             <span
               onClick={() => {
@@ -116,8 +125,10 @@ export const Menu = () => {
             >
               {app.menuOpen ? (
                 <p>Log out</p>
-              ) : ( <Tooltip title={<p id="menu-tooltip">Log out</p>} ><ExitToAppIcon id="logged-in-icon" /></Tooltip>
-                
+              ) : (
+                <Tooltip title={<p id="menu-tooltip">Log out</p>}>
+                  <ExitToAppIcon id="logged-in-icon" />
+                </Tooltip>
               )}
             </span>
           </div>
@@ -136,7 +147,7 @@ export const Menu = () => {
           </div>
           <div
             className={
-              app.menuOpen ? "menu-links-wrapper active" : "menu-links-wrapper"
+              app.menuOpen ? "menu-links-wrapper-not-logged-in active" : "menu-links-wrapper-not-logged-in"
             }
           >
             <span
@@ -149,8 +160,10 @@ export const Menu = () => {
             >
               {app.menuOpen ? (
                 <p>Log in</p>
-              ) : ( <Tooltip title={<p id="menu-tooltip">Log in</p>} ><MeetingRoomIcon id="not-logged-in-icon" /></Tooltip>
-                
+              ) : (
+                <Tooltip title={<p id="menu-tooltip">Log in</p>}>
+                  <MeetingRoomIcon id="not-logged-in-icon" />
+                </Tooltip>
               )}
             </span>
 
@@ -163,7 +176,10 @@ export const Menu = () => {
             >
               {app.menuOpen ? (
                 <p>Settings</p>
-              ) : ( <Tooltip title={<p id="menu-tooltip">Settings</p>} ><SettingsIcon id="not-logged-in-icon" /></Tooltip>
+              ) : (
+                <Tooltip title={<p id="menu-tooltip">Settings</p>}>
+                  <SettingsIcon id="not-logged-in-icon" />
+                </Tooltip>
               )}
             </Link>
             <Link
@@ -175,7 +191,10 @@ export const Menu = () => {
             >
               {app.menuOpen ? (
                 <p>About</p>
-              ) : ( <Tooltip title={<p id="menu-tooltip">About</p>} ><InfoIcon id="not-logged-in-icon" /></Tooltip>
+              ) : (
+                <Tooltip title={<p id="menu-tooltip">About</p>}>
+                  <InfoIcon id="not-logged-in-icon" />
+                </Tooltip>
               )}
             </Link>
           </div>
