@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
   },
   photo: {
-   type: Buffer
+  
 
   },
   fahrenheit_on: {
