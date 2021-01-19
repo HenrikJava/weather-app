@@ -237,12 +237,12 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
-const upload = multer({ storage, fileFilter });
+/* const upload = multer({ storage, fileFilter });
 cloudinary.config({ 
   cloud_name: 'hloyne9mx', 
   api_key: '959942379881238', 
   api_secret: 'BPt0wYd7QL_Ta8VBEuR66Pp1QZQ' 
-});
+}); */
 //Upload user photo
 router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
   console.log(req.file.path);
