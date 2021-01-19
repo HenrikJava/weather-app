@@ -11,6 +11,7 @@ const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 let path = require("path");
 const fs = require("fs");
+const cloudinary = require('cloudinary')
 
 //Register user
 router.post(
@@ -222,7 +223,8 @@ const storage = multer.diskStorage({
     cb(null, "tempProfilePhoto");
   },
   filename: function (req, file, cb) {
-    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
+
+    cb(null, /* uuidv4() + "-" + Date.now() + path.extname( */file.originalname)/* ) */;
   },
 });
 //Extra validation
@@ -235,10 +237,16 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
-const saveOnDisk = multer({ storage, fileFilter });
-
+const upload = multer({ storage, fileFilter });
+cloudinary.config({ 
+  cloud_name: 'hloyne9mx', 
+  api_key: '959942379881238', 
+  api_secret: 'BPt0wYd7QL_Ta8VBEuR66Pp1QZQ' 
+});
 //Upload user photo
-router.put("/photo", [auth, saveOnDisk.single("photo")], async (req, res) => {
+router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
+  console.log(req.file.path);
+
   const user = await User.findById(req.user.id, async (err) => {
     if (err) {
       return res.status(500).json({
@@ -258,8 +266,13 @@ router.put("/photo", [auth, saveOnDisk.single("photo")], async (req, res) => {
     });
   }
   //Reading photo and deleting photo from disk
-  user.photo = fs.readFileSync(req.file.path);
-  fs.unlinkSync(req.file.path);
+  cloudinary.uploader.upload(req.file.path, (result) => {
+    console.log(req.file.path);
+
+		 console.log(result)
+	})
+  /* user.photo = fs.readFileSync(req.file.path);
+  fs.unlinkSync(req.file.path); */
   user.save((err) => {
     if (err) {
       res.status(500).json({
