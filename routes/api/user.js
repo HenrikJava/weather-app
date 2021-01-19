@@ -220,7 +220,7 @@ router.put(
 //Multer used for save photo on disk.
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    cb(null, "image/upload/");
   },
   filename: function (req, file, cb) {
 
