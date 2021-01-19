@@ -237,8 +237,8 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
-/* const upload = multer({ storage, fileFilter });
-cloudinary.config({ 
+const upload = multer({ storage, fileFilter });
+/* cloudinary.config({ 
   cloud_name: 'hloyne9mx', 
   api_key: '959942379881238', 
   api_secret: 'BPt0wYd7QL_Ta8VBEuR66Pp1QZQ' 
