@@ -11,7 +11,7 @@ const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 let path = require("path");
 const fs = require("fs");
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require("cloudinary").v2;
 /* const bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
@@ -94,7 +94,7 @@ router.post(
               },
             };
             //TODO change expires
-                        jwt.sign(
+            jwt.sign(
               payload,
               config.jwtSecret,
               { expiresIn: 60 * 60 * 24 * 100 },
@@ -149,7 +149,7 @@ router.put(
     });
     const user = await User.findById(req.user.id, async (err) => {
       if (err) {
-       return res.status(500).json({
+        return res.status(500).json({
           message: {
             msgBody: "Something wrong at server, please try again later.",
             msgError: true,
@@ -164,7 +164,7 @@ router.put(
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(req.body.password, salt);
       } else {
-       return res.status(500).json({
+        return res.status(500).json({
           message: {
             msgBody: "Old password doesnt match, please try again.",
             msgError: true,
@@ -224,11 +224,13 @@ router.put(
 //Multer used for save photo on disk.
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads');
+    cb(null, "./uploads");
   },
   filename: function (req, file, cb) {
-
-    cb(null, /* uuidv4() + "-" + Date.now() + path.extname( */file.originalname)/* ) */;
+    cb(
+      null,
+      /* uuidv4() + "-" + Date.now() + path.extname( */ file.originalname
+    ) /* ) */;
   },
 });
 //Extra validation
@@ -242,16 +244,13 @@ const fileFilter = (req, file, cb) => {
   }
 };
 const upload = multer({ storage, fileFilter });
-cloudinary.config({ 
-  cloud_name: process.env.cloud_name || 'hloyne9mx', 
-  api_key: process.env.cloud_api_key || '959942379881238', 
-  api_secret: process.env.cloud_api_secret || 'BPt0wYd7QL_Ta8VBEuR66Pp1QZQ' 
+cloudinary.config({
+  cloud_name: process.env.cloud_name || "hloyne9mx",
+  api_key: process.env.cloud_api_key || "959942379881238",
+  api_secret: process.env.cloud_api_secret || "BPt0wYd7QL_Ta8VBEuR66Pp1QZQ",
 });
 //Upload user photo
 router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
-/*   console.log(req.file);
- */
-
   const user = await User.findById(req.user.id, async (err) => {
     if (err) {
       return res.status(500).json({
@@ -262,18 +261,18 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
       });
     }
   });
-  /* if (!req.file.path) {
+  if (!req.file.path) {
     return res.status(500).json({
       message: {
         msgBody: "Something wrong at server, please try again later.",
         msgError: true,
       },
     });
-  } */
+  }
   //Reading photo and deleting photo from disk
-  
-   await cloudinary.uploader.upload(req.file.path, (err, result) => {
-      if (err) {
+
+  await cloudinary.uploader.upload(req.file.path, (err, result) => {
+    if (err) {
       res.status(500).json({
         message: {
           msgBody: "Something wrong at server, please try again later.",
@@ -281,12 +280,10 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
         },
       });
     }
-       
-           console.log("res", result)
-           user.photo = result.secure_url;
-  })
-  
-  
+
+    user.photo = result.secure_url;
+  });
+
   fs.unlinkSync(req.file.path);
   user.save((err) => {
     if (err) {
