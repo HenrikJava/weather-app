@@ -34,8 +34,10 @@ export const Routing = (props) => {
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);
         if (loggedInUser.data.user.photo) {
-          const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')
-          user.setPhoto(`data:image/png;base64,${b64encoded}`);     
+         /*  const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')
+          user.setPhoto(`data:image/png;base64,${b64encoded}`);   */
+          user.setPhoto(loggedInUser.data.user.photo)
+   
         }
         user.setAvatar(loggedInUser.data.user.avatar);
         user.setFavouriteCity(

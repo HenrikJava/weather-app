@@ -31,10 +31,12 @@ export const SignInDialog = () => {
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
         user.setAvatar(loggedInUser.data.user.avatar);
         if (loggedInUser.data.user.photo) {
-          const b64encoded = new Buffer.from(
+          /* const b64encoded = new Buffer.from(
             loggedInUser.data.user.photo.data
           ).toString("base64");
-          user.setPhoto(`data:image/png;base64,${b64encoded}`);
+          user.setPhoto(`data:image/png;base64,${b64encoded}`); */
+          user.setPhoto(loggedInUser.data.user.photo)
+
         }
         user.setAuthenticatedUser(true);
         handleClose();
