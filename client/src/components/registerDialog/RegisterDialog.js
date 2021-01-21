@@ -109,7 +109,7 @@ export const RegisterDialog = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={
-                    errors.firstname
+                    errors.firstname  && touched.firstname && errors.firstname
                   }
                   type="text"
                   fullWidth
