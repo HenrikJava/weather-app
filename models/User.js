@@ -29,6 +29,9 @@ const UserSchema = new mongoose.Schema({
   fahrenheit_on: {
     type: Boolean,
   },
+  resetPasswordToken: {
+    type: String
+  }
 });
 
 module.exports = User = mongoose.model("user", UserSchema);

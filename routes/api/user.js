@@ -12,6 +12,8 @@ const { v4: uuidv4 } = require("uuid");
 let path = require("path");
 const fs = require("fs");
 const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
+const nodemailer = require("nodemailer");
 /* const bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
@@ -413,4 +415,115 @@ router.get("/", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+router.post(
+  "/forgot",
+  [check("email", "Please enter a valid email").isEmail()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res
+        .status(400)
+        .json({ message: { msgBody: errors.errors.msg, msgError: true } });
+    } else {
+      const email = req.body.email;
+
+      User.findOne({ email }, async (err, user) => {
+        if (err) {
+          res.status(400).json({
+            message: {
+              msgBody: "Something wrong at server, please try again later.",
+              msgError: true,
+            },
+          });
+        } else if (!user) {
+          res.status(403).json({
+            message: {
+              msgBody:
+                "There is no user with this email registrated. Please try again or register a new account.",
+              msgError: true,
+            },
+          });
+        } else {
+          //Creating token
+          const payload = {
+            user: {
+              id: user.id,
+            },
+          };
+          //TODO change expires
+
+          jwt.sign(
+            payload,
+            config.jwtSecret,
+            { expiresIn: 60 * 60 * 24 * 100 },
+            (err, token) => {
+              if (err) {
+
+                res.status(500).json({
+                  message: {
+                    msgBody:
+                      "Something wrong at server, please try again later.",
+                    msgError: true,
+                  },
+                });
+              } else {
+                user.resetPasswordToken = token;
+                user.save((err) => {
+                  if (err) {
+
+                    res.status(500).json({
+                      message: {
+                        msgBody:
+                          "Something wrong at server, please try again later.",
+                        msgError: true,
+                      },
+                    });
+                  } else {
+                    const transporter = nodemailer.createTransport({
+                      service: "gmail",
+                      auth: {
+                        user: "weathersloth@gmail.com",
+                        pass: "B9q3d1tsE62t",
+                      },
+                    });
+                    const mailOptions = {
+                      from: "weathersloth@gmail.com",
+                      to: user.email,
+                      subject: "Link to reset password",
+                      text:
+                        "You are recieving this because you (or someone else) have requested the reset of the password for your account. \n" +
+                        "Please click on the following link, or paste this into your browser to complete the process within one hour of recieving it. \n" +
+                        `http://localhost:3000/reset/${token} \n` +
+                        "If you did not request this, please ignore this email and your password will remain unchanged.",
+                    };
+                    transporter.sendMail(mailOptions, (err, response) => {
+                      if (err) {
+                        console.log(err);
+                        res.status(500).json({
+                          message: {
+                            msgBody:
+                              "Something wrong at server, please try again later.",
+                            msgError: true,
+                          },
+                        });
+                      } else {
+                        console.log(response);
+                        res.status(200).json({
+                          message: {
+                            msgBody: "Recovery mail is sent.",
+                            msgError: false,
+                          },
+                        });
+                      }
+                    });
+                  }
+                });
+              }
+            }
+          );
+        }
+      });
+    }
+  }
+);
 module.exports = router;
