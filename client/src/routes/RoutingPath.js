@@ -3,5 +3,6 @@ const RoutingPath = {
   profileView: "/profile",
   settingsView: "/settings",
   aboutView: "/about",
+  forgotView: '/forgot'
 };
 export default RoutingPath;

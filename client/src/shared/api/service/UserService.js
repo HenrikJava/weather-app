@@ -206,3 +206,30 @@ export const updateUserSettings = async (values) => {
         };
   }
 };
+export const forgotPasswordUser = async(email) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify(email)
+
+  try {
+const response = await axios.post('/api/user/forgot', body,config)
+if (response.status === 200) {
+  return response
+}
+  } catch (error) {
+    console.log(error.response);
+    return error.response.data.message
+      ? error.response
+      : {
+          data: {
+            message: {
+              msgBody: "Something wrong at server, please try again later.",
+              msgError: true,
+            },
+          },
+        };
+  }
+}
