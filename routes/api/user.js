@@ -98,7 +98,7 @@ router.post(
             //TODO change expires
             jwt.sign(
               payload,
-              config.jwtSecret,
+              process.env.JWT_SECRET,
               { expiresIn: 60 * 60 * 24 * 100 },
               (err, token) => {
                 if (err) {
@@ -198,7 +198,7 @@ router.put(
         //TODO change expires
         jwt.sign(
           payload,
-          config.jwtSecret,
+          process.env.JWT_SECRET,
           { expiresIn: 60 * 60 * 24 * 100 },
           (err, token) => {
             if (err) {
@@ -247,13 +247,14 @@ const fileFilter = (req, file, cb) => {
 };
 const upload = multer({ storage, fileFilter });
 cloudinary.config({
-  cloud_name: process.env.cloud_name || "hloyne9mx",
-  api_key: process.env.cloud_api_key || "959942379881238",
-  api_secret: process.env.cloud_api_secret || "BPt0wYd7QL_Ta8VBEuR66Pp1QZQ",
+  cloud_name: process.env.cloud_name || process.env.CLOUD_NAME,
+  api_key: process.env.cloud_api_key || process.env.CLOUD_API_KEY,
+  api_secret: process.env.cloud_api_secret || process.env.API_SECRET,
 });
 //Upload user photo
 router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
-  const user = await User.findById(req.user.id, async (err) => {
+  
+ const user = await User.findById(req.user.id, async (err) => {
     if (err) {
       return res.status(500).json({
         message: {
@@ -272,8 +273,9 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
     });
   }
   //Reading photo and deleting photo from disk
-
+try {
   await cloudinary.uploader.upload(req.file.path, (err, result) => {
+    
     if (err) {
       res.status(500).json({
         message: {
@@ -282,10 +284,16 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
         },
       });
     }
-
     user.photo = result.secure_url;
   });
-
+} catch (err) {
+  res.status(500).json({
+    message: {
+      msgBody: "Something wrong at server, please try again later.",
+      msgError: true,
+    },
+  });
+}
   fs.unlinkSync(req.file.path);
   user.save((err) => {
     if (err) {
@@ -305,7 +313,7 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
       //TODO change expires
       jwt.sign(
         payload,
-        config.jwtSecret,
+        process.env.JWT_SECRET,
         { expiresIn: 60 * 60 * 24 * 100 },
         (err, token) => {
           if (err) {
@@ -357,7 +365,7 @@ router.put("/settings", [auth], async (req, res) => {
         //TODO change expires
         jwt.sign(
           payload,
-          config.jwtSecret,
+          process.env.JWT_SECRET,
           { expiresIn: 60 * 60 * 24 * 100 },
           (err, token) => {
             if (err) {
@@ -454,7 +462,7 @@ router.post(
 
           jwt.sign(
             payload,
-            config.jwtSecret,
+            process.env.JWT_SECRET,
             { expiresIn: 60 * 60 * 24 * 100 },
             (err, token) => {
               if (err) {
@@ -480,12 +488,12 @@ router.post(
                     const transporter = nodemailer.createTransport({
                       service: "gmail",
                       auth: {
-                        user: "weathersloth@gmail.com",
-                        pass: "B9q3d1tsE62t",
+                        user: process.env.EMAIL_ADDRESS,
+                        pass: process.env.EMAIL_PASSWORD,
                       },
                     });
                     const mailOptions = {
-                      from: "weathersloth@gmail.com",
+                      from: process.env.EMAIL_ADDRESS,
                       to: user.email,
                       subject: "Link to reset password",
                       text:

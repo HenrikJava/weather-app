@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const weatherApi = require("../WeatherApi");
 const axios = require("axios");
 const utf8 = require('utf8');
 
@@ -18,14 +17,14 @@ const adjustTimeZone = (weather) => {
 // Load weather
 router.post("/", async (req, res) => {
   let scale;
-  req.body.fahrenheitOn
-    ? (scale = weatherApi.fahrenheit)
-    : (scale = weatherApi.celcius);
+  req.body.fahrenheitOn 
+    ? (scale = "&units=imperial")
+    : (scale = "&units=metric");
   req.body.city = utf8.encode(req.body.city);
 
   try {
     const response = await axios.get(
-      weatherApi.apiUrl + req.body.city + scale + weatherApi.apiKey
+      process.env.WEATHER_API_URL + req.body.city + scale + process.env.WEATHER_API_KEY
     );
 
     if (response.status === 200) {

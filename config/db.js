@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-const config = require("config");
-const localDb = config.get("mongoURILocal");
+/* const config = require("config");
+const localDb = config.get("mongoURILocal"); */
 //Creating mongodb connection
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/wheater-app", {
+    await mongoose.connect(process.env.MONGODB_URI || process.env.MONGODB_URI_LOCAL, {
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedTopology: true,
