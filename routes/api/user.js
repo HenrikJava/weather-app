@@ -458,7 +458,6 @@ router.post(
             { expiresIn: 60 * 60 * 24 * 100 },
             (err, token) => {
               if (err) {
-
                 res.status(500).json({
                   message: {
                     msgBody:
@@ -470,7 +469,6 @@ router.post(
                 user.resetPasswordToken = token;
                 user.save((err) => {
                   if (err) {
-
                     res.status(500).json({
                       message: {
                         msgBody:
@@ -493,7 +491,7 @@ router.post(
                       text:
                         "You are recieving this because you (or someone else) have requested the reset of the password for your account. \n" +
                         "Please click on the following link, or paste this into your browser to complete the process within one hour of recieving it. \n" +
-                        `http://localhost:3000/reset/${token} \n` +
+                        `http://localhost:3000/reset-check-token/${token} \n` +
                         "If you did not request this, please ignore this email and your password will remain unchanged.",
                     };
                     transporter.sendMail(mailOptions, (err, response) => {
@@ -507,7 +505,6 @@ router.post(
                           },
                         });
                       } else {
-                        console.log(response);
                         res.status(200).json({
                           message: {
                             msgBody: "Recovery mail is sent.",
@@ -526,4 +523,65 @@ router.post(
     }
   }
 );
+router.get("/reset-check-token", [auth], (req, res) => {
+  User.findById(req.user.id, async (err, user) => {
+    if (err) {
+      res.status(500).json({
+        message: {
+          msgBody: "Something wrong at server, please try again later.",
+          msgError: true,
+        },
+      });
+    }
+    if (user) {
+      res.status(200).json({
+        message: {
+          msgBody: "Password are ready to be changed",
+          msgError: false,
+        },
+      });
+    }
+  });
+});
+router.put("/reset-update-password", [auth], async (req, res) => {
+  let hashedPassword = "";
+  if ((req.body.password === req.body.confirmPassword)) {
+    const salt = await bcrypt.genSalt(10);
+    hashedPassword = await bcrypt.hash(req.body.password, salt);
+  } else {
+    return res.status(500).json({
+      message: {
+        msgBody: "Passwords dont match, please try again.",
+        msgError: true,
+      },
+    });
+  }
+  User.findByIdAndUpdate(
+      req.user.id ,
+    {
+      $set: {
+        password: hashedPassword,
+      },
+    },
+    { upsert: true, new: true },
+    async (err) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json({
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        });
+      } else {
+        res.status(201).json({
+          message: {
+            msgBody: "Password successfully updated.",
+            msgError: false,
+          },
+        });
+      }
+    }
+  );
+});
 module.exports = router;

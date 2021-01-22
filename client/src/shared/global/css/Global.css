@@ -15,7 +15,8 @@ html,
 .settings-view,
 .error-view,
 .home-view,
-.forgot-view {
+.forgot-view,
+.reset-view {
   width: 100%;
   height: 92%;
   display: flex;
@@ -71,7 +72,8 @@ html,
   .settings-view,
   .error-view,
   .home-view,
-  .forgot-view {
+  .forgot-view,
+  .reset-view {
     width: 100%;
     height: 89%;
   }
@@ -210,8 +212,11 @@ html,
     height: -webkit-fill-available;
   }
   .profile-view,
-  .empty-view,
-  .settings-view {
+.empty-view,
+.settings-view,
+.error-view,
+.forgot-view,
+.reset-view {
     height: 90%;
   }
   #register-dialog-container > div > div {

@@ -6,6 +6,8 @@ import { EmptyView } from "../view/EmptyView";
 import { SettingsView } from "../view/SettingsView";
 import { AboutView } from "../view/AboutView";
 import { ForgotView} from '../view/ForgotView'
+import { ResetView} from '../view/ResetView'
+
 import { useContext, useEffect } from "react";
 import { UserContext, AppContext } from "../shared/global/provider/Provider";
 import RoutingPath from "./RoutingPath";
@@ -67,6 +69,8 @@ export const Routing = (props) => {
         <Route path={RoutingPath.settingsView} component={SettingsView}></Route>
         <Route path={RoutingPath.aboutView} component={AboutView}></Route>
         <Route path={RoutingPath.forgotView} component={ForgotView}></Route>
+        <Route path={RoutingPath.resetView} component={ResetView}></Route>
+
         <Route component={HomeView}></Route>
       </Switch>
     </Router>

@@ -206,19 +206,19 @@ export const updateUserSettings = async (values) => {
         };
   }
 };
-export const forgotPasswordUser = async(email) => {
+export const forgotPasswordUser = async (email) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
-  const body = JSON.stringify(email)
+  const body = JSON.stringify(email);
 
   try {
-const response = await axios.post('/api/user/forgot', body,config)
-if (response.status === 200) {
-  return response
-}
+    const response = await axios.post("/api/user/forgot", body, config);
+    if (response.status === 200) {
+      return response;
+    }
   } catch (error) {
     console.log(error.response);
     return error.response.data.message
@@ -232,4 +232,52 @@ if (response.status === 200) {
           },
         };
   }
+};
+export const checkTokenUser = async (token) => {
+  setAuthToken(token);
+
+  try {
+    const response = await axios.get("/api/user/reset-check-token");
+    if (response.status === 200) {
+
+      return response;
+    }
+  } catch (error) {
+    return error.response.data.message
+      ? error.response
+      : {
+          data: {
+            message: {
+              msgBody: "Something wrong at server, please try again later.",
+              msgError: true,
+            },
+          },
+        };
+  }
+};
+export const updatePasswordUser = async (values, token) => {
+  
+  setAuthToken(token);
+  const config = {
+    headers: {
+
+    'Content-Type': 'application/json'
+  }}
+const body = JSON.stringify(values)
+try {
+const response = await axios.put('/api/user/reset-update-password', body, config)
+if (response.status === 201) {
+  return response
+}
+}catch (error) {
+return error.response.data.message ? error.response :
+{
+  data: {
+    message: {
+      msgBody: "Something wrong at server, please try again later.",
+      msgError: true,
+    },
+  },
+};
+}
 }

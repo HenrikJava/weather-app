@@ -3,6 +3,7 @@ const RoutingPath = {
   profileView: "/profile",
   settingsView: "/settings",
   aboutView: "/about",
-  forgotView: '/forgot'
+  forgotView: '/forgot',
+  resetView: '/reset-check-token/:token'
 };
 export default RoutingPath;
