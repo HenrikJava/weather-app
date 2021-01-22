@@ -52,8 +52,12 @@ html,
     height: 2vw;
     font-size: 1.6vw;
   }
+  .link-between-dialogs-wrapper {
+    text-align: center;
+    place-content: space-evenly;
+    display: flex;
+  }
 .link-between-dialogs {
-  text-align: center;
   cursor: pointer;
 }
 .link-between-dialogs:hover {

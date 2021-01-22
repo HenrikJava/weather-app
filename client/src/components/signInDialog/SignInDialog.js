@@ -10,6 +10,7 @@ import { loginUser, loadUser } from "../../shared/api/service/UserService";
 import { UserContext } from "../../shared/global/provider/Provider";
 import { AppContext } from "../../shared/global/provider/Provider";
 import { useHistory } from "react-router-dom";
+import RoutingPath from "../../routes/RoutingPath";
 export const SignInDialog = () => {
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState();
@@ -57,6 +58,10 @@ export const SignInDialog = () => {
     setErrorMessage();
     app.setRegisterDialogOpen(true);
   };
+  const openForgotPassword = () => {
+    app.setSignInDialogOpen(false);
+    history.push(RoutingPath.forgotView)
+  }
 
   return (
     <Dialog
@@ -97,8 +102,11 @@ export const SignInDialog = () => {
             Log in
           </Button>
         </DialogActions>
-        <DialogContentText className="link-between-dialogs">
-          <span onClick={() => openRegisterDialog()}>
+        <DialogContentText className="link-between-dialogs-wrapper">
+          <span onClick={() => openForgotPassword()} className="link-between-dialogs">
+            Forgot password?
+          </span>
+          <span onClick={() => openRegisterDialog()} className="link-between-dialogs">
             Don't have an account yet?
           </span>
         </DialogContentText>

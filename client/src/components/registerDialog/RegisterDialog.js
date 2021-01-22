@@ -179,8 +179,8 @@ export const RegisterDialog = () => {
             );
           }}
         </Formik>
-        <DialogContentText className="link-between-dialogs">
-          <span onClick={() => openSignInDialog()}>
+        <DialogContentText className="link-between-dialogs-wrapper">
+          <span onClick={() => openSignInDialog()} className="link-between-dialogs">
             Already have an account?
           </span>
         </DialogContentText>
