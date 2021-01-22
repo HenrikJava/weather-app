@@ -234,12 +234,13 @@ export const forgotPasswordUser = async (email) => {
   }
 };
 export const checkTokenUser = async (token) => {
-  setAuthToken(token);
+  const config = {
+    headers: {'x-auth-token': token}
+  }
 
   try {
-    const response = await axios.get("/api/user/reset-check-token");
+    const response = await axios.get("/api/user/reset-check-token",config);
     if (response.status === 200) {
-
       return response;
     }
   } catch (error) {
