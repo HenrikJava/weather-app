@@ -290,7 +290,7 @@ try {
     user.photo = result.secure_url;
   });
 } catch (error) {
-  res.status(500).json({
+  return res.status(500).json({
     message: {
       msgBody: "Something wrong at server2, please try again later.",
       msgError: true,
