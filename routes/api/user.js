@@ -246,11 +246,11 @@ const fileFilter = (req, file, cb) => {
   }
 };
 const upload = multer({ storage, fileFilter });
-cloudinary.config({
+/* cloudinary.config({
   cloud_name: process.env.cloud_name || process.env.CLOUD_NAME,
   api_key: process.env.cloud_api_key || process.env.CLOUD_API_KEY,
   api_secret: process.env.cloud_api_secret || process.env.API_SECRET,
-});
+}); */
 //Upload user photo
 router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
   
