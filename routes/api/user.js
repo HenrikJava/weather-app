@@ -279,19 +279,20 @@ try {
     console.log('err', err);
 
     if (err) {
-      res.status(500).json({
+     return res.status(500).json({
         message: {
-          msgBody: "Something wrong at server, please try again later." + err ,
+          msgBody: "Something wrong at server1, please try again later." + err ,
           msgError: true,
+          err: err
         },
       });
     }
     user.photo = result.secure_url;
   });
-} catch (err) {
+} catch (error) {
   res.status(500).json({
     message: {
-      msgBody: "Something wrong at server, please try again later.",
+      msgBody: "Something wrong at server2, please try again later.",
       msgError: true,
     },
   });
