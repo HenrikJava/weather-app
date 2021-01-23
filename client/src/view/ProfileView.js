@@ -28,10 +28,10 @@ export const ProfileView = () => {
       user.setEmail(loggedInUser.data.user.email);
       user.setFavouriteCity(loggedInUser.data.user.favourite_city);
       if (loggedInUser.data.user.photo) {
-      /*   const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')
-          user.setPhoto(`data:image/png;base64,${b64encoded}`); */
-          user.setPhoto(loggedInUser.data.user.photo)
-      }
+        const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')
+          user.setPhoto(`data:image/png;base64,${b64encoded}`);
+/*           user.setPhoto(loggedInUser.data.user.photo)
+ */      }
       user.setAvatar(loggedInUser.data.user.avatar);
       user.setAuthenticatedUser(true);
     } else {
