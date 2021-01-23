@@ -159,7 +159,7 @@ export const updateUserPhoto = async (image) => {
     const response = await axios.put("/api/user/photo", image, config);
     if (response.status === 201) {
       localStorage.setItem("token", response.data.token);
-
+console.log(response);
       return response;
     }
   } catch (error) {

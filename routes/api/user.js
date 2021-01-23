@@ -273,15 +273,15 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
     });
   }
   //Reading photo and deleting photo from disk
-try {
-  await cloudinary.uploader.upload(req.file.path, (err, result) => {
+/* try {
+ */  await cloudinary.uploader.upload(req.file.path, (err, result) => {
     console.log('result', result);
     console.log('err', err);
 
     if (err) {
      return res.status(500).json({
         message: {
-          msgBody: "Something wrong at server1, please try again later." + err ,
+          msgBody: "Something wrong at server1, please try again later.",
           msgError: true,
           err: err
         },
@@ -289,7 +289,7 @@ try {
     }
     user.photo = result.secure_url;
   });
-} catch (error) {
+/* } catch (error) {
   return res.status(500).json({
     message: {
       msgBody: "Something wrong at server2, please try again later.",
@@ -298,7 +298,7 @@ try {
       err: err
     },
   });
-}
+} */
   fs.unlinkSync(req.file.path);
   user.save((err) => {
     if (err) {
