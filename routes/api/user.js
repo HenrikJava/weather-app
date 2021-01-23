@@ -256,9 +256,10 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
   
  const user = await User.findById(req.user.id, async (err) => {
     if (err) {
+      
       return res.status(500).json({
         message: {
-          msgBody: "Something wrong at server, please try again later.",
+          msgBody: "Something wrong at findbyid, please try again later.",
           msgError: true,
         },
       });
@@ -267,7 +268,7 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
   if (!req.file.path) {
     return res.status(500).json({
       message: {
-        msgBody: "Something wrong at server, please try again later.",
+        msgBody: "Something wrong at !req.path, please try again later.",
         msgError: true,
       },
     });
@@ -279,7 +280,7 @@ try {
     if (err) {
       res.status(500).json({
         message: {
-          msgBody: "Something wrong at server, please try again later.",
+          msgBody: "Something wrong at cloudinary ska bort, please try again later.",
           msgError: true,
         },
       });
@@ -289,7 +290,7 @@ try {
 } catch (err) {
   res.status(500).json({
     message: {
-      msgBody: "Something wrong at server, please try again later.",
+      msgBody: "Something wrong at cloudinary, please try again later.",
       msgError: true,
     },
   });
@@ -299,7 +300,7 @@ try {
     if (err) {
       res.status(500).json({
         message: {
-          msgBody: "Something wrong at server, please try again later.",
+          msgBody: "Something wrong at tabort, please try again later.",
           msgError: true,
         },
       });
@@ -319,7 +320,7 @@ try {
           if (err) {
             res.status(500).json({
               message: {
-                msgBody: "Something wrong at server, please try again later.",
+                msgBody: "Something wrong at jwt, please try again later.",
                 msgError: true,
               },
             });
@@ -499,7 +500,8 @@ router.post(
                       text:
                         "You are recieving this because you (or someone else) have requested the reset of the password for your account. \n" +
                         "Please click on the following link, or paste this into your browser to complete the process within one hour of recieving it. \n" +
-                        `http://localhost:3000/reset/${token} \n` +
+                        /* `http://localhost:3000/reset/${token} \n` + */
+                        `https://slothweather.herokuapp.com/forgot/${token} \n` +
                         "If you did not request this, please ignore this email and your password will remain unchanged.",
                     };
                     transporter.sendMail(mailOptions, (err, response) => {
