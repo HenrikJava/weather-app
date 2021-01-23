@@ -294,6 +294,8 @@ try {
     message: {
       msgBody: "Something wrong at server2, please try again later.",
       msgError: true,
+      error: error,
+      err: err
     },
   });
 }
