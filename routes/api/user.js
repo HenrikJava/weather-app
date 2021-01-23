@@ -256,10 +256,9 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
   
  const user = await User.findById(req.user.id, async (err) => {
     if (err) {
-      
       return res.status(500).json({
         message: {
-          msgBody: "Something wrong at findbyid, please try again later.",
+          msgBody: "Something wrong at server, please try again later.",
           msgError: true,
         },
       });
@@ -268,7 +267,7 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
   if (!req.file.path) {
     return res.status(500).json({
       message: {
-        msgBody: "Something wrong at !req.path, please try again later.",
+        msgBody: "Something wrong at server, please try again later.",
         msgError: true,
       },
     });
@@ -276,11 +275,13 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
   //Reading photo and deleting photo from disk
 try {
   await cloudinary.uploader.upload(req.file.path, (err, result) => {
-    
+    console.log('result', result);
+    console.log('err', err);
+
     if (err) {
       res.status(500).json({
         message: {
-          msgBody: "Something wrong at cloudinary ska bort, please try again later.",
+          msgBody: "Something wrong at server, please try again later." + err ,
           msgError: true,
         },
       });
@@ -290,7 +291,7 @@ try {
 } catch (err) {
   res.status(500).json({
     message: {
-      msgBody: "Something wrong at cloudinary, please try again later.",
+      msgBody: "Something wrong at server, please try again later.",
       msgError: true,
     },
   });
@@ -300,7 +301,7 @@ try {
     if (err) {
       res.status(500).json({
         message: {
-          msgBody: "Something wrong at tabort, please try again later.",
+          msgBody: "Something wrong at server, please try again later.",
           msgError: true,
         },
       });
@@ -320,7 +321,7 @@ try {
           if (err) {
             res.status(500).json({
               message: {
-                msgBody: "Something wrong at jwt, please try again later.",
+                msgBody: "Something wrong at server, please try again later.",
                 msgError: true,
               },
             });
