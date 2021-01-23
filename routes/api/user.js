@@ -14,10 +14,6 @@ const fs = require("fs");
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 const nodemailer = require("nodemailer");
-/* const bodyParser = require('body-parser');
-
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true })); */
 
 //Register user
 router.post(
@@ -229,10 +225,7 @@ const storage = multer.diskStorage({
     cb(null, "./tempProfilePhotoFolder");
   },
   filename: function (req, file, cb) {
-    cb(
-      null,
-      uuidv4() + "-" + Date.now() + path.extname( file.originalname
-    ) );
+    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
   },
 });
 //Extra validation
@@ -253,8 +246,7 @@ const upload = multer({ storage, fileFilter });
 }); */
 //Upload user photo
 router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
-  
- const user = await User.findById(req.user.id, async (err) => {
+  const user = await User.findById(req.user.id, async (err) => {
     if (err) {
       return res.status(500).json({
         message: {
@@ -287,7 +279,6 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
   }); */
 
   user.photo = fs.readFileSync(req.file.path);
-
 
   fs.unlinkSync(req.file.path);
   user.save((err) => {
@@ -494,8 +485,9 @@ router.post(
                       text:
                         "You are recieving this because you (or someone else) have requested the reset of the password for your account. \n" +
                         "Please click on the following link, or paste this into your browser to complete the process within one hour of recieving it. \n" +
-                        /* `http://localhost:3000/reset/${token} \n` + */
-                        process.env.MAIL_LINK_URL+token +'\n' +
+                        process.env.MAIL_LINK_URL +
+                        token +
+                        "\n" +
                         "If you did not request this, please ignore this email and your password will remain unchanged.",
                     };
                     transporter.sendMail(mailOptions, (err, response) => {
@@ -549,7 +541,7 @@ router.get("/reset-check-token", [auth], (req, res) => {
 });
 router.put("/reset-update-password", [auth], async (req, res) => {
   let hashedPassword = "";
-  if ((req.body.password === req.body.confirmPassword)) {
+  if (req.body.password === req.body.confirmPassword) {
     const salt = await bcrypt.genSalt(10);
     hashedPassword = await bcrypt.hash(req.body.password, salt);
   } else {
@@ -561,7 +553,7 @@ router.put("/reset-update-password", [auth], async (req, res) => {
     });
   }
   User.findByIdAndUpdate(
-      req.user.id ,
+    req.user.id,
     {
       $set: {
         password: hashedPassword,
