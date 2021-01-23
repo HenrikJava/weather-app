@@ -495,7 +495,7 @@ router.post(
                         "You are recieving this because you (or someone else) have requested the reset of the password for your account. \n" +
                         "Please click on the following link, or paste this into your browser to complete the process within one hour of recieving it. \n" +
                         /* `http://localhost:3000/reset/${token} \n` + */
-                        `https://slothweather.herokuapp.com/forgot/${token} \n` +
+                        process.env.MAIL_LINK_URL+token +'\n' +
                         "If you did not request this, please ignore this email and your password will remain unchanged.",
                     };
                     transporter.sendMail(mailOptions, (err, response) => {
