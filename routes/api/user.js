@@ -226,13 +226,13 @@ router.put(
 //Multer used for save photo on disk.
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads");
+    cb(null, "./tempProfilePhotoFolder");
   },
   filename: function (req, file, cb) {
     cb(
       null,
-      /* uuidv4() + "-" + Date.now() + path.extname( */ file.originalname
-    ) /* ) */;
+      uuidv4() + "-" + Date.now() + path.extname( file.originalname
+    ) );
   },
 });
 //Extra validation
