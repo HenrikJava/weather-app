@@ -68,7 +68,12 @@ export const updateUser = async (values) => {
     },
   };
   delete values.confirmPassword;
-
+  if (values.password === "") {
+    delete values.password
+  }
+  if (values.oldPassword === "") {
+    delete values.oldPassword
+  }
   const body = JSON.stringify(values);
 
   try {
