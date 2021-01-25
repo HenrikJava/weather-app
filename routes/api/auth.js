@@ -52,7 +52,7 @@ router.post(
 
       User.findOne({ email }, async (err, user) => {
         if (err) {
-          res.status(400).json({
+          res.status(500).json({
             message: {
               msgBody: "Something wrong at server, please try again later.",
               msgError: true,

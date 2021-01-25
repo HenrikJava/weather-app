@@ -162,7 +162,7 @@ router.put(
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(req.body.password, salt);
       } else {
-        return res.status(500).json({
+        return res.status(400).json({
           message: {
             msgBody: "Old password doesnt match, please try again.",
             msgError: true,
@@ -257,7 +257,7 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
     }
   });
   if (!req.file.path) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: {
         msgBody: "Something wrong at server, please try again later.",
         msgError: true,
@@ -423,7 +423,7 @@ router.post(
 
       User.findOne({ email }, async (err, user) => {
         if (err) {
-          res.status(400).json({
+          res.status(500).json({
             message: {
               msgBody: "Something wrong at server, please try again later.",
               msgError: true,
@@ -529,14 +529,20 @@ router.get("/reset-check-token", [auth], (req, res) => {
         },
       });
     }
-    if (user) {
-      res.status(200).json({
+    if (!user) {
+      res.status(400).json({
         message: {
-          msgBody: "Password are ready to be changed",
-          msgError: false,
+          msgBody: "No user found with this email.",
+          msgError: true,
         },
       });
     }
+    res.status(200).json({
+      message: {
+        msgBody: "Password are ready to be changed",
+        msgError: false,
+      },
+    });
   });
 });
 router.put("/reset-update-password", [auth], async (req, res) => {
@@ -545,7 +551,7 @@ router.put("/reset-update-password", [auth], async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     hashedPassword = await bcrypt.hash(req.body.password, salt);
   } else {
-    return res.status(500).json({
+    return res.status(400).json({
       message: {
         msgBody: "Passwords dont match, please try again.",
         msgError: true,

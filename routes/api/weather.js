@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
     }
   } catch (error) {
     if (error.response.data.message === "city not found") {
-      res.status(500).json({
+      res.status(400).json({
         message: {
           msgBody: "city not found",
           msgError: true,
