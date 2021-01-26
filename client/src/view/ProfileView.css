@@ -129,6 +129,10 @@
   #edit-icon {
     font-size: 3vw;
   }
+  #profile-progress-spinner {
+    width: 6vw !important;
+    height: 6vw !important;
+  }
   .profile-lower-wrapper {
     height: fit-content;
     margin-top: 0;
@@ -165,7 +169,7 @@
   #profile-button > button {
     width: 15vw;
     font-size: 1.4vw;
-    margin-top: -2%;
+    margin-top: -1%;
     height: 2.6vw;
   }
 }
@@ -195,6 +199,11 @@
 
   #edit-icon {
     font-size: 4vw;
+  }
+  #profile-progress-spinner {
+    width: 9vw !important;
+    height: 9vw !important;
+    margin: auto;
   }
   .profile-lower-wrapper {
     height: fit-content;
@@ -258,7 +267,11 @@
   .profile-photo {
     width: 28%;
   }
-
+  #profile-progress-spinner {
+    width: 7vw !important;
+    height: 7vw !important;
+    margin: auto;
+  }
   .profile-lower-wrapper {
     height: fit-content;
   }

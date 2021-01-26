@@ -4,7 +4,7 @@
 .city-info-wrapper {
   justify-content: center;
     display: flex;
-    width: 40vw;
+    width: 50vw;
     margin: auto;
     align-items: center;
 }
@@ -28,10 +28,7 @@
   margin: 0;
 }
 @media screen and (max-width: 1400px) and (min-height: 500px) {
-  .city-info {
-    font-size: 3vw;
-    margin: auto;
-  }
+  
   .time {
     font-size: 1.6vw;
     margin: auto;
@@ -44,10 +41,12 @@
   .city-wrapper {
     height: 25%;
   }
-  .city-info {
-    font-size: 7vw;
-    margin: auto;
+  .city-info, .fav-star-icon ,
+  .not-fav-star-icon  {
+    font-size: 7vw!important;
+    
   }
+
   .time {
     font-size: 3vw;
     margin: 0;
@@ -62,10 +61,11 @@
   .city-wrapper {
     height: 25%;
   }
-  .city-info {
-    font-size: 9vw;
-    margin: auto;
-  }
+  .city-info, .fav-star-icon ,
+  .not-fav-star-icon  {
+    font-size: 9vw!important;
+    
+  } 
   .time {
     font-size: 4vw;
     margin: 0;

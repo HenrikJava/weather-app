@@ -4,9 +4,10 @@
   background-color: black;
 }
 
-#back-to-top-button {
+#back-to-top-icon-wrapper {
   display: none;
 }
+
 @media screen and (max-width: 1024px) and (min-height: 1024px) {
   .fore-cast-wrapper {
     height: 43%;
@@ -16,6 +17,7 @@
 
   }
 }
+
 @media screen and (max-width: 512px) {
   .fore-cast-wrapper {
     grid-template-columns: repeat(1, 100%);
