@@ -23,20 +23,22 @@ export const CityInfo = () => {
       email: user.email,
       favouriteCity: city,
     });
-    const loggedInUser = await loadUser()
+    const loggedInUser = await loadUser();
     user.setFavouriteCity(loggedInUser.data.user.favourite_city);
-
   };
 
   const handleFavourite = () => {
     if (isFavourite) {
       localStorage.setItem("favouriteCity", "");
-      if (user.authenticatedUser) {      update("");
-    }
+      if (user.authenticatedUser) {
+        update("");
+      }
     } else {
       localStorage.setItem("favouriteCity", weather.weather.city.name);
-      if (user.authenticatedUser) {      update(weather.weather.city.name);
-    }
+      if (user.authenticatedUser) {
+        update(weather.weather.city.name);
+        app.setNoCityText('')
+      }
     }
     setIsFavourite(!isFavourite);
   };

@@ -61,7 +61,7 @@ export const HomeView = () => {
           } else if (response.data.message.msgBody === "city not found") {
             console.log(response.data.message.msgBody);
             defaultWeatherCall();
-            app.setnoCityText(
+            app.setNoCityText(
               "Your favourite city does not exist in the database, please change it."
             );
           } else {

@@ -21,14 +21,14 @@ export const CitySearch = () => {
     if (response.status === 200) {
       app.setCity(response.data.weather.city.name);
       setCity("");
-      app.setnoCityText("");
+      app.setNoCityText("");
       weather.setWeather(response.data.weather);
     } else if (response.data.message.msgBody === "city not found") {
-      app.setnoCityText(
+      app.setNoCityText(
         `No city with name "${city}" in the database, please try again.`
       );
     } else {
-      app.setnoCityText(response.data.message.msgBody);
+      app.setNoCityText(response.data.message.msgBody);
     }
   };
   return (

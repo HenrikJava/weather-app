@@ -18,7 +18,7 @@ export const NavigationBar = () => {
           history.push(RoutingPath.homeView);
           app.setDisplayCurrent(true);
           app.setMenuOpen(false);
-          app.setnoCityText("");
+          app.setNoCityText("");
         }}
       >
         <img className="navbar-logo-icon" src={defaultSloth} alt="LogoSloth"></img>

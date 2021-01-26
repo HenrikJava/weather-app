@@ -119,7 +119,7 @@ export const Menu = () => {
               onClick={() => {
                 logout();
                 app.setMenuOpen(false);
-                app.setnoCityText("");
+                app.setNoCityText("");
                 localStorage.removeItem('favouriteCity')
               }}
               className="menu-link"
@@ -155,7 +155,7 @@ export const Menu = () => {
               onClick={() => {
                 app.setSignInDialogOpen(true);
                 app.setMenuOpen(false);
-                app.setnoCityText("");
+                app.setNoCityText("");
               }}
               className="menu-link"
             >

@@ -88,7 +88,7 @@ export const ForgotView = () => {
                           history.push(RoutingPath.homeView);
                           app.setDisplayCurrent(true);
                           app.setMenuOpen(false);
-                          app.setnoCityText("");
+                          app.setNoCityText("");
                         }}
                       >
                         Home
@@ -112,7 +112,7 @@ export const ForgotView = () => {
                 history.push(RoutingPath.homeView);
                 app.setDisplayCurrent(true);
                 app.setMenuOpen(false);
-                app.setnoCityText("");
+                app.setNoCityText("");
               }}
             >
               Home

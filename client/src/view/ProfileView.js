@@ -30,6 +30,7 @@ export const ProfileView = () => {
       user.setFirstname(loggedInUser.data.user.firstname);
       user.setEmail(loggedInUser.data.user.email);
       user.setFavouriteCity(loggedInUser.data.user.favourite_city);
+      localStorage.setItem('favouriteCity', loggedInUser.data.user.favourite_city)
       app.setCity(loggedInUser.data.user.favourite_city)
       if (loggedInUser.data.user.photo) {
         const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')

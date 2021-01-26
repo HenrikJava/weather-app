@@ -68,7 +68,7 @@ export const ResetView = (props) => {
                   history.push(RoutingPath.homeView);
                   app.setDisplayCurrent(true);
                   app.setMenuOpen(false);
-                  app.setnoCityText("");
+                  app.setNoCityText("");
                 }}
               >
                 Navigate to Home
@@ -108,7 +108,7 @@ export const ResetView = (props) => {
                 history.push(RoutingPath.homeView);
                 app.setDisplayCurrent(true);
                 app.setMenuOpen(false);
-                app.setnoCityText("");
+                app.N("");
               }}
             >
               Home
