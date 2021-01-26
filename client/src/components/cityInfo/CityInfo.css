@@ -1,9 +1,24 @@
 .city-wrapper {
   height: 20%;
 }
+.city-info-wrapper {
+  justify-content: center;
+    display: flex;
+    width: 40vw;
+    margin: auto;
+    align-items: center;
+}
 .city-info {
   font-size: 3vw;
-  margin: auto;
+  margin: 0 1vw 0 0
+}
+.fav-star-icon {
+  font-size: 3vw!important;
+  color: yellow;
+}
+.not-fav-star-icon {
+  font-size: 3vw!important;
+  color: white;
 }
 .time {
   font-size: 1vw;

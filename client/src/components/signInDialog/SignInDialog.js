@@ -30,6 +30,8 @@ export const SignInDialog = () => {
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
+        localStorage.setItem("favouriteCity", loggedInUser.data.user.favourite_city);
+
         user.setAvatar(loggedInUser.data.user.avatar);
         if (loggedInUser.data.user.photo) {
           const b64encoded = new Buffer.from(

@@ -120,6 +120,7 @@ export const Menu = () => {
                 logout();
                 app.setMenuOpen(false);
                 app.setnoCityText("");
+                localStorage.removeItem('favouriteCity')
               }}
               className="menu-link"
             >

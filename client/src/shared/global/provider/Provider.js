@@ -6,7 +6,7 @@ export const AppProvider = (props) => {
   const [signInDialogOpen, setSignInDialogOpen] = useState(false);
   const [deleteConfirmDialogOpen, setDeleteConfirmDialogOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState();
-  const [city, setCity] = useState("Göteborg");
+  const [city, setCity] = useState(localStorage.getItem("favouriteCity") || "Göteborg");
   const [noCityText, setnoCityText] = useState("");
   const [displayCurrent, setDisplayCurrent] = useState(true);
   const [isAfternoon, setIsAfternoon] = useState(true);

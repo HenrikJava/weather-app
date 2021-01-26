@@ -23,13 +23,14 @@ export const ProfileView = () => {
   const [responseMessage, setResponseMessage] = useState();
   const [hidePhotoInput, setHidePhotoInput] = useState(true);
   const [isLoading, setIsLoading] = useState()
-  const loadUserAfterUpdate = async () => {
+  const loadUserAfterUpdate = async (responseFromUpdate) => {
     const loggedInUser = await loadUser();
     setIsLoading(false)
     if (loggedInUser.data.message.msgError === false) {
       user.setFirstname(loggedInUser.data.user.firstname);
       user.setEmail(loggedInUser.data.user.email);
       user.setFavouriteCity(loggedInUser.data.user.favourite_city);
+      app.setCity(loggedInUser.data.user.favourite_city)
       if (loggedInUser.data.user.photo) {
         const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')
           user.setPhoto(`data:image/png;base64,${b64encoded}`);
@@ -37,6 +38,8 @@ export const ProfileView = () => {
  */      }
       user.setAvatar(loggedInUser.data.user.avatar);
       user.setAuthenticatedUser(true);
+      setResponseMessage(responseFromUpdate);
+
     } else {
       setResponseMessage(loggedInUser.data.message.msgBody);
       user.setAuthenticatedUser(false);
@@ -45,8 +48,7 @@ export const ProfileView = () => {
   const update = async (values) => {
     setIsLoading(true)
     const response = await updateUser(values);
-    setResponseMessage(response.data.message.msgBody);
-    loadUserAfterUpdate();
+    loadUserAfterUpdate(response.data.message.msgBody);
   };
   const openDeleteConfirm = () => {
     app.setDeleteConfirmDialogOpen(true);
@@ -58,8 +60,7 @@ export const ProfileView = () => {
     event.target.value = null
     setHidePhotoInput(true);
     const response = await updateUserPhoto(formData);
-    setResponseMessage(response.data.message.msgBody);
-    loadUserAfterUpdate();
+    loadUserAfterUpdate(response.data.message.msgBody);
   };
 useEffect(() => {
 // If user not logged the signin dialog should display

@@ -3,7 +3,7 @@ import { WeatherContext } from "../shared/global/provider/Provider";
 import { AppContext } from "../shared/global/provider/Provider";
 import { MainWeather } from "../components/mainWeather/MainWeather";
 import { ForeCastWeather } from "../components/forecastWeather/ForeCastWeather";
-import {searchCity} from "../shared/api/service/WeatherService";
+import { searchCity } from "../shared/api/service/WeatherService";
 import { UserContext } from "../shared/global/provider/Provider";
 import { ErrorView } from "./ErrorView";
 import { loadUser } from "../shared/api/service/UserService";
@@ -15,67 +15,69 @@ export const HomeView = () => {
   const [error, setError] = useState();
 
   const defaultWeatherCall = async () => {
-    await searchCity({city:app.city, fahrenheitOn: app.fahrenheitOn}).then(
+    await searchCity({ city: app.city, fahrenheitOn: app.fahrenheitOn }).then(
       (response) => {
         if (response.status === 200) {
           weather.setWeather(response.data.weather);
         } else {
           console.log(response.data.message.msgBody);
-          setError(true)
+          setError(true);
         }
       }
     );
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       const loggedInUser = await loadUser();
-      if (loggedInUser.data.message.msgError===false) {
+      if (loggedInUser.data.message.msgError === false) {
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
         user.setAvatar(loggedInUser.data.user.avatar);
         if (loggedInUser.data.user.photo) {
-          const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')
-          user.setPhoto(`data:image/png;base64,${b64encoded}`);  
-/*           user.setPhoto(loggedInUser.data.user.photo)
- */ 
+          const b64encoded = new Buffer.from(
+            loggedInUser.data.user.photo.data
+          ).toString("base64");
+          user.setPhoto(`data:image/png;base64,${b64encoded}`);
+          /*           user.setPhoto(loggedInUser.data.user.photo)
+           */
         }
-        user.setAuthenticatedUser(true); 
-        //TODO fix fahrenheit   
-        await searchCity(
-          {city:loggedInUser.data.user.favourite_city
+        user.setAuthenticatedUser(true);
+        searchCity({
+          city: loggedInUser.data.user.favourite_city
             ? loggedInUser.data.user.favourite_city
             : app.city,
-          fahrenheitOn:           loggedInUser.data.user.fahrenheit_on
-        }
-        ).then((response) => {
+          fahrenheitOn: loggedInUser.data.user.fahrenheit_on
+            ? loggedInUser.data.user.fahrenheit_on
+            : app.fahrenheitOn,
+        }).then((response) => {
           if (response.status === 200) {
+            app.setCity(response.data.weather.city.name);
             weather.setWeather(response.data.weather);
-          }
-          else if (
-            response.data.message.msgBody ===
-            "city not found"          ) {
+            if (loggedInUser.data.user.favourite_city) {
+              localStorage.setItem("favouriteCity", response.data.weather.city.name);
+            }
+          } else if (response.data.message.msgBody === "city not found") {
             console.log(response.data.message.msgBody);
-            defaultWeatherCall()
-            app.setnoCityText("Your favourite city does not exist in the database, please change it.");
-
+            defaultWeatherCall();
+            app.setnoCityText(
+              "Your favourite city does not exist in the database, please change it."
+            );
           } else {
             console.log(response.data.message.msgBody);
-            
           }
         });
       } else {
         user.setAuthenticatedUser(false);
 
-        defaultWeatherCall()
-
+        defaultWeatherCall();
       }
     };
 
     fetchData();
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  }, [user]);
 
   const displayWeather = () => {
     if (weather.weather) {
