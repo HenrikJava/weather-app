@@ -6,6 +6,8 @@ import { Formik } from "formik";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Tooltip from "@material-ui/core/Tooltip"
 import EditIcon from "@material-ui/icons/Edit";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { DeleteConfirmDialog } from "../components/deleteConfirmDialog/DeleteConfirmDialog";
 import * as Yup from "yup";
 import {
@@ -20,9 +22,10 @@ export const ProfileView = () => {
 
   const [responseMessage, setResponseMessage] = useState();
   const [hidePhotoInput, setHidePhotoInput] = useState(true);
-
+  const [isLoading, setIsLoading] = useState()
   const loadUserAfterUpdate = async () => {
     const loggedInUser = await loadUser();
+    setIsLoading(false)
     if (loggedInUser.data.message.msgError === false) {
       user.setFirstname(loggedInUser.data.user.firstname);
       user.setEmail(loggedInUser.data.user.email);
@@ -40,6 +43,7 @@ export const ProfileView = () => {
     }
   };
   const update = async (values) => {
+    setIsLoading(true)
     const response = await updateUser(values);
     setResponseMessage(response.data.message.msgBody);
     loadUserAfterUpdate();
@@ -48,11 +52,13 @@ export const ProfileView = () => {
     app.setDeleteConfirmDialogOpen(true);
   };
   const uploadPhoto = async (event) => {
+    setIsLoading(true)
     let formData = new FormData();
     formData.append("photo", event.target.files[0]);
+    event.target.value = null
+    setHidePhotoInput(true);
     const response = await updateUserPhoto(formData);
     setResponseMessage(response.data.message.msgBody);
-    setHidePhotoInput(true);
     loadUserAfterUpdate();
   };
 useEffect(() => {
@@ -101,7 +107,7 @@ useEffect(() => {
             ></input>
           </form>
         </Grid>
-
+       {isLoading? <CircularProgress id="profile-progress-spinner"></CircularProgress> : ''} 
         <Formik
           initialValues={{
             firstname: user.firstname,
