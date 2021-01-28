@@ -18,6 +18,8 @@ export const DeleteConfirmDialog = () => {
     const response = await deleteUser();
     setResponseMessage(response.data.message.msgBody);
     if (response.data.message.msgError === false) {
+      localStorage.removeItem('favouriteCity')
+      handleClose()
       user.setAuthenticatedUser(false);
     }
   };
