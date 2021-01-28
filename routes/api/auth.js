@@ -3,8 +3,6 @@ const router = express.Router();
 const auth = require("../../middleware/auth");
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
-
-const config = require("../../config/default.json");
 const jwt = require("jsonwebtoken");
 
 const { check, validationResult } = require("express-validator");
@@ -19,7 +17,15 @@ router.get("/", auth, (req, res) => {
         },
       });
     }
-    if (user) {
+    else if (!user) {
+      res.status(400).json({
+               message: {
+          msgBody: "User dont exists anymore.",
+          msgError: true,
+        },
+      });
+    }
+    else {
       res.status(200).json({
         user,
         message: {
@@ -35,18 +41,16 @@ router.post(
   "/",
   [
     check("email", "Please enter a valid email").isEmail(),
-    check("password", "Password is required").not().isEmpty(),
+    check("password","Password is required").not().isEmpty(),
   ],
   async (req, res) => {
+    
     const errors = validationResult(req);
-    let msgBody = "";
-    errors.errors.forEach((element) => {
-      msgBody += " " + element.msg;
-    });
+    
     if (!errors.isEmpty()) {
       return res
         .status(400)
-        .json({ message: { msgBody: msgBody, msgError: true } });
+        .json({ message: { msgBody: errors.array()[0].msg, msgError: true } });
     } else {
       const { password, email } = req.body;
 
