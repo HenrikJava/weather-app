@@ -67,7 +67,7 @@ html,
   width: 8vw;
   font-size: 1vw;
 }
-.error-message {
+#error-message {
   color: red;
 }
 @media screen and (max-width: 1400px) and (min-height: 500px) {
