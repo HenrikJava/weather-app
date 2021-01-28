@@ -23,6 +23,12 @@ export const Routing = (props) => {
       return EmptyView;
     } else return navigateToView;
   };
+  //If the user are logged in, the forgot password and reset password views is not reachable
+  const blockRouteIfAuthenticated = (navigateToView) => {
+    if (user.authenticatedUser) {
+      return HomeView;
+    } else return navigateToView;
+  };
   //Fetching the user data if there is some
   useEffect(() => {
     const fetchData = async () => {
@@ -39,9 +45,7 @@ export const Routing = (props) => {
         if (loggedInUser.data.user.photo) {
           const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')
           user.setPhoto(`data:image/png;base64,${b64encoded}`);  
-/*           user.setPhoto(loggedInUser.data.user.photo)
- */   
-        }
+          }
         user.setAvatar(loggedInUser.data.user.avatar);
         user.setFavouriteCity(
           loggedInUser.data.user.favourite_city
@@ -68,8 +72,8 @@ export const Routing = (props) => {
         ></Route>
         <Route path={RoutingPath.settingsView} component={SettingsView}></Route>
         <Route path={RoutingPath.aboutView} component={AboutView}></Route>
-        <Route path={RoutingPath.forgotView} component={ForgotView}></Route>
-        <Route path={RoutingPath.resetView} component={ResetView}></Route>
+        <Route path={RoutingPath.forgotView} component={blockRouteIfAuthenticated(ForgotView)}></Route>
+        <Route path={RoutingPath.resetView} component={blockRouteIfAuthenticated(ResetView)}></Route>
 
         <Route component={HomeView}></Route>
       </Switch>
