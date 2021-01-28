@@ -12,6 +12,7 @@ export const SettingsView = () => {
   const [responseMessage, setResponseMessage] = useState();
 
   const handleChange = async () => {
+    setResponseMessage('');
     if (!user.authenticatedUser) {
       app.setFahrenheitOn(!app.fahrenheitOn);
     } else {

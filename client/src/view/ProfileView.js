@@ -4,9 +4,9 @@ import { AppContext } from "../shared/global/provider/Provider";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Tooltip from "@material-ui/core/Tooltip"
+import Tooltip from "@material-ui/core/Tooltip";
 import EditIcon from "@material-ui/icons/Edit";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { DeleteConfirmDialog } from "../components/deleteConfirmDialog/DeleteConfirmDialog";
 import * as Yup from "yup";
@@ -22,32 +22,38 @@ export const ProfileView = () => {
 
   const [responseMessage, setResponseMessage] = useState();
   const [hidePhotoInput, setHidePhotoInput] = useState(true);
-  const [isLoading, setIsLoading] = useState()
+  const [isLoading, setIsLoading] = useState();
   const loadUserAfterUpdate = async (responseFromUpdate) => {
     const loggedInUser = await loadUser();
-    setIsLoading(false)
+    setIsLoading(false);
     if (loggedInUser.data.message.msgError === false) {
       user.setFirstname(loggedInUser.data.user.firstname);
       user.setEmail(loggedInUser.data.user.email);
       user.setFavouriteCity(loggedInUser.data.user.favourite_city);
-      localStorage.setItem('favouriteCity', loggedInUser.data.user.favourite_city)
-      app.setCity(loggedInUser.data.user.favourite_city)
+      localStorage.setItem(
+        "favouriteCity",
+        loggedInUser.data.user.favourite_city
+      );
+      app.setCity(loggedInUser.data.user.favourite_city);
       if (loggedInUser.data.user.photo) {
-        const b64encoded = new Buffer.from(loggedInUser.data.user.photo.data).toString('base64')
-          user.setPhoto(`data:image/png;base64,${b64encoded}`);
-/*           user.setPhoto(loggedInUser.data.user.photo)
- */      }
+        const b64encoded = new Buffer.from(
+          loggedInUser.data.user.photo.data
+        ).toString("base64");
+        user.setPhoto(`data:image/png;base64,${b64encoded}`);
+        
+      }
       user.setAvatar(loggedInUser.data.user.avatar);
       user.setAuthenticatedUser(true);
       setResponseMessage(responseFromUpdate);
-
     } else {
       setResponseMessage(loggedInUser.data.message.msgBody);
       user.setAuthenticatedUser(false);
     }
   };
   const update = async (values) => {
-    setIsLoading(true)
+    setResponseMessage('');
+
+    setIsLoading(true);
     const response = await updateUser(values);
     loadUserAfterUpdate(response.data.message.msgBody);
   };
@@ -55,33 +61,37 @@ export const ProfileView = () => {
     app.setDeleteConfirmDialogOpen(true);
   };
   const uploadPhoto = async (event) => {
-    setIsLoading(true)
+    setResponseMessage('');
+    setIsLoading(true);
     let formData = new FormData();
     formData.append("photo", event.target.files[0]);
-    event.target.value = null
+    event.target.value = null;
     setHidePhotoInput(true);
     const response = await updateUserPhoto(formData);
     loadUserAfterUpdate(response.data.message.msgBody);
   };
-useEffect(() => {
-// If user not logged the signin dialog should display
-  !user.authenticatedUser
-    ? app.setSignInDialogOpen(true)
-    : app.setSignInDialogOpen(false);
-},[app, user.authenticatedUser])
+  useEffect(() => {
+    // If user not logged the signin dialog should display
+    !user.authenticatedUser
+      ? app.setSignInDialogOpen(true)
+      : app.setSignInDialogOpen(false);
+  }, [app, user.authenticatedUser]);
   return (
     <div className="profile-view">
       <DeleteConfirmDialog></DeleteConfirmDialog>
       <Grid container id="profile-wrapper">
         <Grid item xs={12} id="profile-upper-wrapper">
-        <Tooltip title={<p className="profile-delete-tooltip">Delete account</p>}><DeleteIcon
-            id="delete-icon"
-            onClick={() => {
-              openDeleteConfirm();
-            }}
-          ></DeleteIcon></Tooltip>
+          <Tooltip
+            title={<p className="profile-delete-tooltip">Delete account</p>}
+          >
+            <DeleteIcon
+              id="delete-icon"
+              onClick={() => {
+                openDeleteConfirm();
+              }}
+            ></DeleteIcon>
+          </Tooltip>
 
-          
           <span className="photo-wrapper">
             <img
               src={user.photo ? user.photo : user.avatar}
@@ -109,7 +119,11 @@ useEffect(() => {
             ></input>
           </form>
         </Grid>
-       {isLoading? <CircularProgress id="profile-progress-spinner"></CircularProgress> : ''} 
+        {isLoading ? (
+          <CircularProgress id="profile-progress-spinner"></CircularProgress>
+        ) : (
+          ""
+        )}
         <Formik
           initialValues={{
             firstname: user.firstname,
@@ -139,6 +153,13 @@ useEffect(() => {
                 /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
                 "Password must contain at least 8 characters, one uppercase, one number and one special case character"
               ),
+            password: Yup.string().when("oldPassword", {
+              is: (oldPassword) => oldPassword && oldPassword.length > 0,
+              then: Yup.string().required(
+                "New password is required when entering an old one"
+              ),
+              otherwise: Yup.string(),
+            }),
             confirmPassword: Yup.string().when("password", {
               is: (val) => val && val.length > 0,
               then: Yup.string()
@@ -155,7 +176,7 @@ useEffect(() => {
               ),
               otherwise: Yup.string(),
             }),
-          })}
+          },[['password', 'oldPassword']])}
         >
           {(props) => {
             const {
@@ -288,9 +309,7 @@ useEffect(() => {
                     {responseMessage}
                   </p>
 
-                  <Button type="submit" >
-                    Update profile
-                  </Button>
+                  <Button type="submit">Update profile</Button>
                 </Grid>
               </form>
             );
