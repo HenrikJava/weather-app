@@ -50,7 +50,7 @@ export const ForgotView = () => {
             return (
               <form className="form-wrapper" onSubmit={handleSubmit}>
                 <p className="forgot-header">
-                  Please enter email to reset your password
+                  Please enter email to request an email link
                 </p>
                 <TextField
                   autoFocus
@@ -66,7 +66,7 @@ export const ForgotView = () => {
                   fullWidth
                 />
                 <Button type="submit" id="forgot-reset-button" disabled={!isValid}>
-                  Reset my password
+                  Send email
                 </Button>
                 {showError && (
                   <div className="forgot-error-wrapper">
