@@ -32,7 +32,6 @@ export const registerUser = async (values) => {
       "Content-Type": "application/json",
     },
   };
-  delete values.confirmPassword;
   const body = JSON.stringify(values);
 
   try {
@@ -67,7 +66,6 @@ export const updateUser = async (values) => {
       "Content-Type": "application/json",
     },
   };
-  delete values.confirmPassword;
   if (values.password === "") {
     delete values.password
   }
