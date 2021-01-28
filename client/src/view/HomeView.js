@@ -19,6 +19,8 @@ export const HomeView = () => {
       (response) => {
         if (response.status === 200) {
           weather.setWeather(response.data.weather);
+          app.setIsFavourite(false)
+
         } else {
           console.log(response.data.message.msgBody);
           setError(true);
@@ -55,8 +57,11 @@ export const HomeView = () => {
           if (response.status === 200) {
             app.setCity(response.data.weather.city.name);
             weather.setWeather(response.data.weather);
+            app.setIsFavourite(false)
+
             if (loggedInUser.data.user.favourite_city) {
               localStorage.setItem("favouriteCity", response.data.weather.city.name);
+              app.setIsFavourite(true)
             }
           } else if (response.data.message.msgBody === "city not found") {
             console.log(response.data.message.msgBody);

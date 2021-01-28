@@ -15,7 +15,6 @@ export const CityInfo = () => {
   const user = useContext(UserContext);
 
   const [time, setTime] = useState("N/A");
-  const [isFavourite, setIsFavourite] = useState();
 
   const update = async (city) => {
     await updateUser({
@@ -28,7 +27,7 @@ export const CityInfo = () => {
   };
 
   const handleFavourite = () => {
-    if (isFavourite) {
+    if (app.isFavourite) {
       localStorage.setItem("favouriteCity", "");
       if (user.authenticatedUser) {
         update("");
@@ -40,13 +39,13 @@ export const CityInfo = () => {
         app.setNoCityText('')
       }
     }
-    setIsFavourite(!isFavourite);
+    app.setIsFavourite(!app.isFavourite);
   };
   useEffect(() => {
     if (localStorage.getItem("favouriteCity") === weather.weather.city.name) {
-      setIsFavourite(true);
+      app.setIsFavourite(true);
     } else {
-      setIsFavourite(false);
+      app.setIsFavourite(false);
     }
     const interval = setInterval(() => {
       setTime(calcTime(weather.weather.city.timezone).toLocaleString());
@@ -60,7 +59,7 @@ export const CityInfo = () => {
         <p className="city-info">{`${weather.weather.city.name}, ${weather.weather.city.country}`}</p>
         <span onClick={handleFavourite}>
           {" "}
-          {isFavourite ? (
+          {app.isFavourite ? (
             <StarIcon className="fav-star-icon"></StarIcon>
           ) : (
             <StarBorderIcon className="not-fav-star-icon"></StarBorderIcon>
