@@ -38,8 +38,7 @@ export const SignInDialog = () => {
             loggedInUser.data.user.photo.data
           ).toString("base64");
           user.setPhoto(`data:image/png;base64,${b64encoded}`);
-/*           user.setPhoto(loggedInUser.data.user.photo)
- */
+
         }
         user.setAuthenticatedUser(true);
         handleClose();

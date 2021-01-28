@@ -36,9 +36,7 @@ export const ResetView = (props) => {
 
   useEffect(() => {
     const checkIfTokenIsValid = async () => {
-        console.log(props.match.params.token);
       const response = await checkTokenUser(props.match.params.token);
-      console.log(response);
       if (response.data.message.msgError === true) {
         setUpdated(false);
         setError(true);
