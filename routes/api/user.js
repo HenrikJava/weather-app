@@ -4,11 +4,16 @@ const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const auth = require("../../middleware/auth");
 const jwt = require("jsonwebtoken");
-const { check, validationResult } = require("express-validator");
 const User = require("../../models/User");
-const multer = require("multer");
-const { v4: uuidv4 } = require("uuid");
-let path = require("path");
+const multer = require("../../middleware/multer");
+const {
+  registerValidator,
+  result,
+  updateUserValidator,
+  updateSettingsValidator,
+  forgotPasswordValidator,
+  resetUpdatePasswordValidator,
+} = require("../../middleware/validator");
 const fs = require("fs");
 require("dotenv").config();
 const nodemailer = require("nodemailer");
@@ -16,30 +21,9 @@ const nodemailer = require("nodemailer");
 //Register user
 router.post(
   "/",
-  [
-    check("firstname", "Firstname is required").not().isEmpty(),
-    check("email", "Please enter a valid email").isEmail(),
-    check(
-      "password",
-      "Password must include one lowercase character, one uppercase character, a number, a special character and must be at least 8 characters."
-    ).matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").custom((value,{req, loc, path}) => {
-            if (value !== req.body.confirmPassword) {
-                // trow error if passwords do not match
-                throw new Error("Passwords don't match");
-            } else {
-                return value;
-            }
-        })
-  ],
+  [registerValidator, result],
 
   (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .json({ message: { msgBody: errors.array()[0].msg, msgError: true } });
-    }
     const {
       firstname,
       password,
@@ -129,153 +113,99 @@ router.post(
   }
 );
 //Update user info
-router.put(
-  "/",
-  [
-    auth,
-    [
-      check("firstname").not().isEmpty().withMessage("Firstname is required"),
-      check("email", "Please enter a valid email").isEmail(),
-      check("password")
-        .optional()
-        .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i")
-        .withMessage(
-          "Password must include one lowercase character, one uppercase character, a number, and a special character."
-        ).custom((value,{req, loc, path}) => {
-          if (value !== req.body.confirmPassword) {
-              // trow error if passwords do not match
-              throw new Error("Passwords don't match");
+router.put("/", [auth, updateUserValidator, result], async (req, res) => {
+  const avatar = gravatar.url(req.body.email, {
+    s: "200",
+    r: "pg",
+    d: "mm",
+  });
+  const user = await User.findById(req.user.id, async (err, user) => {
+    if (err) {
+      return res.status(500).json({
+        message: {
+          msgBody: "Something wrong at server, please try again later.",
+          msgError: true,
+        },
+      });
+    }
+    if (!user) {
+      return res.status(400).json({
+        message: {
+          msgBody: "User dont exist, contact support.",
+          msgError: true,
+        },
+      });
+    }
+  });
+
+  if (req.body.password) {
+    const isMatch = await bcrypt.compare(req.body.oldPassword, user.password);
+
+    if (isMatch) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(req.body.password, salt);
+    } else {
+      return res.status(400).json({
+        message: {
+          msgBody: "Old password doesnt match, please try again.",
+          msgError: true,
+        },
+      });
+    }
+  }
+
+  user.firstname = req.body.firstname;
+  user.email = req.body.email;
+  user.favourite_city = req.body.favouriteCity;
+  user.fahrenheit_on = req.body.fahrenheitOn;
+  user.avatar = avatar;
+  user.save((err) => {
+    console.log(err);
+
+    if (err) {
+      res.status(500).json({
+        message: {
+          msgBody: "Something wrong at server, please try again later.",
+          msgError: true,
+        },
+      });
+    } else {
+      //Creating token
+      const payload = {
+        user: {
+          id: req.user.id,
+        },
+      };
+      //TODO change expires
+      jwt.sign(
+        payload,
+        process.env.JWT_SECRET,
+        { expiresIn: 60 * 60 * 24 * 100 },
+        (err, token) => {
+          if (err) {
+            res.status(500).json({
+              message: {
+                msgBody: "Something wrong at server, please try again later.",
+                msgError: true,
+              },
+            });
           } else {
-              return value;
+            res.status(201).json({
+              token,
+              message: {
+                msgBody: "Account successfully updated.",
+                msgError: false,
+              },
+            });
           }
-      }),
-      check("oldPassword")
-        .optional()
-        .if(check("password"))
-        .exists()
-        .notEmpty()
-        .withMessage("Old password required"),
-    ],
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .json({ message: { msgBody: errors.array()[0].msg, msgError: true } });
+        }
+      );
     }
-
-    const avatar = gravatar.url(req.body.email, {
-      s: "200",
-      r: "pg",
-      d: "mm",
-    });
-    const user = await User.findById(req.user.id, async (err, user) => {
-      if (err) {
-        return res.status(500).json({
-          message: {
-            msgBody: "Something wrong at server, please try again later.",
-            msgError: true,
-          },
-        });
-      }
-      if (!user) {
-        return res.status(400).json({
-          message: {
-            msgBody: "User dont exist, contact support.",
-            msgError: true,
-          },
-        });
-      }
-    });
-
-    if (req.body.password) {
-      const isMatch = await bcrypt.compare(req.body.oldPassword, user.password);
-
-      if (isMatch) {
-        const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(req.body.password, salt);
-      } else {
-        return res.status(400).json({
-          message: {
-            msgBody: "Old password doesnt match, please try again.",
-            msgError: true,
-          },
-        });
-      }
-    }
-
-    user.firstname = req.body.firstname;
-    user.email = req.body.email;
-    user.favourite_city = req.body.favouriteCity;
-    user.fahrenheit_on = req.body.fahrenheitOn;
-    user.avatar = avatar;
-    user.save((err) => {
-      if (err) {
-        res.status(500).json({
-          message: {
-            msgBody: "Something wrong at server, please try again later.",
-            msgError: true,
-          },
-        });
-      } else {
-        //Creating token
-        const payload = {
-          user: {
-            id: req.user.id,
-          },
-        };
-        //TODO change expires
-        jwt.sign(
-          payload,
-          process.env.JWT_SECRET,
-          { expiresIn: 60 * 60 * 24 * 100 },
-          (err, token) => {
-            if (err) {
-              res.status(500).json({
-                message: {
-                  msgBody: "Something wrong at server, please try again later.",
-                  msgError: true,
-                },
-              });
-            } else {
-              res.status(201).json({
-                token,
-                message: {
-                  msgBody: "Account successfully updated.",
-                  msgError: false,
-                },
-              });
-            }
-          }
-        );
-      }
-    });
-  }
-);
-//Multer used for save photo on disk.
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./tempProfilePhotoFolder");
-  },
-  filename: function (req, file, cb) {
-    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
-  },
+  });
 });
-//Extra validation because express validator cant handle file validation
-const fileFilter = (req, file, cb) => {
-  const validFiles = ["image/jpeg", "image/jpg", "image/png"];
-
-  if (validFiles.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-const upload = multer({ storage, fileFilter });
 
 //Upload user photo
-router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
+router.put("/photo", [auth, multer.single("photo")], async (req, res) => {
   const user = await User.findById(req.user.id, (err, user) => {
     if (err) {
       return res.status(500).json({
@@ -358,82 +288,65 @@ router.put("/photo", [auth, upload.single("photo")], async (req, res) => {
   });
 });
 //Update user settings such as celcius/fahrenheit
-router.put(
-  "/settings",
-  [
-    auth,
-    [
-      check("fahrenheitOn", "Scale is required").not().isEmpty(),
-      check("email", "Please enter a valid email").isEmail(),
-    ],
-  ],
-  (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .json({ message: { msgBody: errors.array()[0].msg, msgError: true } });
-    }
-    User.findOneAndUpdate(
-      { email: req.body.email },
-      {
-        $set: {
-          fahrenheit_on: req.body.fahrenheitOn,
-        },
+router.put("/settings", [auth, updateSettingsValidator], (req, res) => {
+  User.findOneAndUpdate(
+    { email: req.body.email },
+    {
+      $set: {
+        fahrenheit_on: req.body.fahrenheitOn,
       },
-      { upsert: false, new: true },
-      (err, user) => {
-        if (err) {
-          res.status(500).json({
-            message: {
-              msgBody: "Something wrong at server, please try again later.",
-              msgError: true,
-            },
-          });
-        } else if (!user) {
-          res.status(400).json({
-            message: {
-              msgBody: "User dont exist, contact support.",
-              msgError: true,
-            },
-          });
-        } else {
-          //Creating token
-          const payload = {
-            user: {
-              id: req.user.id,
-            },
-          };
-          //TODO change expires
-          jwt.sign(
-            payload,
-            process.env.JWT_SECRET,
-            { expiresIn: 60 * 60 * 24 * 100 },
-            (err, token) => {
-              if (err) {
-                res.status(500).json({
-                  message: {
-                    msgBody:
-                      "Something wrong at server, please try again later.",
-                    msgError: true,
-                  },
-                });
-              } else {
-                res.status(201).json({
-                  token,
-                  message: {
-                    msgBody: "Account successfully updated.",
-                    msgError: false,
-                  },
-                });
-              }
+    },
+    { upsert: false, new: true },
+    (err, user) => {
+      if (err) {
+        res.status(500).json({
+          message: {
+            msgBody: "Something wrong at server, please try again later.",
+            msgError: true,
+          },
+        });
+      } else if (!user) {
+        res.status(400).json({
+          message: {
+            msgBody: "User dont exist, contact support.",
+            msgError: true,
+          },
+        });
+      } else {
+        //Creating token
+        const payload = {
+          user: {
+            id: req.user.id,
+          },
+        };
+        //TODO change expires
+        jwt.sign(
+          payload,
+          process.env.JWT_SECRET,
+          { expiresIn: 60 * 60 * 24 * 100 },
+          (err, token) => {
+            if (err) {
+              res.status(500).json({
+                message: {
+                  msgBody: "Something wrong at server, please try again later.",
+                  msgError: true,
+                },
+              });
+            } else {
+              res.status(201).json({
+                token,
+                message: {
+                  msgBody: "Account successfully updated.",
+                  msgError: false,
+                },
+              });
             }
-          );
-        }
+          }
+        );
       }
-    );
-  }
-);
+    }
+  );
+});
 
 //Delete user
 router.delete("/", auth, (req, res) => {
@@ -464,48 +377,67 @@ router.delete("/", auth, (req, res) => {
   });
 });
 
-router.post(
-  "/forgot",
-  [check("email", "Please enter a valid email").isEmail()],
-  (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .json({ message: { msgBody: errors.array()[0].msg, msgError: true } });
+router.post("/forgot", forgotPasswordValidator, (req, res) => {
+  const email = req.body.email;
+
+  User.findOne({ email }, (err, user) => {
+    if (err) {
+      res.status(500).json({
+        message: {
+          msgBody: "Something wrong at server, please try again later.",
+          msgError: true,
+        },
+      });
+    } else if (!user) {
+      res.status(403).json({
+        message: {
+          msgBody:
+            "There is no user with this email registrated. Please try again or register a new account.",
+          msgError: true,
+        },
+      });
     } else {
-      const email = req.body.email;
+      //Creating token
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+      //TODO change expires
 
-      User.findOne({ email }, (err, user) => {
-        if (err) {
-          res.status(500).json({
-            message: {
-              msgBody: "Something wrong at server, please try again later.",
-              msgError: true,
-            },
-          });
-        } else if (!user) {
-          res.status(403).json({
-            message: {
-              msgBody:
-                "There is no user with this email registrated. Please try again or register a new account.",
-              msgError: true,
-            },
-          });
-        } else {
-          //Creating token
-          const payload = {
-            user: {
-              id: user.id,
-            },
-          };
-          //TODO change expires
-
-          jwt.sign(
-            payload,
-            process.env.JWT_SECRET,
-            { expiresIn: 60 * 60 * 24 * 100 },
-            (err, token) => {
+      jwt.sign(
+        payload,
+        process.env.JWT_SECRET,
+        { expiresIn: 60 * 60 * 24 * 100 },
+        (err, token) => {
+          if (err) {
+            res.status(500).json({
+              message: {
+                msgBody: "Something wrong at server, please try again later.",
+                msgError: true,
+              },
+            });
+          } else {
+            const transporter = nodemailer.createTransport({
+              service: "gmail",
+              auth: {
+                user: process.env.EMAIL_ADDRESS,
+                pass: process.env.EMAIL_PASSWORD,
+              },
+            });
+            const mailOptions = {
+              from: process.env.EMAIL_ADDRESS,
+              to: user.email,
+              subject: "Link to reset password",
+              text:
+                "You are recieving this because you (or someone else) have requested the reset of the password for your account. \n" +
+                "Please click on the following link, or paste this into your browser to complete the process within one hour of recieving it. \n" +
+                process.env.MAIL_LINK_URL +
+                token +
+                "\n" +
+                "If you did not request this, please ignore this email and your password will remain unchanged.",
+            };
+            transporter.sendMail(mailOptions, (err, response) => {
               if (err) {
                 res.status(500).json({
                   message: {
@@ -515,51 +447,20 @@ router.post(
                   },
                 });
               } else {
-                const transporter = nodemailer.createTransport({
-                  service: "gmail",
-                  auth: {
-                    user: process.env.EMAIL_ADDRESS,
-                    pass: process.env.EMAIL_PASSWORD,
+                res.status(200).json({
+                  message: {
+                    msgBody: "Recovery mail is sent.",
+                    msgError: false,
                   },
                 });
-                const mailOptions = {
-                  from: process.env.EMAIL_ADDRESS,
-                  to: user.email,
-                  subject: "Link to reset password",
-                  text:
-                    "You are recieving this because you (or someone else) have requested the reset of the password for your account. \n" +
-                    "Please click on the following link, or paste this into your browser to complete the process within one hour of recieving it. \n" +
-                    process.env.MAIL_LINK_URL +
-                    token +
-                    "\n" +
-                    "If you did not request this, please ignore this email and your password will remain unchanged.",
-                };
-                transporter.sendMail(mailOptions, (err, response) => {
-                  if (err) {
-                    res.status(500).json({
-                      message: {
-                        msgBody:
-                          "Something wrong at server, please try again later.",
-                        msgError: true,
-                      },
-                    });
-                  } else {
-                    res.status(200).json({
-                      message: {
-                        msgBody: "Recovery mail is sent.",
-                        msgError: false,
-                      },
-                    });
-                  }
-                });
               }
-            }
-          );
+            });
+          }
         }
-      });
+      );
     }
-  }
-);
+  });
+});
 router.get("/reset-check-token", [auth], (req, res) => {
   User.findById(req.user.id, (err, user) => {
     if (err) {
@@ -589,29 +490,8 @@ router.get("/reset-check-token", [auth], (req, res) => {
 });
 router.put(
   "/reset-update-password",
-  [
-    auth,
-    [
-      check(
-        "password",
-        "Password must include one lowercase character, one uppercase character, a number, a special character and must be at least 8 characters."
-      ).matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i").custom((value,{req, loc, path}) => {
-        if (value !== req.body.confirmPassword) {
-            // trow error if passwords do not match
-            throw new Error("Passwords don't match");
-        } else {
-            return value;
-        }
-    })
-    ],
-  ],
+  [auth, resetUpdatePasswordValidator],
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .json({ message: { msgBody: errors.array()[0].msg, msgError: true } });
-    }
     let hashedPassword = "";
     const salt = await bcrypt.genSalt(10);
     hashedPassword = await bcrypt.hash(req.body.password, salt);

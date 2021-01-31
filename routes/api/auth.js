@@ -4,8 +4,8 @@ const auth = require("../../middleware/auth");
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const {loginValidator, result} = require("../../middleware/validator")
 
-const { check, validationResult } = require("express-validator");
 //Load user
 router.get("/", auth, (req, res) => {
   User.findById(req.user.id, (err, user) => {
@@ -40,18 +40,11 @@ router.get("/", auth, (req, res) => {
 router.post(
   "/",
   [
-    check("email", "Please enter a valid email").isEmail(),
-    check("password","Password is required").not().isEmpty(),
+    loginValidator, result
   ],
   async (req, res) => {
     
-    const errors = validationResult(req);
     
-    if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .json({ message: { msgBody: errors.array()[0].msg, msgError: true } });
-    } else {
       const { password, email } = req.body;
 
       User.findOne({ email }, async (err, user) => {
@@ -116,6 +109,6 @@ router.post(
         }
       });
     }
-  }
+  
 );
 module.exports = router;
