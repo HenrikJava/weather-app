@@ -119,11 +119,9 @@ export const ProfileView = () => {
             ></input>
           </form>
         </Grid>
-        {isLoading ? (
+        {isLoading &&
           <CircularProgress id="profile-progress-spinner"></CircularProgress>
-        ) : (
-          ""
-        )}
+        }
         <Formik
           initialValues={{
             firstname: user.firstname,
