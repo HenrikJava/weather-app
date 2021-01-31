@@ -6,22 +6,25 @@ import { loadUser } from "../shared/api/service/UserService";
 import { updateUserSettings } from "../shared/api/service/UserService";
 
 import "./SettingsView.css";
+import { CircularProgress } from "@material-ui/core";
 export const SettingsView = () => {
   const user = useContext(UserContext);
   const app = useContext(AppContext);
   const [responseMessage, setResponseMessage] = useState();
+  const [isLoading, setIsLoading] = useState();
 
   const handleChange = async () => {
     setResponseMessage('');
     if (!user.authenticatedUser) {
       app.setFahrenheitOn(!app.fahrenheitOn);
     } else {
+      setIsLoading(true)
       const updateResponse = await updateUserSettings({
         email: user.email,
         fahrenheitOn: !app.fahrenheitOn,
       });
       const loggedInUser = await loadUser();
-
+      setIsLoading(false)
       if (updateResponse.data.message.msgError === false) {
         app.setFahrenheitOn(loggedInUser.data.user.fahrenheit_on);
       }
@@ -49,8 +52,13 @@ export const SettingsView = () => {
           />
           <p>Fahrenheit</p>
         </Grid>
+        {isLoading &&
+        <Grid item xs={12} id="settings-progress-wrapper">
+                 <CircularProgress id="settings-progress-spinner"></CircularProgress>
+
       </Grid>
-      <p
+        }
+        <p
         className={
           responseMessage === "Account successfully updated."
             ? "update-success update"
@@ -59,6 +67,9 @@ export const SettingsView = () => {
       >
         {responseMessage}
       </p>
+      </Grid>
+      
+      
     </div>
   );
 };

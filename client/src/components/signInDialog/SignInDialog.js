@@ -11,15 +11,18 @@ import { UserContext } from "../../shared/global/provider/Provider";
 import { AppContext } from "../../shared/global/provider/Provider";
 import { useHistory } from "react-router-dom";
 import RoutingPath from "../../routes/RoutingPath";
+import { CircularProgress } from "@material-ui/core";
 export const SignInDialog = () => {
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [isLoading, setIsLoading] = useState();
   const user = useContext(UserContext);
   const app = useContext(AppContext);
 
   const login = async (event) => {
+    setIsLoading(true);
     event.preventDefault();
     const response = await loginUser(email, password);
     if (response.data.message.msgError === true) {
@@ -30,7 +33,10 @@ export const SignInDialog = () => {
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
-        localStorage.setItem("favouriteCity", loggedInUser.data.user.favourite_city);
+        localStorage.setItem(
+          "favouriteCity",
+          loggedInUser.data.user.favourite_city
+        );
 
         user.setAvatar(loggedInUser.data.user.avatar);
         if (loggedInUser.data.user.photo) {
@@ -38,7 +44,6 @@ export const SignInDialog = () => {
             loggedInUser.data.user.photo.data
           ).toString("base64");
           user.setPhoto(`data:image/png;base64,${b64encoded}`);
-
         }
         user.setAuthenticatedUser(true);
         handleClose();
@@ -46,6 +51,7 @@ export const SignInDialog = () => {
         setErrorMessage(loggedInUser.data.message.msgBody);
       }
     }
+    setIsLoading(false)
   };
 
   const handleClose = () => {
@@ -61,8 +67,8 @@ export const SignInDialog = () => {
   };
   const openForgotPassword = () => {
     app.setSignInDialogOpen(false);
-    history.push(RoutingPath.forgotView)
-  }
+    history.push(RoutingPath.forgotView);
+  };
 
   return (
     <Dialog
@@ -104,14 +110,21 @@ export const SignInDialog = () => {
           </Button>
         </DialogActions>
         <DialogContentText className="link-between-dialogs-wrapper">
-          <span onClick={() => openForgotPassword()} className="link-between-dialogs">
+          <span
+            onClick={() => openForgotPassword()}
+            className="link-between-dialogs"
+          >
             Forgot password?
           </span>
-          <span onClick={() => openRegisterDialog()} className="link-between-dialogs">
+          <span
+            onClick={() => openRegisterDialog()}
+            className="link-between-dialogs"
+          >
             Don't have an account yet?
           </span>
         </DialogContentText>
       </form>
+      {isLoading && <CircularProgress id="sign-in-progress-spinner"></CircularProgress>}
     </Dialog>
   );
 };

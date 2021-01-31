@@ -6,7 +6,6 @@
   height: 20vw;
   width: 25vw;
   margin: auto;
-  padding-top: 10%;
 }
 
 #settings-field {
@@ -28,6 +27,14 @@
 }
 #switch > span > span > span {
   color:white;
+}
+#settings-progress-wrapper {
+  text-align: center;
+}
+#settings-progress-spinner {
+  width: 4vw !important;
+  height: 4vw !important;
+  margin: auto;
 }
 .update-not-success {
   color: red;

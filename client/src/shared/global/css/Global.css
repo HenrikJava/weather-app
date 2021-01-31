@@ -28,7 +28,8 @@ html,
 }
 #sign-in-dialog-wrapper > div > div {
   height: fit-content;
-
+  justify-content: center;
+  align-items: center;
   width: 30%;
 }
 #dialog-title > h2 {
@@ -69,6 +70,11 @@ html,
 }
 #error-message {
   color: red;
+}
+#sign-in-progress-spinner {
+  position: absolute;
+  width: 4vw !important;
+  height: 4vw !important;
 }
 @media screen and (max-width: 1400px) and (min-height: 700px) {
   .profile-view,
