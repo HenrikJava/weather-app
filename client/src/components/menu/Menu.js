@@ -21,6 +21,9 @@ export const Menu = () => {
   const app = useContext(AppContext);
   const history = useHistory();
   const logout = () => {
+    app.setMenuOpen(false);
+                app.setNoCityText("");
+                localStorage.removeItem('favouriteCity')
     localStorage.removeItem("token");
     setAuthToken();
     user.setFirstname();
@@ -118,9 +121,7 @@ export const Menu = () => {
             <span
               onClick={() => {
                 logout();
-                app.setMenuOpen(false);
-                app.setNoCityText("");
-                localStorage.removeItem('favouriteCity')
+                
               }}
               className="menu-link"
             >
