@@ -70,7 +70,7 @@ html,
 #error-message {
   color: red;
 }
-@media screen and (max-width: 1400px) and (min-height: 500px) {
+@media screen and (max-width: 1400px) and (min-height: 700px) {
   .profile-view,
   .empty-view,
   .settings-view,

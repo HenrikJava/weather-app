@@ -188,6 +188,7 @@ export const MaxMin = () => {
             <ClickAwayListener onClickAway={handleTooltipClose}>
               <div>
                 <Tooltip
+                placement="top-start"
                   PopperProps={{
                     disablePortal: true,
                   }}
@@ -200,8 +201,7 @@ export const MaxMin = () => {
                   title={
                     <p id="tooltip-text">
                       This is calculated by severals conditions such as pressure
-                      and wind and shows the temperature what it feels like for
-                      a human.
+                      and wind and shows the experienced temperature.
                     </p>
                   }
                 >

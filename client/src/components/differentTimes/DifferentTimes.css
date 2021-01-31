@@ -31,7 +31,7 @@
 #different-wind {
   font-size: 1.4vw;
 }
-@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+@media screen and (max-width: 1400px) and  (min-height: 700px)  {
   
   .details-weather-icon {
     width: 4vw;

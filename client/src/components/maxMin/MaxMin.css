@@ -35,12 +35,12 @@ cursor: pointer;
 font-size: 2vw;
 margin-left: 0.4vw;}
 #tooltip {
-  margin-left: -25%;
+  margin-left: -15%;
 }
 #tooltip-text {
-  font-size: 1.8vw; max-width: 25vw; line-height: 1.8vw
+  font-size: 1.4vw; max-width: 25vw; line-height: 1.4vw
 }
-@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+@media screen and (max-width: 1400px) and  (min-height: 700px)  {
   .max-min-sloth {
     width: 20vw;
     margin-left: -70%;
@@ -103,8 +103,11 @@ margin-left: 0.4vw;}
   font-size: 2.4vw;
   margin-left: 0.4vw;
 }
-  
+#tooltip {
+  margin-left: -27%;
+}
+
   #tooltip-text {
-    font-size: 1vw; max-width: 14vw; line-height: 1vw
+    font-size: 3vw; max-width: 27vw; line-height: 3vw
   }
 }

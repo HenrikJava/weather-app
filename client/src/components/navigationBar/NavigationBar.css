@@ -20,7 +20,7 @@
 .navbar-menu {
   width: 75%;
 }
-@media screen and (max-width: 1400px) and (min-height: 500px) {
+@media screen and (max-width: 1400px) and (min-height: 700px) {
   .navbar-wrapper {
     height: 11%;
   }

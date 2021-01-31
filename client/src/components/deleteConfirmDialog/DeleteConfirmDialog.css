@@ -1,0 +1,15 @@
+@media screen and (max-width: 1024px) and (min-height: 1024px) {
+  .delete-dialog-wrapper {
+    width: 90%;
+  }
+  .delete-dialog-header > h2 {
+    font-size: 3.8vw;
+  }
+  .delete-dialog-text {
+    font-size: 3.4vw;
+  }
+  .delete-dialog-button {
+    width: 14vw;
+    font-size: 3vw;
+  }
+}

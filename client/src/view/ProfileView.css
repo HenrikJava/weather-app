@@ -19,19 +19,25 @@
 #name-city {
   display: flex;
 }
-#profile-upper-wrapper,
-#profile-button {
+#profile-upper-wrapper {
   display: grid;
   text-align: center;
 }
-#profile-button > button {
+#profile-button-wrapper {
+  display: grid;
+  text-align: center;
+  width: 20vw;
+  margin: auto;
+  margin-top: 2vw;
+}
+#profile-button-wrapper > button {
   color: black;
   border: 1px solid black;
   background-color: rgb(143, 138, 138);
+  width: 10vw;
   margin: auto;
-  margin-top: 2%;
 }
-#profile-button > button:hover {
+#profile-button-wrapper > button:hover {
   background-color: gainsboro;
 }
 #delete-icon {
@@ -101,11 +107,14 @@
 }
 .update-not-success {
   color: red;
+  margin-bottom: 1vw;
 }
 .update-success {
   color: green;
+  margin-bottom: 1vw;
+
 }
-@media screen and (max-width: 1400px) and (min-height: 500px) {
+@media screen and (max-width: 1400px) and (min-height: 700px) {
   #profile-wrapper {
     width: 80%;
     margin: auto;
@@ -166,7 +175,7 @@
   #profile-confirm {
     font-size: 2vw;
   }
-  #profile-button > button {
+  #profile-button-wrapper > button {
     width: 15vw;
     font-size: 1.4vw;
     margin-top: -1%;
@@ -236,7 +245,7 @@
   #profile-confirm {
     font-size: 4vw;
   }
-  #profile-button > button {
+  #profile-button-wrapper > button {
     width: 24vw;
     font-size: 2vw;
     height: 4vw;
@@ -284,7 +293,7 @@
   #email-old > div,
   #name-city > div {
     max-width: 90%;
-    margin: 1% auto;
+    margin: 0;
   }
   #profile-first-label,
   #profile-city-label,
@@ -302,12 +311,17 @@
   #profile-confirm {
     font-size: 6vw;
   }
-  #profile-button > button {
+  #profile-button-wrapper {
+    
+    width: 50vw;
+  }
+  #profile-button-wrapper > button {
     width: 42vw;
     font-size: 3vw;
   }
+  
 }
-@media screen and (max-width: 736px) and (max-height: 414px) {
+@media screen and (max-width: 812px) and (max-height: 414px) {
   #profile-wrapper {
     width: 50%;
     margin: auto;
@@ -337,22 +351,20 @@
   #profile-upper-wrapper {
     display: grid;
     text-align: center;
-    height: 46%;
+    height: 38%;
   }
-  #profile-button {
-    height: 2vw;
-    width: 22vw;
-    margin: auto;
+  #profile-button-wrapper {
+    width: 36vw;
+    
   }
-  #profile-button > button {
+  #profile-button-wrapper > button {
     color: black;
     border: 1px solid black;
     background-color: rgb(143, 138, 138);
-    margin: auto;
-    margin-top: 2%;
+    width: 20vw;
     font-size: 1.6vw;
   }
-  #profile-button > button:hover {
+  #profile-button-wrapper > button:hover {
     background-color: gainsboro;
   }
   #delete-icon {
@@ -366,10 +378,10 @@
     justify-content: center;
   }
   .profile-photo {
-    width: 24vw;
+    width: 18vw;
     border-radius: 100%;
     display: flex;
-    height: 24vw;
+    height: 18vw;
   }
   .edit-icon-wrapper {
     margin-top: 4%;
@@ -410,10 +422,11 @@
   .align-right {
     text-align: right;
   }
-  .update-not-success {
-    color: red;
-  }
-  .update-success {
-    color: green;
+  
+  .update-success, .update-not-success {
+    font-size: 2vw;
+    margin:0;
+    margin-bottom: 1vw;
+
   }
 }

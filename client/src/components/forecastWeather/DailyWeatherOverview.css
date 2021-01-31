@@ -35,7 +35,7 @@
   justify-content: center;
   height: 8vw;
 }
-@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+@media screen and (max-width: 1400px) and  (min-height: 700px)  {
  
   .daily-overview-weather {
     height: 78%;
@@ -49,8 +49,8 @@
     margin-top: 35%
   }
   #daily-overview-icon {
-    width: 8vw;
-  }
+    width: 9vw;
+    height: 9vw;  }
   #daily-overview-wind {
     font-size: 1.4vw;
   }
@@ -79,7 +79,8 @@
     font-size: 6vw;
   }
   #daily-overview-icon {
-    width:22vw;
+    width: 22vw;
+    height: 22vw;
   }
   .template4 {
     display: none;
@@ -113,6 +114,7 @@
   }
   #daily-overview-icon {
     width:44vw;
+    height: 44vw;
   }
   .template4 {
     display: block;

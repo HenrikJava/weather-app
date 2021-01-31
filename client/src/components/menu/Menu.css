@@ -24,16 +24,16 @@
 
 .menu-name-photo {
   display: flex;
-  width: 9vw;
+  width: 100%;
   align-items: center;
 }
 .menu-links-wrapper  {
-  width: 35%;
+  width: 100%;
   margin-left: auto;
   cursor: pointer;
   height: 100%;
   display: flex;
-  place-content: space-evenly;
+  place-content: flex-end;
 }
 .menu-links-wrapper-not-logged-in {
   width: 25%;
@@ -50,6 +50,7 @@ font-size: 1vw;
   align-self: center;
   display: flex;
   text-decoration: none;
+  margin: 2%;
 }
 #logged-in-icon {
   font-size: 3vw;
@@ -65,7 +66,7 @@ font-size: 1vw;
 #menu-symbol-icon {
   display: none;
 }
-@media screen and (max-width: 1400px) and (min-height: 500px) {
+@media screen and (max-width: 1400px) and (min-height: 700px) {
   .menu-image {
     width: 5vw;
   }
@@ -75,14 +76,8 @@ font-size: 1vw;
   .menu-profile {
     width: 70%;
   }
-  .menu-name-photo {
-    display: flex;
-    width: 15vw;
-    align-items: center;
-  }
-  .menu-links-wrapper {
-    width: 60%;
-  }
+  
+  
   .menu-links-wrapper-not-logged-in {
     width: 40%;
   
@@ -124,7 +119,7 @@ font-size: 1vw;
     background: #1c2237;
     left: 0;
     z-index: 1;
-    height: 100vh;
+    place-content: center;
   }
   .not-logged-in-menu {
     width: 100%;
@@ -190,8 +185,10 @@ font-size: 1vw;
     background: #1c2237;
     left: 0;
     z-index: 1;
-    height: 100vh;
+    height: 92vh;
     margin-top: 16vw;
+    place-content: center;
+
   }
   .not-logged-in-menu {
     width: 100%;

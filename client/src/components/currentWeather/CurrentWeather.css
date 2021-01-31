@@ -32,7 +32,7 @@
   align-self: center;
 
 }
-@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+@media screen and (max-width: 1400px) and  (min-height: 700px)  {
   
   .current-weather-icon {
     width: 12vw;

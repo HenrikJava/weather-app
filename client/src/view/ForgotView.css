@@ -25,23 +25,25 @@
   font-size: 1.4vw;
 }
 #forgot-email {
-  height: 2vw;
-  font-size: 1.6vw;
-  margin: 2%;
+ 
+  font-size: 2vw;
+  margin: 0;
 }
 
 .forgot-error-message {
   color: red;
   font-size: 1vw;
 }
-#forgot-reset-button, #forgot-home-button, #forgot-signin-button, #forgot-register-button {
+#forgot-reset-button, #forgot-home-button, #forgot-signin-button, #forgot-register-button, #forgot-try-again-button {
   color: black;
   border: 1px solid black;
   background-color: rgb(143, 138, 138);
   margin: auto;
   margin-top: 2%;
+  width: 12vw;
+    font-size: 1.6vw;
 }
-#forgot-home-button:hover, #forgot-reset-button:hover, #forgot-signin-button:hover, #forgot-register-button:hover {
+#forgot-home-button:hover, #forgot-reset-button:hover, #forgot-signin-button:hover, #forgot-register-button:hover, #forgot-try-again-button:hover {
   background-color: gainsboro;
 }
 .forgot-success-wrapper {
@@ -51,12 +53,154 @@
     width: 55%;
     align-items: center;
 }
-.forgot-success-buttons-wrapper {
+.forgot-buttons-wrapper {
     display: flex;
     
     margin: auto;
-    width: 50%;
+    width: 85%;
 }
 .forgot-success-text {
     font-size: 3vw;
+}
+@media screen and (max-width: 1400px) and (min-height: 700px) {
+  .form-wrapper {
+    
+    width: 60%;
+   
+  }
+  .forgot-header {
+    font-size: 3vw;
+   
+  }
+  
+  #forgot-email-label {
+    font-size: 3vw;
+  }
+  #forgot-email {
+   
+    font-size: 3.2vw;
+   
+  }
+  #forgot-email-helper-text {
+    font-size: 2vw;
+
+  }
+  .forgot-error-message {
+    
+    font-size: 1.6vw;
+  }
+  #forgot-reset-button, #forgot-home-button, #forgot-signin-button, #forgot-register-button, #forgot-try-again-button {
+    
+    width: 15vw;
+      font-size: 2vw;
+  }
+  #forgot-home-button:hover, #forgot-reset-button:hover, #forgot-signin-button:hover, #forgot-register-button:hover, #forgot-try-again-button:hover {
+    background-color: rgb(143, 138, 138);
+  }
+  .forgot-success-wrapper {
+      
+      width: 85%;
+     
+  }
+  .forgot-success-buttons-wrapper {
+      
+      width: 85%;
+  }
+  .forgot-success-text {
+      font-size: 4.4vw;
+  }
+}
+@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
+  .form-wrapper {
+    
+    width: 70%;
+   
+  }
+  .forgot-header {
+    font-size: 3.6vw;
+   
+  }
+  
+  #forgot-email-label {
+    font-size: 3.8vw;
+  }
+  #forgot-email {
+   
+    font-size: 4vw;
+   
+  }
+  
+  .forgot-error-message {
+    
+    font-size: 3vw;
+  }
+  #forgot-reset-button, #forgot-home-button, #forgot-signin-button, #forgot-register-button, #forgot-try-again-button {
+    
+    width: 19vw;
+      font-size: 2.6vw;
+  }
+  #forgot-home-button:hover, #forgot-reset-button:hover, #forgot-signin-button:hover, #forgot-register-button:hover, #forgot-try-again-button:hover {
+    background-color: rgb(143, 138, 138);
+  }
+  .forgot-success-wrapper {
+      
+      width: 85%;
+     
+  }
+  .forgot-buttons-wrapper {
+      display: flex;
+      
+      margin: auto;
+      width: 85%;
+  }
+  .forgot-success-text {
+      font-size: 4.4vw;
+  }
+}
+@media screen and (max-width: 512px) {
+  .form-wrapper {
+    
+    width: 90%;
+   
+  }
+  .forgot-header {
+    font-size: 5vw;
+   
+  }
+  
+  #forgot-email-label {
+    font-size: 6vw;
+  }
+  #forgot-email {
+   
+    font-size: 6vw;
+   
+  }
+  
+  .forgot-error-message {
+    
+    font-size: 5vw;
+  }
+  #forgot-reset-button, #forgot-home-button, #forgot-signin-button, #forgot-register-button, #forgot-try-again-button {
+    
+    width: 36vw;
+    font-size: 4.6vw;
+  }
+  #forgot-home-button:hover, #forgot-reset-button:hover, #forgot-signin-button:hover, #forgot-register-button:hover, #forgot-try-again-button:hover {
+    background-color: rgb(143, 138, 138);
+  }
+  .forgot-success-wrapper {
+      
+      width: 85%;
+     
+  }
+  .forgot-buttons-wrapper {
+      display: flex;
+      
+      margin: auto;
+      width: 95%;
+  }
+  .forgot-success-text {
+      font-size: 4.8vw;
+  }
 }

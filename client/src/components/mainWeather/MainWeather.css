@@ -15,7 +15,7 @@
   display: none;
 }
 
-@media screen and (max-width: 1400px) and (min-height: 500px) {
+@media screen and (max-width: 1400px) and (min-height: 700px) {
   .main-weather-wrapper {
     height: 70%;
   }

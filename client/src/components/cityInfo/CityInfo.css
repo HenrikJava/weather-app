@@ -4,7 +4,7 @@
 .city-info-wrapper {
   justify-content: center;
     display: flex;
-    width: 50vw;
+    width: 60vw;
     margin: auto;
     align-items: center;
 }
@@ -27,7 +27,7 @@
   font-size: 0.8vw;
   margin: 0;
 }
-@media screen and (max-width: 1400px) and (min-height: 500px) {
+@media screen and (max-width: 1400px) and (min-height: 700px) {
   
   .time {
     font-size: 1.6vw;
@@ -41,6 +41,11 @@
   .city-wrapper {
     height: 25%;
   }
+  .city-info-wrapper {
+   
+    width: 100%;
+   
+}
   .city-info, .fav-star-icon ,
   .not-fav-star-icon  {
     font-size: 7vw!important;
@@ -60,6 +65,11 @@
 @media screen and (max-width: 512px) {
   .city-wrapper {
     height: 25%;
+  }
+  .city-info-wrapper {
+   
+      width: 100%;
+     
   }
   .city-info, .fav-star-icon ,
   .not-fav-star-icon  {

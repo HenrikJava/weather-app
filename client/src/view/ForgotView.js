@@ -23,6 +23,7 @@ export const ForgotView = () => {
       setSuccess(true);
     }
   };
+  
   return (
     <div className="forgot-view">
       {!success ? (
@@ -53,7 +54,7 @@ export const ForgotView = () => {
                   Please enter email to request an email link
                 </p>
                 <TextField
-                  autoFocus
+                  
                   error={errors.email && touched.email}
                   name="email"
                   id="forgot-email"
@@ -65,22 +66,30 @@ export const ForgotView = () => {
                   type="email"
                   fullWidth
                 />
-                <Button type="submit" id="forgot-reset-button" disabled={!isValid}>
+                { !showError && <Button type="submit" id="forgot-reset-button" disabled={!isValid}>
                   Send email
-                </Button>
+                </Button> }
+                
                 {showError && (
                   <div className="forgot-error-wrapper">
                     <p className="forgot-error-message">{responseMessage}</p>
                     {responseMessage !==
                     "Something wrong at server, please try again later." ? (
+                      <div className="forgot-buttons-wrapper">
+                      <Button type="button" id="forgot-try-again-button" onClick={
+                        (e) => {
+                          e.preventDefault();
+                          setShowError(false)
+                        }
+                      }>Try again</Button>
                       <Button
                         onClick={() => {
                           app.setRegisterDialogOpen(true);
                         }}
                         id="forgot-register-button"
                       >
-                        Register account
-                      </Button>
+                        Register
+                      </Button></div>
                     ) : (
                       <Button
                         id="forgot-home-button"
@@ -105,7 +114,7 @@ export const ForgotView = () => {
           <p className="forgot-success-text">
             A reset password link is sent to your email.
           </p>
-          <div className="forgot-success-buttons-wrapper">
+          <div className="forgot-buttons-wrapper">
             <Button
               id="forgot-home-button"
               onClick={() => {

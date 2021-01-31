@@ -35,7 +35,7 @@
   color: rgb(143, 138, 138);
 
 }
-@media screen and (max-width: 1400px) and  (min-height: 500px)  {
+@media screen and (max-width: 1400px) and  (min-height: 700px)  {
   .city-search-wrapper {
     width: 30vw;
     height: 12%;

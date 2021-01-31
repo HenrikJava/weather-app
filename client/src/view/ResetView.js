@@ -9,6 +9,7 @@ import { AppContext } from "../shared/global/provider/Provider";
 import { useHistory } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { setAuthToken } from "../shared/global/functions";
 
 import "./ResetView.css";
 export const ResetView = (props) => {
@@ -31,6 +32,7 @@ export const ResetView = (props) => {
       setError(false);
       setIsLoading(false);
       setResponseMessage(response.data.message.msgBody);
+      setAuthToken()
     }
   };
 
@@ -97,8 +99,7 @@ export const ResetView = (props) => {
     return (
       <div className="reset-view">
         <div className="reset-success-wrapper">
-          <p className="reset-header">Reset password</p>
-          <p>{responseMessage}</p>
+          <p className="reset-text-success">{responseMessage}</p>
           <div className="reset-buttons-wrapper">
             <Button
               id="reset-home-button"
@@ -106,7 +107,7 @@ export const ResetView = (props) => {
                 history.push(RoutingPath.homeView);
                 app.setDisplayCurrent(true);
                 app.setMenuOpen(false);
-                app.N("");
+                app.setNoCityText("");
               }}
             >
               Home
@@ -199,7 +200,7 @@ export const ResetView = (props) => {
                     type="submit"
                     disabled={!isValid}
                   >
-                    Update password
+                    Update
                   </Button>
                 </form>
               );

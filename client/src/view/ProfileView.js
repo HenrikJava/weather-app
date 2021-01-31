@@ -298,7 +298,7 @@ export const ProfileView = () => {
                   </Grid>
                 </Grid>
 
-                <Grid item xs={12} id="profile-button">
+                <div id="profile-button-wrapper">
                   <p
                     className={
                       responseMessage === "Account successfully updated."
@@ -310,12 +310,12 @@ export const ProfileView = () => {
                   </p>
 
                   <Button type="submit">Update profile</Button>
-                </Grid>
+                </div>
               </form>
             );
           }}
         </Formik>
-      </Grid>
-    </div>
+              </Grid>
+          </div>
   );
 };

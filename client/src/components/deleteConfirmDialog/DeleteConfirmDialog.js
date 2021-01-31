@@ -7,7 +7,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { AppContext, UserContext } from "../../shared/global/provider/Provider";
 import { deleteUser } from "../../shared/api/service/UserService";
-
+import './DeleteConfirmDialog.css'
 export const DeleteConfirmDialog = () => {
   const app = useContext(AppContext);
   const user = useContext(UserContext);
@@ -29,19 +29,19 @@ export const DeleteConfirmDialog = () => {
   };
 
   return (
-    <Dialog open={app.deleteConfirmDialogOpen} onClose={handleClose}>
-      <DialogTitle>Are you sure you want to delete your account?</DialogTitle>
+    <Dialog open={app.deleteConfirmDialogOpen} onClose={handleClose} classes={{paperWidthSm: "delete-dialog-wrapper"  }}>
+      <DialogTitle classes={{root: "delete-dialog-header"  }}>Are you sure you want to delete your account?</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          This cant be undone but you can always create a new account.
+        <DialogContentText classes={{root: "delete-dialog-text"  }}>
+          Your account will be lost forever!
         </DialogContentText>
         <DialogContentText>{responseMessage}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary" autoFocus>
+        <Button onClick={handleClose} color="primary" autoFocus classes={{textPrimary: "delete-dialog-button"  }}>
           Cancel
         </Button>
-        <Button onClick={deleteAccount} color="primary">
+        <Button onClick={deleteAccount} color="primary" classes={{textPrimary: "delete-dialog-button"  }}>
           Yes
         </Button>
       </DialogActions>
