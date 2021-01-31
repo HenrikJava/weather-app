@@ -152,8 +152,7 @@ export const ProfileView = () => {
               .matches(
                 /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
                 "Password must contain at least 8 characters, one uppercase, one number and one special case character"
-              ),
-            password: Yup.string().when("oldPassword", {
+              ).when("oldPassword", {
               is: (oldPassword) => oldPassword && oldPassword.length > 0,
               then: Yup.string().required(
                 "New password is required when entering an old one"
