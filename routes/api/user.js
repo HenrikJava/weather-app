@@ -15,8 +15,8 @@ const {
   resetUpdatePasswordValidator,
 } = require("../../middleware/validator");
 const fs = require("fs");
+const { sendResetEmail } = require("../../services/EmailService");
 require("dotenv").config();
-const nodemailer = require("nodemailer");
 
 //Register user
 router.post(
@@ -160,8 +160,6 @@ router.put("/", [auth, updateUserValidator, result], async (req, res) => {
   user.fahrenheit_on = req.body.fahrenheitOn;
   user.avatar = avatar;
   user.save((err) => {
-    console.log(err);
-
     if (err) {
       res.status(500).json({
         message: {
@@ -366,7 +364,6 @@ router.delete("/", auth, (req, res) => {
         },
       });
     } else {
-      console.log(user);
       res.status(200).json({
         message: {
           msgBody: "Account successfully deleted.",
@@ -409,7 +406,7 @@ router.post("/forgot", forgotPasswordValidator, (req, res) => {
         payload,
         process.env.JWT_SECRET,
         { expiresIn: 60 * 60 * 24 * 100 },
-        (err, token) => {
+        async (err, token) => {
           if (err) {
             res.status(500).json({
               message: {
@@ -418,43 +415,22 @@ router.post("/forgot", forgotPasswordValidator, (req, res) => {
               },
             });
           } else {
-            const transporter = nodemailer.createTransport({
-              service: "gmail",
-              auth: {
-                user: process.env.EMAIL_ADDRESS,
-                pass: process.env.EMAIL_PASSWORD,
-              },
-            });
-            const mailOptions = {
-              from: process.env.EMAIL_ADDRESS,
-              to: user.email,
-              subject: "Link to reset password",
-              text:
-                "You are recieving this because you (or someone else) have requested the reset of the password for your account. \n" +
-                "Please click on the following link, or paste this into your browser to complete the process within one hour of recieving it. \n" +
-                process.env.MAIL_LINK_URL +
-                token +
-                "\n" +
-                "If you did not request this, please ignore this email and your password will remain unchanged.",
-            };
-            transporter.sendMail(mailOptions, (err, response) => {
-              if (err) {
-                res.status(500).json({
-                  message: {
-                    msgBody:
-                      "Something wrong at server, please try again later.",
-                    msgError: true,
-                  },
-                });
-              } else {
-                res.status(200).json({
-                  message: {
-                    msgBody: "Recovery mail is sent.",
-                    msgError: false,
-                  },
-                });
-              }
-            });
+            const emailIsSend = await sendResetEmail(token, user.email);
+            if (emailIsSend) {
+              res.status(200).json({
+                message: {
+                  msgBody: "Recovery mail is sent.",
+                  msgError: false,
+                },
+              });
+            } else {
+              res.status(500).json({
+                message: {
+                  msgBody: "Something wrong at server, please try again later.",
+                  msgError: true,
+                },
+              });
+            }
           }
         }
       );
@@ -506,7 +482,6 @@ router.put(
       { upsert: false, new: true },
       (err, user) => {
         if (err) {
-          console.log(err);
           res.status(500).json({
             message: {
               msgBody: "Something wrong at server, please try again later.",
