@@ -42,7 +42,7 @@
   
   .reset-error-message {
     color: red;
-    font-size: 1vw;
+    font-size: 2vw;
   }
   #reset-forgot-button, #reset-home-button, #reset-update-button, #reset-signin-button {
     color: black;
@@ -97,7 +97,7 @@
     
     .reset-error-message {
       
-      font-size: 1vw;
+      font-size: 3vw;
     }
     #reset-forgot-button, #reset-home-button, #reset-update-button, #reset-signin-button {
      
@@ -144,7 +144,7 @@
     
     .reset-error-message {
       
-      font-size: 2vw;
+      font-size: 4vw;
     }
     #reset-forgot-button, #reset-home-button, #reset-update-button, #reset-signin-button {
      
@@ -191,7 +191,7 @@
     
     .reset-error-message {
       
-      font-size: 2vw;
+      font-size: 5vw;
     }
     #reset-forgot-button, #reset-home-button, #reset-update-button, #reset-signin-button {
      

@@ -34,6 +34,7 @@
   display: flex;
   justify-content: center;
   height: 8vw;
+  align-items: center;
 }
 @media screen and (max-width: 1400px) and  (min-height: 700px)  {
  
@@ -45,14 +46,14 @@
     margin: 0;
   }
   #daily-overview-degree {
-    font-size: 3vw;
+    font-size: 2.6vw;
     margin-top: 35%
   }
   #daily-overview-icon {
     width: 9vw;
     height: 9vw;  }
   #daily-overview-wind {
-    font-size: 1.4vw;
+    font-size: 1.2vw;
   }
   #daily-overview-precipitation {
     font-size: 1.6vw;

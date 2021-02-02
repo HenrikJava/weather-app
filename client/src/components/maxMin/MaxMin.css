@@ -72,7 +72,7 @@ margin-left: 0.4vw;}
   .max-min-sloth {
     width: 27vw;
     height: 90%;
-    margin-left: -7vw;
+    margin-left: -4vw;
     margin-top: 3vw;
 
   }
@@ -87,11 +87,11 @@ margin-left: 0.4vw;}
   
   .max-min-temp-degrees {
     font-size: 2.4vw;
-    margin: 1%;
+    margin: 5%;
   }
   .max-min-temp-headers {
-    font-size: 3vw;
-    margin: 1%;
+    font-size: 2.8vw;
+    margin: 2%;
   }
   #header-and-tooltip {
     margin-top: 5%;

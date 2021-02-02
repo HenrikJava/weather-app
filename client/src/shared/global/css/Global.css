@@ -117,7 +117,7 @@ html,
     height: 3vw;
     font-size: 2vw;
   }
-  .link-between-dialogs > span {
+  .link-between-dialogs  {
     font-size: 2vw;
   }
 
@@ -162,7 +162,7 @@ html,
     height: 4vw;
     font-size: 3vw;
   }
-  .link-between-dialogs > span {
+  .link-between-dialogs{
     font-size: 3vw;
   }
 
@@ -172,6 +172,11 @@ html,
   }
   #error-message {
     font-size: 3vw;
+  }
+  #sign-in-progress-spinner {
+    position: absolute;
+    width: 8vw !important;
+    height: 8vw !important;
   }
 }
 @media screen and (max-width: 750px) {

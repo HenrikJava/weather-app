@@ -71,7 +71,7 @@ export const ResetView = (props) => {
                   app.setNoCityText("");
                 }}
               >
-                Navigate to Home
+                Home
               </Button>{" "}
               <Button
                 id="reset-forgot-button"
@@ -79,7 +79,7 @@ export const ResetView = (props) => {
                   history.push(RoutingPath.forgotView);
                 }}
               >
-                Forgot password
+                Try again
               </Button>
             </div>
           </div>

@@ -24,9 +24,9 @@
   text-align: center;
 }
 #profile-button-wrapper {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  width: 20vw;
   margin: auto;
   margin-top: 2vw;
 }
@@ -251,12 +251,12 @@
     height: 4vw;
     margin-top: -2%;
   }
-  .update-not-success {
-    color: red;
+  .update-not-success, .update-success {
+    font-size: 3vw;
+    margin-top: 0;
+    margin-bottom: 3vw;
   }
-  .update-success {
-    color: green;
-  }
+  
 }
 @media screen and (max-width: 512px) {
   #profile-wrapper {
@@ -264,7 +264,7 @@
     margin: auto;
     height: 100%;
 
-    padding-top: 0%;
+    padding-top: 2%;
   }
   #delete-icon {
     font-size: 8vw;
@@ -272,13 +272,21 @@
   #profile-upper-wrapper {
     height: 17%;
   }
+  .edit-icon-wrapper {
+    margin-left: 23%;
+    width: 5vw;
+    height: 5vw;
+  }
 
+  #edit-icon {
+    font-size: 4vw;
+  }
   .profile-photo {
     width: 28%;
   }
   #profile-progress-spinner {
-    width: 7vw !important;
-    height: 7vw !important;
+    width: 12vw !important;
+    height: 12vw !important;
     margin: auto;
   }
   .profile-lower-wrapper {
@@ -313,9 +321,10 @@
   }
   #profile-button-wrapper {
     
-    width: 50vw;
+    
   }
   #profile-button-wrapper > button {
+    height: 10vw;
     width: 42vw;
     font-size: 3vw;
   }

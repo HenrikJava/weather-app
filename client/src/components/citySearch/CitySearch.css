@@ -84,7 +84,7 @@
     margin: 1% auto -3% auto;
 
     width: 55vw;
-    height: 14%;
+    height: 9%;
   }
   #search-icon-wrapper {
     font-size: 5vw;
@@ -94,7 +94,6 @@
     font-size: 4.6vw;
     width: 19vw;
     min-width: 17vw;
-    height: inherit;
     align-self: center;
   }
   #search-icon {

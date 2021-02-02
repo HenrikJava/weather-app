@@ -61,8 +61,8 @@ export const SettingsView = () => {
         <p
         className={
           responseMessage === "Account successfully updated."
-            ? "update-success update"
-            : "update-not-success update"
+            ? "settings-update-success settings-update"
+            : "settings-update-not-success settings-update"
         }
       >
         {responseMessage}

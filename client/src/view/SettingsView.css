@@ -36,13 +36,13 @@
   height: 4vw !important;
   margin: auto;
 }
-.update-not-success {
+.settings-update-not-success {
   color: red;
 }
-.update-success {
+.settings-update-success {
   color: green;
 }
-.update {
+.settings-update {
   margin: auto;
   width: 20vw;
   font-size: 1vw;
@@ -66,7 +66,7 @@
   #switch p {
     font-size: 2vw;
   }
-  .update {
+  .settings-update {
     width: 20vw;
     font-size: 2vw;
    
@@ -94,9 +94,14 @@
   #switch p {
     font-size: 3vw;
   }
-  .update {
+  #settings-progress-spinner {
+    width: 6vw !important;
+    height: 6vw !important;
+    margin: auto;
+  }
+  .settings-update {
     width: 40vw;
-    font-size: 4vw;
+    font-size: 3vw;
    
   }
 }
@@ -106,8 +111,8 @@
     font-size: 11vw;
   }
   #settings-wrapper {
-    height: 25vw;
-    width: 75vw;
+    height: 50vw;
+    width: 90%;
     display: block;
   }
   
@@ -125,5 +130,15 @@
   }
   #switch p {
     font-size: 4.5vw;
+  }
+  #settings-progress-spinner {
+    width: 12vw !important;
+    height: 12vw !important;
+    margin: auto;
+  }
+  .settings-update {
+    width: 100%;
+    font-size: 5vw;
+   
   }
 }
