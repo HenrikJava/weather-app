@@ -17,20 +17,33 @@ const adjustTimeZone = (weather) => {
 // Load weather
 router.post("/", async (req, res) => {
   let scale;
+  let response
   req.body.fahrenheitOn
     ? (scale = "&units=imperial")
     : (scale = "&units=metric");
   // Encode it to utf8 string that make sure swedish(and other) characters work.
-
   try {
-    req.body.city = utf8.encode(req.body.city);
+    if (req.body.city) {
+      req.body.city = utf8.encode(req.body.city);
 
-    const response = await axios.get(
-      process.env.WEATHER_API_URL +
-        req.body.city +
-        scale +
-        process.env.WEATHER_API_KEY
-    );
+       response = await axios.get(
+        process.env.WEATHER_API_URL +
+          "forecast?q=" +
+          req.body.city +
+          scale +
+          process.env.WEATHER_API_KEY
+      );
+    } else {
+       response = await axios.get(
+        process.env.WEATHER_API_URL +
+          "forecast?lat=" +
+          req.body.lat +
+          "&lon=" +
+          req.body.lon +
+          scale +
+          process.env.WEATHER_API_KEY
+      );
+    }
 
     if (response.status === 200) {
       res.status(200).json({

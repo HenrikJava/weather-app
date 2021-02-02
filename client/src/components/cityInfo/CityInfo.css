@@ -39,7 +39,7 @@
 }
 @media screen and (max-width: 1024px) and (min-height: 1024px) {
   .city-wrapper {
-    height: 25%;
+    height: 19%;
   }
   .city-info-wrapper {
    
@@ -64,7 +64,7 @@
 
 @media screen and (max-width: 512px) {
   .city-wrapper {
-    height: 9%;
+    height: 11%;
   }
   .city-info-wrapper {
    
