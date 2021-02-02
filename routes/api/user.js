@@ -119,6 +119,23 @@ router.put("/", [auth, updateUserValidator, result], async (req, res) => {
     r: "pg",
     d: "mm",
   });
+
+  /* try {
+    const users = await User.find({}).populate().select(["username", "email"]);
+
+    console.log(users);
+  } catch (err) {
+    console.log(err.message);
+  }
+  User.findOneAndRemove({ _id: "5fd9e97e2925a71df0eda6d6" }, (err, user) => {
+    if (err) {
+      
+    } else if (!user) {
+      
+    } else {
+     
+    }
+  }); */
   const user = await User.findById(req.user.id, async (err, user) => {
     if (err) {
       return res.status(500).json({
@@ -376,7 +393,6 @@ router.delete("/", auth, (req, res) => {
 
 router.post("/forgot", forgotPasswordValidator, (req, res) => {
   const email = req.body.email;
-
   User.findOne({ email }, (err, user) => {
     if (err) {
       res.status(500).json({
