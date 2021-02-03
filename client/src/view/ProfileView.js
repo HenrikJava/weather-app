@@ -7,7 +7,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Tooltip from "@material-ui/core/Tooltip";
 import EditIcon from "@material-ui/icons/Edit";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
 import { DeleteConfirmDialog } from "../components/deleteConfirmDialog/DeleteConfirmDialog";
 import * as Yup from "yup";
 import {
@@ -34,13 +33,11 @@ export const ProfileView = () => {
         "favouriteCity",
         loggedInUser.data.user.favourite_city
       );
-      app.setCity(loggedInUser.data.user.favourite_city);
       if (loggedInUser.data.user.photo) {
         const b64encoded = new Buffer.from(
           loggedInUser.data.user.photo.data
         ).toString("base64");
         user.setPhoto(`data:image/png;base64,${b64encoded}`);
-        
       }
       user.setAvatar(loggedInUser.data.user.avatar);
       user.setAuthenticatedUser(true);
@@ -51,7 +48,7 @@ export const ProfileView = () => {
     }
   };
   const update = async (values) => {
-    setResponseMessage('');
+    setResponseMessage("");
 
     setIsLoading(true);
     const response = await updateUser(values);
@@ -61,7 +58,7 @@ export const ProfileView = () => {
     app.setDeleteConfirmDialogOpen(true);
   };
   const uploadPhoto = async (event) => {
-    setResponseMessage('');
+    setResponseMessage("");
     setIsLoading(true);
     let formData = new FormData();
     formData.append("photo", event.target.files[0]);
@@ -82,7 +79,11 @@ export const ProfileView = () => {
       <Grid container id="profile-wrapper">
         <Grid item xs={12} id="profile-upper-wrapper">
           <Tooltip
-            title={<p className="profile-delete-tooltip">Delete account</p>}
+            title={
+              <p className="profile-delete-tooltip">
+                {app.swedish ? "Radera konto" : " Delete account"}
+              </p>
+            }
           >
             <DeleteIcon
               id="delete-icon"
@@ -97,7 +98,7 @@ export const ProfileView = () => {
               src={user.photo ? user.photo : user.avatar}
               alt="profile"
               className="profile-photo"
-            />{" "}
+            />
             <span className="edit-icon-wrapper">
               <EditIcon
                 id="edit-icon"
@@ -119,9 +120,9 @@ export const ProfileView = () => {
             ></input>
           </form>
         </Grid>
-        {isLoading &&
+        {isLoading && (
           <CircularProgress id="profile-progress-spinner"></CircularProgress>
-        }
+        )}
         <Formik
           initialValues={{
             firstname: user.firstname,
@@ -139,41 +140,61 @@ export const ProfileView = () => {
 
             actions.setFieldValue("favouriteCity", values.favouriteCity);
           }}
-          validationSchema={Yup.object().shape({
-            email: Yup.string().email().required("Required"),
-            firstname: Yup.string()
-              .required("Required")
-              .min(3, "Name must be at least 3 characters"),
-
-            password: Yup.string()
-              .min(8, "Password is too short - should be 8 chars minimum.")
-              .matches(
-                /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-                "Password must contain at least 8 characters, one uppercase, one number and one special case character"
-              ).when("oldPassword", {
-              is: (oldPassword) => oldPassword && oldPassword.length > 0,
-              then: Yup.string().required(
-                "New password is required when entering an old one"
-              ),
-              otherwise: Yup.string(),
-            }),
-            confirmPassword: Yup.string().when("password", {
-              is: (val) => val && val.length > 0,
-              then: Yup.string()
-                .oneOf(
-                  [Yup.ref("password")],
-                  "Both passwords need to be the same"
+          validationSchema={Yup.object().shape(
+            {
+              email: Yup.string()
+                .email()
+                .required(app.swedish ? "Email nödvändigt" : "Email required"),
+              firstname: Yup.string()
+                .required(
+                  app.swedish ? "Förnamn nödvändigt" : "First name required"
                 )
-                .required(),
-            }),
-            oldPassword: Yup.string().when("password", {
-              is: (password) => password && password.length > 0,
-              then: Yup.string().required(
-                "Old password is required when entering a new one"
-              ),
-              otherwise: Yup.string(),
-            }),
-          },[['password', 'oldPassword']])}
+                .min(
+                  3,
+                  app.swedish
+                    ? "Namnet måste bestå av minst 3 bokstäver"
+                    : "Name must be at least 3 characters"
+                ),
+
+              password: Yup.string()
+                .matches(
+                  /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+                  app.swedish
+                    ? "Lösenordet måste bestå av minst 8 bokstäver, en versal, en gemen, ett nummer och ett specialtecken"
+                    : "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special case character"
+                )
+                .when("oldPassword", {
+                  is: (oldPassword) => oldPassword && oldPassword.length > 0,
+                  then: Yup.string().required(
+                    app.swedish
+                      ? "Ett nytt lösenord måste fyllas i om du skrivit in det gamla lösenordet"
+                      : "New password is required when entering an old password"
+                  ),
+                  otherwise: Yup.string(),
+                }),
+              confirmPassword: Yup.string().when("password", {
+                is: (val) => val && val.length > 0,
+                then: Yup.string()
+                  .oneOf(
+                    [Yup.ref("password")],
+                    app.swedish
+                      ? "Båda lösenorden måste vara identiska"
+                      : "Both passwords need to be the same"
+                  )
+                  .required(),
+              }),
+              oldPassword: Yup.string().when("password", {
+                is: (password) => password && password.length > 0,
+                then: Yup.string().required(
+                  app.swedish
+                    ? "Det gamla lösenordet är nödvändigt"
+                    : "Old password is required"
+                ),
+                otherwise: Yup.string(),
+              }),
+            },
+            [["password", "oldPassword"]]
+          )}
         >
           {(props) => {
             const {
@@ -191,7 +212,7 @@ export const ProfileView = () => {
                     <TextField
                       error={errors.firstname && touched.firstname}
                       id="profile-first"
-                      label="First name"
+                      label={app.swedish ? "Förnamn" : "First name"}
                       name="firstname"
                       value={values.firstname}
                       onChange={handleChange}
@@ -209,7 +230,7 @@ export const ProfileView = () => {
                   <Grid item xs={5} className="align-right">
                     <TextField
                       id="profile-city"
-                      label="Favourite city"
+                      label={app.swedish ? "Favoritstad" : "Favourite city"}
                       name="favouriteCity"
                       value={
                         values.favouriteCity.charAt(0).toUpperCase() +
@@ -236,13 +257,13 @@ export const ProfileView = () => {
                       helperText={errors.email && touched.email && errors.email}
                       fullWidth
                     />
-                  </Grid>{" "}
+                  </Grid>
                   <Grid item xs={2}></Grid>
                   <Grid item xs={5} className="align-right">
                     <TextField
                       error={errors.oldPassword && touched.oldPassword}
                       id="profile-old"
-                      label="Old password"
+                      label={app.swedish ? "Gammalt lösenord" : "Old password"}
                       type="password"
                       name="oldPassword"
                       value={values.oldPassword}
@@ -262,7 +283,7 @@ export const ProfileView = () => {
                     <TextField
                       id="profile-pass"
                       error={errors.password && touched.password}
-                      label="New password"
+                      label={app.swedish ? "Nytt lösenord" : "New password"}
                       type="password"
                       name="password"
                       value={values.password}
@@ -279,7 +300,9 @@ export const ProfileView = () => {
                     <TextField
                       error={errors.confirmPassword && touched.confirmPassword}
                       id="profile-confirm"
-                      label="Confirm password"
+                      label={
+                        app.swedish ? "Bekräfta lösenord" : "Confirm password"
+                      }
                       type="password"
                       name="confirmPassword"
                       value={values.confirmPassword}
@@ -306,13 +329,15 @@ export const ProfileView = () => {
                     {responseMessage}
                   </p>
 
-                  <Button type="submit">Update profile</Button>
+                  <Button type="submit">
+                    {app.swedish ? "Uppdatera" : "Update"}
+                  </Button>
                 </div>
               </form>
             );
           }}
         </Formik>
-              </Grid>
-          </div>
+      </Grid>
+    </div>
   );
 };

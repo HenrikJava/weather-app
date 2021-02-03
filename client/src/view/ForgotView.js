@@ -23,7 +23,7 @@ export const ForgotView = () => {
       setSuccess(true);
     }
   };
-  
+
   return (
     <div className="forgot-view">
       {!success ? (
@@ -35,7 +35,13 @@ export const ForgotView = () => {
             sendResetEmail(values.email);
           }}
           validationSchema={Yup.object().shape({
-            email: Yup.string().email().required("Required"),
+            email: Yup.string()
+              .email()
+              .required(
+                app.swedish
+                  ? "Det måste vara en giltig emailadress"
+                  : "It must be a valid email address"
+              ),
           })}
         >
           {(props) => {
@@ -51,10 +57,11 @@ export const ForgotView = () => {
             return (
               <form className="form-wrapper" onSubmit={handleSubmit}>
                 <p className="forgot-header">
-                  Please enter email to request an email link
+                  {app.swedish
+                    ? "Var vänlig och skriv din email för att motta en återställningslänk."
+                    : "Please enter email to request an reset link"}
                 </p>
                 <TextField
-                  
                   error={errors.email && touched.email}
                   name="email"
                   id="forgot-email"
@@ -66,30 +73,41 @@ export const ForgotView = () => {
                   type="email"
                   fullWidth
                 />
-                { !showError && <Button type="submit" id="forgot-reset-button" disabled={!isValid}>
-                  Send email
-                </Button> }
-                
+                {!showError && (
+                  <Button
+                    type="submit"
+                    id="forgot-reset-button"
+                    disabled={!isValid}
+                  >
+                    {app.swedish ? "Skicka email" : " Send email"}
+                  </Button>
+                )}
+
                 {showError && (
                   <div className="forgot-error-wrapper">
                     <p className="forgot-error-message">{responseMessage}</p>
                     {responseMessage !==
                     "Something wrong at server, please try again later." ? (
                       <div className="forgot-buttons-wrapper">
-                      <Button type="button" id="forgot-try-again-button" onClick={
-                        (e) => {
-                          e.preventDefault();
-                          setShowError(false)
-                        }
-                      }>Try again</Button>
-                      <Button
-                        onClick={() => {
-                          app.setRegisterDialogOpen(true);
-                        }}
-                        id="forgot-register-button"
-                      >
-                        Register
-                      </Button></div>
+                        <Button
+                          type="button"
+                          id="forgot-try-again-button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setShowError(false);
+                          }}
+                        >
+                          {app.swedish ? "Försök igen" : "Try again"}
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            app.setRegisterDialogOpen(true);
+                          }}
+                          id="forgot-register-button"
+                        >
+                          {app.swedish ? "Registrera" : "Register"}
+                        </Button>
+                      </div>
                     ) : (
                       <Button
                         id="forgot-home-button"
@@ -100,7 +118,7 @@ export const ForgotView = () => {
                           app.setNoCityText("");
                         }}
                       >
-                        Home
+                        {app.swedish ? "Hem" : "Home"}
                       </Button>
                     )}
                   </div>
@@ -112,7 +130,9 @@ export const ForgotView = () => {
       ) : (
         <div className="forgot-success-wrapper">
           <p className="forgot-success-text">
-            A reset password link is sent to your email.
+            {app.swedish
+              ? "En återställningslänk är nu skickad till din email."
+              : "A reset password link is sent to your email."}
           </p>
           <div className="forgot-buttons-wrapper">
             <Button
@@ -124,15 +144,15 @@ export const ForgotView = () => {
                 app.setNoCityText("");
               }}
             >
-              Home
-            </Button>{" "}
+              {app.swedish ? "Hem" : "Home"}
+            </Button>
             <Button
               id="forgot-signin-button"
               onClick={() => {
                 app.setSignInDialogOpen(true);
               }}
             >
-              Sign in
+              {app.swedish ? "Logga in" : "Log in"}
             </Button>
           </div>
         </div>

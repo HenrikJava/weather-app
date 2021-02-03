@@ -32,7 +32,7 @@ export const MainWeather = () => {
       </Grid>
            {/* This text only appear in the mobile version  */ }
 
-      <p className="mobile-swipe-text">Swipe down to see more days</p>
+      <p className="mobile-swipe-text">{app.swedish ? 'Svep nedåt för att se fler dagar' : 'Swipe down to see more days'}</p>
     </div>
   );
 };

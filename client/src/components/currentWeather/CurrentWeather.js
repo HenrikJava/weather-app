@@ -14,7 +14,7 @@ export const CurrentWeather = () => {
   };
   return (
     <div className="current-wrapper">
-      <p className="current-header">Current weather</p>
+      <p className="current-header">{app.swedish ? 'Vädret just nu' : 'Current weather'}</p>
       <p className="weather-description">
         {capitalizeFirstLetter(weather.weather.list[0].weather[0].description)}
       </p>

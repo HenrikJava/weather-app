@@ -33,11 +33,16 @@ export const Routing = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const loggedInUser = await loadUser();
-
+console.log(loggedInUser);
       if (loggedInUser.data.message.msgError === false) {
         app.setFahrenheitOn(
           loggedInUser.data.user.fahrenheit_on
             ? loggedInUser.data.user.fahrenheit_on
+            : false
+        );
+        app.setSwedish(
+          loggedInUser.data.user.swedish
+            ? loggedInUser.data.user.swedish
             : false
         );
         user.setFirstname(loggedInUser.data.user.firstname);

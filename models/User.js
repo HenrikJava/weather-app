@@ -29,6 +29,9 @@ const UserSchema = new mongoose.Schema({
   fahrenheit_on: {
     type: Boolean,
   },
+  swedish: {
+    type: Boolean
+  }
   
 });
 

@@ -31,8 +31,8 @@ export const ResetView = (props) => {
       setUpdated(true);
       setError(false);
       setIsLoading(false);
-      setResponseMessage(response.data.message.msgBody);
-      setAuthToken()
+      setResponseMessage(app.swedish ? 'Lösenordet är uppdaterat' : response.data.message.msgBody);
+      setAuthToken();
     }
   };
 
@@ -58,7 +58,9 @@ export const ResetView = (props) => {
     return (
       <div className="reset-view">
         <div className="reset-wrapper">
-          <p className="reset-header">Reset password</p>
+          <p className="reset-header">
+            {app.swedish ? "Återställ lösenord" : "Reset password"}
+          </p>
           <div className="reset-error-wrapper">
             <p className="reset-error-message">{responseMessage}</p>
             <div className="reset-buttons-wrapper">
@@ -71,7 +73,7 @@ export const ResetView = (props) => {
                   app.setNoCityText("");
                 }}
               >
-                Home
+                {app.swedish ? "Hem" : "Home"}
               </Button>{" "}
               <Button
                 id="reset-forgot-button"
@@ -79,7 +81,7 @@ export const ResetView = (props) => {
                   history.push(RoutingPath.forgotView);
                 }}
               >
-                Try again
+                {app.swedish ? "Försök igen" : "Try again"}
               </Button>
             </div>
           </div>
@@ -90,8 +92,11 @@ export const ResetView = (props) => {
     return (
       <div className="reset-view">
         <div className="reset-wrapper">
-          <p className="reset-header">Reset password</p>
-          <p>Loading data</p>
+          <p className="reset-header">
+            {app.swedish ? "Återställ lösenord" : "Reset password"}
+          </p>
+
+          <p>{app.swedish ? "Laddar data" : "Loading data"}</p>
         </div>
       </div>
     );
@@ -110,7 +115,7 @@ export const ResetView = (props) => {
                 app.setNoCityText("");
               }}
             >
-              Home
+              {app.swedish ? "Hem" : "Home"}
             </Button>{" "}
             <Button
               id="reset-signin-button"
@@ -118,17 +123,19 @@ export const ResetView = (props) => {
                 app.setSignInDialogOpen(true);
               }}
             >
-              Sign in
+              {app.swedish ? "Logga in" : "Log in"}
             </Button>
           </div>
         </div>
       </div>
     );
-  }else {
+  } else {
     return (
       <div className="reset-view">
         <div className="reset-wrapper">
-          <p className="reset-header">Reset password</p>
+          <p className="reset-header">
+            {app.swedish ? "Återställ lösenord" : "Reset password"}
+          </p>
           <Formik
             initialValues={{
               password: "",
@@ -140,14 +147,23 @@ export const ResetView = (props) => {
             }}
             validationSchema={Yup.object().shape({
               password: Yup.string()
-                .required("Password required.")
+                .required(
+                  app.swedish ? "Lösenord nödvändigt" : "Password required."
+                )
                 .matches(
                   /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-                  "Password must contain at least 8 characters, one uppercase, one number and one special case character"
+                  app.swedish
+                    ? "Lösenordet måste bestå av minst 8 bokstäver, en versal, en gemen, ett nummer och ett specialtecken"
+                    : "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special case character"
                 ),
               confirmPassword: Yup.string()
-                .required("Required")
-                .oneOf([Yup.ref("password"), null], "Passwords must match"),
+                .required(app.swedish ? "Nödvändigt" : "Required")
+                .oneOf(
+                  [Yup.ref("password"), null],
+                  app.swedish
+                    ? "Båda lösenorden måste vara identiska"
+                    : "Both passwords need to be the same"
+                ),
             })}
           >
             {(props) => {
@@ -166,7 +182,7 @@ export const ResetView = (props) => {
                     autoFocus
                     id="reset-pass"
                     error={errors.password && touched.password}
-                    label="New password"
+                    label={app.swedish ? "Nytt lösenord" : "New password"}
                     type="password"
                     name="password"
                     value={values.password}
@@ -181,7 +197,9 @@ export const ResetView = (props) => {
                   <TextField
                     error={errors.confirmPassword && touched.confirmPassword}
                     id="reset-confirm"
-                    label="Confirm password"
+                    label={
+                      app.swedish ? "Bekräfta lösenord" : "Confirm password"
+                    }
                     type="password"
                     name="confirmPassword"
                     value={values.confirmPassword}
@@ -200,7 +218,7 @@ export const ResetView = (props) => {
                     type="submit"
                     disabled={!isValid}
                   >
-                    Update
+                    {app.swedish ? "Uppdatera" : "Update"}
                   </Button>
                 </form>
               );

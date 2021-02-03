@@ -29,16 +29,19 @@ export const MaxMin = () => {
   ];
 
   /* this function returns the arguments dayname */
-  const getDayName = (fragment) => {
-    return new Date(fragment * 1000).toLocaleString("en-us", {
+  const getDayName = (timestamp) => {
+    return new Date(
+      (timestamp + weather.weather.city.timezone) * 1000
+    ).getUTCDay();
+    /* return new Date(fragment * 1000).toLocaleString("en-us", {
       weekday: "long",
-    });
+    }); */
   };
   /* Filtering out the actual days timestamps*/
   const weatherAtActualDay = weather.weather.list.filter(
     (fragment) => getDayName(fragment.dt) === app.weekday
   );
-  if (weatherAtActualDay.length>0) {
+  if (weatherAtActualDay.length > 0) {
     /* Assigning true if its today */
     isToday =
       new Date(weatherAtActualDay[0].dt * 1000).toLocaleDateString() ===
@@ -85,7 +88,7 @@ export const MaxMin = () => {
     }
     return Math.round(max) + scale(app.fahrenheitOn);
   };
-    /* Function loops the actual day and return the min temp. */
+  /* Function loops the actual day and return the min temp. */
 
   const getDayMin = () => {
     let min = 100;
@@ -182,13 +185,17 @@ export const MaxMin = () => {
           <div id="header-and-tooltip">
             <p className="max-min-temp-headers">
               {!app.displayCurrent && !(isToday && app.isAfternoon)
-                ? "Feels like at noon"
+                ? app.swedish
+                  ? "Känns som vid lunch"
+                  : "Feels like at noon"
+                : app.swedish
+                ? "Känns som just nu"
                 : "Feels like now"}
             </p>
             <ClickAwayListener onClickAway={handleTooltipClose}>
               <div>
                 <Tooltip
-                placement="top-start"
+                  placement="top-start"
                   PopperProps={{
                     disablePortal: true,
                   }}
@@ -200,8 +207,10 @@ export const MaxMin = () => {
                   disableTouchListener
                   title={
                     <p id="tooltip-text">
-                      This is calculated by severals conditions such as pressure
-                      and wind and shows the experienced temperature.
+                      {" "}
+                      {app.swedish
+                        ? "Detta är baserat på många faktorer, bland annat lufttryck och vind och visar den upplevda temperaturen."
+                        : "This is calculated by severals conditions such as pressure and wind and shows the experienced temperature."}
                     </p>
                   }
                 >
@@ -217,9 +226,9 @@ export const MaxMin = () => {
           <p className="max-min-temp-degrees">{getWeatherAtNoon()}</p>
           {!app.displayCurrent && (
             <div>
-              <p className="max-min-temp-headers">Day max:</p>
+              <p className="max-min-temp-headers"> {app.swedish ?'Dagens max' : 'Day max'}</p>
               <p className="max-min-temp-degrees">{getDayMax()}</p>
-              <p className="max-min-temp-headers">Day min:</p>
+              <p className="max-min-temp-headers">{app.swedish ?'Dagens min' : 'Day min'}</p>
               <p className="max-min-temp-degrees">{getDayMin()}</p>
             </div>
           )}

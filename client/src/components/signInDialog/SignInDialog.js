@@ -30,6 +30,16 @@ export const SignInDialog = () => {
     } else {
       const loggedInUser = await loadUser();
       if (loggedInUser.data.message.msgError === false) {
+        app.setFahrenheitOn(
+          loggedInUser.data.user.fahrenheit_on
+            ? loggedInUser.data.user.fahrenheit_on
+            : false
+        );
+        app.setSwedish(
+          loggedInUser.data.user.swedish
+            ? loggedInUser.data.user.swedish
+            : false
+        );
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
@@ -51,7 +61,7 @@ export const SignInDialog = () => {
         setErrorMessage(loggedInUser.data.message.msgBody);
       }
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   const handleClose = () => {
@@ -77,10 +87,14 @@ export const SignInDialog = () => {
       id="sign-in-dialog-wrapper"
     >
       <form onSubmit={login}>
-        <DialogTitle id="dialog-title">Log in</DialogTitle>
+        <DialogTitle id="dialog-title">
+          {app.swedish ? "Logga in" : "Log in"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="user-friendly-text">
-            Please enter your email and password to log in.
+            {app.swedish
+              ? "Var vänlig och skriv in email och lösenord för att logga in."
+              : "Please enter your email and password to log in."}
           </DialogContentText>
           <DialogContentText id="error-message">
             {errorMessage}
@@ -95,7 +109,7 @@ export const SignInDialog = () => {
           />
           <TextField
             id="password"
-            label="Password"
+            label={app.swedish ? "Lösenord" : "Password"}
             type="password"
             fullWidth
             onChange={(event) => setPassword(event.target.value)}
@@ -103,10 +117,10 @@ export const SignInDialog = () => {
         </DialogContent>
         <DialogActions id="dialog-button">
           <Button onClick={handleClose} color="primary">
-            Cancel
+          {app.swedish ? "Ångra" : "Cancel"}
           </Button>
           <Button color="primary" type="submit">
-            Log in
+          {app.swedish ? "Logga in" : "Log in"}
           </Button>
         </DialogActions>
         <DialogContentText className="link-between-dialogs-wrapper">
@@ -114,17 +128,19 @@ export const SignInDialog = () => {
             onClick={() => openForgotPassword()}
             className="link-between-dialogs"
           >
-            Forgot password?
+                     {app.swedish ? "Glömt lösenord?" : "Forgot password?"}
           </span>
           <span
             onClick={() => openRegisterDialog()}
             className="link-between-dialogs"
           >
-            Don't have an account yet?
+             {app.swedish ? "Har du inget konto än?" : "Don't have an account yet?"}
           </span>
         </DialogContentText>
       </form>
-      {isLoading && <CircularProgress id="sign-in-progress-spinner"></CircularProgress>}
+      {isLoading && (
+        <CircularProgress id="sign-in-progress-spinner"></CircularProgress>
+      )}
     </Dialog>
   );
 };

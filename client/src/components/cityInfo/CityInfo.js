@@ -66,9 +66,12 @@ export const CityInfo = () => {
           )}
         </span>
       </div>
-      <p className="time">{`The local time in  ${
+      <p className="time">        {app.swedish ? `Lokal tid i ${
         weather.weather.city.name
-      } is ${time.slice(0, 16)}`}</p>
+      } är ${time.slice(0, 16)}` : `The local time in ${
+        weather.weather.city.name
+      } is ${time.slice(0, 16)}`}
+</p>
     </div>
   );
 };

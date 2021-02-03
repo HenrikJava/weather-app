@@ -9,25 +9,32 @@ export const DailyWeatherOverview = (props) => {
   const weather = useContext(WeatherContext);
   let dailyPrecipitation = 0;
   const weekday = [];
-  weekday[0] = "Sunday";
-  weekday[1] = "Monday";
-  weekday[2] = "Tuesday";
-  weekday[3] = "Wednesday";
-  weekday[4] = "Thursday";
-  weekday[5] = "Friday";
-  weekday[6] = "Saturday";
+  weekday[0] = "Sun";
+  weekday[1] = "Mon";
+  weekday[2] = "Tue";
+  weekday[3] = "Wed";
+  weekday[4] = "Thu";
+  weekday[5] = "Fri";
+  weekday[6] = "Sat";
+  const swedishWeekday = [];
+  swedishWeekday[0] = "Sön";
+  swedishWeekday[1] = "Mån";
+  swedishWeekday[2] = "Tis";
+  swedishWeekday[3] = "Ons";
+  swedishWeekday[4] = "Tor";
+  swedishWeekday[5] = "Fre";
+  swedishWeekday[6] = "Lör";
   /* Function adjust for the timezones and returns the actual day name
   for two reasons. One reason to calculate the precipitation for the 
   actual day and in the other case show the day name.  */
   const getDay = (timestamp) => {
     if (timestamp) {
       return new Date((timestamp + weather.weather.city.timezone) * 1000)
-        .toUTCString()
-        .slice(0, 3);
+        .getUTCDay()
+        
     }
     return new Date((props.day.dt + weather.weather.city.timezone) * 1000)
-      .toUTCString()
-      .slice(0, 3);
+      .getUTCDay()
   };
   /* sum the days precipitation */
   weather.weather.list.forEach((element) => {
@@ -47,11 +54,11 @@ export const DailyWeatherOverview = (props) => {
         /*update the app state which day
         is displaying(it is used in other components) */
         app.setWeekday(
-          weekday[
+          
             new Date(
               (props.day.dt + weather.weather.city.timezone) * 1000
             ).getUTCDay()
-          ]
+          
         );
                 /* used in different places in the app  */
         app.setDisplayCurrent(false);
@@ -61,7 +68,7 @@ export const DailyWeatherOverview = (props) => {
         document.documentElement.scrollTop = 0;
       }}
     >
-      <p className="daily-overview-weekday">{getDay()}</p>
+      <p className="daily-overview-weekday">{app.swedish ? swedishWeekday[getDay()] : weekday[getDay()]}</p>
       <div className="daily-overview-weather">
         <img
           src={`/icons/${props.day.weather[0].icon}.png`}

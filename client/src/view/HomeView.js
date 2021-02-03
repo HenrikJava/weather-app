@@ -19,8 +19,7 @@ export const HomeView = () => {
       (response) => {
         if (response.status === 200) {
           weather.setWeather(response.data.weather);
-          app.setIsFavourite(false)
-
+          app.setIsFavourite(false);
         } else {
           console.log(response.data.message.msgBody);
           setError(true);
@@ -42,8 +41,6 @@ export const HomeView = () => {
             loggedInUser.data.user.photo.data
           ).toString("base64");
           user.setPhoto(`data:image/png;base64,${b64encoded}`);
-          /*           user.setPhoto(loggedInUser.data.user.photo)
-           */
         }
         user.setAuthenticatedUser(true);
         searchCity({
@@ -57,17 +54,22 @@ export const HomeView = () => {
           if (response.status === 200) {
             app.setCity(response.data.weather.city.name);
             weather.setWeather(response.data.weather);
-            app.setIsFavourite(false)
+            app.setIsFavourite(false);
 
             if (loggedInUser.data.user.favourite_city) {
-              localStorage.setItem("favouriteCity", response.data.weather.city.name);
-              app.setIsFavourite(true)
+              localStorage.setItem(
+                "favouriteCity",
+                response.data.weather.city.name
+              );
+              app.setIsFavourite(true);
             }
           } else if (response.data.message.msgBody === "city not found") {
             console.log(response.data.message.msgBody);
             defaultWeatherCall();
             app.setNoCityText(
-              "Your favourite city does not exist in the database, please change it."
+              app.swedish
+                ? "Din favoritstad existerar inte i databasen, var vänlig och ändra den."
+                : "Your favourite city does not exist in the database, please change it."
             );
           } else {
             console.log(response.data.message.msgBody);

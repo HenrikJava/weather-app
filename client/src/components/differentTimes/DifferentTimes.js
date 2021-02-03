@@ -51,12 +51,16 @@ export const DifferentTimes = () => {
   weekday[4] = "Thursday";
   weekday[5] = "Friday";
   weekday[6] = "Saturday";
+  const swedishWeekday = [];
+  swedishWeekday[0] = "Söndag";
+  swedishWeekday[1] = "Måndag";
+  swedishWeekday[2] = "Tisdag";
+  swedishWeekday[3] = "Onsdag";
+  swedishWeekday[4] = "Torsdag";
+  swedishWeekday[5] = "Fredag";
+  swedishWeekday[6] = "Lördag";
 
-  const getDayName = (fragment) => {
-    return weekday[
-      new Date((fragment.dt + weather.weather.city.timezone) * 1000).getUTCDay()
-    ];
-  };
+  
   //This function is a filter function using the long timesarray
   const getTimesToDisplay = (time) => {
     let condition = false;
@@ -70,7 +74,7 @@ export const DifferentTimes = () => {
   /*variable is a result of filtering the weather data to only contain
 the day the component will show*/
   const weatherAtCurrentDay = weather.weather.list.filter(
-    (fragment) => getDayName(fragment) === app.weekday
+    (fragment) => new Date((fragment.dt + weather.weather.city.timezone) * 1000).getUTCDay() === app.weekday
   );
   /*variable to keep track if the day to display actually is current day */
   const isToday =
@@ -79,7 +83,6 @@ the day the component will show*/
     ).getUTCDay() ===
     new Date(Date.now() + weather.weather.city.timezone * 1000).getUTCDay();
 
-  
   let timesToDisplay = [];
   /* Because the component only displays every sixth hour this loop
   adding the outfiltered timestamps precipitation and then adds it
@@ -110,7 +113,7 @@ the day the component will show*/
       stampAdded = false;
     }
   });
-/* If the user search late at night(after 18-21) there is no todays
+  /* If the user search late at night(after 18-21) there is no todays
 weather and this if statement adds the next timestamp(last of the day)
 of the weatherdata and the user will be able to see this with 
 associated precipitation.*/
@@ -126,7 +129,9 @@ associated precipitation.*/
   }
 
   const capitalizeFirstLetter = (weatherDescription) => {
-    return weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
+    return (
+      weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1)
+    );
   };
   const generateDifferentTimes = () => {
     const array = [];
@@ -180,7 +185,7 @@ associated precipitation.*/
 
   return (
     <div className="day-details">
-      <p className="day-to-display">{isToday ? "Today" : app.weekday}</p>
+      <p className="day-to-display">{app.swedish ? isToday ? "Idag" : swedishWeekday[app.weekday] : isToday ? "Today" : weekday[app.weekday]}</p>
 
       <div className="weather-at-differents-time-grid">
         {generateDifferentTimes()}

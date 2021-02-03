@@ -13,63 +13,98 @@ export const SettingsView = () => {
   const [responseMessage, setResponseMessage] = useState();
   const [isLoading, setIsLoading] = useState();
 
-  const handleChange = async () => {
-    setResponseMessage('');
+  const handleChangeScale = async () => {
+    setResponseMessage("");
     if (!user.authenticatedUser) {
       app.setFahrenheitOn(!app.fahrenheitOn);
     } else {
-      setIsLoading(true)
+      setIsLoading(true);
       const updateResponse = await updateUserSettings({
         email: user.email,
         fahrenheitOn: !app.fahrenheitOn,
+        swedish: app.swedish
       });
       const loggedInUser = await loadUser();
-      setIsLoading(false)
+      setIsLoading(false);
       if (updateResponse.data.message.msgError === false) {
         app.setFahrenheitOn(loggedInUser.data.user.fahrenheit_on);
       }
       setResponseMessage(updateResponse.data.message.msgBody);
     }
   };
+  const handleChangeLanguage = async () => {
+    setResponseMessage("");
+    if (!user.authenticatedUser) {
+      app.setSwedish(!app.swedish);
+      if (localStorage.getItem("swedishLanguage")) {
+        localStorage.removeItem("swedishLanguage");
+      } else {
+        localStorage.setItem("swedishLanguage", "true")
+      }
 
+    } else {
+      setIsLoading(true);
+      const updateResponse = await updateUserSettings({
+        email: user.email,
+        fahrenheitOn: app.fahrenheitOn,
+        swedish: !app.swedish
+      })
+      const loggedInUser = await loadUser()
+      setIsLoading(false)
+      if (updateResponse.data.message.msgError === false) {
+        app.setSwedish(loggedInUser.data.user.swedish);
+      }
+      setResponseMessage(updateResponse.data.message.msgBody);
+    }
+  };
   return (
     <div className="settings-view">
       <Grid container id="settings-wrapper">
         <Grid item xs={12} id="settings-header">
-          Settings
+          {app.swedish ? "Inställningar" : "Settings"}
         </Grid>
 
         <Grid item xs={6} id="settings-field">
-          Temperature:
+          {app.swedish ? "Temperatur" : "Temperature:"}
         </Grid>
         <Grid item xs={6} id="switch">
           <p>Celcius</p>
           <Switch
             checked={app.fahrenheitOn}
-            onChange={handleChange}
+            onChange={handleChangeScale}
             color="primary"
             inputProps={{ "aria-label": "primary checkbox" }}
           />
           <p>Fahrenheit</p>
         </Grid>
-        {isLoading &&
-        <Grid item xs={12} id="settings-progress-wrapper">
-                 <CircularProgress id="settings-progress-spinner"></CircularProgress>
-
-      </Grid>
-        }
+        <Grid item xs={6} id="settings-field">
+          {app.swedish ? "Språk:" : "Language:"}
+        </Grid>
+        <Grid item xs={6} id="switch">
+          <p>English</p>
+          <Switch
+            checked={app.swedish}
+            onChange={handleChangeLanguage}
+            color="primary"
+            inputProps={{ "aria-label": "primary checkbox" }}
+          />
+          <p>Svenska</p>
+        </Grid>
+        {isLoading && (
+          <Grid item xs={12} id="settings-progress-wrapper">
+            <CircularProgress id="settings-progress-spinner"></CircularProgress>
+          </Grid>
+        )}
         <p
-        className={
-          responseMessage === "Account successfully updated."
-            ? "settings-update-success settings-update"
-            : "settings-update-not-success settings-update"
-        }
-      >
-        {responseMessage}
-      </p>
+          className={
+            responseMessage === "Account successfully updated."
+              ? "settings-update-success settings-update"
+              : "settings-update-not-success settings-update"
+          }
+        >
+          {responseMessage}
+        </p>
       </Grid>
-      
-      
     </div>
   );
 };

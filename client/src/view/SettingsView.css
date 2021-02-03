@@ -10,12 +10,13 @@
 
 #settings-field {
   font-size: 1.5vw;
+  text-align: center;
   margin: 0;
   height: 2vw;
 }
 #switch {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   height: 2vw;
 }

@@ -30,19 +30,20 @@ export const DeleteConfirmDialog = () => {
 
   return (
     <Dialog open={app.deleteConfirmDialogOpen} onClose={handleClose} classes={{paperWidthSm: "delete-dialog-wrapper"  }}>
-      <DialogTitle classes={{root: "delete-dialog-header"  }}>Are you sure you want to delete your account?</DialogTitle>
+      <DialogTitle classes={{root: "delete-dialog-header"  }}>{app.swedish ? 'Är du säker på att du vill radera ditt konto?' : 'Are you sure you want to delete your account?'}</DialogTitle>
       <DialogContent>
         <DialogContentText classes={{root: "delete-dialog-text"  }}>
-          Your account will be lost forever!
+        {app.swedish ? 'Ditt konto kan inte återskapas!' :  'Your account will be lost forever!'}
         </DialogContentText>
         <DialogContentText>{responseMessage}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary" autoFocus classes={{textPrimary: "delete-dialog-button"  }}>
-          Cancel
+         {app.swedish ? 'Nej' : 'Cancel'} 
         </Button>
         <Button onClick={deleteAccount} color="primary" classes={{textPrimary: "delete-dialog-button"  }}>
-          Yes
+        {app.swedish ? 'Ja' : 'Yes'} 
+
         </Button>
       </DialogActions>
     </Dialog>

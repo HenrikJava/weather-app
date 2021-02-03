@@ -309,6 +309,7 @@ router.put("/settings", [auth, updateSettingsValidator], (req, res) => {
     {
       $set: {
         fahrenheit_on: req.body.fahrenheitOn,
+        swedish: req.body.swedish
       },
     },
     { upsert: false, new: true },
