@@ -271,8 +271,8 @@ html,
   }
 
   #dialog-button > button {
-    width: 22vw;
-    font-size: 4vw;
+    width: 33vw;
+    font-size: 5vw;
   }
   #error-message {
     font-size: 6vw;

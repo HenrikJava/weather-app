@@ -58,8 +58,8 @@ export const ForgotView = () => {
               <form className="form-wrapper" onSubmit={handleSubmit}>
                 <p className="forgot-header">
                   {app.swedish
-                    ? "Var vänlig och skriv din email för att motta en återställningslänk."
-                    : "Please enter email to request an reset link"}
+                    ? "Var vänlig och skriv in din registrerade email"
+                    : "Please enter your registred email"}
                 </p>
                 <TextField
                   error={errors.email && touched.email}
@@ -79,7 +79,7 @@ export const ForgotView = () => {
                     id="forgot-reset-button"
                     disabled={!isValid}
                   >
-                    {app.swedish ? "Skicka email" : " Send email"}
+                    {app.swedish ? "Skicka" : " Send"}
                   </Button>
                 )}
 
@@ -131,8 +131,8 @@ export const ForgotView = () => {
         <div className="forgot-success-wrapper">
           <p className="forgot-success-text">
             {app.swedish
-              ? "En återställningslänk är nu skickad till din email."
-              : "A reset password link is sent to your email."}
+              ? "En återställningslänk är nu skickad till dig"
+              : "A reset password link is sent to you"}
           </p>
           <div className="forgot-buttons-wrapper">
             <Button

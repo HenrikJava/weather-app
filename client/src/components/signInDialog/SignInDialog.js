@@ -101,8 +101,8 @@ export const SignInDialog = () => {
         <DialogContent>
           <DialogContentText id="user-friendly-text">
             {app.swedish
-              ? "Var vänlig och skriv in email och lösenord för att logga in."
-              : "Please enter your email and password to log in."}
+              ? "Var vänlig skriv in email och lösenord."
+              : "Please enter your email and password."}
           </DialogContentText>
           <DialogContentText id="error-message">
             {errorMessage}

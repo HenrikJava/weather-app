@@ -1,15 +1,60 @@
+.delete-dialog-wrapper {
+  width: 54%;
+  max-width: 100%!important;
+}
+.delete-dialog-header > h2 {
+  font-size: 2.4vw;
+}
+.delete-dialog-text {
+  font-size: 2vw!important;
+}
+.delete-dialog-button > span {
+  width: 10vw;
+  font-size: 2vw;
+}
+@media screen and (max-width: 1400px) and  (min-height: 700px)  {
+  .delete-dialog-wrapper {
+    width: 60%;
+  }
+  .delete-dialog-header > h2 {
+    font-size: 2.4vw;
+  }
+  .delete-dialog-text {
+    font-size: 2vw!important;
+  }
+  .delete-dialog-button > span {
+    width: 10vw;
+    font-size: 2vw;
+  }
+}
 @media screen and (max-width: 1024px) and (min-height: 1024px) {
   .delete-dialog-wrapper {
     width: 90%;
   }
   .delete-dialog-header > h2 {
-    font-size: 3.8vw;
+    font-size: 3.6vw;
   }
   .delete-dialog-text {
-    font-size: 3.4vw;
+    font-size: 3.4vw!important;
   }
-  .delete-dialog-button {
+  .delete-dialog-button > span {
     width: 14vw;
     font-size: 3vw;
   }
 }
+@media screen and (max-width: 512px) {
+  .delete-dialog-wrapper {
+    width: 95%;
+  }
+  .delete-dialog-header > h2 {
+    font-size: 5vw;
+  }
+  .delete-dialog-text {
+    font-size: 4.4vw!important;
+  }
+  .delete-dialog-button > span {
+    width: 14vw;
+    font-size: 4vw;
+  }
+}
+

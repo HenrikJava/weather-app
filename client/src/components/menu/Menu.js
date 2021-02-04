@@ -71,7 +71,7 @@ export const Menu = () => {
               }}
             >
               {app.menuOpen ? (
-                <p>Profile</p>
+                <p>{app.swedish ? 'Profil' : 'Profile'}</p>
               ) : (
                 <Tooltip title={<p id="menu-tooltip">{app.swedish ? 'Profil' : 'Profile'}</p>}>
                   <div className="menu-name-photo">
