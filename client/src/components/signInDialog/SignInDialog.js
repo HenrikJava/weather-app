@@ -26,7 +26,15 @@ export const SignInDialog = () => {
     event.preventDefault();
     const response = await loginUser(email, password);
     if (response.data.message.msgError === true) {
-      setErrorMessage(response.data.message.msgBody);
+      if (
+        response.data.message.msgBody ===
+          "The password or email is not valid" &&
+        app.swedish
+      ) {
+        setErrorMessage("Lösenordet eller emailen är felaktig.");
+      } else {
+        setErrorMessage(response.data.message.msgBody);
+      }
     } else {
       const loggedInUser = await loadUser();
       if (loggedInUser.data.message.msgError === false) {
@@ -117,10 +125,10 @@ export const SignInDialog = () => {
         </DialogContent>
         <DialogActions id="dialog-button">
           <Button onClick={handleClose} color="primary">
-          {app.swedish ? "Ångra" : "Cancel"}
+            {app.swedish ? "Ångra" : "Cancel"}
           </Button>
           <Button color="primary" type="submit">
-          {app.swedish ? "Logga in" : "Log in"}
+            {app.swedish ? "Logga in" : "Log in"}
           </Button>
         </DialogActions>
         <DialogContentText className="link-between-dialogs-wrapper">
@@ -128,13 +136,15 @@ export const SignInDialog = () => {
             onClick={() => openForgotPassword()}
             className="link-between-dialogs"
           >
-                     {app.swedish ? "Glömt lösenord?" : "Forgot password?"}
+            {app.swedish ? "Glömt lösenord?" : "Forgot password?"}
           </span>
           <span
             onClick={() => openRegisterDialog()}
             className="link-between-dialogs"
           >
-             {app.swedish ? "Har du inget konto än?" : "Don't have an account yet?"}
+            {app.swedish
+              ? "Har du inget konto än?"
+              : "Don't have an account yet?"}
           </span>
         </DialogContentText>
       </form>

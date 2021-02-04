@@ -22,12 +22,15 @@ export const CitySearch = () => {
       response = await searchCity({
         city: city,
         fahrenheitOn: app.fahrenheitOn,
+        swedish: app.swedish
       });
     } else {
       response = await searchCity({
         lat: coords.lat,
         lon: coords.lon,
         fahrenheitOn: app.fahrenheitOn,
+        swedish: app.swedish
+
       });
     }
 
@@ -47,7 +50,8 @@ export const CitySearch = () => {
             );
       }
     } else {
-      app.setNoCityText(response.data.message.msgBody);
+      app.swedish ? app.setNoCityText("Någonting är fel på servern, var vänlig och försök senare.") : app.setNoCityText(response.data.message.msgBody)
+      ;
     }
   };
 

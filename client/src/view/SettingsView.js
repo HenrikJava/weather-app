@@ -29,7 +29,12 @@ export const SettingsView = () => {
       if (updateResponse.data.message.msgError === false) {
         app.setFahrenheitOn(loggedInUser.data.user.fahrenheit_on);
       }
-      setResponseMessage(updateResponse.data.message.msgBody);
+      if (updateResponse.data.message.msgBody==="Account successfully updated." && app.swedish)
+       { setResponseMessage("Kontot är nu uppdaterat")} else {
+        setResponseMessage(updateResponse.data.message.msgBody);
+
+       }
+
     }
   };
   const handleChangeLanguage = async () => {
@@ -54,7 +59,11 @@ export const SettingsView = () => {
       if (updateResponse.data.message.msgError === false) {
         app.setSwedish(loggedInUser.data.user.swedish);
       }
-      setResponseMessage(updateResponse.data.message.msgBody);
+      if (updateResponse.data.message.msgBody==="Account successfully updated." && !app.swedish)
+       { setResponseMessage("Kontot är nu uppdaterat.")} else {
+        setResponseMessage(updateResponse.data.message.msgBody);
+
+       }
     }
   };
   return (
@@ -97,7 +106,7 @@ export const SettingsView = () => {
         )}
         <p
           className={
-            responseMessage === "Account successfully updated."
+            responseMessage === "Account successfully updated." || "Kontot är nu uppdaterat."
               ? "settings-update-success settings-update"
               : "settings-update-not-success settings-update"
           }

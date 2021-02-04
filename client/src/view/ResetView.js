@@ -20,6 +20,7 @@ export const ResetView = (props) => {
   const app = useContext(AppContext);
   const history = useHistory();
 
+  localStorage.getItem('swedishLanguage')==="true" && app.setSwedish(true)
   const updatePassword = async (values) => {
     const response = await updatePasswordUser(values, props.match.params.token);
     if (response.data.message.msgError === true) {

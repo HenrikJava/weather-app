@@ -21,7 +21,16 @@ export const RegisterDialog = () => {
   const register = async (values) => {
     const response = await registerUser(values);
     if (response.data.message.msgError === true) {
-      setErrorMessage(response.data.message.msgBody);
+      if (
+        response.data.message.msgBody ===
+          "User already exists, choose another email." &&
+        app.swedish
+      ) {
+        setErrorMessage("Användaren existerar redan, var vänlig välj en annan email.");
+      } else {
+        setErrorMessage(response.data.message.msgBody);
+      }
+      
     } else {
       const loggedInUser = await loadUser();
       if (loggedInUser.data.message.msgError === false) {

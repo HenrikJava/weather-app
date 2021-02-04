@@ -15,17 +15,25 @@ export const HomeView = () => {
   const [error, setError] = useState();
 
   const defaultWeatherCall = async () => {
-    await searchCity({ city: app.city, fahrenheitOn: app.fahrenheitOn }).then(
-      (response) => {
-        if (response.status === 200) {
-          weather.setWeather(response.data.weather);
-          app.setIsFavourite(false);
+    await searchCity({
+      city: app.city,
+      fahrenheitOn: app.fahrenheitOn,
+      swedish: app.swedish,
+    }).then((response) => {
+      if (response.status === 200) {
+        console.log("hi");
+
+        weather.setWeather(response.data.weather);
+        if (localStorage.getItem("favouriteCity") === response.data.city) {
+          app.setIsFavourite(true);
         } else {
-          console.log(response.data.message.msgBody);
-          setError(true);
+          app.setIsFavourite(false);
         }
+      } else {
+        console.log(response.data.message.msgBody);
+        setError(true);
       }
-    );
+    });
   };
 
   useEffect(() => {
@@ -50,6 +58,9 @@ export const HomeView = () => {
           fahrenheitOn: loggedInUser.data.user.fahrenheit_on
             ? loggedInUser.data.user.fahrenheit_on
             : app.fahrenheitOn,
+          swedish: loggedInUser.data.user.swedish
+            ? loggedInUser.data.user.swedish
+            : app.swedish,
         }).then((response) => {
           if (response.status === 200) {
             app.setCity(response.data.weather.city.name);

@@ -16,11 +16,15 @@ const adjustTimeZone = (weather) => {
 };
 // Load weather
 router.post("/", async (req, res) => {
-  let scale;
+  let scale 
+  let language = "";
   let response
   req.body.fahrenheitOn
     ? (scale = "&units=imperial")
     : (scale = "&units=metric");
+
+    req.body.swedish && (language = "&lang=se")
+
   // Encode it to utf8 string that make sure swedish(and other) characters work.
   try {
     if (req.body.city) {
@@ -30,6 +34,7 @@ router.post("/", async (req, res) => {
         process.env.WEATHER_API_URL +
           "forecast?q=" +
           req.body.city +
+          language +
           scale +
           process.env.WEATHER_API_KEY
       );
@@ -40,6 +45,7 @@ router.post("/", async (req, res) => {
           req.body.lat +
           "&lon=" +
           req.body.lon +
+          "&lang=se" +
           scale +
           process.env.WEATHER_API_KEY
       );

@@ -20,7 +20,7 @@ router.get("/", auth, (req, res) => {
     else if (!user) {
       res.status(400).json({
                message: {
-          msgBody: "User dont exists anymore.",
+          msgBody: "User dont exists.",
           msgError: true,
         },
       });

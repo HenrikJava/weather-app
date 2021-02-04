@@ -47,8 +47,9 @@ export const CityInfo = () => {
     } else {
       app.setIsFavourite(false);
     }
-    const interval = setInterval(() => {
-      setTime(calcTime(weather.weather.city.timezone).toLocaleString());
+    const interval = setInterval(() => { app.swedish ?
+      setTime(calcTime(weather.weather.city.timezone).toLocaleString())
+      : setTime(calcTime(weather.weather.city.timezone).toLocaleString('en-US', { hour: 'numeric',minute: 'numeric', hour12: true }))
     }, 1000);
     return () => clearInterval(interval);
   }, [weather.weather, user.favouriteCity]);
@@ -58,7 +59,6 @@ export const CityInfo = () => {
       <div className="city-info-wrapper">
         <p className="city-info">{`${weather.weather.city.name}, ${weather.weather.city.country}`}</p>
         <span onClick={handleFavourite}>
-          {" "}
           {app.isFavourite ? (
             <StarIcon className="fav-star-icon"></StarIcon>
           ) : (

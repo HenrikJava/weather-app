@@ -41,7 +41,12 @@ export const ProfileView = () => {
       }
       user.setAvatar(loggedInUser.data.user.avatar);
       user.setAuthenticatedUser(true);
-      setResponseMessage(responseFromUpdate);
+      
+      if (responseFromUpdate==="Account successfully updated." && app.swedish)
+       { setResponseMessage("Kontot är nu uppdaterat.")} else {
+        setResponseMessage(responseFromUpdate);
+
+       }
     } else {
       setResponseMessage(loggedInUser.data.message.msgBody);
       user.setAuthenticatedUser(false);
@@ -321,7 +326,9 @@ export const ProfileView = () => {
                 <div id="profile-button-wrapper">
                   <p
                     className={
-                      responseMessage === "Account successfully updated."
+                      responseMessage === "Account successfully updated." || "Kontot är nu uppdaterat."
+
+                   
                         ? "update-success"
                         : "update-not-success"
                     }
