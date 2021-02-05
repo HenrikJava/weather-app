@@ -432,7 +432,7 @@ router.post("/forgot", forgotPasswordValidator, (req, res) => {
               },
             });
           } else {
-            const emailIsSend = await sendResetEmail(token, user.email);
+            const emailIsSend = await sendResetEmail(token, user.email, req.body.swedish);
             if (emailIsSend) {
               res.status(200).json({
                 message: {
