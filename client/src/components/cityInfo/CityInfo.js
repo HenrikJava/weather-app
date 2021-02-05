@@ -52,7 +52,7 @@ export const CityInfo = () => {
       : setTime(calcTime(weather.weather.city.timezone).toLocaleString('en-US', { hour: 'numeric',minute: 'numeric', hour12: true }))
     }, 1000);
     return () => clearInterval(interval);
-  }, [weather.weather, user.favouriteCity]);
+  }, [weather.weather, user.favouriteCity, app]);
   return (
     <div className="city-wrapper">
       {app.noCityText ? <p className="no-city-text">{app.noCityText}</p> : ""}

@@ -21,7 +21,6 @@ export const HomeView = () => {
       swedish: app.swedish,
     }).then((response) => {
       if (response.status === 200) {
-        console.log("hi");
 
         weather.setWeather(response.data.weather);
         if (localStorage.getItem("favouriteCity") === response.data.city) {
@@ -75,7 +74,6 @@ export const HomeView = () => {
               app.setIsFavourite(true);
             }
           } else if (response.data.message.msgBody === "city not found") {
-            console.log(response.data.message.msgBody);
             defaultWeatherCall();
             app.setNoCityText(
               app.swedish

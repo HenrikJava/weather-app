@@ -9,7 +9,7 @@ export const AboutView = () => {
     <div className="about-wrapper">
       <div className="about-main">
         <span className="image-wrapper">
-          <img src={Creator} className="about-image"></img>
+          <img src={Creator} className="about-image" alt="creator"></img>
         </span>
         <div className="text-wrapper">
           <p className="text-header">

@@ -12,7 +12,7 @@ export const AppProvider = (props) => {
   const [isAfternoon, setIsAfternoon] = useState(true);
   const [weekday, setWeekday] = useState();
   const [fahrenheitOn, setFahrenheitOn] = useState(false);
-  const [swedish, setSwedish] = useState(localStorage.getItem("swedishLanguage") && true || false)
+  const [swedish, setSwedish] = useState(localStorage.getItem("swedishLanguage") && true)
   const [sloth, setSloth] = useState("defaultSloth");
   const [isFavourite, setIsFavourite] = useState()
   
