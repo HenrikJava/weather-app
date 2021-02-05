@@ -93,7 +93,7 @@ export const HomeView = () => {
 
     fetchData();
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [/* user */]);
 
   const displayWeather = () => {
     if (weather.weather) {
