@@ -176,7 +176,6 @@ export const MaxMin = () => {
 
   return (
     <Grid item xs={12} id="max-min-inner-wrapper">
-      <Grid item xs={2}></Grid>
       <Grid item xs={4}>
         <img src={generateSloths()} className="max-min-sloth" alt="clothes" />
       </Grid>
