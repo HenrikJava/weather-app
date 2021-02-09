@@ -37,13 +37,17 @@ export const ChartsView = () => {
   let feelsLikeLabel = app.swedish
     ? "Upplevd temperatur"
     : "Feels like temperature";
+  let windLabel = app.swedish ? "Vind" : "Wind";
   let tempData = [];
   let feelsLikeData = [];
   let weekdayLabel = [];
   let precipitation = [];
+  let windSpeedData = [];
   weather.weather.list.forEach((timestamp) => {
     tempData.push(Math.round(timestamp.main.temp));
     feelsLikeData.push(Math.round(timestamp.main.feels_like));
+
+    windSpeedData.push(Math.round(timestamp.wind.speed));
     if (timestamp.snow) {
       precipitation.push(timestamp.snow["3h"]);
     } else if (timestamp.rain) {
@@ -67,7 +71,6 @@ export const ChartsView = () => {
             ).toLocaleString("en-US", { hour: "numeric", hour12: true })
         );
   });
-  console.log(weekdayLabel);
   const chartData = {
     datasets: [
       {
@@ -92,6 +95,14 @@ export const ChartsView = () => {
         yAxisID: "y-axis-1",
         hidden: true,
       },
+      {
+        label: windLabel,
+        data: windSpeedData,
+        borderColor: "	rgb(128,128,128)",
+        type: "line",
+        yAxisID: "y-axis-3",
+        hidden: true,
+      },
     ],
   };
   const buffer = 2;
@@ -108,7 +119,7 @@ export const ChartsView = () => {
   if (minTemp % 2 === 1 || minTemp % 2 === -1) {
     minTemp--;
   }
-  if (maxTemp % 2 === 1) {
+  if (maxTemp % 2 === 1 || maxTemp % 2 === -1) {
     maxTemp++;
   }
   const options = {
@@ -140,7 +151,7 @@ export const ChartsView = () => {
       callbacks: {
         label: function (tooltipItems, data) {
           if (tooltipItems.datasetIndex === 0) {
-            return data.datasets[0].data[tooltipItems.index] + "mm";
+            return Math.ceil(data.datasets[0].data[tooltipItems.index]) + "mm/3h";
           } else if (tooltipItems.datasetIndex === 1) {
             return (
               data.datasets[1].data[tooltipItems.index] +
@@ -151,6 +162,8 @@ export const ChartsView = () => {
               data.datasets[2].data[tooltipItems.index] +
               scale(app.fahrenheitOn)
             );
+          } else if (tooltipItems.datasetIndex === 3) {
+            return data.datasets[3].data[tooltipItems.index] + (app.fahrenheitOn ? " mph" : " m/s")
           }
         },
       },
@@ -178,7 +191,7 @@ export const ChartsView = () => {
         },
         {
           type: "linear",
-          display: true,
+          display: false,
           position: "right",
           id: "y-axis-2",
           scaleLabel: {
@@ -189,6 +202,25 @@ export const ChartsView = () => {
           ticks: {
             callback: (label) => {
               return label + "mm";
+            },
+            min: 0,
+            max: 30,
+            fontSize: 30,
+          },
+        },
+        {
+          type: "linear",
+          display: true,
+          position: "right",
+          id: "y-axis-3",
+          scaleLabel: {
+            display: true,
+            labelString: windLabel,
+            fontSize: 35,
+          },
+          ticks: {
+            callback: (label) => {
+              return label + (app.fahrenheitOn ? " mph" : " m/s");
             },
             min: 0,
             max: 30,

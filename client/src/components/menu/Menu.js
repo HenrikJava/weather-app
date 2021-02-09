@@ -102,6 +102,21 @@ export const Menu = () => {
               )}
             </Link>
             <Link
+              to={RoutingPath.chartsView}
+              className="menu-link"
+              onClick={() => {
+                app.setMenuOpen(false);
+              }}
+            >
+              {app.menuOpen ? (
+                <p>{app.swedish ? 'Diagram' : 'Charts'}</p>
+              ) : (
+                <Tooltip title={<p id="menu-tooltip">{app.swedish ? 'Diagram' : 'Charts'}</p>}>
+                  <TimelineIcon id="not-logged-in-icon" />
+                </Tooltip>
+              )}
+            </Link>
+            <Link
               to={RoutingPath.aboutView}
               className="menu-link"
               onClick={() => {
