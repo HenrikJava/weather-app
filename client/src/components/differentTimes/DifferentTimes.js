@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { WeatherContext } from "../../shared/global/provider/Provider";
 import { AppContext } from "../../shared/global/provider/Provider";
-import { scale } from "../../shared/global/functions";
+import { calcTime, scale } from "../../shared/global/functions";
 import { Wind } from "../wind/Wind";
 
 import "./DifferentTimes.css";
@@ -133,6 +133,7 @@ associated precipitation.*/
       weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1)
     );
   };
+  console.log(timesToDisplay[0].dt);
   const generateDifferentTimes = () => {
     const array = [];
     for (let index = 0; index < timesToDisplay.length; index++) {
@@ -143,8 +144,9 @@ associated precipitation.*/
           key={timesToDisplay[index].dt}
           className="different-times"
         >
-          <Grid item xs={1}>
-            <p> {timesToDisplay[index].dt_txt.slice(11, 13)} </p>
+          <Grid item xs={2}>
+            <p> {app.swedish ? timesToDisplay[index].dt_txt.slice(11, 16) : calcTime(weather.weather.city.timezone, timesToDisplay[index].dt)
+              .toLocaleString('en-US', { hour: 'numeric',minute: 'numeric', hour12: true })}</p>
           </Grid>
           <Grid item xs={1}>
             <p>

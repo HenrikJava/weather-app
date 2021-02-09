@@ -10,7 +10,7 @@
 .weather-at-differents-time-grid {
   margin: auto;
   width: 100%;
-  font-size: 1.4vw;
+  font-size: 1.1vw;
   white-space: nowrap;
   height: 90%;
 }
@@ -41,7 +41,7 @@
     margin: auto;
     width: 100%;
 
-    font-size: 1.6vw;
+    font-size: 1.2vw;
     white-space: nowrap;
   }
   
@@ -64,7 +64,7 @@
   
   .weather-at-differents-time-grid {
     width: 100%;
-    font-size: 2.5vw;
+    font-size: 1.9vw;
     
   }
   
@@ -88,7 +88,7 @@
     width: 100%;
     white-space: nowrap;
 
-    font-size: 4.2vw;
+    font-size: 3.8vw;
   }
   
   
