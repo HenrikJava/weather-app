@@ -1,0 +1,11 @@
+/* .chart >  canvas {
+    height: 33vw!important;
+} */
+.charts-view {
+    height: 92%
+}
+@media screen and (max-width: 1400px) and (min-height: 700px) {
+    .charts-view {
+        height: 89%
+    }
+}
