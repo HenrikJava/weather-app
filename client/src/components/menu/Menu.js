@@ -10,6 +10,7 @@ import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuIcon from "@material-ui/icons/Menu";
 import InfoIcon from "@material-ui/icons/Info";
+import TimelineIcon from '@material-ui/icons/Timeline';
 import Tooltip from "@material-ui/core/Tooltip";
 import { AppContext } from "../../shared/global/provider/Provider";
 import { SignInDialog } from "../signInDialog/SignInDialog";
@@ -179,6 +180,21 @@ export const Menu = () => {
               ) : (
                 <Tooltip title={<p id="menu-tooltip">{app.swedish ? 'Inställningar' : 'Settings'}</p>}>
                   <SettingsIcon id="not-logged-in-icon" />
+                </Tooltip>
+              )}
+            </Link>
+            <Link
+              to={RoutingPath.chartsView}
+              className="menu-link"
+              onClick={() => {
+                app.setMenuOpen(false);
+              }}
+            >
+              {app.menuOpen ? (
+                <p>{app.swedish ? 'Diagram' : 'Charts'}</p>
+              ) : (
+                <Tooltip title={<p id="menu-tooltip">{app.swedish ? 'Diagram' : 'Charts'}</p>}>
+                  <TimelineIcon id="not-logged-in-icon" />
                 </Tooltip>
               )}
             </Link>

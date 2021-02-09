@@ -4,6 +4,7 @@ const RoutingPath = {
   settingsView: "/settings",
   aboutView: "/about",
   forgotView: '/forgot',
-  resetView: '/reset/:token'
+  resetView: '/reset/:token',
+  chartsView: '/charts'
 };
 export default RoutingPath;

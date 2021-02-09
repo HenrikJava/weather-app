@@ -12,7 +12,7 @@ export const calcTime = (offset, sunTime) => {
 export const scale = (fahrenheitOn) => {
   if (fahrenheitOn) {
     return `°F`;
-  } else return `°`;
+  } else return `°C`;
 };
 
 export const setAuthToken = (token) => {

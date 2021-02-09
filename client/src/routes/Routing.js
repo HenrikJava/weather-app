@@ -7,16 +7,16 @@ import { SettingsView } from "../view/SettingsView";
 import { AboutView } from "../view/AboutView";
 import { ForgotView} from '../view/ForgotView'
 import { ResetView} from '../view/ResetView'
-
+import { ChartsView} from '../view/ChartsView'
 import { useContext, useEffect } from "react";
-import { UserContext, AppContext } from "../shared/global/provider/Provider";
+import { UserContext, AppContext, WeatherContext } from "../shared/global/provider/Provider";
 import RoutingPath from "./RoutingPath";
 import { loadUser } from "../shared/api/service/UserService";
 
 export const Routing = (props) => {
   const user = useContext(UserContext);
   const app = useContext(AppContext);
-
+  const weather = useContext(WeatherContext)
   //If the user are not logged in, the profile view will not display
   const blockRouteIfNotAuthenticated = (navigateToView) => {
     if (!user.authenticatedUser) {
@@ -29,11 +29,16 @@ export const Routing = (props) => {
       return HomeView;
     } else return navigateToView;
   };
+  const blockRouteIfNoWeather = (ChartsView) => {
+    if (weather.weather) {
+      return ChartsView;
+
+    } else return HomeView
+  }
   //Fetching the user data if there is some
   useEffect(() => {
     const fetchData = async () => {
       const loggedInUser = await loadUser();
-console.log(loggedInUser);
       if (loggedInUser.data.message.msgError === false) {
         app.setFahrenheitOn(
           loggedInUser.data.user.fahrenheit_on
@@ -79,7 +84,7 @@ console.log(loggedInUser);
         <Route path={RoutingPath.aboutView} component={AboutView}></Route>
         <Route path={RoutingPath.forgotView} component={blockRouteIfAuthenticated(ForgotView)}></Route>
         <Route path={RoutingPath.resetView} component={blockRouteIfAuthenticated(ResetView)}></Route>
-
+        <Route path={RoutingPath.chartsView} component={blockRouteIfNoWeather(ChartsView)}></Route>
         <Route component={HomeView}></Route>
       </Switch>
     </Router>
