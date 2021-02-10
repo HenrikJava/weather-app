@@ -17,6 +17,11 @@ export const SettingsView = () => {
     setResponseMessage("");
     if (!user.authenticatedUser) {
       app.setFahrenheitOn(!app.fahrenheitOn);
+      if (localStorage.getItem("fahrenheitOn")) {
+        localStorage.removeItem("fahrenheitOn");
+      } else {
+        localStorage.setItem("fahrenheitOn", "true")
+      }
     } else {
       setIsLoading(true);
       const updateResponse = await updateUserSettings({
