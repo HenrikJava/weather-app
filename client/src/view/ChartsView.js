@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import { calcTime, scale } from "../shared/global/functions";
 import { AppContext, WeatherContext } from "../shared/global/provider/Provider";
-import './ChartsView.css'
+import "./ChartsView.css";
 export const ChartsView = () => {
   const weather = useContext(WeatherContext);
   const app = useContext(AppContext);
@@ -16,6 +16,8 @@ export const ChartsView = () => {
     "12 PM",
     "1 PM",
     "2 PM",
+    ' 1 PM',
+    ' 2 PM'
   ];
   const weekday = [];
   weekday[0] = "Sunday";
@@ -44,7 +46,7 @@ export const ChartsView = () => {
   let weekdayLabel = [];
   let precipitation = [];
   let windSpeedData = [];
-  let windowWidth = window.innerWidth
+  let windowWidth = window.innerWidth;
   weather.weather.list.forEach((timestamp) => {
     tempData.push(Math.round(timestamp.main.temp));
     feelsLikeData.push(Math.round(timestamp.main.feels_like));
@@ -126,16 +128,16 @@ export const ChartsView = () => {
   }
   const options = {
     responsive: true,
-    maintainAspectRatio : false,
+    maintainAspectRatio: false,
     title: {
       display: true,
       text: weather.weather.city.name,
-      fontSize: windowWidth/35,
+      fontSize: windowWidth / 35,
       fontColor: "honeydew",
     },
     legend: {
       labels: {
-        fontSize: windowWidth/55,
+        fontSize: windowWidth / 55,
 
         fontColor: "honeydew",
       },
@@ -155,7 +157,9 @@ export const ChartsView = () => {
       callbacks: {
         label: function (tooltipItems, data) {
           if (tooltipItems.datasetIndex === 0) {
-            return Math.ceil(data.datasets[0].data[tooltipItems.index]) + "mm/3h";
+            return (
+              Math.ceil(data.datasets[0].data[tooltipItems.index]) + "mm/3h"
+            );
           } else if (tooltipItems.datasetIndex === 1) {
             return (
               data.datasets[1].data[tooltipItems.index] +
@@ -167,7 +171,10 @@ export const ChartsView = () => {
               scale(app.fahrenheitOn)
             );
           } else if (tooltipItems.datasetIndex === 3) {
-            return data.datasets[3].data[tooltipItems.index] + (app.fahrenheitOn ? " mph" : " m/s")
+            return (
+              data.datasets[3].data[tooltipItems.index] +
+              (app.fahrenheitOn ? " mph" : " m/s")
+            );
           }
         },
       },
@@ -182,13 +189,13 @@ export const ChartsView = () => {
           scaleLabel: {
             display: true,
             labelString: tempLabel,
-            fontSize: windowWidth/55,
+            fontSize: windowWidth / 55,
           },
           ticks: {
             callback: (label) => {
               return label + scale(app.fahrenheitOn);
             },
-            fontSize: windowWidth/70,
+            fontSize: windowWidth / 70,
             min: minTemp - buffer,
             max: maxTemp + buffer,
           },
@@ -220,7 +227,7 @@ export const ChartsView = () => {
           scaleLabel: {
             display: true,
             labelString: windLabel,
-            fontSize: windowWidth/55,
+            fontSize: windowWidth / 55,
           },
           ticks: {
             callback: (label) => {
@@ -228,7 +235,7 @@ export const ChartsView = () => {
             },
             min: 0,
             max: 30,
-            fontSize: windowWidth/70,
+            fontSize: windowWidth / 70,
           },
         },
       ],
@@ -238,12 +245,15 @@ export const ChartsView = () => {
           ticks: {
             display: true,
             maxRotation: 70,
-            fontSize: windowWidth/60,
+            fontSize: windowWidth / 60,
             callback: (label) => {
               for (let j = 0; j < noonArray.length; j++) {
-                if (label.includes(noonArray[j])) {
+                if (
+                  
+                  label.slice(label.length - 5, label.length) === noonArray[j]
+                ) {
                   return label.slice(0, label.length - 5);
-                }
+                } 
               }
             },
           },

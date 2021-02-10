@@ -133,7 +133,6 @@ associated precipitation.*/
       weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1)
     );
   };
-  console.log(timesToDisplay[0].dt);
   const generateDifferentTimes = () => {
     const array = [];
     for (let index = 0; index < timesToDisplay.length; index++) {

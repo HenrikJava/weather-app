@@ -15,10 +15,18 @@
 .fav-star-icon {
   font-size: 3vw!important;
   color: yellow;
+  cursor: pointer;
 }
 .not-fav-star-icon {
   font-size: 3vw!important;
+  color: rgb(143, 138, 138);  cursor: pointer;
+
+}
+.not-fav-star-icon:hover {
+  
   color: white;
+  
+
 }
 .time {
   font-size: 1vw;

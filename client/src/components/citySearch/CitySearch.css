@@ -38,7 +38,8 @@
 }
 .gps-icon {
   font-size: 2vw!important;
-  color: rgb(143, 138, 138)
+  color: rgb(143, 138, 138);
+  cursor: pointer;
 }
 .gps-icon:hover {
   color: honeydew
