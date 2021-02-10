@@ -11,10 +11,11 @@ export const AppProvider = (props) => {
   const [displayCurrent, setDisplayCurrent] = useState(true);
   const [isAfternoon, setIsAfternoon] = useState(true);
   const [weekday, setWeekday] = useState();
-  const [fahrenheitOn, setFahrenheitOn] = useState(false);
+  const [fahrenheitOn, setFahrenheitOn] = useState(localStorage.getItem("fahrenheitOn") && true);
   const [swedish, setSwedish] = useState(localStorage.getItem("swedishLanguage") && true)
   const [sloth, setSloth] = useState("defaultSloth");
-  const [isFavourite, setIsFavourite] = useState()
+  const [isFavourite, setIsFavourite] = useState();
+  const [sessionInProgress, setSessionInProgress] = useState()
   
   return (
     <AppContext.Provider
@@ -42,7 +43,8 @@ export const AppProvider = (props) => {
         swedish, setSwedish,
         sloth,
         setSloth,
-        isFavourite, setIsFavourite
+        isFavourite, setIsFavourite,
+        sessionInProgress, setSessionInProgress
       }}
     >
       {props.children}

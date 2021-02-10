@@ -13,10 +13,10 @@ export const HomeView = () => {
   const weather = useContext(WeatherContext);
   const app = useContext(AppContext);
   const [error, setError] = useState();
-
   const defaultWeatherCall = async () => {
+    const startCity = app.sessionInProgress ? null : localStorage.getItem("favouriteCity")
     await searchCity({
-      city: app.city,
+      city:  startCity ||app.city,
       fahrenheitOn: app.fahrenheitOn,
       swedish: app.swedish,
     }).then((response) => {
@@ -28,6 +28,7 @@ export const HomeView = () => {
         } else {
           app.setIsFavourite(false);
         }
+        app.setSessionInProgress(true)
       } else {
         console.log(response.data.message.msgBody);
         setError(true);
@@ -37,6 +38,7 @@ export const HomeView = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      
       const loggedInUser = await loadUser();
       if (loggedInUser.data.message.msgError === false) {
         user.setFirstname(loggedInUser.data.user.firstname);
@@ -50,9 +52,9 @@ export const HomeView = () => {
           user.setPhoto(`data:image/png;base64,${b64encoded}`);
         }
         user.setAuthenticatedUser(true);
+        const startCity = app.sessionInProgress ? null : loggedInUser.data.user.favourite_city
         searchCity({
-          city: loggedInUser.data.user.favourite_city
-            ? loggedInUser.data.user.favourite_city
+          city: startCity ? startCity
             : app.city,
           fahrenheitOn: loggedInUser.data.user.fahrenheit_on
             ? loggedInUser.data.user.fahrenheit_on
@@ -66,13 +68,16 @@ export const HomeView = () => {
             weather.setWeather(response.data.weather);
             app.setIsFavourite(false);
 
-            if (loggedInUser.data.user.favourite_city) {
+            if (loggedInUser.data.user.favourite_city && !app.sessionInProgress
+              ) {
               localStorage.setItem(
                 "favouriteCity",
                 response.data.weather.city.name
               );
               app.setIsFavourite(true);
             }
+            app.setSessionInProgress(true)
+
           } else if (response.data.message.msgBody === "city not found") {
             defaultWeatherCall();
             app.setNoCityText(

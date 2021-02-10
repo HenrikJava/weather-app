@@ -22,6 +22,8 @@ export const SignInDialog = () => {
   const app = useContext(AppContext);
 
   const login = async (event) => {
+    app.setSessionInProgress(false)
+
     setIsLoading(true);
     event.preventDefault();
     const response = await loginUser(email, password);

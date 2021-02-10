@@ -33,6 +33,7 @@ export const ProfileView = () => {
         "favouriteCity"
         
       );
+      app.setSessionInProgress(false)
       if (loggedInUser.data.user.photo) {
         const b64encoded = new Buffer.from(
           loggedInUser.data.user.photo.data
