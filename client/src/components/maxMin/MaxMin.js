@@ -16,7 +16,9 @@ import Grid from "@material-ui/core/Grid";
 export const MaxMin = () => {
   const weather = useContext(WeatherContext);
   const app = useContext(AppContext);
-  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [feelsLikeTooltipOpen, setFeelsLikeTooltipOpen] = useState(false);
+  const [slothTooltipOpen, setSlothTooltipOpen] = useState(false);
+
   let isToday;
   let sloth;
   const noonArray = [
@@ -102,12 +104,19 @@ export const MaxMin = () => {
     return Math.round(min) + scale(app.fahrenheitOn);
   };
 
-  const handleTooltipClose = () => {
-    setTooltipOpen(false);
+  const handleFeelsLikeTooltipClose = () => {
+    setFeelsLikeTooltipOpen(false);
   };
 
-  const handleTooltipOpen = () => {
-    setTooltipOpen(true);
+  const handleFeelsLikeTooltipOpen = () => {
+    setFeelsLikeTooltipOpen(true);
+  };
+  const handleSlothTooltipClose = () => {
+    setSlothTooltipOpen(false);
+  };
+
+  const handleSlothTooltipOpen = () => {
+    setSlothTooltipOpen(true);
   };
 
   /* Function generate the sloths clothes depending on the weather.  */
@@ -161,7 +170,7 @@ export const MaxMin = () => {
           sloth = hotSloth;
         }
       }
-      if (outsideHours[i].weather[0].description.includes("rain")) {
+      if (outsideHours[i].weather[0].description.includes("rain") || outsideHours[i].weather[0].description.includes("regn")) {
         sloth = wetSloth;
         break;
       }
@@ -176,8 +185,34 @@ export const MaxMin = () => {
 
   return (
     <Grid item xs={12} id="max-min-inner-wrapper">
-      <Grid item xs={4}>
-        <img src={generateSloths()} className="max-min-sloth" alt="clothes" />
+      <Grid item xs={5}>
+      <ClickAwayListener onClickAway={handleSlothTooltipClose}>
+              <div>
+                <Tooltip
+                  placement="top-end"
+                  PopperProps={{
+                    disablePortal: true,
+                  }}
+                  id="tooltip"
+                  onClose={handleSlothTooltipClose}
+                  open={slothTooltipOpen}
+                  disableFocusListener
+                  disableHoverListener
+                  disableTouchListener
+                  title={
+                    <p id="tooltip-text">
+                      {" "}
+                      {app.swedish
+                        ? "Sengångarens klädsel är baserat på den aktuella dagens väder mellan 10-18 och rekommenderar hur man ska klä sig."
+                        : "The sloth's attire is based on the current day's weather between 10-18 and recommends how to dress."}
+                    </p>
+                  }
+                >
+                  <img src={generateSloths()} className="max-min-sloth" alt="clothes"                     onClick={handleSlothTooltipOpen}/>
+                </Tooltip>
+              </div>
+            </ClickAwayListener>
+        
       </Grid>
       <Grid item xs={6}>
         <div className="max-min-temperatures">
@@ -191,7 +226,7 @@ export const MaxMin = () => {
                 ? "Känns som just nu"
                 : "Feels like now"}
             </p>
-            <ClickAwayListener onClickAway={handleTooltipClose}>
+            <ClickAwayListener onClickAway={handleFeelsLikeTooltipClose}>
               <div>
                 <Tooltip
                   placement="top-start"
@@ -199,8 +234,8 @@ export const MaxMin = () => {
                     disablePortal: true,
                   }}
                   id="tooltip"
-                  onClose={handleTooltipClose}
-                  open={tooltipOpen}
+                  onClose={handleFeelsLikeTooltipClose}
+                  open={feelsLikeTooltipOpen}
                   disableFocusListener
                   disableHoverListener
                   disableTouchListener
@@ -209,13 +244,13 @@ export const MaxMin = () => {
                       {" "}
                       {app.swedish
                         ? "Detta är baserat på många faktorer, bland annat lufttryck och vind och visar den upplevda temperaturen."
-                        : "This is calculated by severals conditions such as pressure and wind and shows the experienced temperature."}
+                        : "This is based on many factors, including air pressure and wind and shows the perceived temperature."}
                     </p>
                   }
                 >
                   <HelpIcon
                     id="tooltip-icon"
-                    onClick={handleTooltipOpen}
+                    onClick={handleFeelsLikeTooltipOpen}
                   ></HelpIcon>
                 </Tooltip>
               </div>

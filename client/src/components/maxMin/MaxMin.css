@@ -4,7 +4,10 @@
     height: 90%;
     margin-top: 3vw;
 }
-
+.max-min-sloth:hover {
+  
+  cursor: pointer;
+}
 .max-min-temperatures {
   display: block;
 }
@@ -41,7 +44,7 @@ margin-left: 0.4vw;}
 }
 @media screen and (max-width: 1400px) and  (min-height: 700px)  {
   .max-min-sloth {
-    width: 20vw;
+    width: 19vw;
   }
   
   
@@ -51,7 +54,7 @@ margin-left: 0.4vw;}
     margin: auto;
   }
   .max-min-temp-headers {
-    font-size: 1.8vw;
+    font-size: 1.6vw;
 
   }
   
