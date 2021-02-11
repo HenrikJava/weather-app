@@ -22,7 +22,7 @@ export const SignInDialog = () => {
   const app = useContext(AppContext);
 
   const login = async (event) => {
-    app.setSessionInProgress(false)
+    app.setSessionInProgress(false);
 
     setIsLoading(true);
     event.preventDefault();
@@ -45,26 +45,17 @@ export const SignInDialog = () => {
             ? loggedInUser.data.user.fahrenheit_on
             : false
         );
-        localStorage.removeItem(
-          "fahrenheitOn"
-          
-        );
+        localStorage.removeItem("fahrenheitOn");
         app.setSwedish(
           loggedInUser.data.user.swedish
             ? loggedInUser.data.user.swedish
             : false
         );
-        localStorage.removeItem(
-          "swedishLanguage"
-          
-        );
+        localStorage.removeItem("swedishLanguage");
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
-        localStorage.removeItem(
-          "favouriteCity"
-          
-        );
+        localStorage.removeItem("favouriteCity");
 
         user.setAvatar(loggedInUser.data.user.avatar);
         if (loggedInUser.data.user.photo) {

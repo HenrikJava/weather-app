@@ -4,7 +4,7 @@ import { AppContext } from "../../shared/global/provider/Provider";
 import { scale } from "../../shared/global/functions";
 import { Wind } from "../wind/Wind";
 import "./CurrentWeather.css";
-//This component only displaying the closest "timestamp" in the the weatherdata. 
+//This component only displaying the closest "timestamp" in the the weatherdata.
 export const CurrentWeather = () => {
   const weather = useContext(WeatherContext);
   const app = useContext(AppContext);
@@ -14,7 +14,9 @@ export const CurrentWeather = () => {
   };
   return (
     <div className="current-wrapper">
-      <p className="current-header">{app.swedish ? 'Vädret just nu' : 'Current weather'}</p>
+      <p className="current-header">
+        {app.swedish ? "Vädret just nu" : "Current weather"}
+      </p>
       <p className="weather-description">
         {capitalizeFirstLetter(weather.weather.list[0].weather[0].description)}
       </p>

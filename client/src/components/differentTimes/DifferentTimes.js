@@ -60,7 +60,6 @@ export const DifferentTimes = () => {
   swedishWeekday[5] = "Fredag";
   swedishWeekday[6] = "Lördag";
 
-  
   //This function is a filter function using the long timesarray
   const getTimesToDisplay = (time) => {
     let condition = false;
@@ -74,7 +73,10 @@ export const DifferentTimes = () => {
   /*variable is a result of filtering the weather data to only contain
 the day the component will show*/
   const weatherAtCurrentDay = weather.weather.list.filter(
-    (fragment) => new Date((fragment.dt + weather.weather.city.timezone) * 1000).getUTCDay() === app.weekday
+    (fragment) =>
+      new Date(
+        (fragment.dt + weather.weather.city.timezone) * 1000
+      ).getUTCDay() === app.weekday
   );
   /*variable to keep track if the day to display actually is current day */
   const isToday =
@@ -144,8 +146,19 @@ associated precipitation.*/
           className="different-times"
         >
           <Grid item xs={2}>
-            <p> {app.swedish ? timesToDisplay[index].dt_txt.slice(11, 16) : calcTime(weather.weather.city.timezone, timesToDisplay[index].dt)
-              .toLocaleString('en-US', { hour: 'numeric',minute: 'numeric', hour12: true })}</p>
+            <p>
+              {" "}
+              {app.swedish
+                ? timesToDisplay[index].dt_txt.slice(11, 16)
+                : calcTime(
+                    weather.weather.city.timezone,
+                    timesToDisplay[index].dt
+                  ).toLocaleString("en-US", {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  })}
+            </p>
           </Grid>
           <Grid item xs={1}>
             <p>
@@ -186,7 +199,15 @@ associated precipitation.*/
 
   return (
     <div className="day-details">
-      <p className="day-to-display">{app.swedish ? isToday ? "Idag" : swedishWeekday[app.weekday] : isToday ? "Today" : weekday[app.weekday]}</p>
+      <p className="day-to-display">
+        {app.swedish
+          ? isToday
+            ? "Idag"
+            : swedishWeekday[app.weekday]
+          : isToday
+          ? "Today"
+          : weekday[app.weekday]}
+      </p>
 
       <div className="weather-at-differents-time-grid">
         {generateDifferentTimes()}

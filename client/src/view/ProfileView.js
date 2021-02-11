@@ -29,11 +29,8 @@ export const ProfileView = () => {
       user.setFirstname(loggedInUser.data.user.firstname);
       user.setEmail(loggedInUser.data.user.email);
       user.setFavouriteCity(loggedInUser.data.user.favourite_city);
-      localStorage.removeItem(
-        "favouriteCity"
-        
-      );
-      app.setSessionInProgress(false)
+      localStorage.removeItem("favouriteCity");
+      app.setSessionInProgress(false);
       if (loggedInUser.data.user.photo) {
         const b64encoded = new Buffer.from(
           loggedInUser.data.user.photo.data
@@ -42,12 +39,15 @@ export const ProfileView = () => {
       }
       user.setAvatar(loggedInUser.data.user.avatar);
       user.setAuthenticatedUser(true);
-      
-      if (responseFromUpdate==="Account successfully updated." && app.swedish)
-       { setResponseMessage("Kontot är nu uppdaterat.")} else {
-        setResponseMessage(responseFromUpdate);
 
-       }
+      if (
+        responseFromUpdate === "Account successfully updated." &&
+        app.swedish
+      ) {
+        setResponseMessage("Kontot är nu uppdaterat.");
+      } else {
+        setResponseMessage(responseFromUpdate);
+      }
     } else {
       setResponseMessage(loggedInUser.data.message.msgBody);
       user.setAuthenticatedUser(false);
@@ -327,9 +327,8 @@ export const ProfileView = () => {
                 <div id="profile-button-wrapper">
                   <p
                     className={
-                      responseMessage === "Account successfully updated." || "Kontot är nu uppdaterat."
-
-                   
+                      responseMessage === "Account successfully updated." ||
+                      "Kontot är nu uppdaterat."
                         ? "update-success"
                         : "update-not-success"
                     }

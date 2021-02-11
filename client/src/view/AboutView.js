@@ -4,7 +4,7 @@ import { AppContext } from "../shared/global/provider/Provider";
 import Creator from "../shared/images/HenrikLarsson.jpg";
 import "./AboutView.css";
 export const AboutView = () => {
-  const app = useContext(AppContext)
+  const app = useContext(AppContext);
   return (
     <div className="about-wrapper">
       <div className="about-main">

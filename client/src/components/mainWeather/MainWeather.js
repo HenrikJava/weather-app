@@ -16,7 +16,7 @@ export const MainWeather = () => {
     <div className="main-weather-wrapper">
       <CitySearch></CitySearch>
       <CityInfo></CityInfo>
-     {/* This sloth only appear in the mobile version  */ }
+      {/* This sloth only appear in the mobile version  */}
       <img src={app.sloth} className="mobile-sloth" alt="clothes" />
 
       <Grid container id="middle-three-grids-wrapper">
@@ -30,9 +30,13 @@ export const MainWeather = () => {
           <MaxMin></MaxMin>
         </Grid>
       </Grid>
-           {/* This text only appear in the mobile version  */ }
+      {/* This text only appear in the mobile version  */}
 
-      <p className="mobile-swipe-text">{app.swedish ? 'Svep nedåt för att se fler dagar' : 'Swipe down to see more days'}</p>
+      <p className="mobile-swipe-text">
+        {app.swedish
+          ? "Svep nedåt för att se fler dagar"
+          : "Swipe down to see more days"}
+      </p>
     </div>
   );
 };

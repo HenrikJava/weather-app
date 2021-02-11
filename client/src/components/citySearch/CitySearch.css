@@ -34,47 +34,40 @@
 #search-icon {
   font-size: 1.6vw;
   color: rgb(143, 138, 138);
-
 }
 .gps-icon {
-  font-size: 2vw!important;
+  font-size: 2vw !important;
   color: rgb(143, 138, 138);
   cursor: pointer;
 }
 .gps-icon:hover {
-  color: honeydew
+  color: honeydew;
 }
-@media screen and (max-width: 1400px) and  (min-height: 700px)  {
+@media screen and (max-width: 1400px) and (min-height: 700px) {
   .city-search-wrapper {
     width: 32vw;
     height: 12%;
   }
-  
-  
+
   #search-icon-wrapper {
     font-size: 2vw;
     width: 17vw;
   }
-  
+
   #city-button {
-    
     font-size: 1.6vw;
     width: 7vw;
-    
   }
-  
+
   #search-icon {
     font-size: 2.6vw;
   }
   .gps-icon {
-    font-size: 3vw!important;
-   
+    font-size: 3vw !important;
   }
-  
 }
-@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
+@media screen and (max-width: 1024px) and (min-height: 1024px) {
   .city-search-wrapper {
-    
     width: 42vw;
     height: 15%;
   }
@@ -88,18 +81,14 @@
   }
   #search-icon {
     font-size: 4vw;
-
   }
   .gps-icon {
-    font-size: 4vw!important;
-   
+    font-size: 4vw !important;
   }
 }
 
 @media screen and (max-width: 512px) {
   .city-search-wrapper {
-    
-
     width: 69vw;
     height: 9%;
   }
@@ -117,7 +106,6 @@
     font-size: 5vw;
   }
   .gps-icon {
-    font-size: 7vw!important;
-   
+    font-size: 7vw !important;
   }
 }

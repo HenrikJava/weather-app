@@ -26,21 +26,19 @@ export const RegisterDialog = () => {
           "User already exists, choose another email." &&
         app.swedish
       ) {
-        setErrorMessage("Användaren existerar redan, var vänlig välj en annan email.");
+        setErrorMessage(
+          "Användaren existerar redan, var vänlig välj en annan email."
+        );
       } else {
         setErrorMessage(response.data.message.msgBody);
       }
-      
     } else {
       const loggedInUser = await loadUser();
       if (loggedInUser.data.message.msgError === false) {
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);
         user.setFavouriteCity(loggedInUser.data.user.favourite_city);
-        localStorage.removeItem(
-          "favouriteCity"
-          
-        );
+        localStorage.removeItem("favouriteCity");
         user.setAvatar(loggedInUser.data.user.avatar);
         user.setAuthenticatedUser(true);
         handleClose();
@@ -68,10 +66,14 @@ export const RegisterDialog = () => {
       onClose={handleClose}
       id="register-dialog-container"
     >
-      <DialogTitle id="dialog-title">{app.swedish ? 'Registrera' : 'Register'}</DialogTitle>
+      <DialogTitle id="dialog-title">
+        {app.swedish ? "Registrera" : "Register"}
+      </DialogTitle>
       <DialogContent>
         <DialogContentText id="user-friendly-text">
-        {app.swedish ? 'Var vänlig fyll i fälten för att skapa ett konto.' : 'Please enter the fields to create an account.'} 
+          {app.swedish
+            ? "Var vänlig fyll i fälten för att skapa ett konto."
+            : "Please enter the fields to create an account."}
         </DialogContentText>
         <DialogContentText id="error-message">{errorMessage}</DialogContentText>
         <Formik
@@ -86,19 +88,35 @@ export const RegisterDialog = () => {
             register(values);
           }}
           validationSchema={Yup.object().shape({
-            email: Yup.string().email().required(app.swedish ? 'Email nödvändigt' : 'Email required'),
+            email: Yup.string()
+              .email()
+              .required(app.swedish ? "Email nödvändigt" : "Email required"),
             firstname: Yup.string()
-              .required(app.swedish ? 'Förnamn nödvändigt' :"First name required")
-              .min(3, app.swedish ? 'Namnet måste bestå av minst 3 bokstäver' :"Name must be at least 3 characters"),
+              .required(
+                app.swedish ? "Förnamn nödvändigt" : "First name required"
+              )
+              .min(
+                3,
+                app.swedish
+                  ? "Namnet måste bestå av minst 3 bokstäver"
+                  : "Name must be at least 3 characters"
+              ),
             password: Yup.string()
-              .required(app.swedish ? 'Lösenord nödvändigt' :"Password required.")
+              .required(
+                app.swedish ? "Lösenord nödvändigt" : "Password required."
+              )
               .matches(
                 /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-                app.swedish ? 'Lösenordet måste bestå av minst 8 bokstäver, en versal, en gemen, ett nummer och ett specialtecken' :"Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special case character"
+                app.swedish
+                  ? "Lösenordet måste bestå av minst 8 bokstäver, en versal, en gemen, ett nummer och ett specialtecken"
+                  : "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special case character"
               ),
             confirmPassword: Yup.string()
-              .required(app.swedish ? 'Nödvändigt' :"Required")
-              .oneOf([Yup.ref("password"), null], app.swedish ? 'Lösenorden måste matcha' :"Passwords must match"),
+              .required(app.swedish ? "Nödvändigt" : "Required")
+              .oneOf(
+                [Yup.ref("password"), null],
+                app.swedish ? "Lösenorden måste matcha" : "Passwords must match"
+              ),
           })}
         >
           {(props) => {
@@ -113,16 +131,16 @@ export const RegisterDialog = () => {
             return (
               <form onSubmit={handleSubmit}>
                 <TextField
-                autoFocus
+                  autoFocus
                   error={errors.firstname && touched.firstname}
                   id="first-name"
-                  label={app.swedish ? 'Förnamn' :"First name"}
+                  label={app.swedish ? "Förnamn" : "First name"}
                   name="firstname"
                   value={values.firstname}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={
-                    errors.firstname  && touched.firstname && errors.firstname
+                    errors.firstname && touched.firstname && errors.firstname
                   }
                   type="text"
                   fullWidth
@@ -137,20 +155,19 @@ export const RegisterDialog = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={errors.email && touched.email && errors.email}
-             
                   type="email"
                   fullWidth
                 />
                 <TextField
                   error={errors.password && touched.password}
                   id="password"
-                  label={app.swedish ? 'Lösenord' :"Password"}
+                  label={app.swedish ? "Lösenord" : "Password"}
                   name="password"
                   value={values.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={
-                    errors.password && touched.password && errors.password 
+                    errors.password && touched.password && errors.password
                   }
                   type="password"
                   fullWidth
@@ -158,20 +175,22 @@ export const RegisterDialog = () => {
                 <TextField
                   error={errors.confirmPassword && touched.confirmPassword}
                   id="confirm-password"
-                  label={app.swedish ? 'Bekräfta lösenord' :"Confirm password"}
+                  label={app.swedish ? "Bekräfta lösenord" : "Confirm password"}
                   name="confirmPassword"
                   value={values.confirmPassword}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   helperText={
-                    errors.confirmPassword && touched.confirmPassword && errors.confirmPassword
-                    }
+                    errors.confirmPassword &&
+                    touched.confirmPassword &&
+                    errors.confirmPassword
+                  }
                   type="password"
                   fullWidth
                 />
                 <TextField
                   id="favourite-city"
-                  label={app.swedish ? 'Favoritstad' :"Favourite city"}
+                  label={app.swedish ? "Favoritstad" : "Favourite city"}
                   name="favouriteCity"
                   value={values.favouriteCity}
                   onChange={handleChange}
@@ -182,10 +201,10 @@ export const RegisterDialog = () => {
 
                 <DialogActions id="dialog-button">
                   <Button onClick={handleClose} color="primary">
-                  {app.swedish ? 'Ångra' :"Cancel"} 
+                    {app.swedish ? "Ångra" : "Cancel"}
                   </Button>
                   <Button type="submit" color="primary">
-                  {app.swedish ? 'Registrera' :"Register"}  
+                    {app.swedish ? "Registrera" : "Register"}
                   </Button>
                 </DialogActions>
               </form>
@@ -193,8 +212,13 @@ export const RegisterDialog = () => {
           }}
         </Formik>
         <DialogContentText className="link-between-dialogs-wrapper">
-          <span onClick={() => openSignInDialog()} className="link-between-dialogs">
-          {app.swedish ? 'Har du redan ett konto?' :" Already have an account?"}  
+          <span
+            onClick={() => openSignInDialog()}
+            className="link-between-dialogs"
+          >
+            {app.swedish
+              ? "Har du redan ett konto?"
+              : " Already have an account?"}
           </span>
         </DialogContentText>
       </DialogContent>

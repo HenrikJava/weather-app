@@ -10,7 +10,7 @@ export const Wind = (props) => {
         {props.fahrenheitOn ? " mph" : " m/s"}
       </p>
       <ArrowRightAltIcon
-       id={props.id}
+        id={props.id}
         style={{
           transform: `rotateZ(${props.deg + 90}deg)`,
         }}

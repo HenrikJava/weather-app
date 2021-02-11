@@ -19,10 +19,14 @@ export const NavigationBar = () => {
           app.setDisplayCurrent(true);
           app.setMenuOpen(false);
           app.setNoCityText("");
-          app.setWeekday()
+          app.setWeekday();
         }}
       >
-        <img className="navbar-logo-icon" src={defaultSloth} alt="LogoSloth"></img>
+        <img
+          className="navbar-logo-icon"
+          src={defaultSloth}
+          alt="LogoSloth"
+        ></img>
         <p className="navbar-logo-name">Sloth weather</p>
       </div>
 

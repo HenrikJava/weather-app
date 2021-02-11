@@ -23,16 +23,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
   },
   photo: {
-    type: Buffer
-
+    type: Buffer,
   },
   fahrenheit_on: {
     type: Boolean,
   },
   swedish: {
-    type: Boolean
-  }
-  
+    type: Boolean,
+  },
 });
 
 module.exports = User = mongoose.model("user", UserSchema);

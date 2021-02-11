@@ -45,9 +45,9 @@ const updateUserValidator = [
 ];
 
 const updateSettingsValidator = [
-    check("fahrenheitOn", "Scale is required").not().isEmpty(),
-    check("email", "Please enter a valid email").isEmail(),
-  ]
+  check("fahrenheitOn", "Scale is required").not().isEmpty(),
+  check("email", "Please enter a valid email").isEmail(),
+];
 const result = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -57,23 +57,25 @@ const result = (req, res, next) => {
   }
   next();
 };
-const forgotPasswordValidator =  [check("email", "Please enter a valid email").isEmail()]
+const forgotPasswordValidator = [
+  check("email", "Please enter a valid email").isEmail(),
+];
 
 const resetUpdatePasswordValidator = [
-    check(
-      "password",
-      "Password must include one lowercase character, one uppercase character, a number, a special character and must be at least 8 characters."
-    )
-      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i")
-      .custom((value, { req, loc, path }) => {
-        if (value !== req.body.confirmPassword) {
-          // trow error if passwords do not match
-          throw new Error("Passwords don't match");
-        } else {
-          return value;
-        }
-      }),
-  ]
+  check(
+    "password",
+    "Password must include one lowercase character, one uppercase character, a number, a special character and must be at least 8 characters."
+  )
+    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i")
+    .custom((value, { req, loc, path }) => {
+      if (value !== req.body.confirmPassword) {
+        // trow error if passwords do not match
+        throw new Error("Passwords don't match");
+      } else {
+        return value;
+      }
+    }),
+];
 module.exports = {
   loginValidator,
   registerValidator,

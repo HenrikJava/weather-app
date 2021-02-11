@@ -1,216 +1,214 @@
 .reset-wrapper {
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    width: 50%;
-    background-color: gainsboro;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3%;
-    padding: 3%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 50%;
+  background-color: gainsboro;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3%;
+  padding: 3%;
+}
+.reset-header {
+  font-size: 3vw;
+  color: black;
+  margin: 2%;
+}
+.reset-error-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.reset-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+#reset-pass-label,
+#reset-confirm-label {
+  font-size: 1.4vw;
+}
+#reset-pass,
+#reset-confirm {
+  font-size: 2vw;
+}
+#reset-pass-helper-text,
+#reset-confirm-helper-text {
+  font-size: 1vw;
+}
+
+.reset-error-message {
+  color: red;
+  font-size: 2vw;
+}
+#reset-forgot-button,
+#reset-home-button,
+#reset-update-button,
+#reset-signin-button {
+  color: black;
+  border: 1px solid black;
+  background-color: rgb(143, 138, 138);
+  margin: auto;
+  margin-top: 2%;
+  width: 10vw;
+  font-size: 1.2vw;
+}
+#reset-forgot-button:hover,
+#reset-home-button:hover,
+#reset-update-button:hover,
+#reset-signin-button:hover {
+  background-color: gainsboro;
+}
+.reset-success-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 55%;
+  align-items: center;
+}
+.reset-text-success {
+  font-size: 2vw;
+}
+.reset-buttons-wrapper {
+  display: flex;
+
+  margin: auto;
+  width: 70%;
+}
+@media screen and (max-width: 1400px) and (min-height: 700px) {
+  .reset-wrapper {
+    width: 70%;
   }
   .reset-header {
-    font-size: 3vw;
-    color: black;
-    margin: 2%;
+    font-size: 5vw;
   }
-  .reset-error-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
+
   .reset-form-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
+    width: 80%;
   }
-  #reset-pass-label, #reset-confirm-label {
-    font-size: 1.4vw;
+  #reset-pass-label,
+  #reset-confirm-label {
+    font-size: 3vw;
   }
-  #reset-pass, #reset-confirm {
-    
-    font-size: 2vw;
+  #reset-pass,
+  #reset-confirm {
+    font-size: 4vw;
   }
-  #reset-pass-helper-text, #reset-confirm-helper-text {
-    font-size: 1vw;
-  }
-  
+
   .reset-error-message {
-    color: red;
+    font-size: 3vw;
+  }
+  #reset-forgot-button,
+  #reset-home-button,
+  #reset-update-button,
+  #reset-signin-button {
+    width: 15vw;
     font-size: 2vw;
   }
-  #reset-forgot-button, #reset-home-button, #reset-update-button, #reset-signin-button {
-    color: black;
-    border: 1px solid black;
-    background-color: rgb(143, 138, 138);
-    margin: auto;
-    margin-top: 2%;
-    width: 10vw;
-    font-size: 1.2vw;
-  }
-  #reset-forgot-button:hover, #reset-home-button:hover,  #reset-update-button:hover, #reset-signin-button:hover {
-    background-color: gainsboro;
+  #reset-pass-helper-text,
+  #reset-confirm-helper-text {
+    font-size: 2vw;
   }
   .reset-success-wrapper {
-      display: flex;
-      flex-direction: column;
-      margin: auto;
-      width: 55%;
-      align-items: center;
+    width: 75%;
   }
   .reset-text-success {
-    font-size: 2vw;
+    font-size: 4vw;
   }
   .reset-buttons-wrapper {
-      display: flex;
-      
-      margin: auto;
-      width: 70%;
+    width: 70%;
   }
-  @media screen and (max-width: 1400px) and (min-height: 700px) {
-    .reset-wrapper {
-     
-      width: 70%;
-      
-    }
-    .reset-header {
-      font-size: 5vw;
-      
-    }
-    
-    .reset-form-wrapper {
-   
-      width: 80%;
-    }
-    #reset-pass-label, #reset-confirm-label {
-      font-size: 3vw;
-    }
-    #reset-pass, #reset-confirm {
-      
-      font-size: 4vw;
-    }
-    
-    .reset-error-message {
-      
-      font-size: 3vw;
-    }
-    #reset-forgot-button, #reset-home-button, #reset-update-button, #reset-signin-button {
-     
-      width: 15vw;
-      font-size: 2vw;
-    }
-    #reset-pass-helper-text, #reset-confirm-helper-text {
-      font-size: 2vw;
-    }
-    .reset-success-wrapper {
-        
-        width: 75%;
-    }
-    .reset-text-success {
-      font-size: 4vw;
-    }
-    .reset-buttons-wrapper {
-        
-        width: 70%;
-    }
+}
+@media screen and (max-width: 1024px) and (min-height: 1024px) {
+  .reset-wrapper {
+    width: 90%;
   }
-  @media screen and (max-width: 1024px) and  (min-height: 1024px)  {
-    .reset-wrapper {
-     
-      width: 90%;
-      
-    }
-    .reset-header {
-      font-size: 7vw;
-      
-    }
-    
-    .reset-form-wrapper {
-   
-      width: 80%;
-    }
-    #reset-pass-label, #reset-confirm-label {
-      font-size: 4.4vw;
-    }
-    #reset-pass, #reset-confirm {
-      
-      font-size: 5vw;
-    }
-    
-    .reset-error-message {
-      
-      font-size: 4vw;
-    }
-    #reset-forgot-button, #reset-home-button, #reset-update-button, #reset-signin-button {
-     
-      width: 23vw;
-      font-size: 3vw;
-    }
-    #reset-pass-helper-text, #reset-confirm-helper-text {
-      font-size: 3vw;
-    }
-    .reset-success-wrapper {
-        
-        width: 75%;
-    }
-    .reset-text-success {
-      font-size: 5vw;
-    }
-    .reset-buttons-wrapper {
-        
-        width: 70%;
-    }
+  .reset-header {
+    font-size: 7vw;
   }
-  @media screen and (max-width: 512px) {
-    .reset-wrapper {
-     
-      width: 90%;
-      
-    }
-    .reset-header {
-      font-size: 9vw;
-      
-    }
-    
-    .reset-form-wrapper {
-   
-      width: 80%;
-    }
-    #reset-pass-label, #reset-confirm-label {
-      font-size: 7vw;
-    }
-    #reset-pass, #reset-confirm {
-      
-      font-size: 8vw;
-    }
-    
-    .reset-error-message {
-      
-      font-size: 5vw;
-    }
-    #reset-forgot-button, #reset-home-button, #reset-update-button, #reset-signin-button {
-     
-      width: 35vw;
-      font-size: 5vw;
-    }
-    #reset-pass-helper-text, #reset-confirm-helper-text {
-      font-size: 5vw;
-    }
-    .reset-success-wrapper {
-        
-        width: 100%;
-    }
-    .reset-text-success {
-      font-size: 6vw;
-    }
-    .reset-buttons-wrapper {
-        
-        width: 90%;
-    }
+
+  .reset-form-wrapper {
+    width: 80%;
   }
-  
+  #reset-pass-label,
+  #reset-confirm-label {
+    font-size: 4.4vw;
+  }
+  #reset-pass,
+  #reset-confirm {
+    font-size: 5vw;
+  }
+
+  .reset-error-message {
+    font-size: 4vw;
+  }
+  #reset-forgot-button,
+  #reset-home-button,
+  #reset-update-button,
+  #reset-signin-button {
+    width: 23vw;
+    font-size: 3vw;
+  }
+  #reset-pass-helper-text,
+  #reset-confirm-helper-text {
+    font-size: 3vw;
+  }
+  .reset-success-wrapper {
+    width: 75%;
+  }
+  .reset-text-success {
+    font-size: 5vw;
+  }
+  .reset-buttons-wrapper {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 512px) {
+  .reset-wrapper {
+    width: 90%;
+  }
+  .reset-header {
+    font-size: 9vw;
+  }
+
+  .reset-form-wrapper {
+    width: 80%;
+  }
+  #reset-pass-label,
+  #reset-confirm-label {
+    font-size: 7vw;
+  }
+  #reset-pass,
+  #reset-confirm {
+    font-size: 8vw;
+  }
+
+  .reset-error-message {
+    font-size: 5vw;
+  }
+  #reset-forgot-button,
+  #reset-home-button,
+  #reset-update-button,
+  #reset-signin-button {
+    width: 35vw;
+    font-size: 5vw;
+  }
+  #reset-pass-helper-text,
+  #reset-confirm-helper-text {
+    font-size: 5vw;
+  }
+  .reset-success-wrapper {
+    width: 100%;
+  }
+  .reset-text-success {
+    font-size: 6vw;
+  }
+  .reset-buttons-wrapper {
+    width: 90%;
+  }
+}

@@ -67,10 +67,10 @@ export const updateUser = async (values) => {
     },
   };
   if (values.password === "") {
-    delete values.password
+    delete values.password;
   }
   if (values.oldPassword === "") {
-    delete values.oldPassword
+    delete values.oldPassword;
   }
   const body = JSON.stringify(values);
 
@@ -162,7 +162,7 @@ export const updateUserPhoto = async (image) => {
     const response = await axios.put("/api/user/photo", image, config);
     if (response.status === 201) {
       localStorage.setItem("token", response.data.token);
-console.log(response);
+      console.log(response);
       return response;
     }
   } catch (error) {
@@ -238,11 +238,11 @@ export const forgotPasswordUser = async (email) => {
 };
 export const checkTokenUser = async (token) => {
   const config = {
-    headers: {'x-auth-token': token}
-  }
+    headers: { "x-auth-token": token },
+  };
 
   try {
-    const response = await axios.get("/api/user/reset-check-token",config);
+    const response = await axios.get("/api/user/reset-check-token", config);
     if (response.status === 200) {
       return response;
     }
@@ -260,28 +260,32 @@ export const checkTokenUser = async (token) => {
   }
 };
 export const updatePasswordUser = async (values, token) => {
-  
   setAuthToken(token);
   const config = {
     headers: {
-
-    'Content-Type': 'application/json'
-  }}
-const body = JSON.stringify(values)
-try {
-const response = await axios.put('/api/user/reset-update-password', body, config)
-if (response.status === 201) {
-  return response
-}
-}catch (error) {
-return error.response.data.message ? error.response :
-{
-  data: {
-    message: {
-      msgBody: "Something wrong at server, please try again later.",
-      msgError: true,
+      "Content-Type": "application/json",
     },
-  },
+  };
+  const body = JSON.stringify(values);
+  try {
+    const response = await axios.put(
+      "/api/user/reset-update-password",
+      body,
+      config
+    );
+    if (response.status === 201) {
+      return response;
+    }
+  } catch (error) {
+    return error.response.data.message
+      ? error.response
+      : {
+          data: {
+            message: {
+              msgBody: "Something wrong at server, please try again later.",
+              msgError: true,
+            },
+          },
+        };
+  }
 };
-}
-}

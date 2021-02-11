@@ -20,7 +20,7 @@ export const ResetView = (props) => {
   const app = useContext(AppContext);
   const history = useHistory();
 
-  localStorage.getItem('swedishLanguage')==="true" && app.setSwedish(true)
+  localStorage.getItem("swedishLanguage") === "true" && app.setSwedish(true);
   const updatePassword = async (values) => {
     const response = await updatePasswordUser(values, props.match.params.token);
     if (response.data.message.msgError === true) {
@@ -32,7 +32,9 @@ export const ResetView = (props) => {
       setUpdated(true);
       setError(false);
       setIsLoading(false);
-      setResponseMessage(app.swedish ? 'Lösenordet är uppdaterat' : response.data.message.msgBody);
+      setResponseMessage(
+        app.swedish ? "Lösenordet är uppdaterat" : response.data.message.msgBody
+      );
       setAuthToken();
     }
   };

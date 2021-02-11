@@ -3,7 +3,7 @@ import { AppContext } from "../shared/global/provider/Provider";
 import confusedSloth from "../shared/images/sloths/confusedSloth.png";
 import "./ErrorView.css";
 export const ErrorView = () => {
-  const app = useContext(AppContext)
+  const app = useContext(AppContext);
   return (
     <div className="error-view">
       <div className="error-image-wrapper">

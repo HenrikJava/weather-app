@@ -20,26 +20,29 @@ export const SettingsView = () => {
       if (localStorage.getItem("fahrenheitOn")) {
         localStorage.removeItem("fahrenheitOn");
       } else {
-        localStorage.setItem("fahrenheitOn", "true")
+        localStorage.setItem("fahrenheitOn", "true");
       }
     } else {
       setIsLoading(true);
       const updateResponse = await updateUserSettings({
         email: user.email,
         fahrenheitOn: !app.fahrenheitOn,
-        swedish: app.swedish
+        swedish: app.swedish,
       });
       const loggedInUser = await loadUser();
       setIsLoading(false);
       if (updateResponse.data.message.msgError === false) {
         app.setFahrenheitOn(loggedInUser.data.user.fahrenheit_on);
       }
-      if (updateResponse.data.message.msgBody==="Account successfully updated." && app.swedish)
-       { setResponseMessage("Kontot är nu uppdaterat")} else {
+      if (
+        updateResponse.data.message.msgBody ===
+          "Account successfully updated." &&
+        app.swedish
+      ) {
+        setResponseMessage("Kontot är nu uppdaterat");
+      } else {
         setResponseMessage(updateResponse.data.message.msgBody);
-
-       }
-
+      }
     }
   };
   const handleChangeLanguage = async () => {
@@ -49,26 +52,29 @@ export const SettingsView = () => {
       if (localStorage.getItem("swedishLanguage")) {
         localStorage.removeItem("swedishLanguage");
       } else {
-        localStorage.setItem("swedishLanguage", "true")
+        localStorage.setItem("swedishLanguage", "true");
       }
-
     } else {
       setIsLoading(true);
       const updateResponse = await updateUserSettings({
         email: user.email,
         fahrenheitOn: app.fahrenheitOn,
-        swedish: !app.swedish
-      })
-      const loggedInUser = await loadUser()
-      setIsLoading(false)
+        swedish: !app.swedish,
+      });
+      const loggedInUser = await loadUser();
+      setIsLoading(false);
       if (updateResponse.data.message.msgError === false) {
         app.setSwedish(loggedInUser.data.user.swedish);
       }
-      if (updateResponse.data.message.msgBody==="Account successfully updated." && !app.swedish)
-       { setResponseMessage("Kontot är nu uppdaterat.")} else {
+      if (
+        updateResponse.data.message.msgBody ===
+          "Account successfully updated." &&
+        !app.swedish
+      ) {
+        setResponseMessage("Kontot är nu uppdaterat.");
+      } else {
         setResponseMessage(updateResponse.data.message.msgBody);
-
-       }
+      }
     }
   };
   return (
@@ -111,7 +117,8 @@ export const SettingsView = () => {
         )}
         <p
           className={
-            responseMessage === "Account successfully updated." || "Kontot är nu uppdaterat."
+            responseMessage === "Account successfully updated." ||
+            "Kontot är nu uppdaterat."
               ? "settings-update-success settings-update"
               : "settings-update-not-success settings-update"
           }

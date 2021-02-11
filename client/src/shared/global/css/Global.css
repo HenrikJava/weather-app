@@ -10,7 +10,6 @@ html,
   color: honeydew;
 }
 
-
 .profile-view,
 .empty-view,
 .settings-view,
@@ -40,25 +39,25 @@ html,
   font-size: 1.2vw;
 }
 #email-label,
-  #password-label,
-  #first-name-label,
-  #favourite-city-label,
-  #confirm-password-label {
-    font-size: 1.4vw;
-  }
-  #email,
-  #password,
-  #first-name,
-  #favourite-city,
-  #confirm-password {
-    height: 2vw;
-    font-size: 1.6vw;
-  }
-  .link-between-dialogs-wrapper {
-    text-align: center;
-    place-content: space-evenly;
-    display: flex;
-  }
+#password-label,
+#first-name-label,
+#favourite-city-label,
+#confirm-password-label {
+  font-size: 1.4vw;
+}
+#email,
+#password,
+#first-name,
+#favourite-city,
+#confirm-password {
+  height: 2vw;
+  font-size: 1.6vw;
+}
+.link-between-dialogs-wrapper {
+  text-align: center;
+  place-content: space-evenly;
+  display: flex;
+}
 .link-between-dialogs {
   cursor: pointer;
 }
@@ -118,7 +117,7 @@ html,
     height: 3vw;
     font-size: 2vw;
   }
-  .link-between-dialogs  {
+  .link-between-dialogs {
     font-size: 2vw;
   }
 
@@ -163,7 +162,7 @@ html,
     height: 4vw;
     font-size: 3vw;
   }
-  .link-between-dialogs{
+  .link-between-dialogs {
     font-size: 3vw;
   }
 
@@ -228,11 +227,11 @@ html,
     height: auto;
   }
   .profile-view,
-.empty-view,
-.settings-view,
-.error-view,
-.forgot-view,
-.reset-view {
+  .empty-view,
+  .settings-view,
+  .error-view,
+  .forgot-view,
+  .reset-view {
     height: 90%;
   }
   #register-dialog-container > div > div {

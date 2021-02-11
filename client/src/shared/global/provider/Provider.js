@@ -6,17 +6,23 @@ export const AppProvider = (props) => {
   const [signInDialogOpen, setSignInDialogOpen] = useState(false);
   const [deleteConfirmDialogOpen, setDeleteConfirmDialogOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState();
-  const [city, setCity] = useState(localStorage.getItem("favouriteCity") || "Göteborg");
+  const [city, setCity] = useState(
+    localStorage.getItem("favouriteCity") || "Göteborg"
+  );
   const [noCityText, setNoCityText] = useState("");
   const [displayCurrent, setDisplayCurrent] = useState(true);
   const [isAfternoon, setIsAfternoon] = useState(true);
   const [weekday, setWeekday] = useState();
-  const [fahrenheitOn, setFahrenheitOn] = useState(localStorage.getItem("fahrenheitOn") && true);
-  const [swedish, setSwedish] = useState(localStorage.getItem("swedishLanguage") && true)
+  const [fahrenheitOn, setFahrenheitOn] = useState(
+    localStorage.getItem("fahrenheitOn") && true
+  );
+  const [swedish, setSwedish] = useState(
+    localStorage.getItem("swedishLanguage") && true
+  );
   const [sloth, setSloth] = useState("defaultSloth");
   const [isFavourite, setIsFavourite] = useState();
-  const [sessionInProgress, setSessionInProgress] = useState()
-  
+  const [sessionInProgress, setSessionInProgress] = useState();
+
   return (
     <AppContext.Provider
       value={{
@@ -40,11 +46,14 @@ export const AppProvider = (props) => {
         setWeekday,
         fahrenheitOn,
         setFahrenheitOn,
-        swedish, setSwedish,
+        swedish,
+        setSwedish,
         sloth,
         setSloth,
-        isFavourite, setIsFavourite,
-        sessionInProgress, setSessionInProgress
+        isFavourite,
+        setIsFavourite,
+        sessionInProgress,
+        setSessionInProgress,
       }}
     >
       {props.children}

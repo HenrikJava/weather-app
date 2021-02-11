@@ -11,7 +11,8 @@
   display: flex;
   margin-top: 5%;
 }
-.mobile-sloth, .mobile-swipe-text {
+.mobile-sloth,
+.mobile-swipe-text {
   display: none;
 }
 

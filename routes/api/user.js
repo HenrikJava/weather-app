@@ -81,11 +81,11 @@ router.post(
                 id: doc._id,
               },
             };
-            //TODO change expires
+
             jwt.sign(
               payload,
               process.env.JWT_SECRET,
-              { expiresIn: 60 * 60 * 24 * 100 },
+              { expiresIn: 60 * 60 * 24 },
               (err, token) => {
                 if (err) {
                   res.status(500).json({
@@ -120,22 +120,6 @@ router.put("/", [auth, updateUserValidator, result], async (req, res) => {
     d: "mm",
   });
 
-  /* try {
-    const users = await User.find({}).populate().select(["username", "email"]);
-
-    console.log(users);
-  } catch (err) {
-    console.log(err.message);
-  }
-  User.findOneAndRemove({ _id: "5fd9e97e2925a71df0eda6d6" }, (err, user) => {
-    if (err) {
-      
-    } else if (!user) {
-      
-    } else {
-     
-    }
-  }); */
   const user = await User.findById(req.user.id, async (err, user) => {
     if (err) {
       return res.status(500).json({
@@ -191,11 +175,11 @@ router.put("/", [auth, updateUserValidator, result], async (req, res) => {
           id: req.user.id,
         },
       };
-      //TODO change expires
+
       jwt.sign(
         payload,
         process.env.JWT_SECRET,
-        { expiresIn: 60 * 60 * 24 * 100 },
+        { expiresIn: 60 * 60 * 24 },
         (err, token) => {
           if (err) {
             res.status(500).json({
@@ -275,11 +259,11 @@ router.put("/photo", [auth, multer.single("photo")], async (req, res) => {
           id: req.user.id,
         },
       };
-      //TODO change expires
+
       jwt.sign(
         payload,
         process.env.JWT_SECRET,
-        { expiresIn: 60 * 60 * 24 * 100 },
+        { expiresIn: 60 * 60 * 24 },
         (err, token) => {
           if (err) {
             res.status(500).json({
@@ -309,7 +293,7 @@ router.put("/settings", [auth, updateSettingsValidator], (req, res) => {
     {
       $set: {
         fahrenheit_on: req.body.fahrenheitOn,
-        swedish: req.body.swedish
+        swedish: req.body.swedish,
       },
     },
     { upsert: false, new: true },
@@ -335,11 +319,11 @@ router.put("/settings", [auth, updateSettingsValidator], (req, res) => {
             id: req.user.id,
           },
         };
-        //TODO change expires
+
         jwt.sign(
           payload,
           process.env.JWT_SECRET,
-          { expiresIn: 60 * 60 * 24 * 100 },
+          { expiresIn: 60 * 60 * 24 },
           (err, token) => {
             if (err) {
               res.status(500).json({
@@ -417,12 +401,11 @@ router.post("/forgot", forgotPasswordValidator, (req, res) => {
           id: user.id,
         },
       };
-      //TODO change expires
 
       jwt.sign(
         payload,
         process.env.JWT_SECRET,
-        { expiresIn: 60 * 60 * 24 * 100 },
+        { expiresIn: 60 * 60 * 24 },
         async (err, token) => {
           if (err) {
             res.status(500).json({
@@ -432,7 +415,11 @@ router.post("/forgot", forgotPasswordValidator, (req, res) => {
               },
             });
           } else {
-            const emailIsSend = await sendResetEmail(token, user.email, req.body.swedish);
+            const emailIsSend = await sendResetEmail(
+              token,
+              user.email,
+              req.body.swedish
+            );
             if (emailIsSend) {
               res.status(200).json({
                 message: {

@@ -1,11 +1,9 @@
 .max-min-sloth {
-  
   width: 17vw;
-    height: 90%;
-    margin-top: 3vw;
+  height: 90%;
+  margin-top: 3vw;
 }
 .max-min-sloth:hover {
-  
   cursor: pointer;
 }
 .max-min-temperatures {
@@ -20,11 +18,9 @@
 .max-min-temp-degrees {
   font-size: 1.4vw;
   margin: auto;
-
 }
 .max-min-temp-headers {
   font-size: 1.4vw;
-  
 }
 #header-and-tooltip {
   display: flex;
@@ -33,50 +29,50 @@
   margin-bottom: -1vw;
 }
 #tooltip-icon {
-cursor: pointer;
-font-size: 2vw;
-margin-left: 0.4vw;}
+  cursor: pointer;
+  font-size: 2vw;
+  margin-left: 0.4vw;
+}
 #tooltip {
   margin-left: -15%;
 }
 #tooltip-text {
-  font-size: 1.4vw; max-width: 25vw; line-height: 1.4vw
+  font-size: 1.4vw;
+  max-width: 25vw;
+  line-height: 1.4vw;
 }
-@media screen and (max-width: 1400px) and  (min-height: 700px)  {
+@media screen and (max-width: 1400px) and (min-height: 700px) {
   .max-min-sloth {
     width: 16vw;
   }
-  
-  
-  
+
   .max-min-temp-degrees {
     font-size: 1.6vw;
     margin: auto;
   }
   .max-min-temp-headers {
     font-size: 1.6vw;
-
   }
-  
+
   #tooltip-icon {
-  cursor: pointer;
-  font-size: 2vw;
-  margin-left: 0.4vw;}
-  
+    cursor: pointer;
+    font-size: 2vw;
+    margin-left: 0.4vw;
+  }
+
   #tooltip-text {
     font-size: 2vw;
     max-width: 25vw;
     line-height: 2vw;
   }
 }
-@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
+@media screen and (max-width: 1024px) and (min-height: 1024px) {
   .max-min-sloth {
     width: 24vw;
     height: 70%;
     margin-top: 7vw;
-
   }
-  #max-min-inner-wrapper > div{
+  #max-min-inner-wrapper > div {
     display: flex;
     height: 100%;
   }
@@ -84,7 +80,7 @@ margin-left: 0.4vw;}
     width: 100%;
     align-self: center;
   }
-  
+
   .max-min-temp-degrees {
     font-size: 2.4vw;
     margin: 5%;
@@ -99,15 +95,16 @@ margin-left: 0.4vw;}
     margin-bottom: 0vw;
   }
   #tooltip-icon {
- 
-  font-size: 2.4vw;
-  margin-left: 0.4vw;
-}
-#tooltip {
-  margin-left: -27%;
-}
+    font-size: 2.4vw;
+    margin-left: 0.4vw;
+  }
+  #tooltip {
+    margin-left: -27%;
+  }
 
   #tooltip-text {
-    font-size: 3vw; max-width: 27vw; line-height: 3vw
+    font-size: 3vw;
+    max-width: 27vw;
+    line-height: 3vw;
   }
 }

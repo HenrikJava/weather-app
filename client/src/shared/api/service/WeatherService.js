@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const searchCity = async (values) => {
   const config = {
     headers: {
@@ -27,5 +26,3 @@ export const searchCity = async (values) => {
         };
   }
 };
-
-

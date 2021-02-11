@@ -1,76 +1,86 @@
 .footer-wrapper {
-    background-color: grey;
-    height: 15%;
-    display: flex;
-    align-items: center;
-    
-
+  background-color: grey;
+  height: 15%;
+  display: flex;
+  align-items: center;
 }
 .footer-icon-wrapper {
-    width: 6vw;
-    height: 6vw;
-    border-radius: 100%;
-    background-color: antiquewhite;    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 6vw;
+  height: 6vw;
+  border-radius: 100%;
+  background-color: antiquewhite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#email-icon,#github-icon,#facebook-icon,#copyright-icon {
-    color: black;
-    width: 5vw;
-    height: 3vw;
+#email-icon,
+#github-icon,
+#facebook-icon,
+#copyright-icon {
+  color: black;
+  width: 5vw;
+  height: 3vw;
 }
 .footer-item {
-    display: flex;
-    align-items: center;
-    width: 25%;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  width: 25%;
+  justify-content: center;
 }
-#footer-label-contact,#footer-label-github,#footer-label-facebook,#footer-label-copyright {
-    margin-left: 2%;
-    font-size: 2vw;
-    text-decoration: none;
-    color: black;
+#footer-label-contact,
+#footer-label-github,
+#footer-label-facebook,
+#footer-label-copyright {
+  margin-left: 2%;
+  font-size: 2vw;
+  text-decoration: none;
+  color: black;
+}
+#footer-label-contact:hover,
+#footer-label-github:hover,
+#footer-label-facebook:hover {
+  color: gainsboro;
+  cursor: pointer;
+}
 
-}
-#footer-label-contact:hover,#footer-label-github:hover,#footer-label-facebook:hover {
-    color: gainsboro;
-    cursor: pointer;
-}
+@media screen and (max-width: 1024px) and (min-height: 1020px) {
+  .footer-icon-wrapper {
+    width: 8vw;
+    height: 8vw;
+  }
+  #email-icon,
+  #github-icon,
+  #facebook-icon,
+  #copyright-icon {
+    height: 5vw;
+  }
 
-@media screen and (max-width: 1024px) and  (min-height: 1020px)  {
-    .footer-icon-wrapper {
-        width: 8vw;
-        height: 8vw;
-        
-    }
-    #email-icon,#github-icon,#facebook-icon,#copyright-icon {
-        height: 5vw;
-    }
-    
-    #footer-label-contact,#footer-label-github,#footer-label-facebook,#footer-label-copyright {
-        font-size: 2.6vw;
-        
-    }
-   
+  #footer-label-contact,
+  #footer-label-github,
+  #footer-label-facebook,
+  #footer-label-copyright {
+    font-size: 2.6vw;
+  }
 }
 @media screen and (max-width: 512px) {
-    .footer-wrapper {
-        height: 9%;
-      
-        
-    
-    }
-    .footer-icon-wrapper {
-        width: 8vw;
-        height: 8vw;
-        
-    }
-    #email-icon,#github-icon,#facebook-icon,#copyright-icon {
-        height: 5vw;
-    }
-    
-    #footer-label-contact,#footer-label-github,#footer-label-facebook,#footer-label-copyright {
-        font-size: 2.6vw;
-        
-    }
+  .footer-wrapper {
+    height: 9%;
+  }
+  .footer-icon-wrapper {
+    width: 8vw;
+    height: 8vw;
+  }
+  #email-icon,
+  #github-icon,
+  #facebook-icon,
+  #copyright-icon {
+    height: 5vw;
+  }
+
+  #footer-label-contact,
+  #footer-label-github,
+  #footer-label-facebook,
+  #footer-label-copyright {
+    font-size: 2.6vw;
+  }
 }

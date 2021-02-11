@@ -16,18 +16,15 @@
   margin-right: 8%;
   font-size: 1.4vw;
   margin-left: auto;
-  color:black;
-
-
+  color: black;
 }
-
 
 .menu-name-photo {
   display: flex;
   width: 100%;
   align-items: center;
 }
-.menu-links-wrapper  {
+.menu-links-wrapper {
   width: 100%;
   margin-left: auto;
   cursor: pointer;
@@ -44,7 +41,7 @@
   place-content: space-evenly;
 }
 #menu-tooltip {
-font-size: 1vw;
+  font-size: 1vw;
 }
 .menu-link {
   align-self: center;
@@ -76,11 +73,9 @@ font-size: 1vw;
   .menu-profile {
     width: 70%;
   }
-  
-  
+
   .menu-links-wrapper-not-logged-in {
     width: 40%;
-  
   }
   #logged-in-icon {
     font-size: 4vw;
@@ -103,7 +98,8 @@ font-size: 1vw;
     width: 28%;
     margin-left: auto;
   }
-  .menu-links-wrapper, .menu-links-wrapper-not-logged-in {
+  .menu-links-wrapper,
+  .menu-links-wrapper-not-logged-in {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -115,7 +111,8 @@ font-size: 1vw;
     transition: all 0.5s ease;
   }
 
-  .menu-links-wrapper.active, .menu-links-wrapper-not-logged-in.active {
+  .menu-links-wrapper.active,
+  .menu-links-wrapper-not-logged-in.active {
     background: #1c2237;
     left: 0;
     z-index: 1;
@@ -170,7 +167,8 @@ font-size: 1vw;
     font-size: 3.5vw;
   }
 
-  .menu-links-wrapper, .menu-links-wrapper-not-logged-in {
+  .menu-links-wrapper,
+  .menu-links-wrapper-not-logged-in {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -181,14 +179,14 @@ font-size: 1vw;
     opacity: 1;
     transition: all 0.5s ease;
   }
-  .menu-links-wrapper.active , .menu-links-wrapper-not-logged-in.active {
+  .menu-links-wrapper.active,
+  .menu-links-wrapper-not-logged-in.active {
     background: #1c2237;
     left: 0;
     z-index: 1;
     height: 171vh;
     margin-top: 16vw;
     place-content: start;
-
   }
   .not-logged-in-menu {
     width: 100%;

@@ -83,7 +83,6 @@ export const ChartsView = () => {
         type: "bar",
         yAxisID: "y-axis-2",
         backgroundColor: "rgb(30,144,255)",
-        
       },
       {
         label: tempLabel,
@@ -93,7 +92,6 @@ export const ChartsView = () => {
         yAxisID: "y-axis-1",
         fill: false,
         backgroundColor: "rgb(240, 255, 0)",
-
       },
       {
         label: feelsLikeLabel,
@@ -103,7 +101,7 @@ export const ChartsView = () => {
         type: "line",
         yAxisID: "y-axis-1",
         hidden: true,
-        fill: false
+        fill: false,
       },
       {
         label: windLabel,
@@ -113,7 +111,7 @@ export const ChartsView = () => {
         type: "line",
         yAxisID: "y-axis-3",
         hidden: true,
-        fill: false
+        fill: false,
       },
     ],
   };
@@ -148,16 +146,16 @@ export const ChartsView = () => {
         fontSize: windowWidth / 55,
         padding: 40,
         fontColor: "honeydew",
-        boxWidth: windowWidth / 55
+        boxWidth: windowWidth / 55,
       },
       onHover: function (e) {
-        e.target.style.cursor = 'pointer'
+        e.target.style.cursor = "pointer";
       },
       onLeave: function (e) {
-        e.target.style.cursor = 'default'
-      }
+        e.target.style.cursor = "default";
+      },
     },
-    
+
     tooltips: {
       backgroundColor: "#FFF",
       titleFontSize: 18,
@@ -165,7 +163,7 @@ export const ChartsView = () => {
       bodyFontColor: "#000",
       bodyFontSize: 20,
       displayColors: true,
-      
+
       callbacks: {
         label: function (tooltipItems, data) {
           if (tooltipItems.datasetIndex === 0) {
@@ -202,7 +200,7 @@ export const ChartsView = () => {
             display: true,
             labelString: tempLabel,
             fontSize: windowWidth / 55,
-            fontColor: "honeydew"
+            fontColor: "honeydew",
           },
           ticks: {
             callback: (label) => {
@@ -224,8 +222,7 @@ export const ChartsView = () => {
             display: true,
             labelString: precipitationLabel,
             fontSize: 35,
-            fontColor: "honeydew"
-
+            fontColor: "honeydew",
           },
           ticks: {
             callback: (label) => {
@@ -234,8 +231,7 @@ export const ChartsView = () => {
             min: 0,
             max: 30,
             fontSize: 30,
-            fontColor: "honeydew"
-
+            fontColor: "honeydew",
           },
         },
         {
@@ -247,8 +243,7 @@ export const ChartsView = () => {
             display: true,
             labelString: windLabel,
             fontSize: windowWidth / 55,
-            fontColor: "honeydew"
-
+            fontColor: "honeydew",
           },
           ticks: {
             callback: (label) => {
@@ -257,8 +252,7 @@ export const ChartsView = () => {
             min: 0,
             max: 30,
             fontSize: windowWidth / 70,
-            fontColor: "honeydew"
-
+            fontColor: "honeydew",
           },
         },
       ],

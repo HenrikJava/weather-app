@@ -36,7 +36,7 @@ export const CityInfo = () => {
       localStorage.setItem("favouriteCity", weather.weather.city.name);
       if (user.authenticatedUser) {
         update(weather.weather.city.name);
-        app.setNoCityText('')
+        app.setNoCityText("");
       }
     }
     app.setIsFavourite(!app.isFavourite);
@@ -47,9 +47,16 @@ export const CityInfo = () => {
     } else {
       app.setIsFavourite(false);
     }
-    const interval = setInterval(() => { app.swedish ?
-      setTime(calcTime(weather.weather.city.timezone).toLocaleString())
-      : setTime(calcTime(weather.weather.city.timezone).toLocaleString('en-US', { hour: 'numeric',minute: 'numeric', hour12: true }))
+    const interval = setInterval(() => {
+      app.swedish
+        ? setTime(calcTime(weather.weather.city.timezone).toLocaleString())
+        : setTime(
+            calcTime(weather.weather.city.timezone).toLocaleString("en-US", {
+              hour: "numeric",
+              minute: "numeric",
+              hour12: true,
+            })
+          );
     }, 1000);
     return () => clearInterval(interval);
   }, [weather.weather, user.favouriteCity, app]);
@@ -66,12 +73,15 @@ export const CityInfo = () => {
           )}
         </span>
       </div>
-      <p className="time">        {app.swedish ? `Lokal tid i ${
-        weather.weather.city.name
-      } är ${time.slice(0, 16)}` : `The local time in ${
-        weather.weather.city.name
-      } is ${time.slice(0, 16)}`}
-</p>
+      <p className="time">
+        {" "}
+        {app.swedish
+          ? `Lokal tid i ${weather.weather.city.name} är ${time.slice(0, 16)}`
+          : `The local time in ${weather.weather.city.name} is ${time.slice(
+              0,
+              16
+            )}`}
+      </p>
     </div>
   );
 };

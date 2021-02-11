@@ -23,11 +23,11 @@
 #switch p {
   font-size: 1vw;
 }
-#switch > span > :last-child  {
-  background-color:grey
+#switch > span > :last-child {
+  background-color: grey;
 }
 #switch > span > span > span {
-  color:white;
+  color: white;
 }
 #settings-progress-wrapper {
   text-align: center;
@@ -49,7 +49,7 @@
   font-size: 1vw;
   text-align: center;
 }
-@media screen and (max-width: 1400px) and  (min-height: 700px)  {
+@media screen and (max-width: 1400px) and (min-height: 700px) {
   #settings-header {
     font-size: 4vw;
   }
@@ -61,7 +61,6 @@
     font-size: 2.5vw;
   }
   #switch {
-  
     height: 3vw;
   }
   #switch p {
@@ -70,26 +69,23 @@
   .settings-update {
     width: 20vw;
     font-size: 2vw;
-   
   }
 }
 
-@media screen and (max-width: 1024px) and  (min-height: 1024px)  {
+@media screen and (max-width: 1024px) and (min-height: 1024px) {
   #settings-header {
     font-size: 8vw;
   }
   #settings-wrapper {
     height: 35vw;
     width: 55vw;
-    
   }
-  
+
   #settings-field {
     font-size: 4vw;
     height: 5vw;
   }
   #switch {
-    
     height: 5vw;
   }
   #switch p {
@@ -103,7 +99,6 @@
   .settings-update {
     width: 40vw;
     font-size: 3vw;
-   
   }
 }
 
@@ -116,7 +111,7 @@
     width: 90%;
     display: block;
   }
-  
+
   #settings-field {
     font-size: 6vw;
     height: 8vw;
@@ -142,6 +137,5 @@
   .settings-update {
     width: 100%;
     font-size: 5vw;
-   
   }
 }

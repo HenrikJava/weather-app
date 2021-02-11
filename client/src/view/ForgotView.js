@@ -15,7 +15,10 @@ export const ForgotView = () => {
   const history = useHistory();
 
   const sendResetEmail = async (email) => {
-    const response = await forgotPasswordUser({ email: email, swedish: app.swedish });
+    const response = await forgotPasswordUser({
+      email: email,
+      swedish: app.swedish,
+    });
     if (response.data.message.msgError === true) {
       setResponseMessage(response.data.message.msgBody);
       setShowError(true);

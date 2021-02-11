@@ -35,9 +35,6 @@ export const MaxMin = () => {
     return new Date(
       (timestamp + weather.weather.city.timezone) * 1000
     ).getUTCDay();
-    /* return new Date(fragment * 1000).toLocaleString("en-us", {
-      weekday: "long",
-    }); */
   };
   /* Filtering out the actual days timestamps*/
   const weatherAtActualDay = weather.weather.list.filter(
@@ -170,7 +167,10 @@ export const MaxMin = () => {
           sloth = hotSloth;
         }
       }
-      if (outsideHours[i].weather[0].description.includes("rain") || outsideHours[i].weather[0].description.includes("regn")) {
+      if (
+        outsideHours[i].weather[0].description.includes("rain") ||
+        outsideHours[i].weather[0].description.includes("regn")
+      ) {
         sloth = wetSloth;
         break;
       }
@@ -186,33 +186,37 @@ export const MaxMin = () => {
   return (
     <Grid item xs={12} id="max-min-inner-wrapper">
       <Grid item xs={5}>
-      <ClickAwayListener onClickAway={handleSlothTooltipClose}>
-              <div>
-                <Tooltip
-                  placement="top-end"
-                  PopperProps={{
-                    disablePortal: true,
-                  }}
-                  id="tooltip"
-                  onClose={handleSlothTooltipClose}
-                  open={slothTooltipOpen}
-                  disableFocusListener
-                  disableHoverListener
-                  disableTouchListener
-                  title={
-                    <p id="tooltip-text">
-                      {" "}
-                      {app.swedish
-                        ? "Sengångarens klädsel är baserat på den aktuella dagens väder mellan 10-18 och rekommenderar hur man ska klä sig."
-                        : "The sloth's attire is based on the current day's weather between 10-18 and recommends how to dress."}
-                    </p>
-                  }
-                >
-                  <img src={generateSloths()} className="max-min-sloth" alt="clothes"                     onClick={handleSlothTooltipOpen}/>
-                </Tooltip>
-              </div>
-            </ClickAwayListener>
-        
+        <ClickAwayListener onClickAway={handleSlothTooltipClose}>
+          <div>
+            <Tooltip
+              placement="top-end"
+              PopperProps={{
+                disablePortal: true,
+              }}
+              id="tooltip"
+              onClose={handleSlothTooltipClose}
+              open={slothTooltipOpen}
+              disableFocusListener
+              disableHoverListener
+              disableTouchListener
+              title={
+                <p id="tooltip-text">
+                  {" "}
+                  {app.swedish
+                    ? "Sengångarens klädsel är baserat på den aktuella dagens väder mellan 10-18 och rekommenderar hur man ska klä sig."
+                    : "The sloth's attire is based on the current day's weather between 10-18 and recommends how to dress."}
+                </p>
+              }
+            >
+              <img
+                src={generateSloths()}
+                className="max-min-sloth"
+                alt="clothes"
+                onClick={handleSlothTooltipOpen}
+              />
+            </Tooltip>
+          </div>
+        </ClickAwayListener>
       </Grid>
       <Grid item xs={6}>
         <div className="max-min-temperatures">
@@ -260,9 +264,14 @@ export const MaxMin = () => {
           <p className="max-min-temp-degrees">{getWeatherAtNoon()}</p>
           {!app.displayCurrent && (
             <div>
-              <p className="max-min-temp-headers"> {app.swedish ?'Dagens max' : 'Day max'}</p>
+              <p className="max-min-temp-headers">
+                {" "}
+                {app.swedish ? "Dagens max" : "Day max"}
+              </p>
               <p className="max-min-temp-degrees">{getDayMax()}</p>
-              <p className="max-min-temp-headers">{app.swedish ?'Dagens min' : 'Day min'}</p>
+              <p className="max-min-temp-headers">
+                {app.swedish ? "Dagens min" : "Day min"}
+              </p>
               <p className="max-min-temp-degrees">{getDayMin()}</p>
             </div>
           )}

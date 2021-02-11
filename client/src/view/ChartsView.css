@@ -1,21 +1,18 @@
-/* .chart >  canvas {
-    height: 33vw!important;
-} */
 .charts-view {
-    height: 92%
+  height: 92%;
 }
 @media screen and (max-width: 1400px) and (min-height: 700px) {
-    .charts-view {
-        height: 89%
-    }
+  .charts-view {
+    height: 89%;
+  }
 }
-@media screen and (max-width: 1024px) and  (min-height: 1020px)  {
-    .charts-view {
-        height: 92%
-    }
+@media screen and (max-width: 1024px) and (min-height: 1020px) {
+  .charts-view {
+    height: 92%;
+  }
 }
 @media screen and (max-width: 512px) {
-    .charts-view {
-        height: 90%
-    }
+  .charts-view {
+    height: 90%;
+  }
 }
