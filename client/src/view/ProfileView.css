@@ -54,15 +54,15 @@
   justify-content: center;
 }
 .profile-photo {
-  width: 24vw;
+  width: 21vw;
   border-radius: 100%;
   display: flex;
-  height: 24vw;
+  height: 21vw;
 }
 .edit-icon-wrapper {
   margin-top: 4%;
   position: absolute;
-  margin-left: 20%;
+  margin-left: 18%;
   width: 3vw;
   height: 3vw;
   background-color: gainsboro;
@@ -129,8 +129,8 @@
     font-size: 4vw;
   }
   .profile-photo {
-    width: 30vw;
-    height: 30vw;
+    width: 23vw;
+    height: 23vw;
   }
   .edit-icon-wrapper {
     margin-left: 24%;
@@ -146,7 +146,7 @@
   }
   .profile-lower-wrapper {
     height: fit-content;
-    margin-top: 0;
+    margin-top: 1%;
   }
   #passwords,
   #email-old,

@@ -1,6 +1,7 @@
 .fore-cast-wrapper {
   display: flex;
   height: 30%;
+  margin-bottom: 1%;
 }
 
 #back-to-top-icon-wrapper {

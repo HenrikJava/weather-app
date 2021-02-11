@@ -45,10 +45,18 @@ export const SignInDialog = () => {
             ? loggedInUser.data.user.fahrenheit_on
             : false
         );
+        localStorage.removeItem(
+          "fahrenheitOn"
+          
+        );
         app.setSwedish(
           loggedInUser.data.user.swedish
             ? loggedInUser.data.user.swedish
             : false
+        );
+        localStorage.removeItem(
+          "swedishLanguage"
+          
         );
         user.setFirstname(loggedInUser.data.user.firstname);
         user.setEmail(loggedInUser.data.user.email);

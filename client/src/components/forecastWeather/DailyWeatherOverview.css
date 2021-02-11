@@ -2,8 +2,8 @@
   border: 1px solid black;
   border-radius: 5%;
   background-color: rgb(143, 138, 138);
-  width: 14vw;
-  height: 14vw;
+  width: 13vw;
+  height: 13vw;
   margin: auto;
   text-align: center;
   cursor: pointer;
@@ -20,7 +20,7 @@
   margin-bottom: -20%;
 }
 #daily-overview-icon {
-  width: 8vw;
+  width: 6vw;
 }
 #daily-overview-wind {
   font-size: 1vw;
@@ -33,11 +33,16 @@
 .daily-overview-weather {
   display: flex;
   justify-content: center;
-  height: 8vw;
+  height: 6vw;
   align-items: center;
 }
 @media screen and (max-width: 1400px) and  (min-height: 700px)  {
- 
+  .daily-overview-wrapper {
+    
+    width: 16vw;
+    height: 16vw;
+    
+  }
   .daily-overview-weather {
     height: 78%;
   }

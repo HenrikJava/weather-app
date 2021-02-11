@@ -59,7 +59,7 @@ export const ForgotView = () => {
                 <p className="forgot-header">
                   {app.swedish
                     ? "Var vänlig och skriv in din registrerade email"
-                    : "Please enter your registred email"}
+                    : "Please enter your registered email"}
                 </p>
                 <TextField
                   error={errors.email && touched.email}
