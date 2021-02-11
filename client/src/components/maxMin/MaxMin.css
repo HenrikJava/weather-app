@@ -1,6 +1,6 @@
 .max-min-sloth {
   
-  width: 18vw;
+  width: 17vw;
     height: 90%;
     margin-top: 3vw;
 }
@@ -44,7 +44,7 @@ margin-left: 0.4vw;}
 }
 @media screen and (max-width: 1400px) and  (min-height: 700px)  {
   .max-min-sloth {
-    width: 19vw;
+    width: 16vw;
   }
   
   
@@ -71,9 +71,9 @@ margin-left: 0.4vw;}
 }
 @media screen and (max-width: 1024px) and  (min-height: 1024px)  {
   .max-min-sloth {
-    width: 27vw;
-    height: 90%;
-    margin-top: 3vw;
+    width: 24vw;
+    height: 70%;
+    margin-top: 7vw;
 
   }
   #max-min-inner-wrapper > div{

@@ -38,11 +38,15 @@
 @media screen and (max-width: 1400px) and (min-height: 700px) {
   
   .time {
-    font-size: 1.6vw;
+    font-size: 1.2vw;
     margin: auto;
   }
   .no-city-text {
     font-size: 1.4vw;
+  }
+  .city-info { 
+    font-size: 4vw;
+    margin: 0 1vw 0 0
   }
 }
 @media screen and (max-width: 1024px) and (min-height: 1024px) {

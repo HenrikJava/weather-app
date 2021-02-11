@@ -9,9 +9,10 @@
   height: 100%;
   align-items: center;
   width: 25%;
+  cursor: pointer;
 }
 .navbar-logo-name {
-  cursor: pointer;
+  
   font-size: 3vw;
 }
 .navbar-logo-icon {

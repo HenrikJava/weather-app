@@ -6,9 +6,10 @@ html,
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: #403f3f;
   color: honeydew;
 }
+
 
 .profile-view,
 .empty-view,
@@ -224,7 +225,7 @@ html,
 }
 @media screen and (max-width: 512px) and (min-height: 568px) {
   .home-view {
-    height: -webkit-fill-available;
+    height: auto;
   }
   .profile-view,
 .empty-view,

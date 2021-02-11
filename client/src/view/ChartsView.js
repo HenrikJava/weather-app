@@ -16,8 +16,8 @@ export const ChartsView = () => {
     "12 PM",
     "1 PM",
     "2 PM",
-    ' 1 PM',
-    ' 2 PM'
+    " 1 PM",
+    " 2 PM",
   ];
   const weekday = [];
   weekday[0] = "Sunday";
@@ -83,6 +83,7 @@ export const ChartsView = () => {
         type: "bar",
         yAxisID: "y-axis-2",
         backgroundColor: "rgb(30,144,255)",
+        
       },
       {
         label: tempLabel,
@@ -90,22 +91,29 @@ export const ChartsView = () => {
         borderColor: "rgb(240, 255, 0)",
         type: "line",
         yAxisID: "y-axis-1",
+        fill: false,
+        backgroundColor: "rgb(240, 255, 0)",
+
       },
       {
         label: feelsLikeLabel,
         data: feelsLikeData,
         borderColor: "rgb(240, 255, 240)",
+        backgroundColor: "rgb(240, 255, 240)",
         type: "line",
         yAxisID: "y-axis-1",
         hidden: true,
+        fill: false
       },
       {
         label: windLabel,
         data: windSpeedData,
-        borderColor: "	rgb(128,128,128)",
+        borderColor: "rgb(128,128,128)",
+        backgroundColor: "rgb(128,128,128)",
         type: "line",
         yAxisID: "y-axis-3",
         hidden: true,
+        fill: false
       },
     ],
   };
@@ -138,10 +146,18 @@ export const ChartsView = () => {
     legend: {
       labels: {
         fontSize: windowWidth / 55,
-
+        padding: 40,
         fontColor: "honeydew",
+        boxWidth: windowWidth / 55
       },
+      onHover: function (e) {
+        e.target.style.cursor = 'pointer'
+      },
+      onLeave: function (e) {
+        e.target.style.cursor = 'default'
+      }
     },
+    
     tooltips: {
       backgroundColor: "#FFF",
       titleFontSize: 18,
@@ -149,11 +165,7 @@ export const ChartsView = () => {
       bodyFontColor: "#000",
       bodyFontSize: 20,
       displayColors: true,
-      /* callbacks: {
-            label: (tooltipItems, data) => { 
-                return tooltipItems.yLabel + ' mm';
-            }
-        } */
+      
       callbacks: {
         label: function (tooltipItems, data) {
           if (tooltipItems.datasetIndex === 0) {
@@ -190,12 +202,15 @@ export const ChartsView = () => {
             display: true,
             labelString: tempLabel,
             fontSize: windowWidth / 55,
+            fontColor: "honeydew"
           },
           ticks: {
             callback: (label) => {
               return label + scale(app.fahrenheitOn);
             },
             fontSize: windowWidth / 70,
+            fontColor: "honeydew",
+
             min: minTemp - buffer,
             max: maxTemp + buffer,
           },
@@ -209,6 +224,8 @@ export const ChartsView = () => {
             display: true,
             labelString: precipitationLabel,
             fontSize: 35,
+            fontColor: "honeydew"
+
           },
           ticks: {
             callback: (label) => {
@@ -217,6 +234,8 @@ export const ChartsView = () => {
             min: 0,
             max: 30,
             fontSize: 30,
+            fontColor: "honeydew"
+
           },
         },
         {
@@ -228,6 +247,8 @@ export const ChartsView = () => {
             display: true,
             labelString: windLabel,
             fontSize: windowWidth / 55,
+            fontColor: "honeydew"
+
           },
           ticks: {
             callback: (label) => {
@@ -236,6 +257,8 @@ export const ChartsView = () => {
             min: 0,
             max: 30,
             fontSize: windowWidth / 70,
+            fontColor: "honeydew"
+
           },
         },
       ],
@@ -244,16 +267,17 @@ export const ChartsView = () => {
           labels: weekdayLabel,
           ticks: {
             display: true,
-            maxRotation: 70,
-            fontSize: windowWidth / 60,
+            maxRotation: 80,
+            fontSize: windowWidth / 62,
+            fontColor: "honeydew",
+
             callback: (label) => {
               for (let j = 0; j < noonArray.length; j++) {
                 if (
-                  
                   label.slice(label.length - 5, label.length) === noonArray[j]
                 ) {
                   return label.slice(0, label.length - 5);
-                } 
+                }
               }
             },
           },

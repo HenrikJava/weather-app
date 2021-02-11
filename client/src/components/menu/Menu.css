@@ -185,9 +185,9 @@ font-size: 1vw;
     background: #1c2237;
     left: 0;
     z-index: 1;
-    height: 92vh;
+    height: 171vh;
     margin-top: 16vw;
-    place-content: center;
+    place-content: start;
 
   }
   .not-logged-in-menu {

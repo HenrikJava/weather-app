@@ -9,3 +9,13 @@
         height: 89%
     }
 }
+@media screen and (max-width: 1024px) and  (min-height: 1020px)  {
+    .charts-view {
+        height: 92%
+    }
+}
+@media screen and (max-width: 512px) {
+    .charts-view {
+        height: 90%
+    }
+}
